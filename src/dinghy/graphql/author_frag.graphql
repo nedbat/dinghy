@@ -1,0 +1,4 @@
+fragment authorData on Actor {
+  login
+  url
+}

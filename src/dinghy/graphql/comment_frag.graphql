@@ -1,0 +1,16 @@
+# Comment is an interface for a number of kinds of comments, not all of which
+# have a url.
+fragment commentData on Comment {
+  id
+  body
+  updatedAt
+  author {
+    ...authorData   # fragment: author_frag.graphql
+  }
+  ... on IssueComment {
+    url
+  }
+  ... on PullRequestReviewComment {
+    url
+  }
+}

@@ -1,0 +1,28 @@
+query getProjectIssues(
+  $org: String!
+  $projectNumber: Int!
+  $after: String
+) {
+  organization(login: $org) {
+    project: projectNext(number: $projectNumber) {
+      title
+      url
+      items(first: 100, after: $after) {
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+        nodes {
+          content {
+            ... on Issue {
+              ...issueData    # fragment: issue_frag.graphql
+            }
+            # ... on PullRequest {
+            #     number
+            # }
+          }
+        }
+      }
+    }
+  }
+}

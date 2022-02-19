@@ -1,0 +1,20 @@
+query getIssueComments(
+  $owner: String!
+  $name: String!
+  $number: Int!
+  $after: String
+) {
+  repository(owner: $owner, name: $name) {
+    issue(number: $number) {
+      comments(first: 100, after: $after) {
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+        nodes {
+          ...commentData    # fragment: comment_frag.graphql
+        }
+      }
+    }
+  }
+}

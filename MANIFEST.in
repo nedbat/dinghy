@@ -1,0 +1,4 @@
+include Makefile
+include dev-requirements.txt
+
+recursive-include tests *

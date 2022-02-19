@@ -1,0 +1,7 @@
+out*.json
+dinghy.yaml
+token.sh
+
+*.egg-info/
+build/
+dist/

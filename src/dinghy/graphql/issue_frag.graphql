@@ -1,0 +1,44 @@
+fragment issueData on Issue {
+  repository {
+    ...repoData   # fragment: repo_frag.graphql
+  }
+  number
+  url
+  title
+  state
+  createdAt
+  updatedAt
+  closedAt
+  author {
+    ...authorData   # fragment: author_frag.graphql
+  }
+  body
+  comments(last: 100) {
+    totalCount
+    nodes {
+      ...commentData    # fragment: comment_frag.graphql
+    }
+  }
+  projectNextItems(first: 100) {
+    nodes {
+      project {
+        owner {
+          ... on User {
+            login
+          }
+          ... on Organization {
+            login
+          }
+        }
+        number
+      }
+    }
+  }
+  labels(first:10) {
+    nodes {
+      color
+      name
+    }
+  }
+  # Issues have timelineItems, but added or removed from projectNext isn't listed.
+}

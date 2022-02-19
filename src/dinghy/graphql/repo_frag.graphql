@@ -1,0 +1,8 @@
+fragment repoData on Repository {
+  owner { 
+    login 
+  }
+  name
+  nameWithOwner
+  url
+}

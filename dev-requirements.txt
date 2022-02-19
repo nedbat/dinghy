@@ -1,0 +1,6 @@
+-e .
+black
+build
+pylint
+pytest
+twine

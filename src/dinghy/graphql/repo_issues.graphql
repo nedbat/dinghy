@@ -1,0 +1,19 @@
+query getRepoIssues(
+  $owner: String!
+  $name: String!
+  $since: String!
+  $after: String
+) {
+  repository(owner: $owner, name: $name) {
+    ...repoData
+    issues(first: 100, filterBy: {since: $since}, after: $after) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      nodes {
+        ...issueData    # fragment: issue_frag.graphql
+      }
+    }
+  }
+}
