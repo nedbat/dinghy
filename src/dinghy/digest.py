@@ -18,7 +18,7 @@ from .helpers import json_save, parse_timedelta
 from .jinja_helpers import render_jinja
 
 
-class Summarizer:
+class Digester:
     """
     Use GitHub GraphQL to get data about recent changes.
     """
@@ -137,12 +137,26 @@ class Summarizer:
             raise Exception(f"Can't understand URL {url!r}")
 
     def _trim_since(self, nodes):
+        """
+        Trim a list to keep only activity since `self.since`.
+
+        The returned list is also sorted by updatedAt date.
+        """
         nodes = [n for n in nodes if n["updatedAt"] > self.since]
         nodes.sort(key=operator.itemgetter("updatedAt"))
         return nodes
 
     async def _populate_issue_comments(self, issues):
-        # Need to get full comments.
+        """
+        Add more comments to issues.
+
+        We can't paginate the comments on issues while paginating issues, so
+        this method gets the rest of the comments.
+
+        Args:
+            issues (list[dict]): the issues to populate.
+
+        """
         queried_issues = []
         issue_queries = []
         for iss in issues:
@@ -169,22 +183,37 @@ class Summarizer:
 
         return issues
 
-    def _add_reasons(self, issues):
-        # Why were these issues in the list?
-        for iss in issues:
-            iss["reasonCreated"] = iss["createdAt"] > self.since
-            iss["reasonClosed"] = bool(
-                iss["closedAt"] and (iss["closedAt"] > self.since)
+    def _add_reasons(self, items):
+        """
+        Populate items with the reasons they've been included.
+
+        Args:
+            items (list[dict]): the issues or pull requests data.
+
+        """
+        for item in items:
+            item["reasonCreated"] = item["createdAt"] > self.since
+            item["reasonClosed"] = bool(
+                item["closedAt"] and (item["closedAt"] > self.since)
             )
-            iss["reasonMerged"] = bool(
-                iss.get("mergedAt") and (iss["mergedAt"] > self.since)
+            item["reasonMerged"] = bool(
+                item.get("mergedAt") and (item["mergedAt"] > self.since)
             )
 
 
 async def make_digest(since, items, digest):
+    """
+    Make a single digest.
+
+    Args:
+        since (str): a duration spec ("2 day", "3d6h", etc).
+        items (list[str]): a list of GitHub URLs to collect items from.
+        digest (str): the HTML file name to write.
+
+    """
     since_date = datetime.datetime.now() - parse_timedelta(since)
-    summarizer = Summarizer(since=since_date)
-    tasks = [fn(*args) for fn, *args in map(summarizer.methods_from_url, items)]
+    digester = Digester(since=since_date)
+    tasks = [fn(*args) for fn, *args in map(digester.methods_from_url, items)]
     results = await asyncio.gather(*tasks)
     # $set_env.py: DIGEST_SAVE_RESULT - save digest data in a JSON file.
     if int(os.environ.get("DIGEST_SAVE_RESULT", 0)):
@@ -196,6 +225,13 @@ async def make_digest(since, items, digest):
 
 
 async def make_digests(conf_file):
+    """
+    Make all the digests specified by a configuration file.
+
+    Args:
+        conf_file (str): the yaml configuration file name.
+
+    """
     with open(conf_file, encoding="utf-8") as y:
         config = yaml.safe_load(y)
     await asyncio.gather(*(make_digest(**spec) for spec in config))

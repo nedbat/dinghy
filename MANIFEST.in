@@ -1,6 +1,7 @@
 include .editorconfig
-include Makefile
 include dev-requirements.txt
+include Makefile
+include pylintrc
 include *.rst
 
 recursive-include tests *
