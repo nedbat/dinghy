@@ -9,13 +9,12 @@ import operator
 import os
 import re
 
-import aiofiles
 import yaml
 from glom import glom as g
 
 from .graphql_helpers import build_query, GraphqlHelper
 from .helpers import json_save, parse_timedelta
-from .jinja_helpers import render_jinja
+from .jinja_helpers import render_jinja_to_file
 
 
 class Digester:
@@ -245,9 +244,9 @@ async def make_digest(since, items, digest):
     if int(os.environ.get("DIGEST_SAVE_RESULT", 0)):
         await json_save(results, "out_digest.json")
 
-    html = render_jinja("digest.html.j2", results=results, since=since_date)
-    async with aiofiles.open(digest, "w", encoding="utf-8") as html_out:
-        await html_out.write(html)
+    await render_jinja_to_file(
+        "digest.html.j2", digest, results=results, since=since_date
+    )
     print(f"Wrote {digest}")
 
 

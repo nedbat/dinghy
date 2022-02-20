@@ -5,8 +5,9 @@ Utilities for working with Jina2 templates.
 import datetime
 from pathlib import Path
 
-import wcag_contrast_ratio
+import aiofiles
 import jinja2
+import wcag_contrast_ratio
 
 
 def datetime_format(value, fmt="%m-%d %H:%M"):
@@ -32,3 +33,10 @@ def render_jinja(template_filename, **variables):
     template = jenv.get_template(f"templates/{template_filename}")
     html = template.render(**variables)
     return html
+
+
+async def render_jinja_to_file(template_filename, output_file, **variables):
+    """Render a template file with variables, and write it to a file."""
+    text = render_jinja(template_filename, **variables)
+    async with aiofiles.open(output_file, "w", encoding="utf-8") as out:
+        await out.write(text)
