@@ -1,7 +1,9 @@
 -e .
 black
 build
+check-manifest
 pylint
 pytest
+readme_renderer
 scriv
 twine

@@ -1,5 +1,7 @@
 include .editorconfig
 include Makefile
 include dev-requirements.txt
+include *.rst
 
 recursive-include tests *
+recursive-include scriv.d *

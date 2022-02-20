@@ -32,7 +32,9 @@ pylint: ## run pylint to find code smells
 .PHONY: dist pypi testpypi
 
 dist: ## build the distributions
+	python -m check_manifest
 	python -m build --sdist --wheel
+	python -m twine check dist/*
 
 pypi: ## upload the built distributions to PyPI.
 	python -m twine upload --verbose dist/*
