@@ -2,6 +2,8 @@
 Dinghy 
 ######
 
+|pypi-badge| |pyversions-badge| |license-badge|
+
 Dinghy daily digest tool.
 
 Dinghy uses the GitHub GraphQL API to find recent activity on issues and pull
@@ -40,3 +42,16 @@ The file is a list of digests to produce.  Each entry specifies what to digest:
 
   - A URL to a repo's pull requests will report on the pull requests in the
     repo.
+
+
+.. |pypi-badge| image:: https://img.shields.io/pypi/v/dinghy.svg
+    :target: https://pypi.python.org/pypi/dinghy/
+    :alt: PyPI
+
+.. |pyversions-badge| image:: https://img.shields.io/pypi/pyversions/dinghy.svg
+    :target: https://pypi.python.org/pypi/dinghy/
+    :alt: Supported Python versions
+
+.. |license-badge| image:: https://img.shields.io/github/license/nedbat/dinghy.svg
+    :target: https://github.com/nedbat/dinghy/blob/master/LICENSE.txt
+    :alt: License
