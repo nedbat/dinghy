@@ -3,4 +3,5 @@ black
 build
 pylint
 pytest
+scriv
 twine
