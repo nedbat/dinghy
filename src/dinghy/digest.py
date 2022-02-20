@@ -125,14 +125,23 @@ class Digester:
         repo["kind"] = "pull requests"
         return repo, pulls
 
-    def methods_from_url(self, url):
-        """Dispatch to a get_* method from a GitHub url."""
+    def method_from_url(self, url):
+        """
+        Dispatch to a get_* method from a GitHub url.
+
+        Args:
+            url (str): A GitHub url
+
+        Returns:
+            A method, and a dict of **kwargs.
+
+        """
         if m := re.fullmatch(r"https://github.com/(.*?)/(.*?)/issues", url):
-            return self.get_repo_issues, m[1], m[2]
+            return self.get_repo_issues, dict(owner=m[1], name=m[2])
         elif m := re.fullmatch(r"https://github.com/(.*?)/(.*?)/pulls", url):
-            return self.get_pull_requests, m[1], m[2]
+            return self.get_pull_requests, dict(owner=m[1], name=m[2])
         elif m := re.fullmatch(r"https://github.com/orgs/(.*?)/projects/(\d+)", url):
-            return self.get_project_issues, m[1], int(m[2])
+            return self.get_project_issues, dict(org=m[1], number=int(m[2]))
         else:
             raise Exception(f"Can't understand URL {url!r}")
 
@@ -207,17 +216,35 @@ async def make_digest(since, items, digest):
 
     Args:
         since (str): a duration spec ("2 day", "3d6h", etc).
-        items (list[str]): a list of GitHub URLs to collect items from.
+        items (list[str|dict]): a list of YAML objects or GitHub URLs to collect items from.
         digest (str): the HTML file name to write.
 
     """
     since_date = datetime.datetime.now() - parse_timedelta(since)
     digester = Digester(since=since_date)
-    tasks = [fn(*args) for fn, *args in map(digester.methods_from_url, items)]
+
+    tasks = []
+    for item in items:
+        if isinstance(item, str):
+            url = item
+            more_kwargs = {}
+        else:
+            url = item["url"]
+            more_kwargs = dict(item)
+            more_kwargs.pop("url")
+        fn, kwargs = digester.method_from_url(url)
+        try:
+            task = fn(**kwargs, **more_kwargs)
+        except TypeError as typeerr:
+            raise Exception(f"Problem with config item: {item}: {typeerr}") from None
+        tasks.append(task)
+
     results = await asyncio.gather(*tasks)
+
     # $set_env.py: DIGEST_SAVE_RESULT - save digest data in a JSON file.
     if int(os.environ.get("DIGEST_SAVE_RESULT", 0)):
         await json_save(results, "out_digest.json")
+
     html = render_jinja("digest.html.j2", results=results, since=since_date)
     async with aiofiles.open(digest, "w", encoding="utf-8") as html_out:
         await html_out.write(html)
