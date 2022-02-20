@@ -192,6 +192,7 @@ async def make_digest(since, items, digest):
     html = render_jinja("digest.html.j2", results=results, since=since_date)
     async with aiofiles.open(digest, "w", encoding="utf-8") as html_out:
         await html_out.write(html)
+    print(f"Wrote {digest}")
 
 
 async def make_digests(conf_file):
