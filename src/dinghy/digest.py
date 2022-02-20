@@ -56,13 +56,13 @@ class Digester:
 
         Args:
             org (str): the organization owner of the repo.
-            number (int): the project number.
+            number (int|str): the project number.
             home_repo (str): the owner/name of a repo that most issues are in.
         """
         project, project_data = await self.gql.nodes(
             query=build_query("project_issues.graphql"),
             path="organization.project.items",
-            variables=dict(org=org, projectNumber=number),
+            variables=dict(org=org, projectNumber=int(number)),
         )
         issues = [content for data in project_data if (content := data["content"])]
         issues = self._trim_since(issues)
@@ -76,7 +76,7 @@ class Digester:
         project["kind"] = "issues"
         return project, issues
 
-    async def get_pull_requests(self, owner, name):
+    async def get_repo_pull_requests(self, owner, name):
         """
         Get pull requests from a repo updated since a date, with comments since that date.
 
@@ -126,23 +126,33 @@ class Digester:
 
     def method_from_url(self, url):
         """
-        Dispatch to a get_* method from a GitHub url.
+        Dispatch to a get_* method from a GitHub URL.
 
         Args:
-            url (str): A GitHub url
+            url (str): A GitHub URL
 
         Returns:
             A method, and a dict of **kwargs.
 
         """
-        if m := re.fullmatch(r"https://github.com/(.*?)/(.*?)/issues", url):
-            return self.get_repo_issues, dict(owner=m[1], name=m[2])
-        elif m := re.fullmatch(r"https://github.com/(.*?)/(.*?)/pulls", url):
-            return self.get_pull_requests, dict(owner=m[1], name=m[2])
-        elif m := re.fullmatch(r"https://github.com/orgs/(.*?)/projects/(\d+)", url):
-            return self.get_project_issues, dict(org=m[1], number=int(m[2]))
-        else:
-            raise Exception(f"Can't understand URL {url!r}")
+        for rx, fn in [
+            (
+                r"https://github.com/(?P<owner>.*?)/(?P<name>.*?)/issues",
+                self.get_repo_issues,
+            ),
+            (
+                r"https://github.com/(?P<owner>.*?)/(?P<name>.*?)/pulls",
+                self.get_repo_pull_requests,
+            ),
+            (
+                r"https://github.com/orgs/(?P<org>.*?)/projects/(?P<number>\d+)",
+                self.get_project_issues,
+            ),
+        ]:
+            if match_url := re.fullmatch(rx, url):
+                return fn, match_url.groupdict()
+
+        raise Exception(f"Can't understand URL {url!r}")
 
     def _trim_since(self, nodes):
         """
