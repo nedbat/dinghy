@@ -49,7 +49,9 @@ class GraphqlHelper:
 
         # $set_env.py: DIGEST_SAVE_RESPONSES - save every query response in a JSON file.
         if int(os.environ.get("DIGEST_SAVE_RESPONSES", 0)):
-            await json_save(data, next(JSON_NAMES))
+            json_name = next(JSON_NAMES)
+            await json_save(data, json_name)
+            print(f"Wrote query data: {json_name}")
 
         if "message" in data:
             raise Exception(data["message"])

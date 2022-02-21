@@ -301,12 +301,14 @@ async def make_digest(since, items, digest):
 
     # $set_env.py: DIGEST_SAVE_RESULT - save digest data in a JSON file.
     if int(os.environ.get("DIGEST_SAVE_RESULT", 0)):
-        await json_save(results, "out_digest.json")
+        json_name = digest.replace(".html", ".json")
+        await json_save(results, json_name)
+        print(f"Wrote results data: {json_name}")
 
     await render_jinja_to_file(
         "digest.html.j2", digest, results=results, since=since_date
     )
-    print(f"Wrote {digest}")
+    print(f"Wrote digest: {digest}")
 
 
 async def make_digests(conf_file):
