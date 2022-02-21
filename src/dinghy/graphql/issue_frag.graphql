@@ -1,4 +1,5 @@
 fragment issueData on Issue {
+  __typename
   repository {
     ...repoData   # fragment: repo_frag.graphql
   }
@@ -34,7 +35,7 @@ fragment issueData on Issue {
       }
     }
   }
-  labels(first:10) {
+  labels(first:20) {
     nodes {
       color
       name

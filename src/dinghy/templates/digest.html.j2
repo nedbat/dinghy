@@ -19,14 +19,14 @@
     font-weight: bold;
     font-size: 150%;
   }
-  ul.issue {
+  ul.item {
     padding-left: 0em;
     margin-bottom: 1em;
   }
-  ul.issue > li {
+  ul.item > li {
     margin: .5em 0;
   }
-  ul.issue p {
+  ul.item p {
     margin: .2em 0 0 3em;
   }
   ul.comment {
@@ -61,7 +61,7 @@
 <body>
 <h1>Activity since {{ since|datetime("%Y-%m-%d") }}</h1>
 <ul class="repo">
-  {% for thing, issues in results -%}
+  {% for thing, items in results -%}
     <li>
       <span class="reponame"><a href="{{ thing.url }}">
       {%- if thing.container_kind == "repo" -%}
@@ -73,41 +73,41 @@
       {%- endif -%}
       </a></span>
       {{ thing.container_kind }} {{ thing.kind }}
-      <ul class="issue">
-        {% for issue in issues -%}
-          <li class="{{ issue.state|lower }}">
+      <ul class="item">
+        {% for item in items -%}
+          <li class="{{ item.state|lower }}">
 
-            {%- if issue.reasonCreated -%}
+            {%- if item.reasonCreated -%}
               <span class="icon created" title="newly created">&Star;</span>
             {%- else -%}
               <span class="icon">&ndash;</span>
             {%- endif -%}
-            {% if issue.reasonMerged -%}
+            {% if item.reasonMerged -%}
               <span class="icon merged" title="newly merged">&#x2713;</span>
-            {%- elif issue.reasonClosed -%}
+            {%- elif item.reasonClosed -%}
             <span class="icon closed" title="newly closed">&times;</span>
             {%- else -%}
               <span class="icon">&ndash;</span>
             {%- endif -%}
 
-            <a href="{{ issue.url }}"><b>{{issue.title}}</b> #{{ issue.number }}</a>
-            [{{ issue.author.login }}]
+            <a href="{{ item.url }}"><b>{{item.title}}</b> #{{ item.number }}</a>
+            [{{ item.author.login }}]
 
-            {% if issue.labels -%}
-              {%- for label in issue.labels.nodes -%}
+            {% if item.labels -%}
+              {%- for label in item.labels.nodes -%}
                 <span class="label" style="background: #{{label.color}}; color: {{label.color|textcolor}}">{{ label.name }}</span>
               {% endfor %}
             {%- endif -%}
 
-            {% if issue.other_repo -%}
-              <span class="homerepo">{{ issue.repository.nameWithOwner }}</span>
+            {% if item.other_repo -%}
+              <span class="homerepo">{{ item.repository.nameWithOwner }}</span>
             {%- endif %}
 
-            {%- if issue.body %}<p>{{ issue.body|truncate(120) }}</p>{% endif -%}
+            {%- if item.body %}<p>{{ item.body|truncate(120) }}</p>{% endif -%}
 
-            {% if issue.comments_to_show -%}
+            {% if item.comments_to_show -%}
               <ul class="comment">
-                {% for comment in issue.comments_to_show -%}
+                {% for comment in item.comments_to_show -%}
                   <li>
                     <a href="{{ comment.url }}" title="{{ comment.updatedAt|datetime() }}">
                       {% if comment.review_state -%}

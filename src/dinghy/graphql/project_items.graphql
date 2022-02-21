@@ -1,4 +1,4 @@
-query getProjectIssues(
+query getProjectItems(
   $org: String!
   $projectNumber: Int!
   $after: String
@@ -7,7 +7,7 @@ query getProjectIssues(
     project: projectNext(number: $projectNumber) {
       title
       url
-      items(first: 100, after: $after) {
+      items(first: 10, after: $after) {
         pageInfo {
           hasNextPage
           endCursor
@@ -15,11 +15,11 @@ query getProjectIssues(
         nodes {
           content {
             ... on Issue {
-              ...issueData    # fragment: issue_frag.graphql
+              ...issueData          # fragment: issue_frag.graphql
             }
-            # ... on PullRequest {
-            #     number
-            # }
+            ... on PullRequest {
+              ...pullRequestData    # fragment: pull_request_frag.graphql
+            }
           }
         }
       }

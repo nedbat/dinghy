@@ -56,7 +56,8 @@ The file is a list of digests to produce.  Each entry specifies what to digest:
 
   - The ``url`` setting is a GitHub URL, in a number of forms:
 
-    - An organization project URL will report on the issues in the project.
+    - An organization project URL will report on the issues and pull requests
+      in the project.
 
     - A URL to a repo's issues will report on the issues in the repo.
 

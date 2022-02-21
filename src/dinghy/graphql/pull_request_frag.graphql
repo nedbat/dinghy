@@ -1,4 +1,5 @@
 fragment pullRequestData on PullRequest {
+  __typename
   repository {
     ...repoData   # fragment: repo_frag.graphql
   }

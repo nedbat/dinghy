@@ -5,7 +5,7 @@ query getPullRequests(
 ) {
   repository(owner: $owner, name: $name) {
     ...repoData
-    pullRequests (
+    pullRequests(
       first: 10
       orderBy: {
         field: UPDATED_AT
