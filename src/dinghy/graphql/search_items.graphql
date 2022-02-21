@@ -1,0 +1,20 @@
+query searchItems(
+  $query: String!
+  $after: String
+) {
+  # 10 at a time is slow, but more than that always bumps against node limits.
+  search(query: $query, type: ISSUE, first: 10, after: $after) {
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+    nodes {
+      ... on Issue {
+        ...issueData          # fragment: issue_frag.graphql
+      }
+      ... on PullRequest {
+        ...pullRequestData    # fragment: pull_request_frag.graphql
+      }
+    }
+  }
+}

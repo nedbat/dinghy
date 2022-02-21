@@ -68,6 +68,8 @@
         {{ thing.nameWithOwner }}
       {%- elif thing.container_kind == "project" -%}
         {{ thing.title }}
+      {%- elif thing.container_kind == "search" -%}
+        {{ thing.query }}
       {%- endif -%}
       </a></span>
       {{ thing.container_kind }} {{ thing.kind }}

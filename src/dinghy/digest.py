@@ -8,6 +8,7 @@ import itertools
 import operator
 import os
 import re
+import urllib.parse
 
 import yaml
 from glom import glom as g
@@ -90,6 +91,17 @@ class Digester:
             variables=dict(owner=owner, name=name),
             donefn=(lambda nodes: nodes[-1]["updatedAt"] < self.since),
         )
+        self._process_pull_requests(pulls)
+
+        repo = g(repo, "data.repository")
+        repo["container_kind"] = "repo"
+        repo["kind"] = "pull requests"
+        return repo, pulls
+
+    def _process_pull_requests(self, pulls):
+        """
+        Do extra work to make pull requests right for reporting.
+        """
         pulls = self._trim_since(pulls)
         for pull in pulls:
             # Pull requests have complex trees of data, with comments in
@@ -119,10 +131,31 @@ class Digester:
             pull["comments_to_show"] = self._trim_since(comments.values())
 
         self._add_reasons(pulls)
-        repo = g(repo, "data.repository")
-        repo["container_kind"] = "repo"
-        repo["kind"] = "pull requests"
-        return repo, pulls
+
+    async def get_org_pull_requests(self, org):
+        """
+        Get pull requests across an organization.  Uses GitHub search.
+        """
+        search_terms = {
+            "org": org,
+            "is": "pr",
+            "updated": f">{self.since}",
+        }
+        search_query = " ".join(f"{k}:{v}" for k, v in search_terms.items())
+        _, pulls = await self.gql.nodes(
+            query=build_query("search_items.graphql"),
+            path="search",
+            variables=dict(query=search_query),
+        )
+        self._process_pull_requests(pulls)
+        url_q = urllib.parse.quote_plus(search_query)
+        search = {
+            "query": search_query,
+            "url": f"https://github.com/search?q={url_q}&type=issues",
+            "container_kind": "search",
+            "kind": "pull requests",
+        }
+        return search, pulls
 
     def method_from_url(self, url):
         """
@@ -219,6 +252,37 @@ class Digester:
             )
 
 
+def task_from_item(digester, item):
+    """
+    Parse a single item, and make a digester task for it.
+    """
+    url = None
+    if isinstance(item, str):
+        url = item
+        more_kwargs = {}
+    elif "url" in item:
+        url = item["url"]
+        more_kwargs = dict(item)
+        more_kwargs.pop("url")
+    if url:
+        fn, kwargs = digester.method_from_url(url)
+        try:
+            task = fn(**kwargs, **more_kwargs)
+        except TypeError as type_err:
+            raise Exception(f"Problem with config item: {item}: {type_err}") from None
+    else:
+        if "pull_requests" in item:
+            where = item["pull_requests"]
+            if where.startswith("org:"):
+                org = where.partition(":")[2]
+                task = digester.get_org_pull_requests(org)
+            else:
+                raise Exception(f"Don't understand pull_requests scope: {where!r}")
+        else:
+            raise Exception(f"Don't understand item: {item!r}")
+    return task
+
+
 async def make_digest(since, items, digest):
     """
     Make a single digest.
@@ -232,22 +296,7 @@ async def make_digest(since, items, digest):
     since_date = datetime.datetime.now() - parse_timedelta(since)
     digester = Digester(since=since_date)
 
-    tasks = []
-    for item in items:
-        if isinstance(item, str):
-            url = item
-            more_kwargs = {}
-        else:
-            url = item["url"]
-            more_kwargs = dict(item)
-            more_kwargs.pop("url")
-        fn, kwargs = digester.method_from_url(url)
-        try:
-            task = fn(**kwargs, **more_kwargs)
-        except TypeError as typeerr:
-            raise Exception(f"Problem with config item: {item}: {typeerr}") from None
-        tasks.append(task)
-
+    tasks = [task_from_item(digester, item) for item in items]
     results = await asyncio.gather(*tasks)
 
     # $set_env.py: DIGEST_SAVE_RESULT - save digest data in a JSON file.
