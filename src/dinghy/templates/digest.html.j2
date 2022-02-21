@@ -75,65 +75,65 @@
       </a></span>
       {{ thing.container_kind }} {{ thing.kind }}
       {% if items %}
-      <ul class="item">
-        {% for item in items -%}
-          <li class="{{ item.state|lower }}">
+        <ul class="item">
+          {% for item in items -%}
+            <li class="{{ item.state|lower }}">
 
-            {%- if item.reasonCreated -%}
-              <span class="icon created" title="newly created">&Star;</span>
-            {%- else -%}
-              <span class="icon">&ndash;</span>
-            {%- endif -%}
-            {% if item.reasonMerged -%}
-              <span class="icon merged" title="newly merged">&#x2713;</span>
-            {%- elif item.reasonClosed -%}
-            <span class="icon closed" title="newly closed">&times;</span>
-            {%- else -%}
-              <span class="icon">&ndash;</span>
-            {%- endif -%}
+              {%- if item.reasonCreated -%}
+                <span class="icon created" title="newly created">&Star;</span>
+              {%- else -%}
+                <span class="icon">&ndash;</span>
+              {%- endif -%}
+              {% if item.reasonMerged -%}
+                <span class="icon merged" title="newly merged">&#x2713;</span>
+              {%- elif item.reasonClosed -%}
+              <span class="icon closed" title="newly closed">&times;</span>
+              {%- else -%}
+                <span class="icon">&ndash;</span>
+              {%- endif -%}
 
-            <a href="{{ item.url }}"><b>{{item.title}}</b> #{{ item.number }}</a>
-            [{{ item.author.login }}]
+              <a href="{{ item.url }}"><b>{{item.title}}</b> #{{ item.number }}</a>
+              [{{ item.author.login }}]
 
-            {% if item.labels -%}
-              {%- for label in item.labels.nodes -%}
-                <span class="label" style="background: #{{label.color}}; color: {{label.color|textcolor}}">{{ label.name }}</span>
-              {% endfor %}
-            {%- endif -%}
+              {% if item.labels -%}
+                {%- for label in item.labels.nodes -%}
+                  <span class="label" style="background: #{{label.color}}; color: {{label.color|textcolor}}">{{ label.name }}</span>
+                {% endfor %}
+              {%- endif -%}
 
-            {% if item.other_repo -%}
-              <span class="homerepo">{{ item.repository.nameWithOwner }}</span>
-            {%- endif %}
+              {% if item.other_repo -%}
+                <span class="homerepo">{{ item.repository.nameWithOwner }}</span>
+              {%- endif %}
 
-            {%- if item.body %}<p>{{ item.body|truncate(120) }}</p>{% endif -%}
+              {%- if item.body %}<p>{{ item.body|truncate(120) }}</p>{% endif -%}
 
-            {% if item.comments_to_show -%}
-              <ul class="comment">
-                {% for comment in item.comments_to_show -%}
-                  <li>
-                    <a href="{{ comment.url }}" title="{{ comment.updatedAt|datetime() }}">
-                      {% if comment.review_state -%}
-                        {% if comment.review_state == "APPROVED" -%}
-                          {{ checked_box }}
+              {% if item.comments_to_show -%}
+                <ul class="comment">
+                  {% for comment in item.comments_to_show -%}
+                    <li>
+                      <a href="{{ comment.url }}" title="{{ comment.updatedAt|datetime() }}">
+                        {% if comment.review_state -%}
+                          {% if comment.review_state == "APPROVED" -%}
+                            {{ checked_box }}
+                          {% else %}
+                            {{ empty_box }}
+                          {% endif %}
                         {% else %}
-                          {{ empty_box }}
+                          {{ double_bubble }}
                         {% endif %}
-                      {% else %}
-                        {{ double_bubble }}
-                      {% endif %}
-                      {{ comment.author.login }}</a>{# -#}
-                    {%- if comment.body %}: {{ comment.body|trim|truncate(100) }}{% endif -%}
-                    {%- if comment.review_state -%}
-                      &nbsp;<i>(review:&nbsp;{{ comment.review_state|lower|replace("_", " ") }})</i>
-                    {% endif -%}
-                  </li>
-                {% endfor -%}
-              </ul>
-            {% endif -%}
+                        {{ comment.author.login }}</a>{# -#}
+                      {%- if comment.body %}: {{ comment.body|trim|truncate(100) }}{% endif -%}
+                      {%- if comment.review_state -%}
+                        &nbsp;<i>(review:&nbsp;{{ comment.review_state|lower|replace("_", " ") }})</i>
+                      {% endif -%}
+                    </li>
+                  {% endfor -%}
+                </ul>
+              {% endif -%}
 
-          </li>
-        {% endfor -%}
-      </ul>
+            </li>
+          {% endfor -%}
+        </ul>
       {% else %}
         <p>Nothing happening</p>
       {% endif %}
