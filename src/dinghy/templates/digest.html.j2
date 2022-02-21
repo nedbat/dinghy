@@ -74,6 +74,7 @@
       {%- endif -%}
       </a></span>
       {{ thing.container_kind }} {{ thing.kind }}
+      {% if items %}
       <ul class="item">
         {% for item in items -%}
           <li class="{{ item.state|lower }}">
@@ -133,6 +134,9 @@
           </li>
         {% endfor -%}
       </ul>
+      {% else %}
+        <p>Nothing happening</p>
+      {% endif %}
     </li>
   {% endfor -%}
 </ul>
