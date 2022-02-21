@@ -1,0 +1,16 @@
+fragment reviewData on PullRequestReview {
+  id
+  url
+  state
+  author {
+    ...authorData   # fragment: author_frag.graphql
+  }
+  body
+  updatedAt
+  comments(first: 100) {
+    totalCount
+    nodes {
+      ...commentData    # fragment: comment_frag.graphql
+    }
+  }
+}

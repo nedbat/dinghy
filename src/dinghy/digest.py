@@ -216,14 +216,15 @@ class Digester:
         reviews = itertools.chain(
             pull["latestReviews"]["nodes"],
             pull["latestOpinionatedReviews"]["nodes"],
+            pull["reviews"]["nodes"],
         )
         for rev in reviews:
-            ncom = 0
+            had_comment = False
             for com in rev["comments"]["nodes"]:
                 com = comments.setdefault(com["id"], dict(com))
                 com["review_state"] = rev["state"]
-                ncom += 1
-            if ncom == 0:
+                had_comment = True
+            if rev["body"] or not had_comment:
                 # A completed review with no comment, make it into a comment.
                 com = comments.setdefault(rev["id"], dict(rev))
                 com["review_state"] = rev["state"]

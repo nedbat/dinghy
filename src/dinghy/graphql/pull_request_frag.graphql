@@ -29,39 +29,19 @@ fragment pullRequestData on PullRequest {
   latestOpinionatedReviews(first: 100) {
     totalCount
     nodes {
-      id
-      url
-      state
-      author {
-        ...authorData   # fragment: author_frag.graphql
-      }
-      body
-      updatedAt
-      comments(first: 100) {
-        totalCount
-        nodes {
-          ...commentData    # fragment: comment_frag.graphql
-        }
-      }
+      ...reviewData     # fragment: review_frag.graphql
     }
   }
   latestReviews(first: 100) {
     totalCount
     nodes {
-      id
-      url
-      state
-      author {
-        ...authorData   # fragment: author_frag.graphql
-      }
-      body
-      updatedAt
-      comments(first: 100) {
-        totalCount
-        nodes {
-          ...commentData    # fragment: comment_frag.graphql
-        }
-      }
+      ...reviewData     # fragment: review_frag.graphql
+    }
+  }
+  reviews(first: 100) {
+    totalCount
+    nodes {
+      ...reviewData     # fragment: review_frag.graphql
     }
   }
   reviewThreads(first: 100) {
