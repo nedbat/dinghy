@@ -23,10 +23,11 @@ class Digester:
     Use GitHub GraphQL to get data about recent changes.
     """
 
-    def __init__(self, since):
+    def __init__(self, since, options):
         self.since = since.strftime("%Y-%m-%dT%H:%M:%S")
         token = os.environ.get("GITHUB_TOKEN", "")
         self.gql = GraphqlHelper("https://api.github.com/graphql", token)
+        self.bots = options.get("bots", [])
 
     async def get_repo_issues(self, owner, name):
         """
@@ -149,14 +150,23 @@ class Digester:
 
         raise Exception(f"Can't understand URL {url!r}")
 
-    def _trim_since(self, nodes):
+    def _trim_unwanted(self, nodes):
         """
-        Trim a list to keep only activity since `self.since`.
+        Trim a list to keep only activity since `self.since`, and only by real
+        users.
 
         The returned list is also sorted by updatedAt date.
         """
-        nodes = [n for n in nodes if n["updatedAt"] > self.since]
-        nodes.sort(key=operator.itemgetter("updatedAt"))
+        nodes = (n for n in nodes if n["updatedAt"] > self.since)
+        nodes = (n for n in nodes if n["author"]["__typename"] == "User")
+        nodes = (n for n in nodes if n["author"]["login"] not in self.bots)
+        nodes = sorted(nodes, key=operator.itemgetter("updatedAt"))
+        return nodes
+
+    def _trim_author_type(self, nodes):
+        """
+        Keep only things authored by users, not bots.
+        """
         return nodes
 
     async def _process_items(self, items):
@@ -165,7 +175,7 @@ class Digester:
 
         Keep only things updated since our date, and sort them.
         """
-        items = self._trim_since(items)
+        items = self._trim_unwanted(items)
         items = await asyncio.gather(*map(self._process_item, items))
         return items
 
@@ -203,7 +213,7 @@ class Digester:
             )
         else:
             comments = issue["comments"]["nodes"]
-        issue["comments_to_show"] = self._trim_since(comments)
+        issue["comments_to_show"] = self._trim_unwanted(comments)
 
     async def _process_pull_request(self, pull):
         """
@@ -234,7 +244,7 @@ class Digester:
         for com in pull["comments"]["nodes"]:
             comments.setdefault(com["id"], com)
 
-        pull["comments_to_show"] = self._trim_since(comments.values())
+        pull["comments_to_show"] = self._trim_unwanted(comments.values())
 
     def _add_reasons(self, item):
         """
@@ -284,7 +294,7 @@ def task_from_item(digester, item):
     return task
 
 
-async def make_digest(since, items, digest):
+async def make_digest(since, items, digest, **options):
     """
     Make a single digest.
 
@@ -295,7 +305,7 @@ async def make_digest(since, items, digest):
 
     """
     since_date = datetime.datetime.now() - parse_timedelta(since)
-    digester = Digester(since=since_date)
+    digester = Digester(since=since_date, options=options)
 
     tasks = [task_from_item(digester, item) for item in items]
     results = await asyncio.gather(*tasks)

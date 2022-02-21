@@ -72,6 +72,10 @@ The file is a list of digests to produce.  Each entry specifies what to digest:
 
 Items can have additional options:
 
+- No activity is reported for bot users.  Some applications act as real users,
+  but should be ignored anyway.  You can list those user names that should be
+  considered bots in the ``bots`` setting.
+
 - Options for organization projects include:
 
   - ``home_repo`` is the owner/repo of the repo in which most issues will be

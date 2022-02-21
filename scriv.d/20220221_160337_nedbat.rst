@@ -1,0 +1,6 @@
+Added
+.....
+
+- Don't report on activity by bot users.  The ``bot`` setting can be used to
+  list user accounts that should be considered bots.
+
