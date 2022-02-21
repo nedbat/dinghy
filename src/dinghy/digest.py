@@ -328,4 +328,7 @@ def main(conf_file="dinghy.yaml"):
     """
     Digest all the things!
     """
-    asyncio.run(make_digests(conf_file))
+    try:
+        asyncio.run(make_digests(conf_file))
+    finally:
+        print(GraphqlHelper.last_rate_limit())
