@@ -22,6 +22,23 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+0.2.0 — 2022-02-21
+------------------
+
+Added
+.....
+
+- Items can have options.  Organization projects have a ``home_repo`` option so
+  that issues from other repos will get an indication of the other repo.
+
+- Organizatons can be searched for pull requests.
+
+- If dinghy hits a GraphQL API rate limit, it will sleep until the limit is
+  reset.
+
+- Don't report on activity by bot users.  The ``bot`` setting can be used to
+  list user accounts that should be considered bots.
+
 0.1.0 — 2022-02-19
 ------------------
 
