@@ -2,9 +2,9 @@
 Dinghy
 ######
 
-|pypi-badge| |pyversions-badge| |license-badge|
+Dinghy daily GitHub digest tool.
 
-Dinghy daily digest tool.
+|pypi-badge| |pyversions-badge| |license-badge|
 
 Dinghy uses the GitHub GraphQL API to find recent activity on issues and pull
 requests, and writes a compact HTML digest.  Write your configuration in a
