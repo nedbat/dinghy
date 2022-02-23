@@ -93,7 +93,7 @@ class GraphqlHelper:
             jbody["variables"] = variables
         async with aiohttp.ClientSession(headers=self.headers) as session:
             async with session.post(self.endpoint, json=jbody) as response:
-                #print(response.status, response.headers)
+                # print(response.status, response.headers)
                 response.raise_for_status()
                 self.save_rate_limit(_summarize_rate_limit(response))
                 return await response.json()

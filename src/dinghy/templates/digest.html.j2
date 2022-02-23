@@ -58,6 +58,11 @@
   .homerepo {
     color: #888;
   }
+  .footer {
+    color: #888;
+    font-style: italic;
+    margin-top: 3em;
+  }
   </style>
 <body>
 <h1>Activity since {{ since|datetime("%Y-%m-%d") }}</h1>
@@ -140,3 +145,7 @@
     </li>
   {% endfor -%}
 </ul>
+<p class="footer">
+  created by <a href="https://pypi.org/project/dinghy">dinghy</a>,
+  {{ now|datetime("%Y-%m-%d %H:%M") }}
+</p>

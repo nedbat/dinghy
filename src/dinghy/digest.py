@@ -317,7 +317,11 @@ async def make_digest(since, items, digest, **options):
         print(f"Wrote results data: {json_name}")
 
     await render_jinja_to_file(
-        "digest.html.j2", digest, results=results, since=since_date
+        "digest.html.j2",
+        digest,
+        results=results,
+        since=since_date,
+        now=datetime.datetime.now(),
     )
     print(f"Wrote digest: {digest}")
 
