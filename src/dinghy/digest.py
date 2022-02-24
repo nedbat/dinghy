@@ -336,7 +336,12 @@ async def make_digests(conf_file):
     """
     with open(conf_file, encoding="utf-8") as y:
         config = yaml.safe_load(y)
-    await asyncio.gather(*(make_digest(**spec) for spec in config))
+    defaults = config.get("defaults", {})
+    tasks = []
+    for spec in config.get("digests", []):
+        args = {**defaults, **spec}
+        tasks.append(make_digest(**args))
+    await asyncio.gather(*tasks)
 
 
 def main(conf_file="dinghy.yaml"):

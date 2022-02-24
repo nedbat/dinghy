@@ -23,29 +23,36 @@ Dinghy configuration is read from a ``dinghy.yaml`` file:
 
 .. code-block:: yaml
 
-    - digest: lastweek.html
-      since: 1 week
-      items:
-        - https://github.com/orgs/myorg/projects/17
-        - https://github.com/orgs/anotherorg/projects/8
-        - https://github.com/myorg/myrepo/pulls
+    digests:
+      - digest: lastweek.html
+        since: 1 week
+        items:
+          - https://github.com/orgs/myorg/projects/17
+          - https://github.com/orgs/anotherorg/projects/8
+          - https://github.com/myorg/myrepo/pulls
 
-    - digest: hotnews.html
-      since: 1 day
-      items:
-        - url: https://github.com/orgs/anotherorg/projects/8
-          home_repo: anotherorg/wg
-        - https://github.com/myorg/churnchurn/issues
+      - digest: hotnews.html
+        since: 1 day
+        items:
+          - url: https://github.com/orgs/anotherorg/projects/8
+            home_repo: anotherorg/wg
+          - https://github.com/myorg/churnchurn/issues
 
-    - digest: all_prs.html
-      since: 1 day
-      items:
-        - pull_requests: org:myorg
+      - digest: all_prs.html
+        since: 1 day
+        items:
+          - pull_requests: org:myorg
 
+    defaults:
+      bots:
+        - app-user
+        - fake-bot
 
-The file is a list of digests to produce.  Each entry specifies what to digest:
+The ``digests`` clause is a list of digests to produce.  The ``defaults``
+clause sets defaults for the digest options in the rest of the file.  Each in
+the ``digests`` clause specifies what to digest:
 
-- The ``digest`` setting is the HTML file path to produce.
+- The ``digest`` setting is the HTML file to write.
 
 - The ``since`` setting indicates how far back to look for activity. It can use
   units of weeks, days, hours, minutes and seconds, and can also be
