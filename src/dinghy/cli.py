@@ -17,4 +17,9 @@ def cli(config_file):
     try:
         asyncio.run(make_digests(config_file))
     finally:
-        print(GraphqlHelper.last_rate_limit())
+        lrl = GraphqlHelper.last_rate_limit()
+        print(
+            f"Remaining {lrl['resource']} rate limit: "
+            + f"{lrl['remaining']} of {lrl['limit']}, "
+            + f"next reset at {lrl['reset_when']}"
+        )
