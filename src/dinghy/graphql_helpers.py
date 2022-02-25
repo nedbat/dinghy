@@ -103,7 +103,10 @@ class GraphqlHelper:
         Execute one GraphQL query, with logging, retrying, and error handling.
         """
         args = ", ".join(f"{k}: {v!r}" for k, v in variables.items())
-        print(query.splitlines()[0] + args + ")")
+        query_head = next(
+            line for line in query.splitlines() if not line.startswith("#")
+        )
+        print(query_head + args + ")")
 
         while True:
             data = await self._raw_execute(query=query, variables=variables)
