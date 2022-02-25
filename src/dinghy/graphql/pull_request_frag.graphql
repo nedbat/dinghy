@@ -1,3 +1,4 @@
+# https://docs.github.com/en/graphql/reference/objects#pullrequest
 fragment pullRequestData on PullRequest {
   __typename
   repository {
@@ -11,9 +12,11 @@ fragment pullRequestData on PullRequest {
   url
   createdAt
   updatedAt
+  closed
   closedAt
   merged
   mergedAt
+  isDraft
   labels(first:10) {
     nodes {
       color

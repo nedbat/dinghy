@@ -63,6 +63,33 @@
     font-style: italic;
     margin-top: 3em;
   }
+  .octicon {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    padding-bottom: 2px;
+  }
+  {# Octicons: https://github.com/primer/octicons/tree/main/icons #}
+  .octicon.pull {
+    background-image: url(https://raw.githubusercontent.com/primer/octicons/main/icons/git-pull-request-16.svg);
+  }
+  .octicon.pull.draft {
+    background-image: url(https://raw.githubusercontent.com/primer/octicons/main/icons/git-pull-request-draft-16.svg);
+  }
+  .octicon.pull.closed {
+    background-image: url(https://raw.githubusercontent.com/primer/octicons/main/icons/git-pull-request-closed-16.svg);
+  }
+  .octicon.pull.closed.merged {
+    background-image: url(https://raw.githubusercontent.com/primer/octicons/main/icons/git-merge-16.svg);
+  }
+  .octicon.issue {
+    background-image: url(https://raw.githubusercontent.com/primer/octicons/main/icons/issue-opened-16.svg);
+  }
+  .octicon.issue.closed {
+    background-image: url(https://raw.githubusercontent.com/primer/octicons/main/icons/issue-closed-16.svg);
+  }
   </style>
 <body>
 <h1>Activity since {{ since|datetime("%Y-%m-%d") }}</h1>
@@ -96,6 +123,14 @@
               {%- else -%}
                 <span class="icon">&ndash;</span>
               {%- endif -%}
+
+              <span class="octicon
+                {%- if item.__typename == "PullRequest" %} pull{% endif -%}
+                {%- if item.__typename == "Issue" %} issue{% endif -%}
+                {%- if item.isDraft %} draft{% endif -%}
+                {%- if item.closed %} closed{% endif -%}
+                {%- if item.merged %} merged{% endif -%}
+              "></span>
 
               <a href="{{ item.url }}"><b>{{item.title}}</b> #{{ item.number }}</a>
               [{{ item.author.login }}]

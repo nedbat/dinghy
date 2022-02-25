@@ -1,3 +1,4 @@
+# https://docs.github.com/en/graphql/reference/objects#issue
 fragment issueData on Issue {
   __typename
   repository {
@@ -9,6 +10,7 @@ fragment issueData on Issue {
   state
   createdAt
   updatedAt
+  closed
   closedAt
   author {
     ...authorData   # fragment: author_frag.graphql
