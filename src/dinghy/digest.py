@@ -163,12 +163,6 @@ class Digester:
         nodes = sorted(nodes, key=operator.itemgetter("updatedAt"))
         return nodes
 
-    def _trim_author_type(self, nodes):
-        """
-        Keep only things authored by users, not bots.
-        """
-        return nodes
-
     async def _process_items(self, items):
         """
         Process items after they've been retrieved.
