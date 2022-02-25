@@ -81,7 +81,7 @@
   .octicon.pull.closed {
     background-image: url(https://raw.githubusercontent.com/primer/octicons/main/icons/git-pull-request-closed-16.svg);
   }
-  .octicon.pull.closed.merged {
+  .octicon.pull.merged {
     background-image: url(https://raw.githubusercontent.com/primer/octicons/main/icons/git-merge-16.svg);
   }
   .octicon.issue {
@@ -125,11 +125,15 @@
               {%- endif -%}
 
               <span class="octicon
+                {%- if item.isDraft %} draft{% endif -%}
+                {%- if item.merged %} merged{% elif item.closed %} closed{% endif -%}
                 {%- if item.__typename == "PullRequest" %} pull{% endif -%}
                 {%- if item.__typename == "Issue" %} issue{% endif -%}
-                {%- if item.isDraft %} draft{% endif -%}
-                {%- if item.closed %} closed{% endif -%}
-                {%- if item.merged %} merged{% endif -%}
+              " title="
+                {%- if item.isDraft %}draft {% endif -%}
+                {%- if item.merged %}merged {% elif item.closed %}closed {% endif -%}
+                {%- if item.__typename == "PullRequest" %}pull request{% endif -%}
+                {%- if item.__typename == "Issue" %}issue{% endif -%}
               "></span>
 
               <a href="{{ item.url }}"><b>{{item.title}}</b> #{{ item.number }}</a>
