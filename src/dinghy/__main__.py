@@ -1,5 +1,7 @@
 """Enable 'python -m dinghy'."""
 
-from dinghy.digest import main
+from .cli import cli
 
-main()
+# pylint: disable=unexpected-keyword-arg
+# pylint: disable=no-value-for-parameter
+cli(prog_name="dinghy")

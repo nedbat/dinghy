@@ -325,24 +325,13 @@ async def make_digests(conf_file):
     Make all the digests specified by a configuration file.
 
     Args:
-        conf_file (str): the yaml configuration file name.
+        conf_file (file): an open file object to read the configuration from.
 
     """
-    with open(conf_file, encoding="utf-8") as y:
-        config = yaml.safe_load(y)
+    config = yaml.safe_load(conf_file)
     defaults = config.get("defaults", {})
     tasks = []
     for spec in config.get("digests", []):
         args = {**defaults, **spec}
         tasks.append(make_digest(**args))
     await asyncio.gather(*tasks)
-
-
-def main(conf_file="dinghy.yaml"):
-    """
-    Digest all the things!
-    """
-    try:
-        asyncio.run(make_digests(conf_file))
-    finally:
-        print(GraphqlHelper.last_rate_limit())
