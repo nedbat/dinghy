@@ -23,7 +23,7 @@ test: ## run tests in the current virtualenv
 	pytest tests
 
 black: ## run black to format source
-	black src tests
+	black -q src tests
 
 pylint: ## run pylint to find code smells
 	pylint src tests
