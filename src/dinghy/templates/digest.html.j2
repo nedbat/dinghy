@@ -148,7 +148,7 @@
                   {% if item.reasonMerged -%}
                     <span class="octicon newmerged"></span>
                   {%- elif item.reasonClosed -%}
-                    <span class="octicon newclosed"></span>
+                    <span class="octicon {% if item.__typename == "PullRequest" %}newclosed{% else %}newmerged{% endif %}"></span>
                   {%- else -%}
                     <span class="octicon dash"></span>
                   {%- endif -%}
