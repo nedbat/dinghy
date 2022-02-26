@@ -64,25 +64,33 @@
     margin-top: 3em;
   }
   .octicon {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     display: inline-block;
     vertical-align: middle;
     background-repeat: no-repeat;
-    padding-bottom: 2px;
   }
   {# Octicons: https://github.com/primer/octicons/tree/main/icons #}
+  {# sepia: #aa9a7c #}
   .octicon.pull {
     background-image: url(https://raw.githubusercontent.com/primer/octicons/main/icons/git-pull-request-16.svg);
+    {# open color: #1a7f37 #}
+    filter: invert(1) brightness(.5) sepia(1) hue-rotate(98deg) saturate(8) brightness(0.5);
   }
   .octicon.pull.draft {
     background-image: url(https://raw.githubusercontent.com/primer/octicons/main/icons/git-pull-request-draft-16.svg);
+    {# draft color: #57606a #}
+    filter: invert(1) brightness(.5) sepia(1) hue-rotate(172deg) saturate(0.43) brightness(0.65);
   }
   .octicon.pull.closed {
     background-image: url(https://raw.githubusercontent.com/primer/octicons/main/icons/git-pull-request-closed-16.svg);
+    {# closed color: #cf222e #}
+    filter: invert(1) brightness(.5) sepia(1) hue-rotate(316deg) saturate(6) brightness(.8);
   }
   .octicon.pull.merged {
     background-image: url(https://raw.githubusercontent.com/primer/octicons/main/icons/git-merge-16.svg);
+    {# merged color: #8250df #}
+    filter: invert(1) brightness(.5) sepia(1) hue-rotate(220deg) saturate(8) brightness(.65);
   }
   .octicon.issue {
     background-image: url(https://raw.githubusercontent.com/primer/octicons/main/icons/issue-opened-16.svg);
