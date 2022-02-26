@@ -28,7 +28,7 @@ class Digester:
         self.since = since.strftime("%Y-%m-%dT%H:%M:%S")
         token = os.environ.get("GITHUB_TOKEN", "")
         self.gql = GraphqlHelper("https://api.github.com/graphql", token)
-        self.bots = options.get("bots", [])
+        self.ignore_users = options.get("ignore_users", [])
 
     async def get_repo_issues(self, owner, name):
         """
@@ -160,7 +160,7 @@ class Digester:
         """
         nodes = (n for n in nodes if n["updatedAt"] > self.since)
         nodes = (n for n in nodes if n["author"]["__typename"] == "User")
-        nodes = (n for n in nodes if n["author"]["login"] not in self.bots)
+        nodes = (n for n in nodes if n["author"]["login"] not in self.ignore_users)
         nodes = sorted(nodes, key=operator.itemgetter("updatedAt"))
         return nodes
 

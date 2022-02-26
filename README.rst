@@ -44,7 +44,7 @@ Dinghy configuration is read from a ``dinghy.yaml`` file:
           - pull_requests: org:myorg
 
     defaults:
-      bots:
+      ignore_users:
         - app-user
         - fake-bot
 
@@ -81,7 +81,7 @@ Items can have additional options:
 
 - No activity is reported for bot users.  Some applications act as real users,
   but should be ignored anyway.  You can list those user names that should be
-  considered bots in the ``bots`` setting.
+  ignored in the ``ignore_users`` setting.
 
 - Options for organization projects include:
 
