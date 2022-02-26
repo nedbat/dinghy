@@ -3,6 +3,10 @@
   {% set double_bubble = "&#x1F5EA;" %}
   {% set empty_box = "&#x2610;" %}
   {% set checked_box = "&#x1F5F9;" %}
+  {% macro octicon(name, size=16) -%}
+    {# Octicons: https://github.com/primer/octicons/tree/main/icons #}
+    background-image: url(https://raw.githubusercontent.com/primer/octicons/main/icons/{{ name }}-{{ size }}.svg);
+  {%- endmacro %}
   <title>{{ double_bubble }} Activity since {{ since|datetime("%Y-%m-%d") }}</title>
   <style>
   body {
@@ -10,6 +14,7 @@
     max-width: 60em;
     margin: auto;
     line-height: 1.3;
+    color: black;
   }
   ul {
     padding-left: 0;
@@ -32,20 +37,13 @@
   ul.comment {
     padding-left: 3em;
   }
-  .icon {
-    display: inline-block;
-    width: 1em;
-    color: #ccc;
-  }
-  .icon.created, .icon.closed, .icon.merged {
-    color: black;
-    cursor: default;
-  }
   a {
     text-decoration: none;
+    color: black;
   }
   a:hover {
-    text-decoration: underline;
+    text-decoration: none;
+    color: #0969da;
   }
   .label {
     padding: .2em .5em .1em .5em;
@@ -70,33 +68,46 @@
     vertical-align: middle;
     background-repeat: no-repeat;
   }
-  {# Octicons: https://github.com/primer/octicons/tree/main/icons #}
   {# sepia: #aa9a7c #}
+  .octicon.newcreated {
+    {{ octicon("star") }}
+    filter: invert(1) brightness(.5) sepia(1) hue-rotate(98deg) saturate(8) brightness(0.5);
+  }
+  .octicon.newclosed {
+    {{ octicon("x") }}
+  }
+  .octicon.newmerged {
+    {{ octicon("check") }}
+  }
+  .octicon.dash {
+    {{ octicon("dash") }}
+    filter: invert(1) brightness(.5) sepia(1) hue-rotate(172deg) saturate(0.43) brightness(1.25);
+  }
   .octicon.pull {
-    background-image: url(https://raw.githubusercontent.com/primer/octicons/main/icons/git-pull-request-16.svg);
+    {{ octicon("git-pull-request") }}
     {# open color: #1a7f37 #}
     filter: invert(1) brightness(.5) sepia(1) hue-rotate(98deg) saturate(8) brightness(0.5);
   }
   .octicon.pull.draft {
-    background-image: url(https://raw.githubusercontent.com/primer/octicons/main/icons/git-pull-request-draft-16.svg);
+    {{ octicon("git-pull-request-draft") }}
     {# draft color: #57606a #}
     filter: invert(1) brightness(.5) sepia(1) hue-rotate(172deg) saturate(0.43) brightness(0.65);
   }
   .octicon.pull.closed {
-    background-image: url(https://raw.githubusercontent.com/primer/octicons/main/icons/git-pull-request-closed-16.svg);
+    {{ octicon("git-pull-request-closed") }}
     {# closed color: #cf222e #}
     filter: invert(1) brightness(.5) sepia(1) hue-rotate(316deg) saturate(6) brightness(.8);
   }
   .octicon.pull.merged {
-    background-image: url(https://raw.githubusercontent.com/primer/octicons/main/icons/git-merge-16.svg);
+    {{ octicon("git-merge") }}
     {# merged color: #8250df #}
     filter: invert(1) brightness(.5) sepia(1) hue-rotate(220deg) saturate(8) brightness(.65);
   }
   .octicon.issue {
-    background-image: url(https://raw.githubusercontent.com/primer/octicons/main/icons/issue-opened-16.svg);
+    {{ octicon("issue-opened") }}
   }
   .octicon.issue.closed {
-    background-image: url(https://raw.githubusercontent.com/primer/octicons/main/icons/issue-closed-16.svg);
+    {{ octicon("issue-closed") }}
   }
   </style>
 <body>
@@ -119,32 +130,39 @@
           {% for item in items -%}
             <li class="{{ item.state|lower }}">
 
-              {%- if item.reasonCreated -%}
-                <span class="icon created" title="newly created">&Star;</span>
-              {%- else -%}
-                <span class="icon">&ndash;</span>
-              {%- endif -%}
-              {% if item.reasonMerged -%}
-                <span class="icon merged" title="newly merged">&#x2713;</span>
-              {%- elif item.reasonClosed -%}
-              <span class="icon closed" title="newly closed">&times;</span>
-              {%- else -%}
-                <span class="icon">&ndash;</span>
-              {%- endif -%}
+              <a href="{{ item.url }}">{# -#}
+                <span title="
+                  {%- if item.isDraft %}draft {% endif -%}
+                  {%- if item.merged %}merged {% elif item.closed %}closed {% endif -%}
+                  {%- if item.__typename == "PullRequest" %}pull request{% endif -%}
+                  {%- if item.__typename == "Issue" %}issue{% endif -%}
+                  {%- if item.reasonCreated %}, newly created{% endif -%}
+                  {%- if item.reasonMerged -%}, newly merged{% elif item.reasonClosed %}, newly closed{% endif -%}
+                ">{# -#}
 
-              <span class="octicon
-                {%- if item.isDraft %} draft{% endif -%}
-                {%- if item.merged %} merged{% elif item.closed %} closed{% endif -%}
-                {%- if item.__typename == "PullRequest" %} pull{% endif -%}
-                {%- if item.__typename == "Issue" %} issue{% endif -%}
-              " title="
-                {%- if item.isDraft %}draft {% endif -%}
-                {%- if item.merged %}merged {% elif item.closed %}closed {% endif -%}
-                {%- if item.__typename == "PullRequest" %}pull request{% endif -%}
-                {%- if item.__typename == "Issue" %}issue{% endif -%}
-              "></span>
+                  {%- if item.reasonCreated -%}
+                    <span class="octicon newcreated"></span>
+                  {%- else -%}
+                    <span class="octicon dash"></span>
+                  {%- endif -%}
+                  {% if item.reasonMerged -%}
+                    <span class="octicon newmerged"></span>
+                  {%- elif item.reasonClosed -%}
+                    <span class="octicon newclosed"></span>
+                  {%- else -%}
+                    <span class="octicon dash"></span>
+                  {%- endif -%}
 
-              <a href="{{ item.url }}"><b>{{item.title}}</b> #{{ item.number }}</a>
+                  <span class="octicon
+                    {%- if item.isDraft %} draft{% endif -%}
+                    {%- if item.merged %} merged{% elif item.closed %} closed{% endif -%}
+                    {%- if item.__typename == "PullRequest" %} pull{% endif -%}
+                    {%- if item.__typename == "Issue" %} issue{% endif -%}
+                  "></span>
+                </span>
+
+                <b>{{item.title}}</b> #{{ item.number }}{# -#}
+              </a>
               [{{ item.author.login }}]
 
               {% if item.labels -%}
