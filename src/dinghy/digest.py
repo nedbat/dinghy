@@ -5,6 +5,7 @@ Summarize issue activity in GitHub repos and projects.
 import asyncio
 import datetime
 import itertools
+import json
 import operator
 import os
 import re
@@ -335,3 +336,25 @@ async def make_digests(conf_file):
         args = {**defaults, **spec}
         tasks.append(make_digest(**args))
     await asyncio.gather(*tasks)
+
+
+def just_render(result_file):
+    """Helper function to re-render stored results.
+
+    For iterating on rendering changes without using up GitHub rate limits.
+
+    $ python -c "import sys,dinghy.digest as dd; dd.just_render(sys.argv[1])" /tmp/lots.json
+
+    """
+    with open(result_file, encoding="utf-8") as j:
+        results = json.load(j)
+
+    asyncio.run(
+        render_jinja_to_file(
+            "digest.html.j2",
+            result_file.replace(".json", ".html"),
+            results=results,
+            since=datetime.datetime.now(),
+            now=datetime.datetime.now(),
+        )
+    )
