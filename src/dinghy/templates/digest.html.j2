@@ -196,11 +196,12 @@
                         {% else %}
                           {{ double_bubble }}
                         {% endif %}
-                        {{ comment.author.login }}</a>{# -#}
+                        {{ comment.author.login }}{# -#}
                       {%- if comment.body %}: {{ comment.body|trim|truncate(100) }}{% endif -%}
                       {%- if comment.review_state -%}
                         &nbsp;<i>(review:&nbsp;{{ comment.review_state|lower|replace("_", " ") }})</i>
                       {% endif -%}
+                      </a>
                     </li>
                   {% endfor -%}
                 </ul>
