@@ -74,14 +74,14 @@
     padding-bottom: .2em;
   }
   {# sepia: #aa9a7c #}
-  .octicon.newcreated {
+  .octicon.star {
     {{ octicon("star") }}
     filter: invert(1) brightness(.5) sepia(1) hue-rotate(98deg) saturate(8) brightness(0.5);
   }
-  .octicon.newclosed {
+  .octicon.x {
     {{ octicon("x") }}
   }
-  .octicon.newmerged {
+  .octicon.check {
     {{ octicon("check") }}
   }
   .octicon.dash {
@@ -146,14 +146,14 @@
                 ">{# -#}
 
                   {%- if item.reasonCreated -%}
-                    <span class="octicon newcreated"></span>
+                    <span class="octicon star"></span>
                   {%- else -%}
                     <span class="octicon dash"></span>
                   {%- endif -%}
                   {% if item.reasonMerged -%}
-                    <span class="octicon newmerged"></span>
+                    <span class="octicon check"></span>
                   {%- elif item.reasonClosed -%}
-                    <span class="octicon {% if item.__typename == "PullRequest" %}newclosed{% else %}newmerged{% endif %}"></span>
+                    <span class="octicon {% if item.__typename == "PullRequest" %}x{% else %}check{% endif %}"></span>
                   {%- else -%}
                     <span class="octicon dash"></span>
                   {%- endif -%}
