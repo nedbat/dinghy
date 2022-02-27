@@ -35,6 +35,9 @@
   ul.comment {
     padding-left: 4.2em;
   }
+  ul.thread_comment {
+    padding-left: 1.5em;
+  }
   a {
     text-decoration: none;
     color: black;
@@ -194,7 +197,7 @@
 
               {% if item.comments_to_show -%}
                 <ul class="comment">
-                  {% for comment in item.comments_to_show -%}
+                  {% for comment in item.comments_to_show recursive -%}
                     <li>
                       <a href="{{ comment.url }}" title="{{ comment.updatedAt|datetime() }}">
                         {% if comment.review_state -%}
@@ -214,6 +217,9 @@
                         &nbsp;<i>(review:&nbsp;{{ comment.review_state|lower|replace("_", " ") }})</i>
                       {% endif -%}
                       </a>
+                      {% if comment.comments_to_show %}
+                        <ul class="thread_comment">{{ loop(comment.comments_to_show) }}</ul>
+                      {% endif %}
                     </li>
                   {% endfor -%}
                 </ul>

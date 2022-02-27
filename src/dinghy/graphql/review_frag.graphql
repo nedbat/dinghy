@@ -10,6 +10,9 @@ fragment reviewData on PullRequestReview {
   comments(first: 100) {
     totalCount
     nodes {
+      pullRequestReview {
+        id
+      }
       ...commentData    # fragment: comment_frag.graphql
     }
   }

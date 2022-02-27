@@ -10,6 +10,7 @@ fragment pullRequestData on PullRequest {
   number
   title
   url
+  body
   createdAt
   updatedAt
   closed
@@ -48,11 +49,16 @@ fragment pullRequestData on PullRequest {
     }
   }
   reviewThreads(first: 100) {
+    # https://docs.github.com/en/graphql/reference/objects#pullrequestreviewthread
     totalCount
     nodes {
+      isResolved
       comments(first: 100) {
         totalCount
         nodes {
+          pullRequestReview {
+            id
+          }
           ...commentData    # fragment: comment_frag.graphql
         }
       }

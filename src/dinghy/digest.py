@@ -218,26 +218,48 @@ class Digester:
         # multiple places, and duplications.  Reviews can also be finished
         # with no comment, but we want them to appear in the digest.
         comments = {}
-        reviews = itertools.chain(
-            pull["latestReviews"]["nodes"],
-            pull["latestOpinionatedReviews"]["nodes"],
+        reviews = {}
+        seen = set()
+        all_reviews = itertools.chain(
+            # pull["latestReviews"]["nodes"],
+            # pull["latestOpinionatedReviews"]["nodes"],
             pull["reviews"]["nodes"],
         )
-        for rev in reviews:
+        for rev in all_reviews:
+            rev["show"] = True
+            rev["review_state"] = rev["state"]
+            reviews[rev["id"]] = rev
+
+        for thread in pull["reviewThreads"]["nodes"]:
+            com0 = thread["comments"]["nodes"][0]
+            com0["comments_to_show"] = thread["comments"]["nodes"][1:]
+            reviews[com0["pullRequestReview"]["id"]].setdefault(
+                "comments_to_show", []
+            ).append(com0)
+            seen.add(com0["id"])
+            for com in com0["comments_to_show"]:
+                seen.add(com["id"])
+                seen.add(com["pullRequestReview"]["id"])
+                reviews[com["pullRequestReview"]["id"]]["show"] = False
+
+        for rev in reviews.values():
+            if not rev["show"]:
+                continue
             had_comment = False
             for com in rev["comments"]["nodes"]:
-                com = comments.setdefault(com["id"], dict(com))
+                if com["id"] in seen or com["id"] in comments:
+                    continue
+                comments.setdefault(com["id"], com)
                 com["review_state"] = rev["state"]
                 had_comment = True
             if rev["body"] or not had_comment:
                 # A completed review with no comment, make it into a comment.
                 com = comments.setdefault(rev["id"], dict(rev))
                 com["review_state"] = rev["state"]
-        for thread in pull["reviewThreads"]["nodes"]:
-            for com in thread["comments"]["nodes"]:
-                comments.setdefault(com["id"], com)
+            if rev["show"]:
+                comments[rev["id"]] = rev
         for com in pull["comments"]["nodes"]:
-            comments.setdefault(com["id"], com)
+            comments[com["id"]] = com
 
         pull["comments_to_show"] = self._trim_unwanted(comments.values())
 
