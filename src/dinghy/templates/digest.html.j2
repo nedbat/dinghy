@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <head>
   {% set double_bubble = "&#x1F5EA;" %}
-  {% set empty_box = "&#x2610;" %}
-  {% set checked_box = "&#x1F5F9;" %}
   {% macro octicon(name, size=16) -%}
     {# Octicons: https://github.com/primer/octicons/tree/main/icons #}
     background-image: url(https://raw.githubusercontent.com/primer/octicons/main/icons/{{ name }}-{{ size }}.svg);
@@ -83,6 +81,18 @@
   }
   .octicon.check {
     {{ octicon("check") }}
+  }
+  .octicon.checkcircle {
+    {{ octicon("check-circle") }}
+  }
+  .octicon.comment {
+    {{ octicon("comment") }}
+  }
+  .octicon.eye {
+    {{ octicon("eye") }}
+  }
+  .octicon.filediff {
+    {{ octicon("file-diff") }}
   }
   .octicon.dash {
     {{ octicon("dash") }}
@@ -189,14 +199,16 @@
                       <a href="{{ comment.url }}" title="{{ comment.updatedAt|datetime() }}">
                         {% if comment.review_state -%}
                           {% if comment.review_state == "APPROVED" -%}
-                            {{ checked_box }}
+                            <span class="octicon checkcircle" title="reviewed, approved"></span>
+                          {% elif comment.review_state == "CHANGES_REQUESTED" -%}
+                            <span class="octicon filediff" title="reviewed, changes requested"></span>
                           {% else %}
-                            {{ empty_box }}
+                            <span class="octicon eye" title="reviewed"></span>
                           {% endif %}
                         {% else %}
-                          {{ double_bubble }}
+                          <span class="octicon comment" title="comment"></span>
                         {% endif %}
-                        {{ comment.author.login }}{# -#}
+                        <b>{{ comment.author.login }}</b>{# -#}
                       {%- if comment.body %}: {{ comment.body|trim|truncate(100) }}{% endif -%}
                       {%- if comment.review_state -%}
                         &nbsp;<i>(review:&nbsp;{{ comment.review_state|lower|replace("_", " ") }})</i>
