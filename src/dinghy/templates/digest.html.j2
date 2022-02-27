@@ -32,10 +32,10 @@
     margin: .5em 0;
   }
   ul.item p {
-    margin: .2em 0 0 3em;
+    margin: 0 0 0 4.2em;
   }
   ul.comment {
-    padding-left: 3em;
+    padding-left: 4.2em;
   }
   a {
     text-decoration: none;
@@ -61,12 +61,17 @@
     font-style: italic;
     margin-top: 3em;
   }
+  .octicons {
+    display: inline-block;
+    padding-right: .3em;
+  }
   .octicon {
-    width: 18px;
-    height: 18px;
+    width: 1.3em;
+    height: 1em;
     display: inline-block;
     vertical-align: middle;
     background-repeat: no-repeat;
+    padding-bottom: .2em;
   }
   {# sepia: #aa9a7c #}
   .octicon.newcreated {
@@ -131,7 +136,7 @@
             <li class="{{ item.state|lower }}">
 
               <a href="{{ item.url }}">{# -#}
-                <span title="
+                <span class="octicons" title="
                   {%- if item.isDraft %}draft {% endif -%}
                   {%- if item.merged %}merged {% elif item.closed %}closed {% endif -%}
                   {%- if item.__typename == "PullRequest" %}pull request{% endif -%}
@@ -158,8 +163,8 @@
                     {%- if item.merged %} merged{% elif item.closed %} closed{% endif -%}
                     {%- if item.__typename == "PullRequest" %} pull{% endif -%}
                     {%- if item.__typename == "Issue" %} issue{% endif -%}
-                  "></span>
-                </span>
+                  "></span>{# -#}
+                </span>{# -#}
 
                 <b>{{item.title}}</b> #{{ item.number }}{# -#}
               </a>
