@@ -1,4 +1,0 @@
-Changed
-.......
-
-- The ``bots`` setting is now called ``ignore_users``.

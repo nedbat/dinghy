@@ -22,6 +22,27 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+0.3.0 — 2022-02-27
+------------------
+
+Added
+.....
+
+- The configuration file can be specified as the argument on the command line.
+
+- GitHub icons decorate pull requests, issues, and comments to distinguish them
+  and indicate their status.
+
+Changed
+.......
+
+- The configuration file syntax changed.  Now there is a top-level ``digests``
+  clause and an optional ``defaults`` clause.
+
+- The ``bots`` setting is now called ``ignore_users``.
+
+- Pull request review threads are presented hierarchically.
+
 0.2.0 — 2022-02-21
 ------------------
 

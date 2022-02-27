@@ -1,5 +1,0 @@
-Added
-.....
-
-- GitHub icons decorate pull requests and issues to distinguish them and
-  indicate their status.

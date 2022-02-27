@@ -1,4 +1,0 @@
-Added
-.....
-
-- The configuration file can be specified as the argument on the command line.

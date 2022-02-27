@@ -1,5 +1,0 @@
-Changed
-.......
-
-- The configuration file syntax changed.  Now there is a top-level ``digests``
-  clause and an optional ``defaults`` clause.
