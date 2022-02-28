@@ -1,10 +1,14 @@
 <!DOCTYPE html>
+{# The template for the digest.html output file. -#}
+
+{%- set double_bubble = "&#x1F5EA;" -%}
+
+{%- macro octicon(name, size=16) -%}
+  {#- Octicons: https://github.com/primer/octicons/tree/main/icons -#}
+  background-image: url(https://raw.githubusercontent.com/primer/octicons/main/icons/{{ name }}-{{ size }}.svg);
+{%- endmacro -%}
+
 <head>
-  {% set double_bubble = "&#x1F5EA;" %}
-  {% macro octicon(name, size=16) -%}
-    {# Octicons: https://github.com/primer/octicons/tree/main/icons #}
-    background-image: url(https://raw.githubusercontent.com/primer/octicons/main/icons/{{ name }}-{{ size }}.svg);
-  {%- endmacro %}
   <title>{{ double_bubble }} Activity since {{ since|datetime("%Y-%m-%d") }}</title>
   <style>
   body {
@@ -22,17 +26,16 @@
     font-weight: bold;
     font-size: 150%;
   }
-  ul.item {
-    padding-left: 0em;
-    margin-bottom: 1em;
+  ul.repos > li {
+    margin: 2em 0;
   }
-  ul.item > li {
-    margin: .5em 0;
+  ul.items > li {
+    margin: 1em 0;
   }
-  ul.item p {
+  ul.items p {
     margin: 0 0 0 4.2em;
   }
-  ul.comment {
+  ul.comments {
     padding-left: 4.2em;
   }
   ul.thread_comment {
@@ -103,22 +106,22 @@
   }
   .octicon.pull {
     {{ octicon("git-pull-request") }}
-    {# open color: #1a7f37 #}
+    {# open color: #1a7f37 -#}
     filter: invert(1) brightness(.5) sepia(1) hue-rotate(98deg) saturate(8) brightness(0.5);
   }
   .octicon.pull.draft {
     {{ octicon("git-pull-request-draft") }}
-    {# draft color: #57606a #}
+    {# draft color: #57606a -#}
     filter: invert(1) brightness(.5) sepia(1) hue-rotate(172deg) saturate(0.43) brightness(0.65);
   }
   .octicon.pull.closed {
     {{ octicon("git-pull-request-closed") }}
-    {# closed color: #cf222e #}
+    {# closed color: #cf222e -#}
     filter: invert(1) brightness(.5) sepia(1) hue-rotate(316deg) saturate(6) brightness(.8);
   }
   .octicon.pull.merged {
     {{ octicon("git-merge") }}
-    {# merged color: #8250df #}
+    {# merged color: #8250df -#}
     filter: invert(1) brightness(.5) sepia(1) hue-rotate(220deg) saturate(8) brightness(.65);
   }
   .octicon.issue {
@@ -130,7 +133,7 @@
   </style>
 <body>
 <h1>Activity since {{ since|datetime("%Y-%m-%d") }}</h1>
-<ul class="repo">
+<ul class="repos">
   {% for thing, items in results -%}
     <li>
       <span class="reponame"><a href="{{ thing.url }}">
@@ -144,7 +147,7 @@
       </a></span>
       {{ thing.container_kind }} {{ thing.kind }}
       {% if items %}
-        <ul class="item">
+        <ul class="items">
           {% for item in items -%}
             <li class="{{ item.state|lower }}">
 
@@ -196,7 +199,7 @@
               {%- if item.body %}<p>{{ item.body|truncate(120) }}</p>{% endif -%}
 
               {% if item.comments_to_show -%}
-                <ul class="comment">
+                <ul class="comments">
                   {% for comment in item.comments_to_show recursive -%}
                     <li>
                       <a href="{{ comment.url }}" title="{{ comment.updatedAt|datetime() }}">
