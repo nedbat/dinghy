@@ -132,7 +132,9 @@
   }
   </style>
 <body>
+
 <h1>Activity since {{ since|datetime("%Y-%m-%d") }}</h1>
+
 <ul class="repos">
   {% for thing, items in results -%}
     <li>
@@ -140,9 +142,9 @@
       {%- if thing.container_kind == "repo" -%}
         {{ thing.nameWithOwner }}
       {%- elif thing.container_kind == "project" -%}
-        {{ thing.title }}
+        {{ thing.title|trim }}
       {%- elif thing.container_kind == "search" -%}
-        {{ thing.query }}
+        {{ thing.query|trim }}
       {%- endif -%}
       </a></span>
       {{ thing.container_kind }} {{ thing.kind }}
@@ -182,7 +184,7 @@
                   "></span>{# -#}
                 </span>{# -#}
 
-                <b>{{item.title}}</b> #{{ item.number }}{# -#}
+                <b>{{item.title|trim}}</b> #{{ item.number }}{# -#}
               </a>
               [{{ item.author.login }}]
 
@@ -196,7 +198,7 @@
                 <span class="homerepo">{{ item.repository.nameWithOwner }}</span>
               {%- endif %}
 
-              {%- if item.body %}<p>{{ item.body|truncate(120) }}</p>{% endif -%}
+              {%- if item.body %}<p>{{ item.body|trim|truncate(120) }}</p>{% endif -%}
 
               {% if item.comments_to_show -%}
                 <ul class="comments">
@@ -237,6 +239,7 @@
     </li>
   {% endfor -%}
 </ul>
+
 <p class="footer">
   created by <a href="https://pypi.org/project/dinghy">dinghy</a>,
   {{ now|datetime("%Y-%m-%d %H:%M") }}
