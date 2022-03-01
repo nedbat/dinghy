@@ -31,10 +31,10 @@ def _summarize_rate_limit(response):
     rate_limit_helpfully = {
         **rate_limit_info,
         "reset_when": time.strftime(
-            "%Y-%m-%dT%H:%M:%S",
+            "%H:%M:%S",
             time.localtime(int(rate_limit_info["reset"])),
         ),
-        "when": datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S"),
+        "when": datetime.datetime.now().strftime("%H:%M:%S"),
     }
     return rate_limit_helpfully
 
@@ -93,7 +93,6 @@ class GraphqlHelper:
             jbody["variables"] = variables
         async with aiohttp.ClientSession(headers=self.headers) as session:
             async with session.post(self.endpoint, json=jbody) as response:
-                # print(response.status, response.headers)
                 response.raise_for_status()
                 self.save_rate_limit(_summarize_rate_limit(response))
                 return await response.json()
