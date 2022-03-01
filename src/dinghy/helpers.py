@@ -9,6 +9,10 @@ import re
 import aiofiles
 
 
+class DinghyError(Exception):
+    """An error in how Dinghy is being used."""
+
+
 async def json_save(data, filename):
     """Write `data` to `filename` as JSON."""
     async with aiofiles.open(filename, "w", encoding="utf-8") as json_out:

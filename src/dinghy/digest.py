@@ -15,7 +15,7 @@ import yaml
 from glom import glom as g
 
 from .graphql_helpers import build_query, GraphqlHelper
-from .helpers import json_save, parse_timedelta
+from .helpers import DinghyError, json_save, parse_timedelta
 from .jinja_helpers import render_jinja_to_file
 
 
@@ -149,7 +149,7 @@ class Digester:
             if match_url := re.fullmatch(rx, url):
                 return fn, match_url.groupdict()
 
-        raise Exception(f"Can't understand URL {url!r}")
+        raise DinghyError(f"Can't understand URL {url!r}")
 
     def _trim_unwanted(self, nodes):
         """
@@ -280,9 +280,9 @@ class Digester:
         )
 
 
-def task_from_item(digester, item):
+def coro_from_item(digester, item):
     """
-    Parse a single item, and make a digester task for it.
+    Parse a single item, and make a digester coro for it.
     """
     url = None
     if isinstance(item, str):
@@ -295,20 +295,20 @@ def task_from_item(digester, item):
     if url:
         fn, kwargs = digester.method_from_url(url)
         try:
-            task = fn(**kwargs, **more_kwargs)
+            coro = fn(**kwargs, **more_kwargs)
         except TypeError as type_err:
-            raise Exception(f"Problem with config item: {item}: {type_err}") from None
+            raise DinghyError(f"Problem with config item: {item}: {type_err}") from None
     else:
         if "pull_requests" in item:
             where = item["pull_requests"]
             if where.startswith("org:"):
                 org = where.partition(":")[2]
-                task = digester.get_org_pull_requests(org)
+                coro = digester.get_org_pull_requests(org)
             else:
-                raise Exception(f"Don't understand pull_requests scope: {where!r}")
+                raise DinghyError(f"Don't understand pull_requests scope: {where!r}")
         else:
-            raise Exception(f"Don't understand item: {item!r}")
-    return task
+            raise DinghyError(f"Don't understand item: {item!r}")
+    return coro
 
 
 async def make_digest(since, items, digest, **options):
@@ -324,8 +324,15 @@ async def make_digest(since, items, digest, **options):
     since_date = datetime.datetime.now() - parse_timedelta(since)
     digester = Digester(since=since_date, options=options)
 
-    tasks = [task_from_item(digester, item) for item in items]
-    results = await asyncio.gather(*tasks)
+    coros = []
+    for item in items:
+        try:
+            coros.append(coro_from_item(digester, item))
+        except:
+            for coro in coros:
+                coro.close()
+            raise
+    results = await asyncio.gather(*coros)
 
     # $set_env.py: DIGEST_SAVE_RESULT - save digest data in a JSON file.
     if int(os.environ.get("DIGEST_SAVE_RESULT", 0)):
@@ -353,11 +360,11 @@ async def make_digests(conf_file):
     """
     config = yaml.safe_load(conf_file)
     defaults = config.get("defaults", {})
-    tasks = []
+    coros = []
     for spec in config.get("digests", []):
         args = {**defaults, **spec}
-        tasks.append(make_digest(**args))
-    await asyncio.gather(*tasks)
+        coros.append(make_digest(**args))
+    await asyncio.gather(*coros)
 
 
 def just_render(result_file):
