@@ -1,4 +1,4 @@
-.PHONY: clean help quality requirements test validate
+.PHONY: help clean requirements
 
 .DEFAULT_GOAL := help
 
@@ -11,21 +11,25 @@ clean: ## remove stuff we don't need
 	find . -name '*.pyc' -exec rm -f {} +
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
-	rm -fr build/
-	rm -fr dist/
-	rm -fr src/*.egg-info
+	rm -fr build/ dist/ src/*.egg-info
 	rm -fr .*_cache/
+	rm -f out_*.json
 
 requirements: ## install development environment requirements
 	pip install -r dev-requirements.txt
 
+
+.PHONY: test quality black lint
+
 test: ## run tests in the current virtualenv
 	pytest tests
 
-black: ## run black to format source
+quality: black lint ## run code-checking tools
+
+black:
 	black -q src tests
 
-pylint: ## run pylint to find code smells
+lint:
 	pylint src tests
 
 
