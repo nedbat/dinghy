@@ -14,6 +14,7 @@ import urllib.parse
 import yaml
 from glom import glom as g
 
+from . import __version__
 from .graphql_helpers import build_query, GraphqlHelper
 from .helpers import DinghyError, json_save, parse_timedelta
 from .jinja_helpers import render_jinja_to_file
@@ -362,6 +363,7 @@ async def make_digest(since, items, digest, **options):
         results=results,
         since=since_date,
         now=datetime.datetime.now(),
+        __version__=__version__,
     )
     print(f"Wrote digest: {digest}")
 
