@@ -22,6 +22,14 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+0.4.0 — 2022-02-28
+------------------
+
+Added
+.....
+
+- A repo URL will report on both pull requests and issues in the repo.
+
 0.3.0 — 2022-02-27
 ------------------
 
