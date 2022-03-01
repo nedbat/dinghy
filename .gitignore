@@ -1,6 +1,5 @@
 out*.json
-dinghy.yaml
-token.sh
+try*.yaml
 
 *.egg-info/
 build/
