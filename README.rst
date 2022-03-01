@@ -66,6 +66,8 @@ the ``digests`` clause specifies what to digest:
     - An organization project URL will report on the issues and pull requests
       in the project.
 
+    - A URL to a repo will report on the issues and pull requests in the repo.
+
     - A URL to a repo's issues will report on the issues in the repo.
 
     - A URL to a repo's pull requests will report on the pull requests in the

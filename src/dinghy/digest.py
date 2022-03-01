@@ -96,6 +96,18 @@ class Digester:
         repo["kind"] = "pull requests"
         return repo, pulls
 
+    async def get_repo_items(self, owner, name):
+        """
+        Get issues and pull requests from a repo.
+        """
+        (repo, issues), (_, pull_requests) = await asyncio.gather(
+            self.get_repo_issues(owner, name),
+            self.get_repo_pull_requests(owner, name),
+        )
+        repo["kind"] = "issues and pull requests"
+        items = self._trim_unwanted(issues + pull_requests)
+        return repo, items
+
     async def get_org_pull_requests(self, org):
         """
         Get pull requests across an organization.  Uses GitHub search.
@@ -134,15 +146,19 @@ class Digester:
         """
         for rx, fn in [
             (
-                r"https://github.com/(?P<owner>.*?)/(?P<name>.*?)/issues",
+                r"https://github.com/(?P<owner>[^/]+)/(?P<name>[^/]+)/issues/?",
                 self.get_repo_issues,
             ),
             (
-                r"https://github.com/(?P<owner>.*?)/(?P<name>.*?)/pulls",
+                r"https://github.com/(?P<owner>[^/]+)/(?P<name>[^/]+)/pulls/?",
                 self.get_repo_pull_requests,
             ),
             (
-                r"https://github.com/orgs/(?P<org>.*?)/projects/(?P<number>\d+)",
+                r"https://github.com/(?P<owner>[^/]+)/(?P<name>[^/]+)/?",
+                self.get_repo_items,
+            ),
+            (
+                r"https://github.com/orgs/(?P<org>[^/]+)/projects/(?P<number>\d+)/?",
                 self.get_project_items,
             ),
         ]:

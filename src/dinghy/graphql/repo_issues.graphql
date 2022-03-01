@@ -1,12 +1,18 @@
 query getRepoIssues(
   $owner: String!
   $name: String!
-  $since: String!
+  $since: DateTime!
   $after: String
 ) {
   repository(owner: $owner, name: $name) {
     ...repoData
-    issues(first: 100, filterBy: {since: $since}, after: $after) {
+    issues(
+      first: 100
+      filterBy: {
+        since: $since
+      },
+      after: $after
+    ) {
       pageInfo {
         hasNextPage
         endCursor

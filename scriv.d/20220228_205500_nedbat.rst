@@ -1,0 +1,4 @@
+Added
+.....
+
+- A repo URL will report on both pull requests and issues in the repo.
