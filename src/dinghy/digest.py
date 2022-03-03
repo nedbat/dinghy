@@ -4,7 +4,6 @@ Summarize issue activity in GitHub repos and projects.
 
 import asyncio
 import datetime
-import itertools
 import json
 import operator
 import os
@@ -237,12 +236,7 @@ class Digester:
         comments = {}
         reviews = {}
         seen = set()
-        all_reviews = itertools.chain(
-            # pull["latestReviews"]["nodes"],
-            # pull["latestOpinionatedReviews"]["nodes"],
-            pull["reviews"]["nodes"],
-        )
-        for rev in all_reviews:
+        for rev in pull["reviews"]["nodes"]:
             rev["show"] = True
             rev["review_state"] = rev["state"]
             reviews[rev["id"]] = rev

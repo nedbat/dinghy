@@ -30,18 +30,6 @@ fragment pullRequestData on PullRequest {
       ...commentData    # fragment: comment_frag.graphql
     }
   }
-  latestOpinionatedReviews(first: 100) {
-    totalCount
-    nodes {
-      ...reviewData     # fragment: review_frag.graphql
-    }
-  }
-  latestReviews(first: 100) {
-    totalCount
-    nodes {
-      ...reviewData     # fragment: review_frag.graphql
-    }
-  }
   reviews(first: 100) {
     totalCount
     nodes {
