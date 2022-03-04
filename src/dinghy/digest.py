@@ -244,31 +244,44 @@ class Digester:
         for thread in pull["reviewThreads"]["nodes"]:
             com0 = thread["comments"]["nodes"][0]
             com0["comments_to_show"] = thread["comments"]["nodes"][1:]
-            reviews[com0["pullRequestReview"]["id"]].setdefault(
-                "comments_to_show", []
-            ).append(com0)
+            rev_id = com0["pullRequestReview"]["id"]
+            review_comments = reviews[rev_id].setdefault("comments_to_show", [])
+            review_comments.append(com0)
             seen.add(com0["id"])
             for com in com0["comments_to_show"]:
                 seen.add(com["id"])
-                seen.add(com["pullRequestReview"]["id"])
-                reviews[com["pullRequestReview"]["id"]]["show"] = False
+                rev_id = com["pullRequestReview"]["id"]
+                seen.add(rev_id)
+                reviews[rev_id]["show"] = False
 
         for rev in reviews.values():
             if not rev["show"]:
                 continue
             had_comment = False
             for com in rev["comments"]["nodes"]:
-                if com["id"] in seen or com["id"] in comments:
+                com_id = com["id"]
+                if com_id in seen or com_id in comments:
                     continue
-                comments.setdefault(com["id"], com)
+                comments[com_id] = com
                 com["review_state"] = rev["state"]
                 had_comment = True
             if rev["body"] or not had_comment:
                 # A completed review with no comment, make it into a comment.
                 com = comments.setdefault(rev["id"], dict(rev))
                 com["review_state"] = rev["state"]
+
+            if not rev["body"] and len(rev["comments"]["nodes"]) == 1:
+                # A review with just one comment and no body: the comment should
+                # go where they review would have been.
+                com = rev["comments_to_show"][0]
+                com["review_state"] = rev["review_state"]
+                comments[com["id"]] = com
+                rev["show"] = False
+                del comments[rev["id"]]
+
             if rev["show"]:
                 comments[rev["id"]] = rev
+
         for com in pull["comments"]["nodes"]:
             comments[com["id"]] = com
 
