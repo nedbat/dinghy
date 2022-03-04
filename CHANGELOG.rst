@@ -22,6 +22,14 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+0.5.0 — 2022-03-03
+------------------
+
+Changed
+.......
+
+- Pull request reviews are displayed more compactly.
+
 0.4.0 — 2022-02-28
 ------------------
 

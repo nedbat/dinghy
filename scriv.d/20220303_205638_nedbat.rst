@@ -1,4 +1,0 @@
-Changed
-.......
-
-- Pull request reviews are displayed more compactly.
