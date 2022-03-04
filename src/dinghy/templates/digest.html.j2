@@ -46,7 +46,7 @@
   }
   a {
     text-decoration: none;
-    color: black;
+    color: inherit;
   }
   a:hover {
     text-decoration: none;
@@ -244,7 +244,7 @@
 </ul>
 
 <p class="footer">
-  created by
-  <a href="https://pypi.org/project/dinghy/{{ __version__ }}">dinghy {{ __version__ }}</a>,
+  created at
   {{ now|datetime("%Y-%m-%d %H:%M") }}
+  by <a href="https://pypi.org/project/dinghy/{{ __version__ }}">dinghy {{ __version__ }}</a>.
 </p>
