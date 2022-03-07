@@ -295,13 +295,10 @@ class Digester:
             item (dict): the issue or pull request data.
 
         """
-        item["reasonCreated"] = item["createdAt"] > self.since
-        item["reasonClosed"] = bool(
-            item["closedAt"] and (item["closedAt"] > self.since)
-        )
-        item["reasonMerged"] = bool(
-            item.get("mergedAt") and (item["mergedAt"] > self.since)
-        )
+        # write "reasonCreated" based on "createdAt", etc.
+        for slug in ["Created", "Closed", "Merged"]:
+            at = slug.lower() + "At"
+            item[f"reason{slug}"] = bool(item.get(at) and item[at] > self.since)
 
 
 def coro_from_item(digester, item):
