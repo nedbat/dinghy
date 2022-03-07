@@ -22,6 +22,14 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+0.5.1 — 2022-03-07
+------------------
+
+Changed
+.......
+
+- Indentation tweaks to make thread structure clearer.
+
 0.5.0 — 2022-03-03
 ------------------
 
