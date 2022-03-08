@@ -242,9 +242,6 @@
                         {% endif %}
                         <b>{{ comment.author.login }}</b>{# -#}
                       {%- if comment.body %}: {{ comment.body|trim|truncate(100) }}{% endif -%}
-                      {%- if comment.review_state -%}
-                        &nbsp;<i>(review:&nbsp;{{ comment.review_state|lower|replace("_", " ") }})</i>
-                      {% endif -%}
                       </a></p>
                       {% if comment.comments_to_show %}
                         <ul class="thread_comment">{{ loop(comment.comments_to_show) }}</ul>
