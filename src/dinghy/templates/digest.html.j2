@@ -50,6 +50,9 @@
   ul.items > li {
     margin: 1em 0;
   }
+  ul.items p:first-child {
+    text-indent: -2.1em;   /* not sure why it's half the 4.2em indent */
+  }
   ul.items p {
     margin: 0 0 0 4.2em;
   }
@@ -164,7 +167,7 @@
           {% for item in items -%}
             <li class="{{ item.state|lower }}">
 
-              <a href="{{ item.url }}">{# -#}
+              <p><a href="{{ item.url }}">{# -#}
                 <span class="octicons" title="
                   {%- if item.isDraft %}draft {% endif -%}
                   {%- if item.merged %}merged {% elif item.closed %}closed {% endif -%}
@@ -208,6 +211,7 @@
               {% if item.other_repo -%}
                 <span class="homerepo">{{ item.repository.nameWithOwner }}</span>
               {%- endif %}
+              </p>
 
               {%- if item.body %}<p>{{ item.body|trim|truncate(120) }}</p>{% endif -%}
 
