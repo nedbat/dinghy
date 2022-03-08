@@ -407,5 +407,6 @@ def just_render(result_file):
             results=results,
             since=datetime.datetime.now(),
             now=datetime.datetime.now(),
+            __version__=__version__,
         )
     )
