@@ -22,6 +22,14 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+0.5.2 — 2022-03-08
+------------------
+
+Changed
+.......
+
+- More HTML tweaks to indentation and information.
+
 0.5.1 — 2022-03-07
 ------------------
 
