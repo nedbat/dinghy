@@ -6,8 +6,23 @@
   https://raw.githubusercontent.com/primer/octicons/main/icons/{{ name }}-{{ size }}.svg
 {%- endmacro -%}
 
-{%- macro octicon_bg(name, size=16) -%}
+{%- macro octicon_bg(name, size=16, color="") -%}
   background-image: url({{ octicon_url(name, size) }});
+  {# sepia: #aa9a7c -#}
+  {% if color == "red" -%}
+    filter: invert(1) brightness(.5) sepia(1) hue-rotate(316deg) saturate(6) brightness(.8);
+  {% elif color == "green" -%}
+    {# open color: #1a7f37 -#}
+    filter: invert(1) brightness(.5) sepia(1) hue-rotate(98deg) saturate(8) brightness(0.5);
+  {% elif color == "purple" -%}
+    {# merged color: #8250df -#}
+    filter: invert(1) brightness(.5) sepia(1) hue-rotate(220deg) saturate(8) brightness(.65);
+  {% elif color == "light gray" -%}
+    filter: invert(1) brightness(.5) sepia(1) hue-rotate(172deg) saturate(0.43) brightness(1.25);
+  {% elif color == "gray" -%}
+    {# draft color: #57606a -#}
+    filter: invert(1) brightness(.5) sepia(1) hue-rotate(172deg) saturate(0.43) brightness(0.65);
+  {% endif -%}
 {%- endmacro -%}
 
 <head>
@@ -84,10 +99,8 @@
     background-repeat: no-repeat;
     padding-bottom: .2em;
   }
-  {# sepia: #aa9a7c #}
   .octicon.star {
-    {{ octicon_bg("star") }}
-    filter: invert(1) brightness(.5) sepia(1) hue-rotate(98deg) saturate(8) brightness(0.5);
+    {{ octicon_bg("star", color="green") }}
   }
   .octicon.x {
     {{ octicon_bg("x") }}
@@ -96,7 +109,7 @@
     {{ octicon_bg("check") }}
   }
   .octicon.checkcircle {
-    {{ octicon_bg("check-circle") }}
+    {{ octicon_bg("check-circle", color="green") }}
   }
   .octicon.comment {
     {{ octicon_bg("comment") }}
@@ -105,31 +118,22 @@
     {{ octicon_bg("eye") }}
   }
   .octicon.filediff {
-    {{ octicon_bg("file-diff") }}
+    {{ octicon_bg("file-diff", color="red") }}
   }
   .octicon.dash {
-    {{ octicon_bg("dash") }}
-    filter: invert(1) brightness(.5) sepia(1) hue-rotate(172deg) saturate(0.43) brightness(1.25);
+    {{ octicon_bg("dash", color="light gray") }}
   }
   .octicon.pull {
-    {{ octicon_bg("git-pull-request") }}
-    {# open color: #1a7f37 -#}
-    filter: invert(1) brightness(.5) sepia(1) hue-rotate(98deg) saturate(8) brightness(0.5);
+    {{ octicon_bg("git-pull-request", color="green") }}
   }
   .octicon.pull.draft {
-    {{ octicon_bg("git-pull-request-draft") }}
-    {# draft color: #57606a -#}
-    filter: invert(1) brightness(.5) sepia(1) hue-rotate(172deg) saturate(0.43) brightness(0.65);
+    {{ octicon_bg("git-pull-request-draft", color="gray") }}
   }
   .octicon.pull.closed {
-    {{ octicon_bg("git-pull-request-closed") }}
-    {# closed color: #cf222e -#}
-    filter: invert(1) brightness(.5) sepia(1) hue-rotate(316deg) saturate(6) brightness(.8);
+    {{ octicon_bg("git-pull-request-closed", color="red") }}
   }
   .octicon.pull.merged {
-    {{ octicon_bg("git-merge") }}
-    {# merged color: #8250df -#}
-    filter: invert(1) brightness(.5) sepia(1) hue-rotate(220deg) saturate(8) brightness(.65);
+    {{ octicon_bg("git-merge", color="purple") }}
   }
   .octicon.issue {
     {{ octicon_bg("issue-opened") }}
