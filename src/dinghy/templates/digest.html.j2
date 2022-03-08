@@ -40,31 +40,35 @@
     padding-left: 0;
     list-style-type: none;
   }
-  .reponame {
-    font-weight: bold;
-    font-size: 150%;
+  li {
+    margin: 0;
+  }
+  li p {
+    margin: 0;
   }
   ul.repos > li {
-    margin: 2em 0;
+    margin-top: 2em;
   }
   ul.items > li {
-    margin: 1em 0;
+    margin-top: 1em;
   }
-  ul.items p:first-child {
+  ul.items > li > p {
+    margin-left: 4.2em;
+  }
+  ul.items > li > p:first-child {
     text-indent: -2.1em;   /* not sure why it's half the 4.2em indent */
   }
-  ul.items p {
-    margin: 0 0 0 4.2em;
+  ul.comments > li > p {
+    margin-left: 4.2em;
+    padding-left: 1.6em;
+    text-indent: -1.6em;
   }
-  ul.comments {
-    padding-left: 4.2em;
+  ul.thread_comment ul.thread_comment {
+    padding-left: 1.6em;
   }
-  ul.comments > li {
-    text-indent: -1.5em;
-    padding-left: 1.5em;
-  }
-  ul.thread_comment {
-    padding-left: 1.5em;
+  ul.thread_comment > li > p {
+    padding-left: 7.3em;
+    text-indent: -1.6em;
   }
   a {
     text-decoration: none;
@@ -73,6 +77,10 @@
   a:hover {
     text-decoration: none;
     color: #0969da;
+  }
+  .reponame {
+    font-weight: bold;
+    font-size: 150%;
   }
   .label {
     padding: .2em .5em .1em .5em;
@@ -152,7 +160,7 @@
 <ul class="repos">
   {% for thing, items in results -%}
     <li>
-      <span class="reponame"><a href="{{ thing.url }}">
+      <p><span class="reponame"><a href="{{ thing.url }}">
       {%- if thing.container_kind == "repo" -%}
         {{ thing.nameWithOwner }}
       {%- elif thing.container_kind == "project" -%}
@@ -162,6 +170,7 @@
       {%- endif -%}
       </a></span>
       {{ thing.container_kind }} {{ thing.kind }}
+      </p>
       {% if items %}
         <ul class="items">
           {% for item in items -%}
@@ -219,7 +228,7 @@
                 <ul class="comments">
                   {% for comment in item.comments_to_show recursive -%}
                     <li>
-                      <a href="{{ comment.url }}" title="{{ comment.updatedAt|datetime() }}">
+                      <p><a href="{{ comment.url }}" title="{{ comment.updatedAt|datetime() }}">
                         {% if comment.review_state -%}
                           {% if comment.review_state == "APPROVED" -%}
                             <span class="octicon checkcircle" title="reviewed, approved"></span>
@@ -236,7 +245,7 @@
                       {%- if comment.review_state -%}
                         &nbsp;<i>(review:&nbsp;{{ comment.review_state|lower|replace("_", " ") }})</i>
                       {% endif -%}
-                      </a>
+                      </a></p>
                       {% if comment.comments_to_show %}
                         <ul class="thread_comment">{{ loop(comment.comments_to_show) }}</ul>
                       {% endif %}
