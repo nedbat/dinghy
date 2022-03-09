@@ -49,13 +49,13 @@
   ul.repos > li {
     margin-top: 2em;
   }
-  ul.items > li {
+  ul.entries > li {
     margin-top: 1em;
   }
-  ul.items > li > p {
+  ul.entries > li > p {
     margin-left: 4.2em;
   }
-  ul.items > li > p:first-child {
+  ul.entries > li > p:first-child {
     text-indent: -2.1em;   /* not sure why it's half the 4.2em indent */
   }
   ul.comments > li > p {
@@ -165,62 +165,62 @@
       </a></span>
       {{ container.container_kind }} {{ container.kind }}
       </p>
-      {% if container["items"] %}
-        <ul class="items">
-          {% for item in container["items"] -%}
-            <li class="{{ item.state|lower }}">
+      {% if container.entries %}
+        <ul class="entries">
+          {% for entry in container.entries -%}
+            <li class="{{ entry.state|lower }}">
 
-              <p><a href="{{ item.url }}">{# -#}
+              <p><a href="{{ entry.url }}">{# -#}
                 <span class="octicons" title="
-                  {%- if item.isDraft %}draft {% endif -%}
-                  {%- if item.merged %}merged {% elif item.closed %}closed {% endif -%}
-                  {%- if item.__typename == "PullRequest" %}pull request{% endif -%}
-                  {%- if item.__typename == "Issue" %}issue{% endif -%}
-                  {%- if item.reasonCreated %}, newly created{% endif -%}
-                  {%- if item.reasonMerged -%}, newly merged{% elif item.reasonClosed %}, newly closed{% endif -%}
+                  {%- if entry.isDraft %}draft {% endif -%}
+                  {%- if entry.merged %}merged {% elif entry.closed %}closed {% endif -%}
+                  {%- if entry.__typename == "PullRequest" %}pull request{% endif -%}
+                  {%- if entry.__typename == "Issue" %}issue{% endif -%}
+                  {%- if entry.reasonCreated %}, newly created{% endif -%}
+                  {%- if entry.reasonMerged -%}, newly merged{% elif entry.reasonClosed %}, newly closed{% endif -%}
                 ">{# -#}
 
-                  {%- if item.reasonCreated -%}
+                  {%- if entry.reasonCreated -%}
                     <span class="octicon star"></span>
                   {%- else -%}
                     <span class="octicon dash"></span>
                   {%- endif -%}
-                  {% if item.reasonMerged -%}
+                  {% if entry.reasonMerged -%}
                     <span class="octicon check"></span>
-                  {%- elif item.reasonClosed -%}
-                    <span class="octicon {% if item.__typename == "PullRequest" %}x{% else %}check{% endif %}"></span>
+                  {%- elif entry.reasonClosed -%}
+                    <span class="octicon {% if entry.__typename == "PullRequest" %}x{% else %}check{% endif %}"></span>
                   {%- else -%}
                     <span class="octicon dash"></span>
                   {%- endif -%}
 
                   <span class="octicon
-                    {%- if item.isDraft %} draft{% endif -%}
-                    {%- if item.merged %} merged{% elif item.closed %} closed{% endif -%}
-                    {%- if item.__typename == "PullRequest" %} pull{% endif -%}
-                    {%- if item.__typename == "Issue" %} issue{% endif -%}
+                    {%- if entry.isDraft %} draft{% endif -%}
+                    {%- if entry.merged %} merged{% elif entry.closed %} closed{% endif -%}
+                    {%- if entry.__typename == "PullRequest" %} pull{% endif -%}
+                    {%- if entry.__typename == "Issue" %} issue{% endif -%}
                   "></span>{# -#}
                 </span>{# -#}
 
-                <b>{{item.title|trim}}</b> #{{ item.number }}{# -#}
+                <b>{{entry.title|trim}}</b> #{{ entry.number }}{# -#}
               </a>
-              [{{ item.author.login }}]
+              [{{ entry.author.login }}]
 
-              {% if item.labels -%}
-                {%- for label in item.labels.nodes -%}
+              {% if entry.labels -%}
+                {%- for label in entry.labels.nodes -%}
                   <span class="label" style="background: #{{label.color}}; color: {{label.color|textcolor}}">{{ label.name }}</span>
                 {% endfor %}
               {%- endif -%}
 
-              {% if item.other_repo -%}
-                <span class="homerepo">{{ item.repository.nameWithOwner }}</span>
+              {% if entry.other_repo -%}
+                <span class="homerepo">{{ entry.repository.nameWithOwner }}</span>
               {%- endif %}
               </p>
 
-              {%- if item.body %}<p>{{ item.body|trim|truncate(120) }}</p>{% endif -%}
+              {%- if entry.body %}<p>{{ entry.body|trim|truncate(120) }}</p>{% endif -%}
 
-              {% if item.comments_to_show -%}
+              {% if entry.comments_to_show -%}
                 <ul class="comments">
-                  {% for comment in item.comments_to_show recursive -%}
+                  {% for comment in entry.comments_to_show recursive -%}
                     <li>
                       <p><a href="{{ comment.url }}" title="{{ comment.updatedAt|datetime() }}">
                         {% if comment.review_state -%}

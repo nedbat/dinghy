@@ -42,43 +42,43 @@ class Digester:
             query=build_query("repo_issues.graphql"),
             variables=dict(owner=owner, name=name, since=self.since),
         )
-        issues = await self._process_items(issues)
+        issues = await self._process_entries(issues)
         repo = glom(repo, "data.repository")
         container = {
             "url": repo["url"],
             "container_kind": "repo",
             "title": repo["nameWithOwner"],
             "kind": "issues",
-            "items": issues,
+            "entries": issues,
         }
         return container
 
-    async def get_project_items(self, org, number, home_repo=""):
+    async def get_project_entries(self, org, number, home_repo=""):
         """
-        Get items from a project.
+        Get entries from a project.
 
         Args:
             org (str): the organization owner of the repo.
             number (int|str): the project number.
-            home_repo (str): the owner/name of a repo that most items are in.
+            home_repo (str): the owner/name of a repo that most entries are in.
         """
         project, project_data = await self.gql.nodes(
-            query=build_query("project_items.graphql"),
+            query=build_query("project_entries.graphql"),
             variables=dict(org=org, projectNumber=int(number)),
         )
-        items = [content for data in project_data if (content := data["content"])]
-        items = await self._process_items(items)
-        for item in items:
-            item["other_repo"] = item["repository"]["nameWithOwner"] != home_repo
-            if "comments_to_show" not in item:
-                item["comments_to_show"] = item["comments"]["nodes"]
+        entries = [content for data in project_data if (content := data["content"])]
+        entries = await self._process_entries(entries)
+        for entry in entries:
+            entry["other_repo"] = entry["repository"]["nameWithOwner"] != home_repo
+            if "comments_to_show" not in entry:
+                entry["comments_to_show"] = entry["comments"]["nodes"]
         project = glom(project, "data.organization.project")
         container = {
             "url": project["url"],
             "container_kind": "project",
             "title": project["title"],
             "kind": "items",
-            "items": items,
+            "entries": entries,
         }
         return container
 
@@ -95,7 +95,7 @@ class Digester:
             variables=dict(owner=owner, name=name),
             donefn=(lambda nodes: nodes[-1]["updatedAt"] < self.since),
         )
-        pulls = await self._process_items(pulls)
+        pulls = await self._process_entries(pulls)
 
         repo = glom(repo, "data.repository")
         container = {
@@ -103,11 +103,11 @@ class Digester:
             "container_kind": "repo",
             "title": repo["nameWithOwner"],
             "kind": "pull_requests",
-            "items": pulls,
+            "entries": pulls,
         }
         return container
 
-    async def get_repo_items(self, owner, name):
+    async def get_repo_entries(self, owner, name):
         """
         Get issues and pull requests from a repo.
         """
@@ -115,11 +115,13 @@ class Digester:
             self.get_repo_issues(owner, name),
             self.get_repo_pull_requests(owner, name),
         )
-        items = self._trim_unwanted(issue_container["items"] + pr_container["items"])
+        entries = self._trim_unwanted(
+            issue_container["entries"] + pr_container["entries"]
+        )
         container = {
             **issue_container,
             "kind": "issues and pull requests",
-            "items": items,
+            "entries": entries,
         }
         return container
 
@@ -134,17 +136,17 @@ class Digester:
         }
         search_query = " ".join(f"{k}:{v}" for k, v in search_terms.items())
         _, pulls = await self.gql.nodes(
-            query=build_query("search_items.graphql"),
+            query=build_query("search_entries.graphql"),
             variables=dict(query=search_query),
         )
-        pulls = await self._process_items(pulls)
+        pulls = await self._process_entries(pulls)
         url_q = urllib.parse.quote_plus(search_query)
         container = {
             "url": f"https://github.com/search?q={url_q}&type=issues",
             "container_kind": "search",
             "title": search_query,
             "kind": "pull requests",
-            "items": pulls,
+            "entries": pulls,
         }
         return container
 
@@ -169,11 +171,11 @@ class Digester:
             ),
             (
                 r"https://github.com/(?P<owner>[^/]+)/(?P<name>[^/]+)/?",
-                self.get_repo_items,
+                self.get_repo_entries,
             ),
             (
                 r"https://github.com/orgs/(?P<org>[^/]+)/projects/(?P<number>\d+)/?",
-                self.get_project_items,
+                self.get_project_entries,
             ),
         ]:
             if match_url := re.fullmatch(rx, url):
@@ -194,26 +196,26 @@ class Digester:
         nodes = sorted(nodes, key=operator.itemgetter("updatedAt"))
         return nodes
 
-    async def _process_items(self, items):
+    async def _process_entries(self, entries):
         """
-        Process items after they've been retrieved.
+        Process entries after they've been retrieved.
 
         Keep only things updated since our date, and sort them.
         """
-        items = self._trim_unwanted(items)
-        items = await asyncio.gather(*map(self._process_item, items))
-        return items
+        entries = self._trim_unwanted(entries)
+        entries = await asyncio.gather(*map(self._process_entry, entries))
+        return entries
 
-    async def _process_item(self, item):
+    async def _process_entry(self, entry):
         """
-        Apply item-specific processing to an item.
+        Apply entry-specific processing to an entry.
         """
-        if item["__typename"] == "Issue":
-            await self._process_issue(item)
-        elif item["__typename"] == "PullRequest":
-            await self._process_pull_request(item)
-        self._add_reasons(item)
-        return item
+        if entry["__typename"] == "Issue":
+            await self._process_issue(entry)
+        elif entry["__typename"] == "PullRequest":
+            await self._process_pull_request(entry)
+        self._add_reasons(entry)
+        return entry
 
     async def _process_issue(self, issue):
         """
@@ -299,23 +301,23 @@ class Digester:
 
         pull["comments_to_show"] = self._trim_unwanted(comments.values())
 
-    def _add_reasons(self, item):
+    def _add_reasons(self, entry):
         """
-        Populate an item with the reasons it's been included.
+        Populate an entry with the reasons it's been included.
 
         Args:
-            item (dict): the issue or pull request data.
+            entry (dict): the issue or pull request data.
 
         """
         # write "reasonCreated" based on "createdAt", etc.
         for slug in ["Created", "Closed", "Merged"]:
             at = slug.lower() + "At"
-            item[f"reason{slug}"] = bool(item.get(at) and item[at] > self.since)
+            entry[f"reason{slug}"] = bool(entry.get(at) and entry[at] > self.since)
 
 
 def coro_from_item(digester, item):
     """
-    Parse a single item, and make a digester coro for it.
+    Parse a single config item, and make a digester coro for it.
     """
     url = None
     if isinstance(item, str):
@@ -350,7 +352,7 @@ async def make_digest(since, items, digest, **options):
 
     Args:
         since (str): a duration spec ("2 day", "3d6h", etc).
-        items (list[str|dict]): a list of YAML objects or GitHub URLs to collect items from.
+        items (list[str|dict]): a list of YAML objects or GitHub URLs to collect entries from.
         digest (str): the HTML file name to write.
 
     """
