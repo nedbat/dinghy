@@ -11,7 +11,7 @@ import re
 import urllib.parse
 
 import yaml
-from glom import glom as g
+from glom import glom
 
 from . import __version__
 from .graphql_helpers import build_query, GraphqlHelper
@@ -37,17 +37,21 @@ class Digester:
         Args:
             owner (str): the owner of the repo.
             name (str): the name of the repo.
-
         """
         repo, issues = await self.gql.nodes(
             query=build_query("repo_issues.graphql"),
             variables=dict(owner=owner, name=name, since=self.since),
         )
         issues = await self._process_items(issues)
-        repo = g(repo, "data.repository")
-        repo["container_kind"] = "repo"
-        repo["kind"] = "issues"
-        return repo, issues
+        repo = glom(repo, "data.repository")
+        container = {
+            "url": repo["url"],
+            "container_kind": "repo",
+            "title": repo["nameWithOwner"],
+            "kind": "issues",
+            "items": issues,
+        }
+        return container
 
     async def get_project_items(self, org, number, home_repo=""):
         """
@@ -68,10 +72,15 @@ class Digester:
             item["other_repo"] = item["repository"]["nameWithOwner"] != home_repo
             if "comments_to_show" not in item:
                 item["comments_to_show"] = item["comments"]["nodes"]
-        project = g(project, "data.organization.project")
-        project["container_kind"] = "project"
-        project["kind"] = "items"
-        return project, items
+        project = glom(project, "data.organization.project")
+        container = {
+            "url": project["url"],
+            "container_kind": "project",
+            "title": project["title"],
+            "kind": "items",
+            "items": items,
+        }
+        return container
 
     async def get_repo_pull_requests(self, owner, name):
         """
@@ -88,22 +97,31 @@ class Digester:
         )
         pulls = await self._process_items(pulls)
 
-        repo = g(repo, "data.repository")
-        repo["container_kind"] = "repo"
-        repo["kind"] = "pull requests"
-        return repo, pulls
+        repo = glom(repo, "data.repository")
+        container = {
+            "url": repo["url"],
+            "container_kind": "repo",
+            "title": repo["nameWithOwner"],
+            "kind": "pull_requests",
+            "items": pulls,
+        }
+        return container
 
     async def get_repo_items(self, owner, name):
         """
         Get issues and pull requests from a repo.
         """
-        (repo, issues), (_, pull_requests) = await asyncio.gather(
+        issue_container, pr_container = await asyncio.gather(
             self.get_repo_issues(owner, name),
             self.get_repo_pull_requests(owner, name),
         )
-        repo["kind"] = "issues and pull requests"
-        items = self._trim_unwanted(issues + pull_requests)
-        return repo, items
+        items = self._trim_unwanted(issue_container["items"] + pr_container["items"])
+        container = {
+            **issue_container,
+            "kind": "issues and pull requests",
+            "items": items,
+        }
+        return container
 
     async def get_org_pull_requests(self, org):
         """
@@ -121,13 +139,14 @@ class Digester:
         )
         pulls = await self._process_items(pulls)
         url_q = urllib.parse.quote_plus(search_query)
-        search = {
-            "query": search_query,
+        container = {
             "url": f"https://github.com/search?q={url_q}&type=issues",
             "container_kind": "search",
+            "title": search_query,
             "kind": "pull requests",
+            "items": pulls,
         }
-        return search, pulls
+        return container
 
     def method_from_url(self, url):
         """
@@ -138,7 +157,6 @@ class Digester:
 
         Returns:
             A method, and a dict of **kwargs.
-
         """
         for rx, fn in [
             (
@@ -206,7 +224,6 @@ class Digester:
 
         Args:
             issue (dict): the issue to populate.
-
         """
         if issue["comments"]["totalCount"] > len(issue["comments"]["nodes"]):
             comments = await self.gql.nodes(

@@ -158,22 +158,16 @@
 <h1>Activity since {{ since|datetime("%Y-%m-%d") }}</h1>
 
 <ul class="repos">
-  {% for thing, items in results -%}
+  {% for container in results -%}
     <li>
-      <p><span class="reponame"><a href="{{ thing.url }}">
-      {%- if thing.container_kind == "repo" -%}
-        {{ thing.nameWithOwner }}
-      {%- elif thing.container_kind == "project" -%}
-        {{ thing.title|trim }}
-      {%- elif thing.container_kind == "search" -%}
-        {{ thing.query|trim }}
-      {%- endif -%}
+      <p><span class="reponame"><a href="{{ container.url }}">
+        {{- container.title|trim -}}
       </a></span>
-      {{ thing.container_kind }} {{ thing.kind }}
+      {{ container.container_kind }} {{ container.kind }}
       </p>
-      {% if items %}
+      {% if container["items"] %}
         <ul class="items">
-          {% for item in items -%}
+          {% for item in container["items"] -%}
             <li class="{{ item.state|lower }}">
 
               <p><a href="{{ item.url }}">{# -#}
