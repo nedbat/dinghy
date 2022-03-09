@@ -12,9 +12,8 @@ import re
 import time
 
 import aiohttp
-from glom import glom as g
 
-from .helpers import json_save
+from .helpers import find_dict_with_key, json_save
 
 
 def _summarize_rate_limit(response):
@@ -128,7 +127,7 @@ class GraphqlHelper:
         _raise_if_error(data)
         return data
 
-    async def nodes(self, query, path, variables=None, donefn=None):
+    async def nodes(self, query, variables=None, donefn=None):
         """
         Execute a GraphQL query, and follow the pagination to get all the nodes.
 
@@ -139,7 +138,7 @@ class GraphqlHelper:
         variables = dict(variables)
         while True:
             data = await self.execute(query, variables)
-            fetched = g(data, f"data.{path}")
+            fetched = find_dict_with_key(data, "pageInfo")
             nodes.extend(fetched["nodes"])
             if not fetched["pageInfo"]["hasNextPage"]:
                 break

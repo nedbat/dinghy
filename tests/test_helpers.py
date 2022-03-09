@@ -6,7 +6,7 @@ import datetime
 
 import pytest
 
-from dinghy.helpers import parse_timedelta
+from dinghy.helpers import find_dict_with_key, parse_timedelta
 
 
 @pytest.mark.parametrize(
@@ -38,3 +38,19 @@ def test_parse_timedelta(tds, kwargs):
 def test_bad_parse_timedelta(tds):
     with pytest.raises(ValueError, match=f"Couldn't parse time delta from {tds!r}"):
         parse_timedelta(tds)
+
+
+@pytest.mark.parametrize(
+    "d, k, res",
+    [
+        ({"a": 1, "b": {"k": 1}, "c": "hello"}, "k", {"k": 1}),
+        (
+            {"a": 1, "b": {"x": 0, "d": {"k": 1, "z": 2}}, "c": "hello"},
+            "k",
+            {"k": 1, "z": 2},
+        ),
+        ({"a": 1, "b": {"k": 1}, "c": "hello"}, "z", None),
+    ],
+)
+def test_find_dict_with_key(d, k, res):
+    assert find_dict_with_key(d, k) == res

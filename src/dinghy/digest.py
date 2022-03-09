@@ -41,7 +41,6 @@ class Digester:
         """
         repo, issues = await self.gql.nodes(
             query=build_query("repo_issues.graphql"),
-            path="repository.issues",
             variables=dict(owner=owner, name=name, since=self.since),
         )
         issues = await self._process_items(issues)
@@ -61,7 +60,6 @@ class Digester:
         """
         project, project_data = await self.gql.nodes(
             query=build_query("project_items.graphql"),
-            path="organization.project.items",
             variables=dict(org=org, projectNumber=int(number)),
         )
         items = [content for data in project_data if (content := data["content"])]
@@ -85,7 +83,6 @@ class Digester:
         """
         repo, pulls = await self.gql.nodes(
             query=build_query("repo_pull_requests.graphql"),
-            path="repository.pullRequests",
             variables=dict(owner=owner, name=name),
             donefn=(lambda nodes: nodes[-1]["updatedAt"] < self.since),
         )
@@ -120,7 +117,6 @@ class Digester:
         search_query = " ".join(f"{k}:{v}" for k, v in search_terms.items())
         _, pulls = await self.gql.nodes(
             query=build_query("search_items.graphql"),
-            path="search",
             variables=dict(query=search_query),
         )
         pulls = await self._process_items(pulls)
@@ -215,7 +211,6 @@ class Digester:
         if issue["comments"]["totalCount"] > len(issue["comments"]["nodes"]):
             comments = await self.gql.nodes(
                 query=build_query("issue_comments.graphql"),
-                path="repository.issue.comments",
                 variables=dict(
                     owner=issue["repository"]["owner"]["login"],
                     name=issue["repository"]["name"],

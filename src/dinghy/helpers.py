@@ -48,3 +48,15 @@ def parse_timedelta(timedelta_str):
         raise ValueError(f"Couldn't parse time delta from {timedelta_str!r}")
     kwargs = {name: float(val) for name, val in parts.groupdict().items() if val}
     return datetime.timedelta(**kwargs)
+
+
+def find_dict_with_key(d, key):
+    """Return the subdict of `d` that has `key`."""
+    if key in d:
+        return d
+    for dd in d.values():
+        if isinstance(dd, dict):
+            sd = find_dict_with_key(dd, key)
+            if sd is not None:
+                return sd
+    return None
