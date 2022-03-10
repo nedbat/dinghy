@@ -1,5 +1,4 @@
 fragment authorData on Actor {
   __typename
   login
-  url
 }
