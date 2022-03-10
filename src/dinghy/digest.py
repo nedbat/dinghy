@@ -115,9 +115,8 @@ class Digester:
             self.get_repo_issues(owner, name),
             self.get_repo_pull_requests(owner, name),
         )
-        entries = self._trim_unwanted(
-            issue_container["entries"] + pr_container["entries"]
-        )
+        entries = issue_container["entries"] + pr_container["entries"]
+        entries = self._trim_unwanted(entries)
         container = {
             **issue_container,
             "kind": "issues and pull requests",
@@ -202,6 +201,15 @@ class Digester:
 
         Keep only things updated since our date, and sort them.
         """
+        # GitHub has a @ghost account for deleted users.  That shows up in our
+        # data as a None author. Fix those.
+        for entry in entries:
+            if entry["author"] is None:
+                entry["author"] = {
+                    "__typename": "User",
+                    "login": "ghost",
+                }
+
         entries = self._trim_unwanted(entries)
         entries = await asyncio.gather(*map(self._process_entry, entries))
         return entries
