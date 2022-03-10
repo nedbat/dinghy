@@ -2,12 +2,12 @@
 Utilities for working with Jina2 templates.
 """
 
+import colorsys
 import datetime
 from pathlib import Path
 
 import aiofiles
 import jinja2
-import wcag_contrast_ratio
 
 
 def datetime_format(value, fmt="%m-%d %H:%M"):
@@ -17,19 +17,23 @@ def datetime_format(value, fmt="%m-%d %H:%M"):
     return value.strftime(fmt)
 
 
-def textcolor(bg_color):
-    """Calculate a text color for a background color `bg_color`."""
-    rgb = [int(bg_color[i : i + 2], 16) / 255 for i in [0, 2, 4]]
-    bcontrast = wcag_contrast_ratio.rgb(rgb, (0, 0, 0))
-    wcontrast = wcag_contrast_ratio.rgb(rgb, (1, 1, 1))
-    return "black" if bcontrast > wcontrast else "white"
+def label_color_css(bg_color):
+    """Create CSS for a label color."""
+    r, g, b = [int(bg_color[i : i + 2], 16) / 255 for i in [0, 2, 4]]
+    h, l, s = colorsys.rgb_to_hls(r, g, b)
+    css = []
+    for ltr, val, fac in zip(
+        "rgbhls", [r, g, b, h, l, s], [255, 255, 255, 360, 100, 100]
+    ):
+        css.append(f"--label-{ltr}:{int(val * fac)};")
+    return " ".join(css)
 
 
 def render_jinja(template_filename, **variables):
     """Render a template file, with variables."""
     jenv = jinja2.Environment(loader=jinja2.FileSystemLoader(Path(__file__).parent))
     jenv.filters["datetime"] = datetime_format
-    jenv.filters["textcolor"] = textcolor
+    jenv.filters["label_color_css"] = label_color_css
     template = jenv.get_template(f"templates/{template_filename}")
     html = template.render(**variables)
     return html
