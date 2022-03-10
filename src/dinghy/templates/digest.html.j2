@@ -216,7 +216,7 @@
               {%- endif %}
               </p>
 
-              {%- if entry.body %}<p>{{ entry.body|trim|truncate(120) }}</p>{% endif -%}
+              {%- if entry.bodyText %}<p>{{ entry.bodyText|trim|truncate(120) }}</p>{% endif -%}
 
               {% if entry.comments_to_show -%}
                 <ul class="comments">
@@ -235,7 +235,7 @@
                           <span class="octicon comment" title="comment"></span>
                         {% endif %}
                         <b>{{ comment.author.login }}</b>{# -#}
-                      {%- if comment.body %}: {{ comment.body|trim|truncate(100) }}{% endif -%}
+                      {%- if comment.bodyText %}: {{ comment.bodyText|trim|truncate(100) }}{% endif -%}
                       </a></p>
                       {% if comment.comments_to_show %}
                         <ul class="thread_comment">{{ loop(comment.comments_to_show) }}</ul>

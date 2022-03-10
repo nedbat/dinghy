@@ -15,7 +15,7 @@ fragment issueData on Issue {
   author {
     ...authorData   # fragment: author_frag.graphql
   }
-  body
+  bodyText
   comments(last: 100) {
     totalCount
     nodes {

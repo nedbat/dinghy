@@ -287,12 +287,12 @@ class Digester:
                 comments[com_id] = com
                 com["review_state"] = rev["state"]
                 had_comment = True
-            if rev["body"] or not had_comment:
+            if rev["bodyText"] or not had_comment:
                 # A completed review with no comment, make it into a comment.
                 com = comments.setdefault(rev["id"], dict(rev))
                 com["review_state"] = rev["state"]
 
-            if not rev["body"] and len(rev["comments"]["nodes"]) == 1:
+            if not rev["bodyText"] and len(rev["comments"]["nodes"]) == 1:
                 # A review with just one comment and no body: the comment should
                 # go where they review would have been.
                 com = rev["comments_to_show"][0]

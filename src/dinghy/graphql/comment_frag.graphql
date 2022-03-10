@@ -2,7 +2,7 @@
 # have a url.
 fragment commentData on Comment {
   id
-  body
+  bodyText
   updatedAt
   author {
     ...authorData   # fragment: author_frag.graphql

@@ -5,7 +5,7 @@ fragment reviewData on PullRequestReview {
   author {
     ...authorData   # fragment: author_frag.graphql
   }
-  body
+  bodyText
   updatedAt
   comments(first: 100) {
     totalCount
