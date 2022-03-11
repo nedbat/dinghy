@@ -33,7 +33,7 @@ lint:
 	pylint src tests
 
 
-.PHONY: dist pypi testpypi
+.PHONY: dist pypi testpypi sample
 
 dist: ## build the distributions
 	python -m check_manifest
@@ -45,3 +45,8 @@ pypi: ## upload the built distributions to PyPI.
 
 testpypi: ## upload the distrubutions to PyPI's testing server.
 	python -m twine upload --verbose --repository testpypi dist/*
+
+sample: ## make the sample digest
+	python -m dinghy black_dinghy.yaml
+	sed -i -e '/>Activity/s/ since.*</</' /tmp/black.html
+	cp /tmp/black.html ~/web/stellated/files/black_dinghy.html

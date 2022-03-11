@@ -1,0 +1,5 @@
+digests:
+  - digest: /tmp/black.html
+    since: 3 days
+    items:
+      - https://github.com/psf/black
