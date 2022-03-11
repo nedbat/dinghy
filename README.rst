@@ -14,12 +14,18 @@ requests, and writes a compact HTML digest.  Write your configuration in a
 
     $ pip install dinghy
     $ python -m dinghy
+    Wrote digest: digest.html
+
+Your digest will look `something like this`__.
+
+__ https://nedbatchelder.com/files/black_dinghy.html
 
 
 Configuration
 =============
 
-Dinghy configuration is read from a ``dinghy.yaml`` file:
+Dinghy configuration is read from a YAML file (``dinghy.yaml`` by default).
+Here's an example:
 
 .. code-block:: yaml
 
@@ -49,10 +55,10 @@ Dinghy configuration is read from a ``dinghy.yaml`` file:
         - fake-bot
 
 The ``digests`` clause is a list of digests to produce.  The ``defaults``
-clause sets defaults for the digest options in the rest of the file.  Each in
-the ``digests`` clause specifies what to digest:
+clause sets defaults for the digest options in the rest of the file.  Each
+``digests`` clause specifies what to digest:
 
-- The ``digest`` setting is the HTML file to write.
+- The ``digest`` setting is the HTML digest file to write.
 
 - The ``since`` setting indicates how far back to look for activity. It can use
   units of weeks, days, hours, minutes and seconds, and can also be
