@@ -1,5 +1,0 @@
-Added
-.....
-
-- GitHub's @ghost user shows up as an "author" of None.  Properly handle that
-  case.

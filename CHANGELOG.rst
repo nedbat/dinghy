@@ -22,6 +22,22 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+0.6.0 — 2022-03-10
+------------------
+
+Added
+.....
+
+- GitHub's @ghost user shows up in GraphQL results as an "author" of None.
+  Properly handle that case.
+
+Changed
+.......
+
+- Fixes to the color of labels.
+
+- Correct handling of HTML in bodies.
+
 0.5.2 — 2022-03-08
 ------------------
 
