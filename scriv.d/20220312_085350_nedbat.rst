@@ -1,0 +1,6 @@
+Fixed
+.....
+
+- Dependencies now have minimum pins, fixing `issue 1`_.
+
+.. _issue 1: https://github.com/nedbat/dinghy/issues/1
