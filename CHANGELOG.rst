@@ -22,6 +22,25 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+0.7.0 — 2022-03-12
+------------------
+
+Added
+.....
+
+- The command line now accepts a GitHub URL to quickly get a week's digest of
+  activity from a repo (or issues, pull requests, etc).
+
+- The logging level can now be specified with the ``-v``/``--verbosity``
+  command-line option.
+
+Fixed
+.....
+
+- Dependencies now have minimum pins, fixing `issue 1`_.
+
+.. _issue 1: https://github.com/nedbat/dinghy/issues/1
+
 0.6.0 — 2022-03-10
 ------------------
 

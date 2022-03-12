@@ -1,5 +1,0 @@
-Added
-.....
-
-- The logging level can now be specified with the ``-v``/``--verbosity``
-  command-line option.
