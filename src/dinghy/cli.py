@@ -5,19 +5,28 @@ import sys
 
 import click
 
-from .digest import make_digests
+from .digest import make_digest, make_digests_from_config
 from .graphql_helpers import GraphqlHelper
 from .helpers import DinghyError
 
 
 @click.command()
-@click.argument("config_file", type=click.File("rb"), default="dinghy.yaml")
-def cli(config_file):
+@click.argument("_input", metavar="[INPUT]", default="dinghy.yaml")
+def cli(_input):
     """
     Generate HTML digests of GitHub activity.
+
+    INPUT is a dinghy YAML configuration file (default: dinghy.yaml), or a
+    GitHub repo URL.
+
     """
+    if "://" in _input:
+        coro = make_digest([_input])
+    else:
+        coro = make_digests_from_config(_input)
+
     try:
-        asyncio.run(make_digests(config_file))
+        asyncio.run(coro)
     except DinghyError as err:
         print(f"dinghy error: {err}")
         sys.exit(1)

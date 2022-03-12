@@ -1,0 +1,5 @@
+Added
+.....
+
+- The command line now accepts a GitHub url to quickly get a week's digest of
+  activity from a repo (or issues, pull requests, etc).

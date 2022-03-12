@@ -2,23 +2,27 @@
 Dinghy
 ######
 
-Dinghy daily GitHub digest tool.
+Dinghy, a GitHub activity digest tool.
 
 |pypi-badge| |pyversions-badge| |license-badge|
 
 Dinghy uses the GitHub GraphQL API to find recent activity on issues and pull
-requests, and writes a compact HTML digest.  Write your configuration in a
-``dinghy.yaml`` file, then:
+requests, and writes a compact HTML digest.  The simplest way to run dinghy is
+with a GitHub repo URL:
 
 .. code-block:: bash
 
     $ pip install dinghy
-    $ python -m dinghy
+    $ python -m dinghy https://github.com/Me/MyProject
     Wrote digest: digest.html
 
-Your digest will look `something like this`__.
+You will have a digest of the last week's activity in digest.html. It will look
+`something like this`__.
 
 __ https://nedbatchelder.com/files/black_dinghy.html
+
+You can also write a YAML configuration file to digest multiple sources, or
+with different time periods.
 
 
 Configuration

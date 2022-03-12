@@ -354,7 +354,7 @@ def coro_from_item(digester, item):
     return coro
 
 
-async def make_digest(since, items, digest, **options):
+async def make_digest(items, since="1 week", digest="digest.html", **options):
     """
     Make a single digest.
 
@@ -394,15 +394,20 @@ async def make_digest(since, items, digest, **options):
     print(f"Wrote digest: {digest}")
 
 
-async def make_digests(conf_file):
+async def make_digests_from_config(conf_file):
     """
     Make all the digests specified by a configuration file.
 
     Args:
-        conf_file (file): an open file object to read the configuration from.
+        conf_file (str): a file path to read as a config file.
 
     """
-    config = yaml.safe_load(conf_file)
+    try:
+        with open(conf_file, encoding="utf-8") as cf:
+            config = yaml.safe_load(cf)
+    except Exception as err:
+        raise DinghyError(f"Couldn't read config file {conf_file!r}: {err}") from err
+
     defaults = config.get("defaults", {})
     coros = []
     for spec in config.get("digests", []):
