@@ -19,12 +19,12 @@ requirements: ## install development environment requirements
 	pip install -r dev-requirements.txt
 
 
-.PHONY: test quality black lint
+.PHONY: test quality black lint check_manifest
 
 test: ## run tests in the current virtualenv
 	pytest tests
 
-quality: black lint ## run code-checking tools
+quality: black lint check_manifest ## run code-checking tools
 
 black:
 	black -q src tests
@@ -32,11 +32,12 @@ black:
 lint:
 	pylint src tests
 
+check_manifest:
+	python -m check_manifest
 
 .PHONY: dist testpypi pypi tag sample
 
-dist: ## build the distributions
-	python -m check_manifest
+dist: check_manifest ## build the distributions
 	python -m build --sdist --wheel
 	python -m twine check dist/*
 
