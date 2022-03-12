@@ -51,6 +51,5 @@ tag: ## make a git tag with the version number
 	git tag -a -m "Version $$(python setup.py --version)" $$(python setup.py --version)
 
 sample: ## make the sample digest
-	python -m dinghy black_dinghy.yaml
-	sed -i -e '/>Activity/s/ since.*</</' /tmp/black.html
-	cp /tmp/black.html ~/web/stellated/files/black_dinghy.html
+	python -m dinghy docs/black_dinghy.yaml
+	sed -i "" -e '/>Activity/s/ since.*</</' docs/black_digest.html

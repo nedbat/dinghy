@@ -19,7 +19,7 @@ with a GitHub repo URL:
 You will have a digest of the last week's activity in digest.html. It will look
 `something like this`__.
 
-__ https://nedbatchelder.com/files/black_dinghy.html
+__ https://nedbat.github.io/dinghy/black_digest.html
 
 You can also write a YAML configuration file to digest multiple sources, or
 with different time periods.
