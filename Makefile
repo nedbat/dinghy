@@ -33,18 +33,21 @@ lint:
 	pylint src tests
 
 
-.PHONY: dist pypi testpypi sample
+.PHONY: dist testpypi pypi tag sample
 
 dist: ## build the distributions
 	python -m check_manifest
 	python -m build --sdist --wheel
 	python -m twine check dist/*
 
+testpypi: ## upload the distrubutions to PyPI's testing server.
+	python -m twine upload --verbose --repository testpypi dist/*
+
 pypi: ## upload the built distributions to PyPI.
 	python -m twine upload --verbose dist/*
 
-testpypi: ## upload the distrubutions to PyPI's testing server.
-	python -m twine upload --verbose --repository testpypi dist/*
+tag: ## make a git tag with the version number
+	git tag -a -m "Version $$(python setup.py --version)" $$(python setup.py --version)
 
 sample: ## make the sample digest
 	python -m dinghy black_dinghy.yaml
