@@ -14,7 +14,7 @@ import time
 
 import aiohttp
 
-from .helpers import find_dict_with_key, json_save
+from .helpers import DinghyError, find_dict_with_key, json_save
 
 
 logger = logging.getLogger()
@@ -42,6 +42,12 @@ def _summarize_rate_limit(response):
     return rate_limit_helpfully
 
 
+# GraphQL error types that could be user mistakes.
+USER_FIXABLE_ERR_TYPES = {
+    "INSUFFICIENT_SCOPES": "Insufficient GitHub token scope.",
+}
+
+
 def _raise_if_error(data):
     """
     If `data` is an error response, raise a useful exception.
@@ -50,12 +56,15 @@ def _raise_if_error(data):
         raise Exception(data["message"])
     if "errors" in data:
         err = data["errors"][0]
+        if user_fix_msg := USER_FIXABLE_ERR_TYPES.get(err["type"]):
+            raise DinghyError(f"{user_fix_msg} {err['message']}")
         msg = f"GraphQL error: {err['message']}"
         if "path" in err:
             msg += f" @{'.'.join(err['path'])}"
         if "locations" in err:
             loc = err["locations"][0]
             msg += f", line {loc['line']} column {loc['column']}"
+        logger.debug(f"Error data: {data}")
         raise Exception(msg)
     if "data" in data and data["data"] is None:
         # Another kind of failure response?
@@ -95,6 +104,10 @@ class GraphqlHelper:
             jbody["variables"] = variables
         async with aiohttp.ClientSession(headers=self.headers) as session:
             async with session.post(self.endpoint, json=jbody) as response:
+                if response.status == 401:
+                    raise DinghyError(
+                        "Unauthorized. You need to create a GITHUB_TOKEN environment variable."
+                    )
                 response.raise_for_status()
                 self.save_rate_limit(_summarize_rate_limit(response))
                 return await response.json()
