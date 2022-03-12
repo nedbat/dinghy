@@ -31,8 +31,8 @@ Added
 - GitHub's @ghost user shows up in GraphQL results as an "author" of None.
   Properly handle that case.
 
-Changed
-.......
+Fixed
+.....
 
 - Fixes to the color of labels.
 
