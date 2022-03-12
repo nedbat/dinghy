@@ -71,6 +71,15 @@ def _raise_if_error(data):
         raise Exception("GraphQL query returned null")
 
 
+def _query_synopsis(query, variables):
+    """
+    Create a one-line synopsis of the query, for debugging and error messages.
+    """
+    args = ", ".join(f"{k}: {v!r}" for k, v in variables.items())
+    query_head = next(line for line in query.splitlines() if not line.startswith("#"))
+    return query_head + args + ")"
+
+
 class GraphqlHelper:
     """
     A helper for GraphQL, including error handling and pagination.
@@ -116,11 +125,7 @@ class GraphqlHelper:
         """
         Execute one GraphQL query, with logging, retrying, and error handling.
         """
-        args = ", ".join(f"{k}: {v!r}" for k, v in variables.items())
-        query_head = next(
-            line for line in query.splitlines() if not line.startswith("#")
-        )
-        logger.debug(query_head + args + ")")
+        logger.debug(_query_synopsis(query, variables))
 
         while True:
             data = await self._raw_execute(query=query, variables=variables)
@@ -155,6 +160,11 @@ class GraphqlHelper:
         while True:
             data = await self.execute(query, variables)
             fetched = find_dict_with_key(data, "pageInfo")
+            if fetched is None:
+                raise DinghyError(
+                    "Query returned no data, you may need more permissions in your token: "
+                    + _query_synopsis(query, variables)
+                )
             nodes.extend(fetched["nodes"])
             if not fetched["pageInfo"]["hasNextPage"]:
                 break
