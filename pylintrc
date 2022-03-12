@@ -12,4 +12,6 @@ no-docstring-rgx=__.*__|test[A-Z_].*
 # Disable the message(s) with the given id(s).
 disable=
     invalid-name,
+    logging-fstring-interpolation,
+    logging-not-lazy,
     no-else-return,

@@ -6,6 +6,7 @@ import asyncio
 import collections
 import datetime
 import itertools
+import logging
 import os
 import pkgutil
 import re
@@ -14,6 +15,9 @@ import time
 import aiohttp
 
 from .helpers import find_dict_with_key, json_save
+
+
+logger = logging.getLogger()
 
 
 def _summarize_rate_limit(response):
@@ -52,7 +56,6 @@ def _raise_if_error(data):
         if "locations" in err:
             loc = err["locations"][0]
             msg += f", line {loc['line']} column {loc['column']}"
-        print(data)
         raise Exception(msg)
     if "data" in data and data["data"] is None:
         # Another kind of failure response?
@@ -104,14 +107,14 @@ class GraphqlHelper:
         query_head = next(
             line for line in query.splitlines() if not line.startswith("#")
         )
-        print(query_head + args + ")")
+        logger.debug(query_head + args + ")")
 
         while True:
             data = await self._raw_execute(query=query, variables=variables)
             if "errors" in data:
                 if data["errors"][0].get("type") == "RATE_LIMITED":
                     reset_when = self.last_rate_limit()["reset_when"]
-                    print(f"Waiting for rate limit to reset at {reset_when}")
+                    logger.info(f"Waiting for rate limit to reset at {reset_when}")
                     await asyncio.sleep(
                         int(self.last_rate_limit()["reset"]) - time.time() + 10
                     )
@@ -122,7 +125,7 @@ class GraphqlHelper:
         if int(os.environ.get("DIGEST_SAVE_RESPONSES", 0)):
             json_name = next(self.json_names)
             await json_save(data, json_name)
-            print(f"Wrote query data: {json_name}")
+            logger.info(f"Wrote query data: {json_name}")
 
         _raise_if_error(data)
         return data

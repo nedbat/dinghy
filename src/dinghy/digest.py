@@ -5,6 +5,7 @@ Summarize issue activity in GitHub repos and projects.
 import asyncio
 import datetime
 import json
+import logging
 import operator
 import os
 import re
@@ -17,6 +18,9 @@ from . import __version__
 from .graphql_helpers import build_query, GraphqlHelper
 from .helpers import DinghyError, json_save, parse_timedelta
 from .jinja_helpers import render_jinja_to_file
+
+
+logger = logging.getLogger()
 
 
 class Digester:
@@ -381,7 +385,7 @@ async def make_digest(items, since="1 week", digest="digest.html", **options):
     if int(os.environ.get("DIGEST_SAVE_RESULT", 0)):
         json_name = digest.replace(".html", ".json")
         await json_save(results, json_name)
-        print(f"Wrote results data: {json_name}")
+        logger.info(f"Wrote results data: {json_name}")
 
     await render_jinja_to_file(
         "digest.html.j2",
@@ -391,7 +395,7 @@ async def make_digest(items, since="1 week", digest="digest.html", **options):
         now=datetime.datetime.now(),
         __version__=__version__,
     )
-    print(f"Wrote digest: {digest}")
+    logger.info(f"Wrote digest: {digest}")
 
 
 async def make_digests_from_config(conf_file):
