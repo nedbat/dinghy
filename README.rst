@@ -7,22 +7,41 @@ Dinghy, a GitHub activity digest tool.
 |pypi-badge| |pyversions-badge| |license-badge|
 
 Dinghy uses the GitHub GraphQL API to find recent activity on issues and pull
-requests, and writes a compact HTML digest.  The simplest way to run dinghy is
-with a GitHub repo URL:
+requests, and writes a compact HTML digest `like this <sample_>`_.
 
-.. code-block:: bash
+Getting Started
+===============
 
-    $ pip install dinghy
+1. Install dinghy:
+
+   .. code-block:: bash
+
+    $ python -m pip install dinghy
+
+2. To run dinghy you will need a GitHub `personal access token`_ with the
+   correct scopes, probably "repo".  Create one and define the GITHUB_TOKEN
+   environment variable with the value:
+
+   .. code-block:: bash
+
+    $ export GITHUB_TOKEN=ghp_Y2oxDn9gHJ3W2NcQeyJsrMOez
+
+.. _personal access token: https://github.com/settings/tokens
+
+3. Then run dinghy with a GitHub URL:
+
+   .. code-block:: bash
+
     $ python -m dinghy https://github.com/Me/MyProject
     Wrote digest: digest.html
 
-You will have a digest of the last week's activity in digest.html. It will look
-`something like this`__.
+   You will have a digest of the repo's last week of activity in digest.html.
+   It will look `something like this <sample_>`_.
 
-__ https://nedbat.github.io/dinghy/black_digest.html
+   You can also write a YAML configuration file to digest multiple sources, or
+   with different time periods.
 
-You can also write a YAML configuration file to digest multiple sources, or
-with different time periods.
+.. _sample: https://nedbat.github.io/dinghy/black_digest.html
 
 
 Configuration
@@ -74,7 +93,7 @@ clause sets defaults for the digest options in the rest of the file.  Each
   - The ``url`` setting is a GitHub URL, in a number of forms:
 
     - An organization project URL will report on the issues and pull requests
-      in the project.
+      in the project. Your GitHub token will need the "read:org" scope.
 
     - A URL to a repo will report on the issues and pull requests in the repo.
 
