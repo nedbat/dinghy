@@ -22,6 +22,15 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+0.7.1 — 2022-03-13
+------------------
+
+Fixed
+.....
+
+- Better handling of authorization problems, with error message presented so
+  that the user can fix them.
+
 0.7.0 — 2022-03-12
 ------------------
 
