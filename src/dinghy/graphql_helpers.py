@@ -56,7 +56,7 @@ def _raise_if_error(data):
         raise Exception(data["message"])
     if "errors" in data:
         err = data["errors"][0]
-        if user_fix_msg := USER_FIXABLE_ERR_TYPES.get(err["type"]):
+        if user_fix_msg := USER_FIXABLE_ERR_TYPES.get(err.get("type")):
             raise DinghyError(f"{user_fix_msg} {err['message']}")
         msg = f"GraphQL error: {err['message']}"
         if "path" in err:
