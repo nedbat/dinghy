@@ -39,7 +39,7 @@ def cli(_input):
     finally:
         lrl = GraphqlHelper.last_rate_limit()
         if lrl is not None:
-            resource = lrl["resource"] if "resource" in lrl else "general"
+            resource = lrl.get("resource", "general")
             logger.debug(
                 f"Remaining {resource} rate limit: "
                 + f"{lrl['remaining']} of {lrl['limit']}, "
