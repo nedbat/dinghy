@@ -218,7 +218,7 @@ class Digester:
                 self.get_repo_entries,
             ),
             (
-                r"/orgs/(?P<org>[^/]+)/projects/(?P<number>\d+)/?",
+                r"/(?P<owner>[^/]+)/(?P<name>[^/]+)/projects/(?P<number>\d+)/?",
                 self.get_repo_project_entries,
             ),
         ]:
