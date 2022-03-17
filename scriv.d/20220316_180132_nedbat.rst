@@ -1,0 +1,7 @@
+Fixed
+.....
+
+- Error handling failed on certain errors.  This is now fixed, closing
+  `issue 4`_.
+
+.. _issue 4: https://github.com/nedbat/dinghy/issues/4
