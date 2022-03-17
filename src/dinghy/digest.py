@@ -22,6 +22,22 @@ from .jinja_helpers import render_jinja_to_file
 
 logger = logging.getLogger()
 
+GITHUB_URL_MAP = []
+
+
+def github_route(url_pattern):
+    """A decorator to associate a GitHub URL path regex with a Digester.get_ method.
+
+    The regexes will be tried in the order the decorator is used in the class,
+    so be careful if a path could match multiple patterns.
+    """
+
+    def _dec(func):
+        GITHUB_URL_MAP.append((url_pattern, func.__name__))
+        return func
+
+    return _dec
+
 
 class Digester:
     """
@@ -39,6 +55,7 @@ class Digester:
         token = os.environ.get("GITHUB_TOKEN", "")
         self.gql = GraphqlHelper(f"https://api.{self.github}/graphql", token)
 
+    @github_route(r"/orgs/(?P<org>[^/]+)/projects/(?P<number>\d+)/?")
     async def get_org_project_entries(self, org, number, home_repo=""):
         """
         Get entries from a organization project.
@@ -93,6 +110,7 @@ class Digester:
         }
         return container
 
+    @github_route(r"/(?P<owner>[^/]+)/(?P<name>[^/]+)/?")
     async def get_repo_entries(self, owner, name):
         """
         Get issues and pull requests from a repo.
@@ -110,6 +128,7 @@ class Digester:
         }
         return container
 
+    @github_route(r"/(?P<owner>[^/]+)/(?P<name>[^/]+)/issues/?")
     async def get_repo_issues(self, owner, name):
         """
         Get issues from a repo updated since a date, with comments since that date.
@@ -133,6 +152,7 @@ class Digester:
         }
         return container
 
+    @github_route(r"/(?P<owner>[^/]+)/(?P<name>[^/]+)/projects/(?P<number>\d+)/?")
     async def get_repo_project_entries(self, owner, name, number):
         """
         Get entries from a repo project.
@@ -163,6 +183,7 @@ class Digester:
         }
         return container
 
+    @github_route(r"/(?P<owner>[^/]+)/(?P<name>[^/]+)/pulls/?")
     async def get_repo_pull_requests(self, owner, name):
         """
         Get pull requests from a repo updated since a date, with comments since that date.
@@ -200,30 +221,9 @@ class Digester:
         """
         parsed = urllib.parse.urlparse(url)
         self.github = parsed.netloc
-        for rx, fn in [
-            (
-                r"/orgs/(?P<org>[^/]+)/projects/(?P<number>\d+)/?",
-                self.get_org_project_entries,
-            ),
-            (
-                r"/(?P<owner>[^/]+)/(?P<name>[^/]+)/issues/?",
-                self.get_repo_issues,
-            ),
-            (
-                r"/(?P<owner>[^/]+)/(?P<name>[^/]+)/pulls/?",
-                self.get_repo_pull_requests,
-            ),
-            (
-                r"/(?P<owner>[^/]+)/(?P<name>[^/]+)/?",
-                self.get_repo_entries,
-            ),
-            (
-                r"/(?P<owner>[^/]+)/(?P<name>[^/]+)/projects/(?P<number>\d+)/?",
-                self.get_repo_project_entries,
-            ),
-        ]:
+        for rx, fn_name in GITHUB_URL_MAP:
             if match_url := re.fullmatch(rx, parsed.path):
-                return fn, match_url.groupdict()
+                return getattr(self, fn_name), match_url.groupdict()
 
         raise DinghyError(f"Can't understand URL {url!r}")
 
