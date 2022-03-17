@@ -1,0 +1,6 @@
+Added
+.....
+
+- GitHub enterprise support: you can use URLs pointing to your own GitHub
+  Enterprise installation.  Only a single host can be used.  Thanks, Henry
+  Gessau.
