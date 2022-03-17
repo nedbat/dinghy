@@ -310,11 +310,12 @@ class Digester:
             if not rev["bodyText"] and len(rev["comments"]["nodes"]) == 1:
                 # A review with just one comment and no body: the comment should
                 # go where they review would have been.
-                com = rev["comments_to_show"][0]
-                com["review_state"] = rev["review_state"]
-                comments[com["id"]] = com
-                rev["show"] = False
-                del comments[rev["id"]]
+                if "comments_to_show" in rev:
+                    com = rev["comments_to_show"][0]
+                    com["review_state"] = rev["review_state"]
+                    comments[com["id"]] = com
+                    rev["show"] = False
+                    del comments[rev["id"]]
 
             if rev["show"]:
                 comments[rev["id"]] = rev
