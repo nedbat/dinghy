@@ -1,0 +1,13 @@
+query getRepoProjectItems(
+  $owner: String!
+  $name: String!
+  $projectNumber: Int!
+  $after: String
+) {
+  repository(owner: $owner, name: $name) {
+    ...repoData             # fragment: repo_frag.graphql
+    project: projectNext(number: $projectNumber) {
+      ...projectNextData    # fragment: project_entries_frag.graphql
+    }
+  }
+}

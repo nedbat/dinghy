@@ -1,0 +1,21 @@
+# A project in an org or repo.
+fragment projectNextData on ProjectNext {
+  title
+  url
+  items(first: 10, after: $after) {
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+    nodes {
+      content {
+        ... on Issue {
+          ...issueData          # fragment: issue_frag.graphql
+        }
+        ... on PullRequest {
+          ...pullRequestData    # fragment: pull_request_frag.graphql
+        }
+      }
+    }
+  }
+}

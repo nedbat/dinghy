@@ -57,9 +57,9 @@ class Digester:
         }
         return container
 
-    async def get_project_entries(self, org, number, home_repo=""):
+    async def get_org_project_entries(self, org, number, home_repo=""):
         """
-        Get entries from a project.
+        Get entries from a organization project.
 
         Args:
             org (str): the organization owner of the repo.
@@ -67,7 +67,7 @@ class Digester:
             home_repo (str): the owner/name of a repo that most entries are in.
         """
         project, project_data = await self.gql.nodes(
-            query=build_query("project_entries.graphql"),
+            query=build_query("org_project_entries.graphql"),
             variables=dict(org=org, projectNumber=int(number)),
         )
         entries = [content for data in project_data if (content := data["content"])]
@@ -77,6 +77,36 @@ class Digester:
             if "comments_to_show" not in entry:
                 entry["comments_to_show"] = entry["comments"]["nodes"]
         project = glom(project, "data.organization.project")
+        container = {
+            "url": project["url"],
+            "container_kind": "project",
+            "title": project["title"],
+            "kind": "items",
+            "entries": entries,
+        }
+        return container
+
+    async def get_repo_project_entries(self, owner, name, number):
+        """
+        Get entries from a repo project.
+
+        Args:
+            owner (str): the owner of the repo.
+            name (str): the name of the repo.
+            number (int|str): the project number.
+        """
+        project, project_data = await self.gql.nodes(
+            query=build_query("repo_project_entries.graphql"),
+            variables=dict(owner=owner, name=name, projectNumber=int(number)),
+        )
+        home_repo = f"{owner}/{name}"
+        entries = [content for data in project_data if (content := data["content"])]
+        entries = await self._process_entries(entries)
+        for entry in entries:
+            entry["other_repo"] = entry["repository"]["nameWithOwner"] != home_repo
+            if "comments_to_show" not in entry:
+                entry["comments_to_show"] = entry["comments"]["nodes"]
+        project = glom(project, "data.repository.project")
         container = {
             "url": project["url"],
             "container_kind": "project",
@@ -165,6 +195,10 @@ class Digester:
         """
         for rx, fn in [
             (
+                r"https://github.com/orgs/(?P<org>[^/]+)/projects/(?P<number>\d+)/?",
+                self.get_org_project_entries,
+            ),
+            (
                 r"https://github.com/(?P<owner>[^/]+)/(?P<name>[^/]+)/issues/?",
                 self.get_repo_issues,
             ),
@@ -177,8 +211,8 @@ class Digester:
                 self.get_repo_entries,
             ),
             (
-                r"https://github.com/orgs/(?P<org>[^/]+)/projects/(?P<number>\d+)/?",
-                self.get_project_entries,
+                r"https://github.com/(?P<owner>[^/]+)/(?P<name>[^/]+)/projects/(?P<number>\d+)/?",
+                self.get_repo_project_entries,
             ),
         ]:
             if match_url := re.fullmatch(rx, url):

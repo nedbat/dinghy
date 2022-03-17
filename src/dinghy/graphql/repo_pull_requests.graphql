@@ -4,7 +4,7 @@ query getPullRequests(
   $after: String
 ) {
   repository(owner: $owner, name: $name) {
-    ...repoData
+    ...repoData         # fragment: repo_frag.graphql
     pullRequests(
       first: 10
       orderBy: {
