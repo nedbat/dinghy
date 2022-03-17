@@ -31,15 +31,13 @@ class Digester:
     def __init__(self, since, options):
         self.since = since.strftime("%Y-%m-%dT%H:%M:%S")
         self.ignore_users = options.get("ignore_users", [])
-        self.github = "github.com"
-        self._gql = None
+        self.github = None
+        self.gql = None
 
-    @property
-    def gql(self):
-        if self._gql is None:
-            token = os.environ.get("GITHUB_TOKEN", "")
-            self._gql = GraphqlHelper(f"https://api.{self.github}/graphql", token)
-        return self._gql
+    def prepare(self):
+        """Create the network helpers we need."""
+        token = os.environ.get("GITHUB_TOKEN", "")
+        self.gql = GraphqlHelper(f"https://api.{self.github}/graphql", token)
 
     async def get_org_project_entries(self, org, number, home_repo=""):
         """
@@ -200,33 +198,32 @@ class Digester:
         Returns:
             A method, and a dict of **kwargs.
         """
-        url_with_host = re.match(r"^https://([^/]+)/.+$", url)
-        if url_with_host:
-            self.github = url_with_host.groups()[0]
-            for rx, fn in [
-                (
-                    rf"https://{self.github}/orgs/(?P<org>[^/]+)/projects/(?P<number>\d+)/?",
-                    self.get_org_project_entries,
-                ),
-                (
-                    rf"https://{self.github}/(?P<owner>[^/]+)/(?P<name>[^/]+)/issues/?",
-                    self.get_repo_issues,
-                ),
-                (
-                    rf"https://{self.github}/(?P<owner>[^/]+)/(?P<name>[^/]+)/pulls/?",
-                    self.get_repo_pull_requests,
-                ),
-                (
-                    rf"https://{self.github}/(?P<owner>[^/]+)/(?P<name>[^/]+)/?",
-                    self.get_repo_entries,
-                ),
-                (
-                    rf"https://{self.github}/orgs/(?P<org>[^/]+)/projects/(?P<number>\d+)/?",
-                    self.get_repo_project_entries,
-                ),
-            ]:
-                if match_url := re.fullmatch(rx, url):
-                    return fn, match_url.groupdict()
+        parsed = urllib.parse.urlparse(url)
+        self.github = parsed.netloc
+        for rx, fn in [
+            (
+                r"/orgs/(?P<org>[^/]+)/projects/(?P<number>\d+)/?",
+                self.get_org_project_entries,
+            ),
+            (
+                r"/(?P<owner>[^/]+)/(?P<name>[^/]+)/issues/?",
+                self.get_repo_issues,
+            ),
+            (
+                r"/(?P<owner>[^/]+)/(?P<name>[^/]+)/pulls/?",
+                self.get_repo_pull_requests,
+            ),
+            (
+                r"/(?P<owner>[^/]+)/(?P<name>[^/]+)/?",
+                self.get_repo_entries,
+            ),
+            (
+                r"/orgs/(?P<org>[^/]+)/projects/(?P<number>\d+)/?",
+                self.get_repo_project_entries,
+            ),
+        ]:
+            if match_url := re.fullmatch(rx, parsed.path):
+                return fn, match_url.groupdict()
 
         raise DinghyError(f"Can't understand URL {url!r}")
 
@@ -424,6 +421,8 @@ async def make_digest(items, since="1 week", digest="digest.html", **options):
             for coro in coros:
                 coro.close()
             raise
+
+    digester.prepare()
     results = await asyncio.gather(*coros)
 
     # $set_env.py: DIGEST_SAVE_RESULT - save digest data in a JSON file.
