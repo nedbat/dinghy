@@ -22,6 +22,22 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+0.8.0 — 2022-03-16
+------------------
+
+Added
+.....
+
+- Repo projects are supported.
+
+Fixed
+.....
+
+- Error handling failed on certain errors.  This is now fixed, closing
+  `issue 4`_.
+
+.. _issue 4: https://github.com/nedbat/dinghy/issues/4
+
 0.7.1 — 2022-03-13
 ------------------
 

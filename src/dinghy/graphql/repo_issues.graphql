@@ -5,7 +5,7 @@ query getRepoIssues(
   $after: String
 ) {
   repository(owner: $owner, name: $name) {
-    ...repoData
+    ...repoData         # fragment: repo_frag.graphql
     issues(
       first: 100
       filterBy: {
