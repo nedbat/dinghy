@@ -34,29 +34,6 @@ class Digester:
         self.gql = GraphqlHelper("https://api.github.com/graphql", token)
         self.ignore_users = options.get("ignore_users", [])
 
-    async def get_repo_issues(self, owner, name):
-        """
-        Get issues from a repo updated since a date, with comments since that date.
-
-        Args:
-            owner (str): the owner of the repo.
-            name (str): the name of the repo.
-        """
-        repo, issues = await self.gql.nodes(
-            query=build_query("repo_issues.graphql"),
-            variables=dict(owner=owner, name=name, since=self.since),
-        )
-        issues = await self._process_entries(issues)
-        repo = glom(repo, "data.repository")
-        container = {
-            "url": repo["url"],
-            "container_kind": "repo",
-            "title": repo["nameWithOwner"],
-            "kind": "issues",
-            "entries": issues,
-        }
-        return container
-
     async def get_org_project_entries(self, org, number, home_repo=""):
         """
         Get entries from a organization project.
@@ -83,6 +60,71 @@ class Digester:
             "title": project["title"],
             "kind": "items",
             "entries": entries,
+        }
+        return container
+
+    async def get_org_pull_requests(self, org):
+        """
+        Get pull requests across an organization.  Uses GitHub search.
+        """
+        search_terms = {
+            "org": org,
+            "is": "pr",
+            "updated": f">{self.since}",
+        }
+        search_query = " ".join(f"{k}:{v}" for k, v in search_terms.items())
+        _, pulls = await self.gql.nodes(
+            query=build_query("search_entries.graphql"),
+            variables=dict(query=search_query),
+        )
+        pulls = await self._process_entries(pulls)
+        url_q = urllib.parse.quote_plus(search_query)
+        container = {
+            "url": f"https://github.com/search?q={url_q}&type=issues",
+            "container_kind": "search",
+            "title": search_query,
+            "kind": "pull requests",
+            "entries": pulls,
+        }
+        return container
+
+    async def get_repo_entries(self, owner, name):
+        """
+        Get issues and pull requests from a repo.
+        """
+        issue_container, pr_container = await asyncio.gather(
+            self.get_repo_issues(owner, name),
+            self.get_repo_pull_requests(owner, name),
+        )
+        entries = issue_container["entries"] + pr_container["entries"]
+        entries = self._trim_unwanted(entries)
+        container = {
+            **issue_container,
+            "kind": "issues and pull requests",
+            "entries": entries,
+        }
+        return container
+
+    async def get_repo_issues(self, owner, name):
+        """
+        Get issues from a repo updated since a date, with comments since that date.
+
+        Args:
+            owner (str): the owner of the repo.
+            name (str): the name of the repo.
+        """
+        repo, issues = await self.gql.nodes(
+            query=build_query("repo_issues.graphql"),
+            variables=dict(owner=owner, name=name, since=self.since),
+        )
+        issues = await self._process_entries(issues)
+        repo = glom(repo, "data.repository")
+        container = {
+            "url": repo["url"],
+            "container_kind": "repo",
+            "title": repo["nameWithOwner"],
+            "kind": "issues",
+            "entries": issues,
         }
         return container
 
@@ -137,48 +179,6 @@ class Digester:
             "container_kind": "repo",
             "title": repo["nameWithOwner"],
             "kind": "pull_requests",
-            "entries": pulls,
-        }
-        return container
-
-    async def get_repo_entries(self, owner, name):
-        """
-        Get issues and pull requests from a repo.
-        """
-        issue_container, pr_container = await asyncio.gather(
-            self.get_repo_issues(owner, name),
-            self.get_repo_pull_requests(owner, name),
-        )
-        entries = issue_container["entries"] + pr_container["entries"]
-        entries = self._trim_unwanted(entries)
-        container = {
-            **issue_container,
-            "kind": "issues and pull requests",
-            "entries": entries,
-        }
-        return container
-
-    async def get_org_pull_requests(self, org):
-        """
-        Get pull requests across an organization.  Uses GitHub search.
-        """
-        search_terms = {
-            "org": org,
-            "is": "pr",
-            "updated": f">{self.since}",
-        }
-        search_query = " ".join(f"{k}:{v}" for k, v in search_terms.items())
-        _, pulls = await self.gql.nodes(
-            query=build_query("search_entries.graphql"),
-            variables=dict(query=search_query),
-        )
-        pulls = await self._process_entries(pulls)
-        url_q = urllib.parse.quote_plus(search_query)
-        container = {
-            "url": f"https://github.com/search?q={url_q}&type=issues",
-            "container_kind": "search",
-            "title": search_query,
-            "kind": "pull requests",
             "entries": pulls,
         }
         return container
