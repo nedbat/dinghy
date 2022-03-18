@@ -385,32 +385,35 @@ def coro_from_item(digester, item):
     Parse a single config item, and make a digester coro for it.
     """
     url = None
+    more_kwargs = {}
     if isinstance(item, str):
         url = item
-        more_kwargs = {}
     elif "url" in item:
-        url = item["url"]
         more_kwargs = dict(item)
-        more_kwargs.pop("url")
+        url = more_kwargs.pop("url")
+
     if url:
         fn, kwargs = digester.method_from_url(url)
-        try:
-            coro = fn(**kwargs, **more_kwargs)
-        except TypeError as type_err:
-            raise DinghyError(f"Problem with config item: {item}: {type_err}") from None
     else:
         if "search" in item:
-            query = item["search"]
-            coro = digester.get_search_results(query)
+            kwargs = dict(item)
+            kwargs["query"] = kwargs.pop("search")
+            fn = digester.get_search_results
         elif "pull_requests" in item:
             where = item["pull_requests"]
             if where.startswith("org:"):
-                org = where.partition(":")[2]
-                coro = digester.get_org_pull_requests(org)
+                kwargs = dict(org=where.partition(":")[2])
+                fn = digester.get_org_pull_requests
             else:
                 raise DinghyError(f"Don't understand pull_requests scope: {where!r}")
         else:
             raise DinghyError(f"Don't understand item: {item!r}")
+
+    try:
+        coro = fn(**kwargs, **more_kwargs)
+    except TypeError as type_err:
+        raise DinghyError(f"Problem with config item: {item}: {type_err}") from None
+
     return coro
 
 
