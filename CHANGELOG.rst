@@ -22,6 +22,28 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+0.9.0 — 2022-03-17
+------------------
+
+Added
+.....
+
+- GitHub enterprise support: you can use URLs pointing to your own GitHub
+  Enterprise installation.  Only a single host can be used.  Thanks, Henry
+  Gessau.
+
+- A "search:" entry in the configuration file will find issues or pull requests
+  matching the query.
+
+- Items in the configuration file can have ``title:`` to set an explicit title.
+
+Deprecated
+..........
+
+- The ``pull_requests:`` configuration setting is deprecated in favor of
+  ``search:``.   ``pull_requests: org:my_org`` becomes ``search: org:my_org
+  is:pr``.
+
 0.8.0 — 2022-03-16
 ------------------
 
