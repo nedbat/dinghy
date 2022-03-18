@@ -85,30 +85,41 @@ class Digester:
         }
         return container
 
-    async def get_org_pull_requests(self, org):
+    async def get_search_results(self, query):
         """
-        Get pull requests across an organization.  Uses GitHub search.
+        Get issues or pull requests returned by a search query.
         """
-        search_terms = {
-            "org": org,
-            "is": "pr",
-            "updated": f">{self.since}",
-        }
-        search_query = " ".join(f"{k}:{v}" for k, v in search_terms.items())
-        _, pulls = await self.gql.nodes(
+        query += f" updated:>{self.since}"
+        _, entries = await self.gql.nodes(
             query=build_query("search_entries.graphql"),
-            variables=dict(query=search_query),
+            variables=dict(query=query),
         )
-        pulls = await self._process_entries(pulls)
-        url_q = urllib.parse.quote_plus(search_query)
+        entries = await self._process_entries(entries)
+        url_q = urllib.parse.quote_plus(query)
+        if "is:pr" in query:
+            kind = "pull requests"
+        elif "is:issue" in query:
+            kind = "issues"
+        else:
+            kind = "items"
         container = {
             "url": f"https://{self.github}/search?q={url_q}&type=issues",
             "container_kind": "search",
-            "title": search_query,
-            "kind": "pull requests",
-            "entries": pulls,
+            "title": query,
+            "kind": kind,
+            "entries": entries,
         }
         return container
+
+    async def get_org_pull_requests(self, org):
+        """
+        Get pull requests across an organization.  Uses GitHub search.
+        Deprecated, will be removed in favor of "search:".
+        """
+        query = f"org:{org} is:pr"
+        logger.info("pull_requests is deprecated, change to:")
+        logger.info(f"  - search: {query}")
+        return await self.get_search_results(query)
 
     @github_route(r"/(?P<owner>[^/]+)/(?P<name>[^/]+)/?")
     async def get_repo_entries(self, owner, name):
@@ -388,7 +399,10 @@ def coro_from_item(digester, item):
         except TypeError as type_err:
             raise DinghyError(f"Problem with config item: {item}: {type_err}") from None
     else:
-        if "pull_requests" in item:
+        if "search" in item:
+            query = item["search"]
+            coro = digester.get_search_results(query)
+        elif "pull_requests" in item:
             where = item["pull_requests"]
             if where.startswith("org:"):
                 org = where.partition(":")[2]

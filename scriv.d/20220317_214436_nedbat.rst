@@ -1,0 +1,39 @@
+.. A new scriv changelog fragment.
+..
+.. Uncomment the header that is right (remove the leading dots).
+..
+.. Removed
+.. .......
+..
+.. - A bullet item for the Removed category.
+..
+Added
+.....
+
+- A "search:" entry in the configuration file will find issues or pull requests
+  matching the query.
+
+..
+.. Changed
+.. .......
+..
+.. - A bullet item for the Changed category.
+..
+
+Deprecated
+..........
+
+- The ``pull_requests:`` configuration setting is deprecated in favor of
+  ``search:``.   ``pull_requests: org:my_org`` becomes ``search: org:my_org
+  is:pr``.
+
+.. Fixed
+.. .....
+..
+.. - A bullet item for the Fixed category.
+..
+.. Security
+.. ........
+..
+.. - A bullet item for the Security category.
+..

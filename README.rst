@@ -71,7 +71,7 @@ Here's an example:
       - digest: all_prs.html
         since: 1 day
         items:
-          - pull_requests: org:myorg
+          - search: org:myorg is:pr
 
     defaults:
       ignore_users:
@@ -109,8 +109,9 @@ clause sets defaults for the digest options in the rest of the file.  Each
     - Any of these URLs can point to a GitHub Enterprise installation instead
       of https://github.com.
 
-  - The ``pull_requests`` setting can specify an organization to search for
-    pull requests.
+  - The ``search`` setting can specify a GitHub search query to find issues or
+    pull requests. The query will have an ``updated:`` term added to it to
+    account for the ``since:`` setting.
 
   - If an item only needs to specify a GitHub URL, then it can simply be the
     URL string.
