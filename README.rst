@@ -72,6 +72,7 @@ Here's an example:
         since: 1 day
         items:
           - search: org:myorg is:pr
+            title: MyOrg pull requests
 
     defaults:
       ignore_users:
@@ -121,6 +122,8 @@ Items can have additional options:
 - No activity is reported for bot users.  Some applications act as real users,
   but should be ignored anyway.  You can list those user names that should be
   ignored in the ``ignore_users`` setting.
+
+- Items can have an explicit title set with the ``title:`` setting.
 
 - Options for organization projects include:
 

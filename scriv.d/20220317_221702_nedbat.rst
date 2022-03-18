@@ -1,0 +1,4 @@
+Added
+.....
+
+- Items in the configuration file can have ``title:`` to set an explicit title.

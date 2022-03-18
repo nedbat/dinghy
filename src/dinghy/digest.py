@@ -56,7 +56,7 @@ class Digester:
         self.gql = GraphqlHelper(f"https://api.{self.github}/graphql", token)
 
     @github_route(r"/orgs/(?P<org>[^/]+)/projects/(?P<number>\d+)/?")
-    async def get_org_project_entries(self, org, number, home_repo=""):
+    async def get_org_project_entries(self, org, number, home_repo="", title=None):
         """
         Get entries from a organization project.
 
@@ -79,13 +79,13 @@ class Digester:
         container = {
             "url": project["url"],
             "container_kind": "project",
-            "title": project["title"],
+            "title": title or project["title"],
             "kind": "items",
             "entries": entries,
         }
         return container
 
-    async def get_search_results(self, query):
+    async def get_search_results(self, query, title=None):
         """
         Get issues or pull requests returned by a search query.
         """
@@ -105,7 +105,7 @@ class Digester:
         container = {
             "url": f"https://{self.github}/search?q={url_q}&type=issues",
             "container_kind": "search",
-            "title": query,
+            "title": title or query,
             "kind": kind,
             "entries": entries,
         }
@@ -122,12 +122,12 @@ class Digester:
         return await self.get_search_results(query)
 
     @github_route(r"/(?P<owner>[^/]+)/(?P<name>[^/]+)/?")
-    async def get_repo_entries(self, owner, name):
+    async def get_repo_entries(self, owner, name, title=None):
         """
         Get issues and pull requests from a repo.
         """
         issue_container, pr_container = await asyncio.gather(
-            self.get_repo_issues(owner, name),
+            self.get_repo_issues(owner, name, title=title),
             self.get_repo_pull_requests(owner, name),
         )
         entries = issue_container["entries"] + pr_container["entries"]
@@ -140,7 +140,7 @@ class Digester:
         return container
 
     @github_route(r"/(?P<owner>[^/]+)/(?P<name>[^/]+)/issues/?")
-    async def get_repo_issues(self, owner, name):
+    async def get_repo_issues(self, owner, name, title=None):
         """
         Get issues from a repo updated since a date, with comments since that date.
 
@@ -157,14 +157,14 @@ class Digester:
         container = {
             "url": repo["url"],
             "container_kind": "repo",
-            "title": repo["nameWithOwner"],
+            "title": title or repo["nameWithOwner"],
             "kind": "issues",
             "entries": issues,
         }
         return container
 
     @github_route(r"/(?P<owner>[^/]+)/(?P<name>[^/]+)/projects/(?P<number>\d+)/?")
-    async def get_repo_project_entries(self, owner, name, number):
+    async def get_repo_project_entries(self, owner, name, number, title=None):
         """
         Get entries from a repo project.
 
@@ -188,14 +188,14 @@ class Digester:
         container = {
             "url": project["url"],
             "container_kind": "project",
-            "title": project["title"],
+            "title": title or project["title"],
             "kind": "items",
             "entries": entries,
         }
         return container
 
     @github_route(r"/(?P<owner>[^/]+)/(?P<name>[^/]+)/pulls/?")
-    async def get_repo_pull_requests(self, owner, name):
+    async def get_repo_pull_requests(self, owner, name, title=None):
         """
         Get pull requests from a repo updated since a date, with comments since that date.
 
@@ -214,7 +214,7 @@ class Digester:
         container = {
             "url": repo["url"],
             "container_kind": "repo",
-            "title": repo["nameWithOwner"],
+            "title": title or repo["nameWithOwner"],
             "kind": "pull_requests",
             "entries": pulls,
         }
