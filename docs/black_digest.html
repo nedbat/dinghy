@@ -173,117 +173,6 @@
         <ul class="entries">
           <li class="">
 
-              <p><a href="https://github.com/psf/black/pull/2770"><span class="octicons" title="pull request"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon pull"></span></span><b>Use parentheses with equality check in walrus/assignment statements</b> #2770</a>
-              [Shivansh-007]
-
-              
-              </p><p>Closes #449
-Checklist - did you ...
-
- Add a CHANGELOG entry if necessary?
- Add / update tests if necessary?
- Add new...</p></li>
-          <li class="">
-
-              <p><a href="https://github.com/psf/black/pull/1661"><span class="octicons" title="merged pull request"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon merged pull"></span></span><b>Remove flake8 W503 from docs as it is ignored by default</b> #1661</a>
-              [jdufresne]
-
-              <span class="label" style="--label-r:251; --label-g:205; --label-b:0; --label-h:49; --label-l:49; --label-s:100;">T: documentation</span>
-                
-              </p><p>Fixes #1660</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/1661#issuecomment-1066473738" title="03-14 07:48">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>fredrikaverpil</b>: I'm on black 22.1.0, Python 3.10 (macOS M1 ARM) and I can't remove the W503 ignore from my...</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="open">
-
-              <p><a href="https://github.com/psf/black/issues/2588"><span class="octicons" title="issue"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>black didn't format the cell note</b> #2588</a>
-              [Vincent0706]
-
-              <span class="label" style="--label-r:0; --label-g:134; --label-b:114; --label-h:171; --label-l:26; --label-s:100;">help wanted</span>
-                <span class="label" style="--label-r:0; --label-g:82; --label-b:204; --label-h:215; --label-l:40; --label-s:100;">T: design</span>
-                <span class="label" style="--label-r:249; --label-g:208; --label-b:196; --label-h:13; --label-l:87; --label-s:81;">S: needs discussion</span>
-                
-              </p><p>Describe the style change
-
-Examples in the current Black style
-
-#%% this is a cell
-a = 12
-Desired style
-
-# %% this...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2588#issuecomment-1066425394" title="03-14 06:26">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>lstsk</b>: Did someone already fix this?</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2588#issuecomment-1066579329" title="03-14 09:50">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>MarcoGorelli</b>: Not yet - I'll make a PR now, from https://docs.spyder-ide.org/4/panes/editor.html it seems like...</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="open">
-
-              <p><a href="https://github.com/psf/black/issues/2921"><span class="octicons" title="issue, newly created"><span class="octicon star"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>Drop redundant parenthesis in `with` statement</b> #2921</a>
-              [intgr]
-
-              <span class="label" style="--label-r:215; --label-g:58; --label-b:74; --label-h:353; --label-l:53; --label-s:66;">T: bug</span>
-                <span class="label" style="--label-r:58; --label-g:252; --label-b:164; --label-h:152; --label-l:60; --label-s:97;">F: parentheses</span>
-                <span class="label" style="--label-r:194; --label-g:224; --label-b:198; --label-h:128; --label-l:81; --label-s:32;">S: accepted</span>
-                
-              </p><p>Describe the bug
-Black removes redundant parenthesis in most contexts, but this does not apply to the with statement...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2921#issuecomment-1066951575" title="03-14 15:30">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: Yes, we should remove these. There are a bunch of other contexts where we leave redundant parens around.</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2921#issuecomment-1066953819" title="03-14 15:32">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>intgr</b>: Some additional test cases involving with:
-with (open("bla.txt") as f):
-    pass
-
-with...</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="open">
-
-              <p><a href="https://github.com/psf/black/issues/2920"><span class="octicons" title="issue, newly created"><span class="octicon star"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>Unexpected formatting of subscript fluent interface</b> #2920</a>
-              [petersaalbrink]
-
-              <span class="label" style="--label-r:191; --label-g:212; --label-b:242; --label-h:215; --label-l:84; --label-s:66;">F: linebreak</span>
-                
-              </p><p>Black version: 22.1.0
-Suppose I have a deeply nested dict-like object:
-data = {
-    "long_key_name_0": {
-       ...</p></li>
-          <li class="">
-
               <p><a href="https://github.com/psf/black/pull/2891"><span class="octicons" title="draft pull request"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon draft pull"></span></span><b>diff-shades: force --preview for PRs and pushes</b> #2891</a>
               [ichard26]
 
@@ -350,36 +239,6 @@ Checklist - did you ...
                     </li>
                   </ul>
               </li>
-          <li class="closed">
-
-              <p><a href="https://github.com/psf/black/issues/2172"><span class="octicons" title="closed issue"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon closed issue"></span></span><b>Support Configuration via tox.ini</b> #2172</a>
-              [dciborow]
-
-              <span class="label" style="--label-r:162; --label-g:238; --label-b:239; --label-h:180; --label-l:78; --label-s:70;">T: enhancement</span>
-                <span class="label" style="--label-r:242; --label-g:179; --label-b:219; --label-h:321; --label-l:82; --label-s:70;">C: command line / config</span>
-                
-              </p><p>Is your feature request related to a problem? Please describe.
-Currently, all of my test configurations are...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2172#issuecomment-1066667697" title="03-14 11:25">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>ikus060</b>: This is a shame. I can configure flake8 and isort in tox.ini but not black.
-
-Completely agree....</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2172#issuecomment-1067511374" title="03-15 02:59">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>mcarans</b>: @ikus060 I've since moved to a full pyproject.toml setup by resurrecting flakehell, a wrapper...</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
           <li class="open">
 
               <p><a href="https://github.com/psf/black/issues/2863"><span class="octicons" title="issue"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>Black stops looking for config at first pyproject.toml file even if there's no black section in it</b> #2863</a>
@@ -422,7 +281,7 @@ pre-commit hook doesn't work as you can...</a></p>
               </li>
           <li class="">
 
-              <p><a href="https://github.com/psf/black/pull/2919"><span class="octicons" title="pull request, newly created"><span class="octicon star"></span><span class="octicon dash"></span><span class="octicon pull"></span></span><b>dont skip formatting #%%</b> #2919</a>
+              <p><a href="https://github.com/psf/black/pull/2919"><span class="octicons" title="pull request"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon pull"></span></span><b>dont skip formatting #%%</b> #2919</a>
               [MarcoGorelli]
 
               
@@ -434,14 +293,6 @@ Checklist - did you ...
  Add a CHANGELOG entry if necessary?
  Add / update tests if necessary?
  Add...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2919#issuecomment-1066980759" title="03-14 15:50">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: This needs to go in the preview style.</a></p>
-                      
-                    </li>
                   <li>
                       <p><a href="https://github.com/psf/black/pull/2919#issuecomment-1067066059" title="03-15 13:31">
                         
@@ -632,83 +483,6 @@ Checklist - did you ...
  Add a CHANGELOG entry if necessary?
  Add / update tests if...</p><ul class="comments">
                   <li>
-                      <p><a href="https://github.com/psf/black/pull/2916#pullrequestreview-909083167" title="03-14 16:46">
-                        
-                            <span class="octicon eye" title="reviewed"></span>
-                          
-                        
-                        <b>felix-hilden</b>: Thanks for the PR once again! A comment and some nits below 👍 Let's discuss.</a></p>
-                      
-                        <ul class="thread_comment"><li>
-                      <p><a href="https://github.com/psf/black/pull/2916#discussion_r826156088" title="03-14 16:46">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>felix-hilden</b>: Suggested change
-        
-          
-    
-
-        
-      
-    
-    
-      
-          
-         ...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2916#discussion_r826157670" title="03-14 16:46">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>felix-hilden</b>: Suggested change
-        
-          
-    
-
-        
-      
-    
-    
-      
-          
-         ...</a></p>
-                      
-                        <ul class="thread_comment"><li>
-                      <p><a href="https://github.com/psf/black/pull/2916#discussion_r826835740" title="03-15 10:54">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>Shivansh-007</b>: I will open a separate PR for this, in case this takes time to get merged, hopefully not 🤞🏻</a></p>
-                      
-                    </li>
-                  </ul>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2916#discussion_r826165374" title="03-14 16:46">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>felix-hilden</b>: This will have to be thought out still, as this comment points out. My two cents: I prefer upper...</a></p>
-                      
-                        <ul class="thread_comment"><li>
-                      <p><a href="https://github.com/psf/black/pull/2916#discussion_r827593743" title="03-16 03:25">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: I'd rather not change hex numbers, we already changed our mind there a few times.</a></p>
-                      
-                    </li>
-                  </ul>
-                      
-                    </li>
-                  </ul>
-                      
-                    </li>
-                  <li>
                       <p><a href="https://github.com/psf/black/pull/2916#discussion_r827591576" title="03-16 03:18">
                         
                             <span class="octicon eye" title="reviewed"></span>
@@ -745,44 +519,6 @@ Checklist - did you ...
                       
                     </li>
                   </ul>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="">
-
-              <p><a href="https://github.com/psf/black/pull/2926"><span class="octicons" title="pull request, newly created"><span class="octicon star"></span><span class="octicon dash"></span><span class="octicon pull"></span></span><b>Remove unnecessary parentheses from `with` statements</b> #2926</a>
-              [jpy-git]
-
-              
-              </p><p>Description
-Closes #2921. Aims to remove redundant parentheses from with statements:
-
-I currently have one failing...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2926#issuecomment-1068269490" title="03-15 17:42">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: Thanks for your contribution! A few quick things:
-
-Under our stability policy...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2926#issuecomment-1068290235" title="03-15 18:00">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>jpy-git</b>: thanks, I've got the tests working now and will refactor slightly to account for the preview mode</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2926#issuecomment-1068368918" title="03-15 19:16">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>jpy-git</b>: @JelleZijlstra I've updated the code to only remove the brackets in preview mode now 😄</a></p>
                       
                     </li>
                   </ul>
@@ -1120,6 +856,159 @@ my guess is they might...</a></p>
                     </li>
                   </ul>
               </li>
+          <li class="open">
+
+              <p><a href="https://github.com/psf/black/issues/2339"><span class="octicons" title="issue"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>fmt: skip removes characters from a comment-only line before it</b> #2339</a>
+              [felix-hilden]
+
+              <span class="label" style="--label-r:215; --label-g:58; --label-b:74; --label-h:353; --label-l:53; --label-s:66;">T: bug</span>
+                <span class="label" style="--label-r:255; --label-g:0; --label-b:0; --label-h:0; --label-l:50; --label-s:100;">C: invalid code</span>
+                <span class="label" style="--label-r:255; --label-g:0; --label-b:170; --label-h:320; --label-l:50; --label-s:100;">F: comments</span>
+                <span class="label" style="--label-r:251; --label-g:202; --label-b:4; --label-h:48; --label-l:50; --label-s:96;">F: fmtskip</span>
+                
+              </p><p>Describe the bug
+Comments behave oddly before # fmt: skip lines. I'll try to see if this has been reported later.
+To...</p><ul class="comments">
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2339#issuecomment-1070550640" title="03-17 08:52">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>felix-hilden</b>: In #2539 @myw provided additional information on the case where the skipped line is a decorator...</a></p>
+                      
+                    </li>
+                  </ul>
+              </li>
+          <li class="closed">
+
+              <p><a href="https://github.com/psf/black/issues/2539"><span class="octicons" title="closed issue, newly closed"><span class="octicon dash"></span><span class="octicon check"></span><span class="octicon closed issue"></span></span><b>Black deletes nonempty block comments before decorators left unfromatted with # fmt: skip</b> #2539</a>
+              [myw]
+
+              <span class="label" style="--label-r:215; --label-g:58; --label-b:74; --label-h:353; --label-l:53; --label-s:66;">T: bug</span>
+                <span class="label" style="--label-r:207; --label-g:211; --label-b:215; --label-h:210; --label-l:82; --label-s:9;">R: duplicate</span>
+                <span class="label" style="--label-r:251; --label-g:202; --label-b:4; --label-h:48; --label-l:50; --label-s:96;">F: fmtskip</span>
+                
+              </p><p>Bug description:
+Black deletes nonempty block comments before decorators left unfromatted with #fmt: skip.
+As a...</p><ul class="comments">
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2539#issuecomment-1070335658" title="03-17 05:17">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>propertone</b>: Any plans to fix this? This is a pretty high severity bug since it literally deletes your code comments.</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2539#issuecomment-1070548315" title="03-17 08:50">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>felix-hilden</b>: This seems like a duplicate (or rather a subset) of #2339. I'll add your debugging there too, so...</a></p>
+                      
+                    </li>
+                  </ul>
+              </li>
+          <li class="">
+
+              <p><a href="https://github.com/psf/black/pull/2926"><span class="octicons" title="pull request, newly created"><span class="octicon star"></span><span class="octicon dash"></span><span class="octicon pull"></span></span><b>Remove unnecessary parentheses from `with` statements</b> #2926</a>
+              [jpy-git]
+
+              
+              </p><p>Description
+Closes #2921. Aims to remove redundant parentheses from with statements:
+
+I currently have one failing...</p><ul class="comments">
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2926#issuecomment-1068269490" title="03-15 17:42">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>JelleZijlstra</b>: Thanks for your contribution! A few quick things:
+
+Under our stability policy...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2926#issuecomment-1068290235" title="03-15 18:00">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>jpy-git</b>: thanks, I've got the tests working now and will refactor slightly to account for the preview mode</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2926#issuecomment-1068368918" title="03-15 19:16">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>jpy-git</b>: @JelleZijlstra I've updated the code to only remove the brackets in preview mode now 😄</a></p>
+                      
+                    </li>
+                  </ul>
+              </li>
+          <li class="open">
+
+              <p><a href="https://github.com/psf/black/issues/2646"><span class="octicons" title="issue"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>"fmt: skip" on colon-terminated lines either fails or moves the directive</b> #2646</a>
+              [dansebcar]
+
+              <span class="label" style="--label-r:215; --label-g:58; --label-b:74; --label-h:353; --label-l:53; --label-s:66;">T: bug</span>
+                <span class="label" style="--label-r:255; --label-g:136; --label-b:68; --label-h:21; --label-l:63; --label-s:100;">C: unstable formatting</span>
+                <span class="label" style="--label-r:251; --label-g:202; --label-b:4; --label-h:48; --label-l:50; --label-s:96;">F: fmtskip</span>
+                
+              </p><p>Describe the bug
+Adding # fmt: skip after a colon (e.g. on the same line as def, if, with or class) either produces...</p></li>
+          <li class="closed">
+
+              <p><a href="https://github.com/psf/black/issues/2936"><span class="octicons" title="closed issue, newly created, newly closed"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon closed issue"></span></span><b>"# fmt: skip" does not work defined function</b> #2936</a>
+              [rpvdkley]
+
+              <span class="label" style="--label-r:215; --label-g:58; --label-b:74; --label-h:353; --label-l:53; --label-s:66;">T: bug</span>
+                <span class="label" style="--label-r:207; --label-g:211; --label-b:215; --label-h:210; --label-l:82; --label-s:9;">R: duplicate</span>
+                <span class="label" style="--label-r:255; --label-g:136; --label-b:68; --label-h:21; --label-l:63; --label-s:100;">C: unstable formatting</span>
+                <span class="label" style="--label-r:251; --label-g:202; --label-b:4; --label-h:48; --label-l:50; --label-s:96;">F: fmtskip</span>
+                
+              </p><p>Describe the bug
+Black raises INTERNAL ERROR when # fmt: skip has been added at the end of a def function...</p><ul class="comments">
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2936#issuecomment-1070948357" title="03-17 13:50">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>felix-hilden</b>: Confirmed on the playground, thanks for reporting!</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2936#issuecomment-1070961126" title="03-17 14:16">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>felix-hilden</b>: Also turns out that this is a duplicate of #2646 ty @Shivansh-007</a></p>
+                      
+                    </li>
+                  </ul>
+              </li>
+          <li class="open">
+
+              <p><a href="https://github.com/psf/black/issues/2937"><span class="octicons" title="issue, newly created"><span class="octicon star"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>Remove redundant brackets from `except` clause</b> #2937</a>
+              [jpy-git]
+
+              <span class="label" style="--label-r:162; --label-g:238; --label-b:239; --label-h:180; --label-l:78; --label-s:70;">T: enhancement</span>
+                <span class="label" style="--label-r:58; --label-g:252; --label-b:164; --label-h:152; --label-l:60; --label-s:97;">F: parentheses</span>
+                
+              </p><p>Is your feature request related to a problem? Please describe.
+The except clause can accept a parenthesised tuple of...</p><ul class="comments">
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2937#issuecomment-1071866808" title="03-17 23:49">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>JelleZijlstra</b>: Agree, this goes with a lot of other cases where we should remove redundant parens.
+Not sure...</a></p>
+                      
+                    </li>
+                  </ul>
+              </li>
           </ul>
       
     </li>
@@ -1127,6 +1016,6 @@ my guess is they might...</a></p>
 
 <p class="footer">
   created at
-  2022-03-16 21:20
-  by <a href="https://pypi.org/project/dinghy/0.8.0">dinghy 0.8.0</a>.
+  2022-03-17 22:29
+  by <a href="https://pypi.org/project/dinghy/0.9.0">dinghy 0.9.0</a>.
 </p>
