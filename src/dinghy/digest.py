@@ -47,7 +47,7 @@ class Digester:
     def __init__(self, since, options):
         self.since = since.strftime("%Y-%m-%dT%H:%M:%S")
         self.ignore_users = options.get("ignore_users", [])
-        self.github = None
+        self.github = "github.com"
         self.gql = None
 
     def prepare(self):
