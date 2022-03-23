@@ -163,37 +163,6 @@ class Digester:
         }
         return container
 
-    @github_route(r"/(?P<owner>[^/]+)/(?P<name>[^/]+)/projects/(?P<number>\d+)/?")
-    async def get_repo_project_entries(self, owner, name, number, title=None):
-        """
-        Get entries from a repo project.
-
-        Args:
-            owner (str): the owner of the repo.
-            name (str): the name of the repo.
-            number (int|str): the project number.
-        """
-        project, project_data = await self.gql.nodes(
-            query=build_query("repo_project_entries.graphql"),
-            variables=dict(owner=owner, name=name, projectNumber=int(number)),
-        )
-        home_repo = f"{owner}/{name}"
-        entries = [content for data in project_data if (content := data["content"])]
-        entries = await self._process_entries(entries)
-        for entry in entries:
-            entry["other_repo"] = entry["repository"]["nameWithOwner"] != home_repo
-            if "comments_to_show" not in entry:
-                entry["comments_to_show"] = entry["comments"]["nodes"]
-        project = glom(project, "data.repository.project")
-        container = {
-            "url": project["url"],
-            "container_kind": "project",
-            "title": title or project["title"],
-            "kind": "items",
-            "entries": entries,
-        }
-        return container
-
     @github_route(r"/(?P<owner>[^/]+)/(?P<name>[^/]+)/pulls/?")
     async def get_repo_pull_requests(self, owner, name, title=None):
         """

@@ -1,0 +1,5 @@
+Removed
+.......
+
+- Oops, it turns out there's no such thing as a repo project for "Projects
+  (beta)".  That thing that wouldn't have worked has been removed.

@@ -104,9 +104,6 @@ clause sets defaults for the digest options in the rest of the file.  Each
     - A URL to a repo's pull requests will report on the pull requests in the
       repo.
 
-    - A URL to a repo project will report on the issues and pull requests in
-      the project.
-
     - Any of these URLs can point to a GitHub Enterprise installation instead
       of https://github.com.
 
