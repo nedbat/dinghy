@@ -261,7 +261,7 @@ class Digester:
             issue (dict): the issue to populate.
         """
         if issue["comments"]["totalCount"] > len(issue["comments"]["nodes"]):
-            comments = await self.gql.nodes(
+            _, comments = await self.gql.nodes(
                 query=build_query("issue_comments.graphql"),
                 variables=dict(
                     owner=issue["repository"]["owner"]["login"],
