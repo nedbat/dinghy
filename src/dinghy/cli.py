@@ -1,7 +1,6 @@
 """Dinghy command-line interface."""
 
 import asyncio
-import logging
 import sys
 
 import click
@@ -11,8 +10,7 @@ from .digest import make_digest, make_digests_from_config
 from .graphql_helpers import GraphqlHelper
 from .helpers import DinghyError
 
-logger = logging.getLogger()
-click_log.basic_config(logger)
+logger = click_log.basic_config("dinghy")
 
 
 @click.command()

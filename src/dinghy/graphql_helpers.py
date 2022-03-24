@@ -17,7 +17,7 @@ import aiohttp
 from .helpers import DinghyError, find_dict_with_key, json_save
 
 
-logger = logging.getLogger()
+logger = logging.getLogger(__name__)
 
 
 def _summarize_rate_limit(response):

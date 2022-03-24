@@ -20,7 +20,7 @@ from .helpers import DinghyError, json_save, parse_timedelta
 from .jinja_helpers import render_jinja_to_file
 
 
-logger = logging.getLogger()
+logger = logging.getLogger(__name__)
 
 GITHUB_URL_MAP = []
 
