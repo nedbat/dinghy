@@ -1,9 +1,7 @@
 # https://docs.github.com/en/graphql/reference/objects#issue
 fragment issueData on Issue {
   __typename
-  repository {
-    ...repoData   # fragment: repo_frag.graphql
-  }
+  id
   number
   url
   title
