@@ -35,11 +35,11 @@ def parse_timedelta(timedelta_str):
     parts = re.match(
         r"""(?x)
         ^
-        ((?P<weeks>[.\d]+)w[a-z]*)?
-        ((?P<days>[.\d]+)d[a-z]*)?
-        ((?P<hours>[.\d]+)h[a-z]*)?
-        ((?P<minutes>[.\d]+)m[a-z]*)?
-        ((?P<seconds>[.\d]+)s[a-z]*)?
+        ((?P<weeks>[.\d]+)w(eeks?)?)?
+        ((?P<days>[.\d]+)d(ays?)?)?
+        ((?P<hours>[.\d]+)h(ours?)?)?
+        ((?P<minutes>[.\d]+)m(in(utes?)?)?)?
+        ((?P<seconds>[.\d]+)s(ec(onds?)?)?)?
         $
         """,
         timedelta_str.replace(" ", ""),

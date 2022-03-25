@@ -32,6 +32,7 @@ def test_parse_timedelta(tds, kwargs):
         "",
         "one",
         "123",
+        "1month",
         "2 years",
     ],
 )
