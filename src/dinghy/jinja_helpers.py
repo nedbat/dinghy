@@ -21,13 +21,12 @@ def label_color_css(bg_color):
     """Create CSS for a label color."""
     r, g, b = [int(bg_color[i : i + 2], 16) / 255 for i in [0, 2, 4]]
     h, l, s = colorsys.rgb_to_hls(r, g, b)
-    css = []
-    for ltr, val, fac in zip(
-        "rgbhls", [r, g, b, h, l, s], [255, 255, 255, 360, 100, 100]
-    ):
-        css.append(f"--label-{ltr}:{int(val * fac)};")
-    return " ".join(css)
-
+    return "".join(
+        f"--label-{ltr}:{int(val * fac)};"
+        for ltr, val, fac in zip(
+            "rgbhsl", [r, g, b, h, s, l], [255, 255, 255, 360, 100, 100]
+        )
+    )
 
 def render_jinja(template_filename, **variables):
     """Render a template file, with variables."""
