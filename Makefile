@@ -13,7 +13,7 @@ clean: ## remove stuff we don't need
 	find . -name '*~' -exec rm -f {} +
 	rm -fr build/ dist/ src/*.egg-info
 	rm -fr .*_cache/
-	rm -f out_*.json
+	rm -f out_*.json save_*.json
 
 requirements: ## install development environment requirements
 	pip install -r dev-requirements.txt

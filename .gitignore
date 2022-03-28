@@ -1,6 +1,6 @@
-out*.json
+out_*.json
 save_*.json
-try*.yaml
+try_*.yaml
 
 *.egg-info/
 build/
