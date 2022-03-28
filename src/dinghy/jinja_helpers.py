@@ -28,6 +28,7 @@ def label_color_css(bg_color):
         )
     )
 
+
 def render_jinja(template_filename, **variables):
     """Render a template file, with variables."""
     jenv = jinja2.Environment(loader=jinja2.FileSystemLoader(Path(__file__).parent))

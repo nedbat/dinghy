@@ -3,6 +3,7 @@
 
 {%- macro octicon_url(name, size=16) -%}
   {#- Octicons: https://github.com/primer/octicons/tree/main/icons -#}
+  {#- also: https://primer.style/octicons/ -#}
   https://raw.githubusercontent.com/primer/octicons/main/icons/{{ name }}-{{ size }}.svg
 {%- endmacro -%}
 
@@ -102,6 +103,9 @@
     border-color: hsla(var(--label-h), calc(var(--label-s) * 1%), calc((var(--label-l) - 25) * 1%), var(--border-alpha));
   }
   .homerepo {
+    color: #888;
+  }
+  .old > p {
     color: #888;
   }
   .footer {
@@ -229,10 +233,10 @@
 
               {%- if entry.bodyText %}<p>{{ entry.bodyText|trim|truncate(120) }}</p>{% endif -%}
 
-              {% if entry.comments_to_show -%}
+              {% if entry.children -%}
                 <ul class="comments">
-                  {% for comment in entry.comments_to_show recursive -%}
-                    <li>
+                  {% for comment in entry.children recursive -%}
+                    <li{% if comment.old %} class="old"{% endif %}>
                       <p><a href="{{ comment.url }}" title="{{ comment.updatedAt|datetime() }}">
                         {% if comment.review_state -%}
                           {% if comment.review_state == "APPROVED" -%}
@@ -248,8 +252,8 @@
                         <b>{{ comment.author.login }}</b>{# -#}
                       {%- if comment.bodyText %}: {{ comment.bodyText|trim|truncate(100) }}{% endif -%}
                       </a></p>
-                      {% if comment.comments_to_show %}
-                        <ul class="thread_comment">{{ loop(comment.comments_to_show) }}</ul>
+                      {% if comment.children %}
+                        <ul class="thread_comment">{{ loop(comment.children) }}</ul>
                       {% endif %}
                     </li>
                   {% endfor -%}

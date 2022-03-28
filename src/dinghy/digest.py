@@ -73,8 +73,8 @@ class Digester:
         entries = await self._process_entries(entries)
         for entry in entries:
             entry["other_repo"] = entry["repository"]["nameWithOwner"] != home_repo
-            if "comments_to_show" not in entry:
-                entry["comments_to_show"] = entry["comments"]["nodes"]
+            if "children" not in entry:
+                entry["children"] = entry["comments"]["nodes"]
         project = glom(project, "data.organization.project")
         container = {
             "url": project["url"],
@@ -232,7 +232,7 @@ class Digester:
                 try:
                     kind = entry["__typename"].lower()
                     num = entry["number"]
-                except:
+                except KeyError:
                     pass
                 else:
                     await json_save(entry, f"save_{kind}_{num}.json")
@@ -278,7 +278,7 @@ class Digester:
             )
         else:
             comments = issue["comments"]["nodes"]
-        issue["comments_to_show"] = self._trim_unwanted(comments)
+        issue["children"] = self._trim_unwanted(comments)
 
     async def _process_pull_request(self, pull):
         """
@@ -287,60 +287,80 @@ class Digester:
         # Pull requests have complex trees of data, with comments in
         # multiple places, and duplications.  Reviews can also be finished
         # with no comment, but we want them to appear in the digest.
-        comments = {}
+        #
+        # Pull requests have:
+        #   comments:
+        #       Standalone comments that should always be included
+        #   reviews:
+        #       Each is a review by a person, who can add comments all over the
+        #       pull request, including in different threads.
+        #   reviewThreads:
+        #       Each is a sequence of comments that follow one another.
+        #
+        children = {}
         reviews = {}
-        seen = set()
+
+        # Make a map of the reviews.
         for rev in pull["reviews"]["nodes"]:
-            rev["show"] = True
             rev["review_state"] = rev["state"]
             reviews[rev["id"]] = rev
 
+        # For each thread, attach the thread as a child of the review.  Each
+        # comment in the thread can be from a different review (as people
+        # respond to each other).  The whole thread will be attached to the
+        # review for the first comment.  Make comments 2-N as children of
+        # comment 1.
         for thread in pull["reviewThreads"]["nodes"]:
             com0 = thread["comments"]["nodes"][0]
-            com0["comments_to_show"] = thread["comments"]["nodes"][1:]
+            com0["children"] = thread["comments"]["nodes"][1:]
             rev_id = com0["pullRequestReview"]["id"]
-            review_comments = reviews[rev_id].setdefault("comments_to_show", [])
+            review_comments = reviews[rev_id].setdefault("children", [])
             review_comments.append(com0)
-            seen.add(com0["id"])
-            for com in com0["comments_to_show"]:
-                seen.add(com["id"])
-                rev_id = com["pullRequestReview"]["id"]
-                seen.add(rev_id)
-                reviews[rev_id]["show"] = False
 
+        # For each review, show it if it has a body, or if it has children, or
+        # if it's not just "COMMENTED".
         for rev in reviews.values():
-            if not rev["show"]:
-                continue
-            had_comment = False
-            for com in rev["comments"]["nodes"]:
-                com_id = com["id"]
-                if com_id in seen or com_id in comments:
-                    continue
-                comments[com_id] = com
-                com["review_state"] = rev["state"]
-                had_comment = True
-            if rev["bodyText"] or not had_comment:
-                # A completed review with no comment, make it into a comment.
-                com = comments.setdefault(rev["id"], dict(rev))
+            if rev["bodyText"] or rev.get("children") or rev["state"] != "COMMENTED":
+                com = children.setdefault(rev["id"], dict(rev))
                 com["review_state"] = rev["state"]
 
-            if not rev["bodyText"] and len(rev["comments"]["nodes"]) == 1:
-                # A review with just one comment and no body: the comment should
-                # go where they review would have been.
-                if "comments_to_show" in rev:
-                    com = rev["comments_to_show"][0]
+                if not rev["bodyText"] and len(rev.get("children", ())) == 1:
+                    # A review with just one comment and no body: the comment should
+                    # go where the review would have been.
+                    com = rev["children"][0]
                     com["review_state"] = rev["review_state"]
-                    comments[com["id"]] = com
-                    rev["show"] = False
-                    del comments[rev["id"]]
+                    children[rev["id"]] = com
 
-            if rev["show"]:
-                comments[rev["id"]] = rev
-
+        # Comments are simple: they all get shown.
         for com in pull["comments"]["nodes"]:
-            comments[com["id"]] = com
+            children[com["id"]] = com
 
-        pull["comments_to_show"] = self._trim_unwanted(comments.values())
+        # Examine all the resulting threads (children). Keep a thread if it has
+        # any comments newer than our since date.  Mark older comments as old.
+        kids, _ = self._trim_unwanted_tree(children.values())
+        pull["children"] = kids
+
+    def _trim_unwanted_tree(self, nodes):
+        """
+        Trim a nested list to indicate activity since `self.since`.  A thread
+        will be kept if any of its children is newer than since.  Items older
+        than that will be get ["old"]=True, and shown grayed in the output.
+        """
+        keep = []
+        any_since_total = False
+        for node in nodes:
+            if node["updatedAt"] > self.since:
+                any_since = True
+            else:
+                any_since = False
+                node["old"] = True
+            kids, any_since_kids = self._trim_unwanted_tree(node.get("children", ()))
+            if any_since or any_since_kids:
+                node["children"] = kids
+                keep.append(node)
+                any_since_total = True
+        keep = sorted(keep, key=operator.itemgetter("updatedAt"))
+        return keep, any_since_total
 
     def _add_reasons(self, entry):
         """
