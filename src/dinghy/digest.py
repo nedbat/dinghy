@@ -226,6 +226,17 @@ class Digester:
 
         Keep only things updated since our date, and sort them.
         """
+        # $set_env.py: DIGEST_SAVE_ENTRIES - save each entry in its own JSON file.
+        if int(os.environ.get("DIGEST_SAVE_ENTRIES", 0)):
+            for entry in entries:
+                try:
+                    kind = entry["__typename"].lower()
+                    num = entry["number"]
+                except:
+                    pass
+                else:
+                    await json_save(entry, f"save_{kind}_{num}.json")
+
         # GitHub has a @ghost account for deleted users.  That shows up in our
         # data as a None author. Fix those.
         for entry in entries:
