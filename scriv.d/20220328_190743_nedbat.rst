@@ -1,9 +1,0 @@
-Changed
-.......
-
-- Pull request data was not properly displayed: comments weren't included in
-  the digest that should have been.
-
-- Pull request comments older than the cutoff date will be included if they are
-  needed to show the discussion threads of newer comments.  The old comments
-  are shown in gray to help stay focused on recent activity.

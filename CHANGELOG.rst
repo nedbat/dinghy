@@ -22,6 +22,33 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-0.10.0:
+
+0.10.0 — 2022-03-28
+-------------------
+
+Changed
+.......
+
+- Pull request data was not properly displayed: comments weren't included in
+  the digest that should have been.
+
+- Pull request comments older than the cutoff date will be included if they are
+  needed to show the discussion threads of newer comments.  The old comments
+  are shown in gray to help stay focused on recent activity.
+
+- Parsing of time durations was made stricter, so that "1 month" isn't
+  mistaken for "1 minute".  Fixes `issue 7`_
+
+.. _issue 7: https://github.com/nedbat/dinghy/issues/7
+
+Removed
+.......
+
+- Oops, it turns out there's no such thing as a repo project for "Projects
+  (beta)".  That thing that wouldn't have worked has been removed.
+
+
 0.9.0 — 2022-03-17
 ------------------
 
