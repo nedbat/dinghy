@@ -14,6 +14,7 @@ clean: ## remove stuff we don't need
 	rm -fr build/ dist/ src/*.egg-info
 	rm -fr .*_cache/
 	rm -f out_*.json save_*.json
+	rm -f docs/black_digest.json
 
 requirements: ## install development environment requirements
 	pip install -r dev-requirements.txt

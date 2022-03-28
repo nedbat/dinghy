@@ -78,6 +78,9 @@
   .homerepo {
     color: #888;
   }
+  .old > p {
+    color: #888;
+  }
   .footer {
     color: #888;
     font-style: italic;
@@ -171,66 +174,293 @@
       </p>
       
         <ul class="entries">
-          <li class="">
+          <li class="open">
 
-              <p><a href="https://github.com/psf/black/pull/2891"><span class="octicons" title="draft pull request"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon draft pull"></span></span><b>diff-shades: force --preview for PRs and pushes</b> #2891</a>
-              [ichard26]
+              <p><a href="https://github.com/psf/black/issues/2954"><span class="octicons" title="issue"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>Sensible minimum number of char width "won back" before indentation used.</b> #2954</a>
+              [mangelozzi]
 
-              <span class="label" style="--label-r:217; --label-g:141; --label-b:91; --label-h:23; --label-l:60; --label-s:62;">skip news</span>
-                <span class="label" style="--label-r:80; --label-g:86; --label-b:120; --label-h:230; --label-l:39; --label-s:20;">C: maintenance</span>
+              <span class="label" style="--label-r:0;--label-g:82;--label-b:204;--label-h:215;--label-s:100;--label-l:40;">T: design</span>
+                <span class="label" style="--label-r:191;--label-g:212;--label-b:242;--label-h:215;--label-s:66;--label-l:84;">F: linebreak</span>
+                <span class="label" style="--label-r:249;--label-g:208;--label-b:196;--label-h:13;--label-s:81;--label-l:87;">S: needs discussion</span>
                 
-              </p><p>Description
-This will let us gauge the impact of a change ahead of time.
-Checklist - did you ...
-
- Add a CHANGELOG...</p></li>
-          <li class="">
-
-              <p><a href="https://github.com/psf/black/pull/2922"><span class="octicons" title="merged pull request, newly created, newly merged"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon merged pull"></span></span><b>Bump mypy, flake8 and pre-commit-hooks in pre-commit</b> #2922</a>
-              [ichard26]
-
-              <span class="label" style="--label-r:217; --label-g:141; --label-b:91; --label-h:23; --label-l:60; --label-s:62;">skip news</span>
-                <span class="label" style="--label-r:80; --label-g:86; --label-b:120; --label-h:230; --label-l:39; --label-s:20;">C: maintenance</span>
-                
-              </p><p>Description
-It's been a while since I last ran pre-commit autoupdate.
-Checklist - did you ...
-
- Add a CHANGELOG...</p><ul class="comments">
+              </p><p>Describe the style change
+Black indents items in brackets to help fit more on the screen, however in some cases, one...</p><ul class="comments">
                   <li>
-                      <p><a href="https://github.com/psf/black/pull/2922#issuecomment-1067389991" title="03-14 23:11">
+                      <p><a href="https://github.com/psf/black/issues/2954#issuecomment-1079634676" title="03-26 07:55">
                         
                           <span class="octicon comment" title="comment"></span>
                         
-                        <b>ichard26</b>: Sadly I can't bump mypy for compilation as mypyc/mypyc#917 is still not fixed.</a></p>
+                        <b>mangelozzi</b>: In the original example the line does actually become shorter, although it's a marginal...</a></p>
                       
                     </li>
                   <li>
-                      <p><a href="https://github.com/psf/black/pull/2922#issuecomment-1067391566" title="03-14 23:13">
+                      <p><a href="https://github.com/psf/black/issues/2954#issuecomment-1079635556" title="03-26 08:00">
                         
                           <span class="octicon comment" title="comment"></span>
                         
-                        <b>MarcoGorelli</b>: Might want to also update the url of flake8 (which is now on github) so that gets auto updated too?</a></p>
+                        <b>mangelozzi</b>: come up with examples where this rule would make formatting worse. I think my objections would...</a></p>
                       
                     </li>
                   <li>
-                      <p><a href="https://github.com/psf/black/pull/2922#pullrequestreview-909497427" title="03-14 23:13">
+                      <p><a href="https://github.com/psf/black/issues/2954#issuecomment-1079635792" title="03-26 08:02">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>mangelozzi</b>: f([[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]])
+
+Settin...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2954#issuecomment-1079664568" title="03-26 11:15">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>TomFryers</b>: I had a look for cases of this in some of my code, and I think long string literals are by far...</a></p>
+                      
+                    </li>
+                  </ul>
+              </li>
+          <li class="open">
+
+              <p><a href="https://github.com/psf/black/issues/2958"><span class="octicons" title="issue, newly created"><span class="octicon star"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>Brackets around lambda expressions in functions</b> #2958</a>
+              [jpy-git]
+
+              <span class="label" style="--label-r:0;--label-g:82;--label-b:204;--label-h:215;--label-s:100;--label-l:40;">T: design</span>
+                <span class="label" style="--label-r:58;--label-g:252;--label-b:164;--label-h:152;--label-s:97;--label-l:60;">F: parentheses</span>
+                
+              </p><p>Is your feature request related to a problem? Please describe.
+At the moment black doesn't seem to have any strong...</p></li>
+          <li class="closed">
+
+              <p><a href="https://github.com/psf/black/issues/2956"><span class="octicons" title="closed issue, newly created, newly closed"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon closed issue"></span></span><b>Avoid split strings in a single line.</b> #2956</a>
+              [mvaled]
+
+              <span class="label" style="--label-r:0;--label-g:82;--label-b:204;--label-h:215;--label-s:100;--label-l:40;">T: design</span>
+                <span class="label" style="--label-r:251;--label-g:170;--label-b:0;--label-h:40;--label-s:100;--label-l:49;">F: strings / docstrings</span>
+                
+              </p><p>Describe the style change
+Black should merge split strings that fit into a single line.
+Examples in the current...</p><ul class="comments">
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2956#issuecomment-1079670393" title="03-26 11:55">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>jpy-git</b>: @mvaled Both of these already work if you use the experimental string processing feature.
+Just...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2956#issuecomment-1079672255" title="03-26 12:05">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>mvaled</b>: Thanks @jpy-git.  I will try it.</a></p>
+                      
+                    </li>
+                  </ul>
+              </li>
+          <li class="closed">
+
+              <p><a href="https://github.com/psf/black/issues/2937"><span class="octicons" title="closed issue, newly closed"><span class="octicon dash"></span><span class="octicon check"></span><span class="octicon closed issue"></span></span><b>Remove redundant brackets from `except` clause</b> #2937</a>
+              [jpy-git]
+
+              <span class="label" style="--label-r:162;--label-g:238;--label-b:239;--label-h:180;--label-s:70;--label-l:78;">T: enhancement</span>
+                <span class="label" style="--label-r:58;--label-g:252;--label-b:164;--label-h:152;--label-s:97;--label-l:60;">F: parentheses</span>
+                <span class="label" style="--label-r:194;--label-g:224;--label-b:198;--label-h:128;--label-s:32;--label-l:81;">S: accepted</span>
+                
+              </p><p>Is your feature request related to a problem? Please describe.
+The except clause can accept a parenthesised tuple of...</p></li>
+          <li class="">
+
+              <p><a href="https://github.com/psf/black/pull/2939"><span class="octicons" title="merged pull request, newly merged"><span class="octicon dash"></span><span class="octicon check"></span><span class="octicon merged pull"></span></span><b>Remove unnecessary parentheses from `except` clauses</b> #2939</a>
+              [jpy-git]
+
+              
+              </p><p>Description
+Closes #2937. As described in the issue we want to remove redundant parentheses from except...</p></li>
+          <li class="">
+
+              <p><a href="https://github.com/psf/black/pull/469"><span class="octicons" title="merged pull request"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon merged pull"></span></span><b>change some numeric behavior</b> #469</a>
+              [JelleZijlstra]
+
+              
+              </p><p>Closes #467.</p></li>
+          <li class="">
+
+              <p><a href="https://github.com/psf/black/pull/2951"><span class="octicons" title="merged pull request, newly merged"><span class="octicon dash"></span><span class="octicon check"></span><span class="octicon merged pull"></span></span><b>Overhaul diff-shades integration to fail on stable changes and preview changes for all projects</b> #2951</a>
+              [ichard26]
+
+              <span class="label" style="--label-r:217;--label-g:141;--label-b:91;--label-h:23;--label-s:62;--label-l:60;">skip news</span>
+                <span class="label" style="--label-r:80;--label-g:86;--label-b:120;--label-h:230;--label-s:20;--label-l:39;">C: maintenance</span>
+                
+              </p><p>Description
+Now PRs will run two diff-shades jobs, "preview-changes" which formats all projects with preview=True,...</p><ul class="comments">
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2951#pullrequestreview-922355404" title="03-26 20:49">
                         <span class="octicon checkcircle" title="reviewed, approved"></span>
                           
                         
                         <b>JelleZijlstra</b></a></p>
                       
                     </li>
+                  </ul>
+              </li>
+          <li class="closed">
+
+              <p><a href="https://github.com/psf/black/issues/2957"><span class="octicons" title="closed issue, newly created, newly closed"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon closed issue"></span></span><b>Remove underscores in numeric literals</b> #2957</a>
+              [jpy-git]
+
+              <span class="label" style="--label-r:255;--label-g:255;--label-b:255;--label-h:0;--label-s:0;--label-l:100;">R: rejected</span>
+                <span class="label" style="--label-r:0;--label-g:82;--label-b:204;--label-h:215;--label-s:100;--label-l:40;">T: design</span>
+                
+              </p><p>Is your feature request related to a problem? Please describe.
+I've just learned that this
+a = 1_2_3_4_5.6_7_8_9
+is...</p><ul class="comments">
                   <li>
-                      <p><a href="https://github.com/psf/black/pull/2922#issuecomment-1067393160" title="03-14 23:16">
+                      <p><a href="https://github.com/psf/black/issues/2957#issuecomment-1079710247" title="03-26 14:56">
                         
                           <span class="octicon comment" title="comment"></span>
                         
-                        <b>ichard26</b>: Good catch!</a></p>
+                        <b>JelleZijlstra</b>: We previously did this (inserting underscores every third digit only), but undid it because it...</a></p>
                       
                     </li>
                   <li>
-                      <p><a href="https://github.com/psf/black/pull/2922#pullrequestreview-909503978" title="03-14 23:26">
+                      <p><a href="https://github.com/psf/black/issues/2957#issuecomment-1079775398" title="03-26 21:09">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>jpy-git</b>: I agree it would be a hassle to try and handle the every third digit logic.
+My suggestion was...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2957#issuecomment-1079776793" title="03-26 21:20">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>JelleZijlstra</b>: Well, I'd feel bad about making Black totally remove all usage of a language feature :)
+The...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2957#issuecomment-1079777969" title="03-26 21:28">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>jpy-git</b>: haha that's a fair point, in that case I understand why we leave it the users to handle these! Thanks 😄</a></p>
+                      
+                    </li>
+                  </ul>
+              </li>
+          <li class="open">
+
+              <p><a href="https://github.com/psf/black/issues/664"><span class="octicons" title="issue"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>Long with statements are not broken into several lines</b> #664</a>
+              [mhham]
+
+              <span class="label" style="--label-r:0;--label-g:82;--label-b:204;--label-h:215;--label-s:100;--label-l:40;">T: design</span>
+                <span class="label" style="--label-r:58;--label-g:252;--label-b:164;--label-h:152;--label-s:97;--label-l:60;">F: parentheses</span>
+                <span class="label" style="--label-r:194;--label-g:224;--label-b:198;--label-h:128;--label-s:32;--label-l:81;">S: accepted</span>
+                <span class="label" style="--label-r:29;--label-g:118;--label-b:219;--label-h:211;--label-s:76;--label-l:48;">C: target version</span>
+                
+              </p><p>Long with statements are not not broken into several lines:
+Something like this should be OK, according to PEP8
+with...</p></li>
+          <li class="">
+
+              <p><a href="https://github.com/psf/black/pull/2926"><span class="octicons" title="pull request"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon pull"></span></span><b>Remove unnecessary parentheses from `with` statements</b> #2926</a>
+              [jpy-git]
+
+              
+              </p><p>Description
+Closes #2921. Aims to remove redundant parentheses from with statements:
+
+I currently have one failing...</p><ul class="comments">
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2926#issuecomment-1079773063" title="03-26 20:56">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>jpy-git</b>: One thing that I've noticed this PR doesn't currently do is add optional brackets if there...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2926#issuecomment-1079773682" title="03-26 20:59">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>JelleZijlstra</b>: We should add these parentheses, but probably in a separate PR. There is already a framework for...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2926#issuecomment-1079774489" title="03-26 21:04">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>jpy-git</b>: Fab thanks, just wanted to check/make you aware whilst reviewing this PR. Will follow up with a...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2926#issuecomment-1079779439" title="03-26 21:38">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>ichard26</b>: This has been discussed in #664 and #1948 FYI.</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2926#issuecomment-1070079132" title="03-26 21:41">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>github-actions</b>: diff-shades reports zero changes comparing this PR (639a2e4) to main (f239d22).
+
+What is this? |...</a></p>
+                      
+                    </li>
+                  </ul>
+              </li>
+          <li class="">
+
+              <p><a href="https://github.com/psf/black/pull/2852"><span class="octicons" title="pull request"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon pull"></span></span><b>Convert `index.rst` and `license.rst` to markdown</b> #2852</a>
+              [gunungpw]
+
+              <span class="label" style="--label-r:217;--label-g:141;--label-b:91;--label-h:23;--label-s:62;--label-l:60;">skip news</span>
+                
+              </p><p>Description
+resolve #2840
+
+Rename and convert index.rst and license.rst to index.md and lisence.md.
+fix ref link...</p><ul class="comments">
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2852#pullrequestreview-922363395" title="03-26 22:17">
+                        <span class="octicon checkcircle" title="reviewed, approved"></span>
+                          
+                        
+                        <b>ichard26</b>: I took care of the cleanup. This is good to land now!</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2852#issuecomment-1079785784" title="03-26 22:21">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>gunungpw</b>: Thank you 😊
+Hope you have a nice day</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2852#issuecomment-1079786537" title="03-26 22:27">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>ichard26</b>: Hmm, I need to figure out what to do with the reference section of the contributing docs, but...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2852#pullrequestreview-922365152" title="03-26 22:52">
                         <span class="octicon checkcircle" title="reviewed, approved"></span>
                           
                         
@@ -241,48 +471,57 @@ Checklist - did you ...
               </li>
           <li class="open">
 
-              <p><a href="https://github.com/psf/black/issues/2863"><span class="octicons" title="issue"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>Black stops looking for config at first pyproject.toml file even if there's no black section in it</b> #2863</a>
-              [slafs]
+              <p><a href="https://github.com/psf/black/issues/1245"><span class="octicons" title="issue"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>Comments between fmt:on/off are reformatted</b> #1245</a>
+              [marcelm]
 
-              <span class="label" style="--label-r:162; --label-g:238; --label-b:239; --label-h:180; --label-l:78; --label-s:70;">T: enhancement</span>
-                <span class="label" style="--label-r:242; --label-g:179; --label-b:219; --label-h:321; --label-l:82; --label-s:70;">C: command line / config</span>
+              <span class="label" style="--label-r:215;--label-g:58;--label-b:74;--label-h:353;--label-s:66;--label-l:53;">T: bug</span>
+                <span class="label" style="--label-r:255;--label-g:0;--label-b:170;--label-h:320;--label-s:100;--label-l:50;">F: comments</span>
+                <span class="label" style="--label-r:78;--label-g:74;--label-b:168;--label-h:242;--label-s:38;--label-l:47;">F: fmtoff</span>
                 
-              </p><p>Disclaimer: I was hesitant whether I should report this as a bug or rather a "Feature request".
-Describe the bug
-
-In...</p><ul class="comments">
+              </p><p>This code:
+# fmt: off
+ #nospace
+ #  twospaces
+# fmt: on
+is changed to:
+# fmt: off
+# nospace
+#  twospaces
+# fmt: on
+I...</p><ul class="comments">
                   <li>
-                      <p><a href="https://github.com/psf/black/issues/2863#issuecomment-1067606328" title="03-15 06:31">
+                      <p><a href="https://github.com/psf/black/issues/1245#issuecomment-1079842809" title="03-27 05:20">
                         
                           <span class="octicon comment" title="comment"></span>
                         
-                        <b>jaklan</b>: I also find it pretty problematic in a monorepo setup:
-
-pre-commit hook doesn't work as you can...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2863#issuecomment-1067623901" title="03-15 06:44">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>jaklan</b>: @Shivansh-007 I did a quick test with isort - if there's intermediate pyproject.toml, but...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2863#issuecomment-1067723090" title="03-15 08:58">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>Shivansh-007</b>: Yeah, that PR is expected to merge sometime soon, it is waiting for @ichard26's review, which...</a></p>
+                        <b>aljabadi</b>: Thanks for creating the best opinionated formatter I've used.
+I'm having this issue with...</a></p>
                       
                     </li>
                   </ul>
               </li>
           <li class="">
 
-              <p><a href="https://github.com/psf/black/pull/2919"><span class="octicons" title="pull request"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon pull"></span></span><b>dont skip formatting #%%</b> #2919</a>
-              [MarcoGorelli]
+              <p><a href="https://github.com/psf/black/pull/633"><span class="octicons" title="closed pull request"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon closed pull"></span></span><b>Add a --single-quotes option to prefer single quotes</b> #633</a>
+              [davvid]
+
+              
+              </p><p>Now there are no excuses not to use black.
+Fixes #594</p><ul class="comments">
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/633#issuecomment-1080652565" title="03-28 13:28">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>rspadim</b>: Could the brunette --single-quotes be imported to black?</a></p>
+                      
+                    </li>
+                  </ul>
+              </li>
+          <li class="">
+
+              <p><a href="https://github.com/psf/black/pull/2965"><span class="octicons" title="draft closed pull request, newly created, newly closed"><span class="octicon star"></span><span class="octicon x"></span><span class="octicon draft closed pull"></span></span><b>Pin click between 8.0.0 and 8.0.4 as 8.1.0 drops Python 3.6</b> #2965</a>
+              [ichard26]
 
               
               </p><p>Description
@@ -294,100 +533,15 @@ Checklist - did you ...
  Add / update tests if necessary?
  Add...</p><ul class="comments">
                   <li>
-                      <p><a href="https://github.com/psf/black/pull/2919#issuecomment-1067066059" title="03-15 13:31">
+                      <p><a href="https://github.com/psf/black/pull/2965#issuecomment-1080977159" title="03-28 18:08">
                         
                           <span class="octicon comment" title="comment"></span>
                         
-                        <b>MarcoGorelli</b>: This needs to go in the preview style.
-
-Thanks @JelleZijlstra , I've given this a go
-Wasn't sure...</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="">
-
-              <p><a href="https://github.com/psf/black/pull/2794"><span class="octicons" title="merged pull request"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon merged pull"></span></span><b>Mark Felix and Batuhan as maintainers</b> #2794</a>
-              [ichard26]
-
-              <span class="label" style="--label-r:251; --label-g:205; --label-b:0; --label-h:49; --label-l:49; --label-s:100;">T: documentation</span>
-                <span class="label" style="--label-r:217; --label-g:141; --label-b:91; --label-h:23; --label-l:60; --label-s:62;">skip news</span>
-                
-              </p><p>Description
-Y'all deserve it :)
-@felix-hilden and @isidentical please check that I chose the right email!
-Checklist...</p></li>
-          <li class="closed">
-
-              <p><a href="https://github.com/psf/black/issues/2923"><span class="octicons" title="closed issue, newly created, newly closed"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon closed issue"></span></span><b>INTERNAL ERROR: Black produced different code on the second pass of the formatter.</b> #2923</a>
-              [RandyMcMillan]
-
-              <span class="label" style="--label-r:215; --label-g:58; --label-b:74; --label-h:353; --label-l:53; --label-s:66;">T: bug</span>
-                <span class="label" style="--label-r:255; --label-g:136; --label-b:68; --label-h:21; --label-l:63; --label-s:100;">C: unstable formatting</span>
-                <span class="label" style="--label-r:147; --label-g:148; --label-b:150; --label-h:219; --label-l:58; --label-s:1;">R: outdated</span>
-                
-              </p><p>https://github.com/RandyMcMillan/x20bf/runs/5547164070?check_suite_focus=true
-error: cannot format...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2923#issuecomment-1067474331" title="03-15 01:43">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: Could you extract the file and give a self-contained repro case?</a></p>
+                        <b>ichard26</b>: Could someone please update the changelog for me? I don't have access to my main machine right...</a></p>
                       
                     </li>
                   <li>
-                      <p><a href="https://github.com/psf/black/issues/2923#issuecomment-1068211359" title="03-15 16:46">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>ichard26</b>: Here's the code of the failing file:
-"""Performance tests for object store"""
-import sys
-from...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2923#issuecomment-1068213078" title="03-15 16:47">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>ichard26</b>: @RandyMcMillan if you can follow up with a self-contained repro that does fail with the latest...</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="closed">
-
-              <p><a href="https://github.com/psf/black/issues/2193"><span class="octicons" title="closed issue, newly closed"><span class="octicon dash"></span><span class="octicon check"></span><span class="octicon closed issue"></span></span><b>Primer: Fix RuntimeError with a closed Event Loop with subprocesses</b> #2193</a>
-              [cooperlees]
-
-              <span class="label" style="--label-r:215; --label-g:58; --label-b:74; --label-h:353; --label-l:53; --label-s:66;">T: bug</span>
-                <span class="label" style="--label-r:80; --label-g:86; --label-b:120; --label-h:230; --label-l:39; --label-s:20;">C: maintenance</span>
-                
-              </p><p>From time to time it seems pandas causes an EventLoop RuntimeError error.
-Let's debug and see if there is something...</p></li>
-          <li class="closed">
-
-              <p><a href="https://github.com/psf/black/issues/2821"><span class="octicons" title="closed issue, newly closed"><span class="octicon dash"></span><span class="octicon check"></span><span class="octicon closed issue"></span></span><b>Primer deprecation plan</b> #2821</a>
-              [JelleZijlstra]
-
-              <span class="label" style="--label-r:80; --label-g:86; --label-b:120; --label-h:230; --label-l:39; --label-s:20;">C: maintenance</span>
-                
-              </p><p>I removed black-primer from CI in #2809 because it was causing annoying and useless CI failures, but kept the code...</p></li>
-          <li class="">
-
-              <p><a href="https://github.com/psf/black/pull/2924"><span class="octicons" title="merged pull request, newly created, newly merged"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon merged pull"></span></span><b>Farewell black-primer, it was nice knowing you</b> #2924</a>
-              [ichard26]
-
-              <span class="label" style="--label-r:80; --label-g:86; --label-b:120; --label-h:230; --label-l:39; --label-s:20;">C: maintenance</span>
-                
-              </p><p>Description
-Enjoy your retirement at https://github.com/cooperlees/black-primer
-Resolves #2821 and closes...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2924#pullrequestreview-910510807" title="03-15 16:38">
+                      <p><a href="https://github.com/psf/black/pull/2965#pullrequestreview-923548812" title="03-28 18:10">
                         <span class="octicon checkcircle" title="reviewed, approved"></span>
                           
                         
@@ -395,353 +549,258 @@ Resolves #2821 and closes...</p><ul class="comments">
                       
                     </li>
                   <li>
-                      <p><a href="https://github.com/psf/black/pull/2924#pullrequestreview-910750120" title="03-15 19:57">
-                        <span class="octicon checkcircle" title="reviewed, approved"></span>
-                          
+                      <p><a href="https://github.com/psf/black/pull/2965#issuecomment-1080988973" title="03-28 18:19">
                         
-                        <b>cooperlees</b>: Good bye old warrior. You helped bring back black development to life!</a></p>
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>woodruffw</b>: Does it make sense to remove the patch entirely (or add ImportError to it), per #2964 (comment)?...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2965#issuecomment-1080993120" title="03-28 18:23">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>JelleZijlstra</b>: @woodruffw probably, looking into that now</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2965#issuecomment-1080995261" title="03-28 18:26">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>woodruffw</b>: (My unsolicited 0.02c: this is probably the ideal patch, since it preserves the fix for Python...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2965#issuecomment-1081017928" title="03-28 18:51">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>ichard26</b>: Closing as this was made under a false assessment of the situation.</a></p>
                       
                     </li>
                   </ul>
               </li>
           <li class="">
 
-              <p><a href="https://github.com/psf/black/pull/2928"><span class="octicons" title="merged pull request, newly created, newly merged"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon merged pull"></span></span><b>Remove power hugging formatting from preview</b> #2928</a>
-              [Shivansh-007]
+              <p><a href="https://github.com/psf/black/pull/2967"><span class="octicons" title="closed pull request, newly created, newly closed"><span class="octicon star"></span><span class="octicon x"></span><span class="octicon closed pull"></span></span><b>Remove usage of _unicodefun module from dependency: 'click'</b> #2967</a>
+              [bcrant]
 
-              <span class="label" style="--label-r:217; --label-g:141; --label-b:91; --label-h:23; --label-l:60; --label-s:62;">skip news</span>
+              
+              </p><p>Description
+The _unicodefun module has been removed from the click library.
+In addition, it is also not actively...</p><ul class="comments">
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2967#issuecomment-1081006370" title="03-28 18:38">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>JelleZijlstra</b>: Thanks, closing in favor of #2966.</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2967#issuecomment-1081006871" title="03-28 18:39">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>ichard26</b>: We still need this so 3.6 still works even if LANG is misconfigured for unicode.</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2967#issuecomment-1081024775" title="03-28 19:00">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>bcrant</b>: Right on! Glad there was an easy fix. Thanks for being on top of it! Cheers</a></p>
+                      
+                    </li>
+                  </ul>
+              </li>
+          <li class="">
+
+              <p><a href="https://github.com/psf/black/pull/2968"><span class="octicons" title="merged pull request, newly created, newly merged"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon merged pull"></span></span><b>Prepare release 22.3.0</b> #2968</a>
+              [JelleZijlstra]
+
+              <span class="label" style="--label-r:217;--label-g:141;--label-b:91;--label-h:23;--label-s:62;--label-l:60;">skip news</span>
                 
               </p><ul class="comments">
                   <li>
-                      <p><a href="https://github.com/psf/black/pull/2928#issuecomment-1068632441" title="03-16 01:29">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>Shivansh-007</b>: Could any of the maintainers add 
-  skip news</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2928#discussion_r827579936" title="03-16 02:49">
+                      <p><a href="https://github.com/psf/black/pull/2968#discussion_r836757968" title="03-28 19:05">
                         
                             <span class="octicon eye" title="reviewed"></span>
                           
                         
-                        <b>ichard26</b>: Hmmm? what's up with mypy?</a></p>
+                        <b>JelleZijlstra</b>: This had ended up in "Parser" somehow</a></p>
                       
                         <ul class="thread_comment"><li>
-                      <p><a href="https://github.com/psf/black/pull/2928#discussion_r827580624" title="03-16 02:50">
+                      <p><a href="https://github.com/psf/black/pull/2968#discussion_r836759087" title="03-28 19:06">
                         
                           <span class="octicon comment" title="comment"></span>
                         
-                        <b>JelleZijlstra</b>: It thinks this code is unreachable because there's only one enum member.</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2928#discussion_r827585581" title="03-16 03:02">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>Shivansh-007</b>: Yeah ^</a></p>
+                        <b>ichard26</b>: I was trying to figure out why this line was changed, makes sense :)</a></p>
                       
                     </li>
                   </ul>
                       
                     </li>
                   <li>
-                      <p><a href="https://github.com/psf/black/pull/2928#pullrequestreview-911050144" title="03-16 03:13">
+                      <p><a href="https://github.com/psf/black/pull/2968#pullrequestreview-923618193" title="03-28 19:06">
                         <span class="octicon checkcircle" title="reviewed, approved"></span>
                           
                         
-                        <b>ichard26</b></a></p>
+                        <b>ichard26</b>: LGTM.</a></p>
                       
                     </li>
                   </ul>
               </li>
-          <li class="open">
+          <li class="closed">
 
-              <p><a href="https://github.com/psf/black/issues/2929"><span class="octicons" title="issue, newly created"><span class="octicon star"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>Add support for user git ignore configuration file.</b> #2929</a>
-              [hardkrash]
+              <p><a href="https://github.com/psf/black/issues/2969"><span class="octicons" title="closed issue, newly created, newly closed"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon closed issue"></span></span><b>Bug using a previous click version</b> #2969</a>
+              [nidhaloff]
 
-              <span class="label" style="--label-r:162; --label-g:238; --label-b:239; --label-h:180; --label-l:78; --label-s:70;">T: enhancement</span>
-                <span class="label" style="--label-r:242; --label-g:179; --label-b:219; --label-h:321; --label-l:82; --label-s:70;">C: command line / config</span>
-                <span class="label" style="--label-r:22; --label-g:188; --label-b:132; --label-h:159; --label-l:41; --label-s:79;">C: file collection</span>
+              <span class="label" style="--label-r:215;--label-g:58;--label-b:74;--label-h:353;--label-s:66;--label-l:53;">T: bug</span>
+                <span class="label" style="--label-r:207;--label-g:211;--label-b:215;--label-h:210;--label-s:9;--label-l:82;">R: duplicate</span>
+                <span class="label" style="--label-r:29;--label-g:118;--label-b:219;--label-h:211;--label-s:76;--label-l:48;">C: installation / packaging</span>
                 
-              </p><p>Is your feature request related to a problem? Please describe.
-Include all sources of gitignore patterns.
-I have...</p></li>
+              </p><p>Describe the bug
+It looks like black is depending on click>=1.8.0, However, click changed the API in the new version...</p><ul class="comments">
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2969#issuecomment-1081036970" title="03-28 19:12">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>JelleZijlstra</b>: Fixed in Black 22.3.0, published a full two minutes ago. See #2964.</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2969#issuecomment-1081037004" title="03-28 19:13">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>ichard26</b>: Already resolved, see #2964. Thanks anyway!</a></p>
+                      
+                    </li>
+                  </ul>
+              </li>
+          <li class="closed">
+
+              <p><a href="https://github.com/psf/black/issues/2963"><span class="octicons" title="closed issue, newly created, newly closed"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon closed issue"></span></span><b>black fails due to _unicodefun</b> #2963</a>
+              [NAThompson]
+
+              <span class="label" style="--label-r:215;--label-g:58;--label-b:74;--label-h:353;--label-s:66;--label-l:53;">T: bug</span>
+                <span class="label" style="--label-r:207;--label-g:211;--label-b:215;--label-h:210;--label-s:9;--label-l:82;">R: duplicate</span>
+                <span class="label" style="--label-r:29;--label-g:118;--label-b:219;--label-h:211;--label-s:76;--label-l:48;">C: installation / packaging</span>
+                
+              </p><p>Describe the bug
+On Centos 7:
+WARNING: You are using pip version 21.2.3; however, version 22.0.4 is available.
+$...</p><ul class="comments">
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2963#issuecomment-1080971273" title="03-28 18:01">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>laundmo</b>: I found a solution: this is a issue with the newest click. if you install click==8.0.4 it should work</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2963#issuecomment-1080972874" title="03-28 18:03">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>Sillocan</b>: Yep. Click 8.1.0 was released with a breaking change.</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2963#issuecomment-1080975225" title="03-28 18:06">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>JelleZijlstra</b>: Going to close in favor of #2964 which is now pinned.</a></p>
+                      
+                    </li>
+                  </ul>
+              </li>
           <li class="">
 
-              <p><a href="https://github.com/psf/black/pull/2916"><span class="octicons" title="pull request"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon pull"></span></span><b>Format hex code in unicode escape sequences in string literals</b> #2916</a>
-              [Shivansh-007]
+              <p><a href="https://github.com/psf/black/pull/2966"><span class="octicons" title="merged pull request, newly created, newly merged"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon merged pull"></span></span><b>Fix _unicodefun patch code for Click 8.1.0</b> #2966</a>
+              [JelleZijlstra]
 
               
-              </p><p>Closes #2067
-Closes #2828
-Checklist - did you ...
-
- Add a CHANGELOG entry if necessary?
- Add / update tests if...</p><ul class="comments">
+              </p><p>Fixes #2964</p><ul class="comments">
                   <li>
-                      <p><a href="https://github.com/psf/black/pull/2916#discussion_r827591576" title="03-16 03:18">
-                        
-                            <span class="octicon eye" title="reviewed"></span>
-                          
-                        
-                        <b>JelleZijlstra</b>: Suggested change
-        
-          
-    
-
-        
-      
-    
-    
-      
-          
-         ...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2916#discussion_r827611370" title="03-16 04:15">
-                        
-                            <span class="octicon eye" title="reviewed"></span>
-                          
-                        
-                        <b>JelleZijlstra</b>: Sorry, I actually meant re.VERBOSE (https://docs.python.org/3/library/re.html#re.VERBOSE), which...</a></p>
-                      
-                        <ul class="thread_comment"><li>
-                      <p><a href="https://github.com/psf/black/pull/2916#discussion_r827618801" title="03-16 04:36">
+                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081023184" title="03-28 18:58">
                         
                           <span class="octicon comment" title="comment"></span>
                         
-                        <b>Shivansh-007</b>: You actually got me there once originally. Done 👍🏻</a></p>
-                      
-                    </li>
-                  </ul>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="closed">
+                        <b>github-actions</b>: diff-shades reports zero changes comparing this PR (2ebdcc3) to main (ac7402c).
 
-              <p><a href="https://github.com/psf/black/issues/2927"><span class="octicons" title="closed issue, newly created, newly closed"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon closed issue"></span></span><b>legecy install failure</b> #2927</a>
-              [Drr1122]
-
-              <span class="label" style="--label-r:251; --label-g:205; --label-b:0; --label-h:49; --label-l:49; --label-s:100;">T: documentation</span>
-                
-              </p><p>I got stuck with this error can someone please help me out</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2927#issuecomment-1068424343" title="03-15 20:13">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: Looks like you're trying to install dlib, not Black. You may have better luck on their tracker.</a></p>
+What is this? |...</a></p>
                       
                     </li>
                   <li>
-                      <p><a href="https://github.com/psf/black/issues/2927#issuecomment-1069045292" title="03-16 11:54">
+                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081025641" title="03-28 19:01">
                         
                           <span class="octicon comment" title="comment"></span>
                         
-                        <b>Drr1122</b>: Thank you for your quick response sir may i know the possible solution for
-this problem
-…
-On...</a></p>
+                        <b>JelleZijlstra</b>: Merging now because I'm pretty sure this isn't going to break PyPy on MacOS only.</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081069287" title="03-28 19:48">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>tjeck97</b>: breaks black==19.10b0
+ImportError: cannot import name '_unicodefun' from 'click'</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081071276" title="03-28 19:50">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>JelleZijlstra</b>: @tjeck97 black 19.10b0 is old. Please upgrade.</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081076379" title="03-28 19:57">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>tjeck97</b>: @tjeck97 black 19.10b0 is old. Please upgrade.
+
+well now i'm forced to 😅 though pinning...</a></p>
                       
                     </li>
                   </ul>
               </li>
-          <li class="open">
-
-              <p><a href="https://github.com/psf/black/issues/2783"><span class="octicons" title="issue"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>Put blank lines between nested classes in typing stubs</b> #2783</a>
-              [MarkKoz]
-
-              <span class="label" style="--label-r:0; --label-g:82; --label-b:204; --label-h:215; --label-l:40; --label-s:100;">T: design</span>
-                <span class="label" style="--label-r:191; --label-g:212; --label-b:242; --label-h:215; --label-l:84; --label-s:66;">F: empty lines</span>
-                <span class="label" style="--label-r:194; --label-g:224; --label-b:198; --label-h:128; --label-l:81; --label-s:32;">S: accepted</span>
-                
-              </p><p>Describe the style change
-Nested classes in typing stubs should have blank lines between them.
-Examples in the...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2783#issuecomment-1069073734" title="03-16 12:27">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>jpy-git</b>: Had a quick look at this and, since there's no special consideration given to whether an...</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="open">
-
-              <p><a href="https://github.com/psf/black/issues/2930"><span class="octicons" title="issue, newly created"><span class="octicon star"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>Addition of `isort` to our dev toolchain</b> #2930</a>
-              [Shivansh-007]
-
-              <span class="label" style="--label-r:80; --label-g:86; --label-b:120; --label-h:230; --label-l:39; --label-s:20;">C: maintenance</span>
-                
-              </p><p>Currently, the imports exist in any random order as added by the developers (see below), which sometimes makes it...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2930#issuecomment-1069141688" title="03-16 13:38">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: Could also consider using https://github.com/facebookexperimental/usort</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="closed">
-
-              <p><a href="https://github.com/psf/black/issues/2934"><span class="octicons" title="closed issue, newly created, newly closed"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon closed issue"></span></span><b>mount</b> #2934</a>
-              [SUDDSDUDDS]
-
-              <span class="label" style="--label-r:228; --label-g:230; --label-b:105; --label-h:60; --label-l:65; --label-s:71;">R: invalid</span>
-                <span class="label" style="--label-r:251; --label-g:205; --label-b:0; --label-h:49; --label-l:49; --label-s:100;">T: documentation</span>
-                
-              </p><p>Is this related to a problem? Please describe.
-
-Describe the solution you'd like
-
-Describe alternatives you've...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2934#issuecomment-1069234752" title="03-16 15:11">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>ichard26</b>: Please avoid opening issues on major OSS projects without context or any information. Thank you!</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="closed">
-
-              <p><a href="https://github.com/psf/black/issues/2933"><span class="octicons" title="closed issue, newly created, newly closed"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon closed issue"></span></span><b>G</b> #2933</a>
-              [Ieatemptiness]
-
-              <span class="label" style="--label-r:228; --label-g:230; --label-b:105; --label-h:60; --label-l:65; --label-s:71;">R: invalid</span>
-                
-              </p></li>
           <li class="">
 
-              <p><a href="https://github.com/psf/black/pull/2931"><span class="octicons" title="merged pull request, newly created, newly merged"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon merged pull"></span></span><b>Update pylint config docs</b> #2931</a>
-              [jpy-git]
+              <p><a href="https://github.com/psf/black/pull/2970"><span class="octicons" title="pull request, newly created"><span class="octicon star"></span><span class="octicon dash"></span><span class="octicon pull"></span></span><b>Correctly handle fmt skip comments without internal spaces</b> #2970</a>
+              [siuryan]
 
               
               </p><p>Description
-Closes #2914. I've confirmed that C0330 & C0326 checks no longer exist in pylint, therefore we can...</p><ul class="comments">
+Hi, first time contributor here! This PR fixes #2917 . The issue was that fmt skip comments were being...</p><ul class="comments">
                   <li>
-                      <p><a href="https://github.com/psf/black/pull/2931#pullrequestreview-911531547" title="03-16 12:39">
-                        <span class="octicon filediff" title="reviewed, changes requested"></span>
-                          
-                        
-                        <b>Shivansh-007</b></a></p>
-                      
-                        <ul class="thread_comment"><li>
-                      <p><a href="https://github.com/psf/black/pull/2931#discussion_r827941399" title="03-16 12:39">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>Shivansh-007</b>: This comment shouldn't be removed, in case you saw me removing it from my PR and then did the...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2931#discussion_r827961523" title="03-16 12:39">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>Shivansh-007</b>: Might be worth adding a small line/note that this configuration is only applicable latest...</a></p>
-                      
-                        <ul class="thread_comment"><li>
-                      <p><a href="https://github.com/psf/black/pull/2931#discussion_r828017059" title="03-16 13:36">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>jpy-git</b>: Makes sense, can see it in the 2.6.0 release notes.
-Given there have been a good number of...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2931#discussion_r828023401" title="03-16 13:41">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: I think a short note like that is good. We can skip the details.</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2931#discussion_r828057656" title="03-16 14:12">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>jpy-git</b>: Added the old error code callout in now 😄</a></p>
-                      
-                    </li>
-                  </ul>
-                      
-                    </li>
-                  </ul>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2931#issuecomment-1069135350" title="03-16 13:33">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: When were these codes removed? We may still want to mention them in case people use an older...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2931#issuecomment-1069301723" title="03-16 16:08">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>Shivansh-007</b>: CO330 is removed by PyCQA/pylint#3571, I am not sure about the other error code but AFAIK its...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2931#issuecomment-1069310864" title="03-16 16:16">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>jpy-git</b>: @Shivansh-007 C0326 was removed in https://github.com/PyCQA/pylint/pull/3577/files (same release...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2931#pullrequestreview-911949793" title="03-16 16:36">
-                        <span class="octicon checkcircle" title="reviewed, approved"></span>
-                          
-                        
-                        <b>Shivansh-007</b></a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2931#discussion_r828227712" title="03-16 16:39">
+                      <p><a href="https://github.com/psf/black/pull/2970#discussion_r836807281" title="03-28 20:11">
                         
                             <span class="octicon eye" title="reviewed"></span>
                           
                         
-                        <b>JelleZijlstra</b>: Suggested change
-        
-          
-    
-
-        
-      
-    
-    
-      
-          
-         ...</a></p>
+                        <b>siuryan</b>: Is setting leaf.prefix to empty string here okay? It appears leaf.prefix can only ever contain...</a></p>
                       
                     </li>
                   <li>
-                      <p><a href="https://github.com/psf/black/pull/2931#pullrequestreview-911983566" title="03-16 17:00">
-                        <span class="octicon checkcircle" title="reviewed, approved"></span>
-                          
+                      <p><a href="https://github.com/psf/black/pull/2970#issuecomment-1081115661" title="03-28 20:35">
                         
-                        <b>JelleZijlstra</b></a></p>
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>github-actions</b>: diff-shades reports zero changes comparing this PR (9e3d823) to main (ae2c075).
+
+What is this? |...</a></p>
                       
                     </li>
                   </ul>
@@ -753,258 +812,222 @@ Given there have been a good number of...</a></p>
 
               
               </p><p>Description
-One of the things discussed in issue #144 was quote placement. Reading through the discussion, there...</p></li>
-          <li class="closed">
-
-              <p><a href="https://github.com/psf/black/issues/2914"><span class="octicons" title="closed issue, newly closed"><span class="octicon dash"></span><span class="octicon check"></span><span class="octicon closed issue"></span></span><b>pylint checks seem to no longer exist?</b> #2914</a>
-              [alkatar21]
-
-              <span class="label" style="--label-r:112; --label-g:87; --label-b:255; --label-h:248; --label-l:67; --label-s:100;">good first issue</span>
-                <span class="label" style="--label-r:251; --label-g:205; --label-b:0; --label-h:49; --label-l:49; --label-s:100;">T: documentation</span>
-                
-              </p><p>Using black with other tools says for pylint, that one should switch off disable = C0330, C0326, however I find the...</p><ul class="comments">
+One of the things discussed in issue #144 was quote placement. Reading through the discussion, there...</p><ul class="comments">
                   <li>
-                      <p><a href="https://github.com/psf/black/issues/2914#issuecomment-1069434417" title="03-16 18:32">
+                      <p><a href="https://github.com/psf/black/pull/2885#issuecomment-1043288305" title="03-28 21:22">
                         
                           <span class="octicon comment" title="comment"></span>
                         
-                        <b>graingert</b>: sources for the removals are on the PR #2931 :
-
-CO330 is removed by PyCQA/pylint#3571, I am not...</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="open">
-
-              <p><a href="https://github.com/psf/black/issues/2681"><span class="octicons" title="issue"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>Writing failed: [Errno 2] No such file or directory: '/home/user/.cache/black/21.11b1/tmpb3yqz52h'</b> #2681</a>
-              [avatar-lavventura]
-
-              <span class="label" style="--label-r:162; --label-g:238; --label-b:239; --label-h:180; --label-l:78; --label-s:70;">T: enhancement</span>
-                
-              </p><p>When I update black, or have a clean install I keep seeing following message:
-load_grammar()] Generating grammar...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2681#issuecomment-1068374212" title="03-15 19:22">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>michaelaye</b>: black should be allowed to do what it needs to do inside its own .cache/black folder, right?</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2681#issuecomment-1069536813" title="03-16 19:31">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>avatar-lavventura</b>: @michaelaye Hm I believe black should be allowed to create files inside .cache/black folder. I...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2681#issuecomment-1069539603" title="03-16 19:34">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>michaelaye</b>: Well #2702 was closed with the comment that the issue would not be picked up for a while, so...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2681#issuecomment-1069541949" title="03-16 19:39">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>avatar-lavventura</b>: Ah you are right, I misread  it, seems like PR is not resolved :-(
-During the installation of...</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="open">
-
-              <p><a href="https://github.com/psf/black/issues/2925"><span class="octicons" title="issue, newly created"><span class="octicon star"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>Does flake8 still ignore W503 by default?</b> #2925</a>
-              [ichard26]
-
-              <span class="label" style="--label-r:112; --label-g:87; --label-b:255; --label-h:248; --label-l:67; --label-s:100;">good first issue</span>
-                <span class="label" style="--label-r:251; --label-g:205; --label-b:0; --label-h:49; --label-l:49; --label-s:100;">T: documentation</span>
-                
-              </p><p>Suspect regression. Using v 4.0.1 (Gentoo X86_64). Having just installed black (v22.1.0), reformatting produced...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2925#issuecomment-1068228847" title="03-15 17:01">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>ichard26</b>: I can't reproduce this behaviour but I'm no flake8 pro. If it turns out flake8 requires ignoring...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2925#issuecomment-1068231280" title="03-15 17:03">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: I feel like it's better to err on the side of listing more codes in our docs, just in case...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2925#issuecomment-1069011440" title="03-16 11:14">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>jpy-git</b>: it's still in the default ignores for the latest flake8 (flake8 --help)
-
-my guess is they might...</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="open">
-
-              <p><a href="https://github.com/psf/black/issues/2339"><span class="octicons" title="issue"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>fmt: skip removes characters from a comment-only line before it</b> #2339</a>
-              [felix-hilden]
-
-              <span class="label" style="--label-r:215; --label-g:58; --label-b:74; --label-h:353; --label-l:53; --label-s:66;">T: bug</span>
-                <span class="label" style="--label-r:255; --label-g:0; --label-b:0; --label-h:0; --label-l:50; --label-s:100;">C: invalid code</span>
-                <span class="label" style="--label-r:255; --label-g:0; --label-b:170; --label-h:320; --label-l:50; --label-s:100;">F: comments</span>
-                <span class="label" style="--label-r:251; --label-g:202; --label-b:4; --label-h:48; --label-l:50; --label-s:96;">F: fmtskip</span>
-                
-              </p><p>Describe the bug
-Comments behave oddly before # fmt: skip lines. I'll try to see if this has been reported later.
-To...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2339#issuecomment-1070550640" title="03-17 08:52">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>felix-hilden</b>: In #2539 @myw provided additional information on the case where the skipped line is a decorator...</a></p>
+                        <b>github-actions</b>: diff-shades results comparing this PR (e073b63) to main (ae2c075). The full diff is available in...</a></p>
                       
                     </li>
                   </ul>
               </li>
           <li class="closed">
 
-              <p><a href="https://github.com/psf/black/issues/2539"><span class="octicons" title="closed issue, newly closed"><span class="octicon dash"></span><span class="octicon check"></span><span class="octicon closed issue"></span></span><b>Black deletes nonempty block comments before decorators left unfromatted with # fmt: skip</b> #2539</a>
-              [myw]
+              <p><a href="https://github.com/psf/black/issues/2964"><span class="octicons" title="closed issue, newly created, newly closed"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon closed issue"></span></span><b>Incompatible with click 8.1.0</b> #2964</a>
+              [stumpylog]
 
-              <span class="label" style="--label-r:215; --label-g:58; --label-b:74; --label-h:353; --label-l:53; --label-s:66;">T: bug</span>
-                <span class="label" style="--label-r:207; --label-g:211; --label-b:215; --label-h:210; --label-l:82; --label-s:9;">R: duplicate</span>
-                <span class="label" style="--label-r:251; --label-g:202; --label-b:4; --label-h:48; --label-l:50; --label-s:96;">F: fmtskip</span>
+              <span class="label" style="--label-r:215;--label-g:58;--label-b:74;--label-h:353;--label-s:66;--label-l:53;">T: bug</span>
+                <span class="label" style="--label-r:29;--label-g:118;--label-b:219;--label-h:211;--label-s:76;--label-l:48;">C: installation / packaging</span>
                 
-              </p><p>Bug description:
-Black deletes nonempty block comments before decorators left unfromatted with #fmt: skip.
-As a...</p><ul class="comments">
+              </p><p>Please use Black 22.3.0 which was just released to fix this issue or pin Click to 8.0.0, 8.0.1, 8.0.2, 8.0.3, or...</p><ul class="comments">
                   <li>
-                      <p><a href="https://github.com/psf/black/issues/2539#issuecomment-1070335658" title="03-17 05:17">
+                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1080970453" title="03-28 18:00">
                         
                           <span class="octicon comment" title="comment"></span>
                         
-                        <b>propertone</b>: Any plans to fix this? This is a pretty high severity bug since it literally deletes your code comments.</a></p>
+                        <b>liranbg</b>: @stumpylog
+try with locking click to click==8.0.1</a></p>
                       
                     </li>
                   <li>
-                      <p><a href="https://github.com/psf/black/issues/2539#issuecomment-1070548315" title="03-17 08:50">
+                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1080971383" title="03-28 18:02">
                         
                           <span class="octicon comment" title="comment"></span>
                         
-                        <b>felix-hilden</b>: This seems like a duplicate (or rather a subset) of #2339. I'll add your debugging there too, so...</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="">
-
-              <p><a href="https://github.com/psf/black/pull/2926"><span class="octicons" title="pull request, newly created"><span class="octicon star"></span><span class="octicon dash"></span><span class="octicon pull"></span></span><b>Remove unnecessary parentheses from `with` statements</b> #2926</a>
-              [jpy-git]
-
-              
-              </p><p>Description
-Closes #2921. Aims to remove redundant parentheses from with statements:
-
-I currently have one failing...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2926#issuecomment-1068269490" title="03-15 17:42">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: Thanks for your contribution! A few quick things:
-
-Under our stability policy...</a></p>
+                        <b>bradleyhurley</b>: I just came here to open a very similar issue.
+The issue is caused by the release of click...</a></p>
                       
                     </li>
                   <li>
-                      <p><a href="https://github.com/psf/black/pull/2926#issuecomment-1068290235" title="03-15 18:00">
+                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1080971479" title="03-28 18:02">
                         
                           <span class="octicon comment" title="comment"></span>
                         
-                        <b>jpy-git</b>: thanks, I've got the tests working now and will refactor slightly to account for the preview mode</a></p>
+                        <b>woodruffw</b>: +1: We have a failure in pip-audit here: trailofbits/pip-audit#249
+(click is strictly a...</a></p>
                       
                     </li>
                   <li>
-                      <p><a href="https://github.com/psf/black/pull/2926#issuecomment-1068368918" title="03-15 19:16">
+                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1080974737" title="03-28 18:05">
                         
                           <span class="octicon comment" title="comment"></span>
                         
-                        <b>jpy-git</b>: @JelleZijlstra I've updated the code to only remove the brackets in preview mode now 😄</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="open">
-
-              <p><a href="https://github.com/psf/black/issues/2646"><span class="octicons" title="issue"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>"fmt: skip" on colon-terminated lines either fails or moves the directive</b> #2646</a>
-              [dansebcar]
-
-              <span class="label" style="--label-r:215; --label-g:58; --label-b:74; --label-h:353; --label-l:53; --label-s:66;">T: bug</span>
-                <span class="label" style="--label-r:255; --label-g:136; --label-b:68; --label-h:21; --label-l:63; --label-s:100;">C: unstable formatting</span>
-                <span class="label" style="--label-r:251; --label-g:202; --label-b:4; --label-h:48; --label-l:50; --label-s:96;">F: fmtskip</span>
-                
-              </p><p>Describe the bug
-Adding # fmt: skip after a colon (e.g. on the same line as def, if, with or class) either produces...</p></li>
-          <li class="closed">
-
-              <p><a href="https://github.com/psf/black/issues/2936"><span class="octicons" title="closed issue, newly created, newly closed"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon closed issue"></span></span><b>"# fmt: skip" does not work defined function</b> #2936</a>
-              [rpvdkley]
-
-              <span class="label" style="--label-r:215; --label-g:58; --label-b:74; --label-h:353; --label-l:53; --label-s:66;">T: bug</span>
-                <span class="label" style="--label-r:207; --label-g:211; --label-b:215; --label-h:210; --label-l:82; --label-s:9;">R: duplicate</span>
-                <span class="label" style="--label-r:255; --label-g:136; --label-b:68; --label-h:21; --label-l:63; --label-s:100;">C: unstable formatting</span>
-                <span class="label" style="--label-r:251; --label-g:202; --label-b:4; --label-h:48; --label-l:50; --label-s:96;">F: fmtskip</span>
-                
-              </p><p>Describe the bug
-Black raises INTERNAL ERROR when # fmt: skip has been added at the end of a def function...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2936#issuecomment-1070948357" title="03-17 13:50">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>felix-hilden</b>: Confirmed on the playground, thanks for reporting!</a></p>
+                        <b>scasagrande</b>: For those that are running black via pre-commit, you can pin click to 8.0.4 via the following:
+-...</a></p>
                       
                     </li>
                   <li>
-                      <p><a href="https://github.com/psf/black/issues/2936#issuecomment-1070961126" title="03-17 14:16">
+                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1080976265" title="03-28 18:07">
                         
                           <span class="octicon comment" title="comment"></span>
                         
-                        <b>felix-hilden</b>: Also turns out that this is a duplicate of #2646 ty @Shivansh-007</a></p>
+                        <b>JelleZijlstra</b>: We should probably pin to <8.1.0 for now. I can help get a release out later today to do that.</a></p>
                       
                     </li>
-                  </ul>
-              </li>
-          <li class="open">
-
-              <p><a href="https://github.com/psf/black/issues/2937"><span class="octicons" title="issue, newly created"><span class="octicon star"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>Remove redundant brackets from `except` clause</b> #2937</a>
-              [jpy-git]
-
-              <span class="label" style="--label-r:162; --label-g:238; --label-b:239; --label-h:180; --label-l:78; --label-s:70;">T: enhancement</span>
-                <span class="label" style="--label-r:58; --label-g:252; --label-b:164; --label-h:152; --label-l:60; --label-s:97;">F: parentheses</span>
-                
-              </p><p>Is your feature request related to a problem? Please describe.
-The except clause can accept a parenthesised tuple of...</p><ul class="comments">
                   <li>
-                      <p><a href="https://github.com/psf/black/issues/2937#issuecomment-1071866808" title="03-17 23:49">
+                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1080977192" title="03-28 18:08">
                         
                           <span class="octicon comment" title="comment"></span>
                         
-                        <b>JelleZijlstra</b>: Agree, this goes with a lot of other cases where we should remove redundant parens.
-Not sure...</a></p>
+                        <b>davidism</b>: Why was black importing an internal module? I was not expecting this to be the change that...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1080978529" title="03-28 18:10">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>woodruffw</b>: Why was black importing an internal module? I was not expecting this to be the change that...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1080980837" title="03-28 18:12">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>mjpieters</b>: The import doesn't raise ModuleNotFoundError, only a plain ImportError, because from click...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1080984425" title="03-28 18:15">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>davidism</b>: Well good news at least, that whole patch isn't needed anymore, since Click itself is now at the...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1080990466" title="03-28 18:21">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>ProGamerGov</b>: This causing black to fail when run on Google Colab right now as well.</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081001637" title="03-28 18:33">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>JelleZijlstra</b>: We do still need the patch. On Python 3.6 + Click 8.0.4 + LANG=C, Click aborts with...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081012555" title="03-28 18:46">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>ichard26</b>: Oh wow, Click 8.1.0 drops support for Python 3.6. We will have to either drop 3.6 soon or pin...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1080974268" title="03-28 18:46">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>ichard26</b>: Oh wow, Click 8.1.0 drops support for Python 3.6. We will have to either drop 3.6 soon or pin...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081035937" title="03-28 19:12">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>JelleZijlstra</b>: We just released Black 22.3.0 with the fix. Sorry for the disruption everyone!
+(There are no...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081135703" title="03-28 20:56">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>ichard26</b>: Mypyc compiled wheels are now also available 🚀</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081157345" title="03-28 21:16">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>UnderratedNorf</b>: How can I fix my failing gitlab pipeline that uses pre-commit ? I'm not sure how to pin Click...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081159070" title="03-28 21:19">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>ichard26</b>: @UnderratedNorf either update black to 22.3.0 in the pre-commit-config.yaml file (remember...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081191079" title="03-28 21:55">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>Edwardx89</b>: Is it me or does 22.3.0 still did not fix it?
+Using black==22.3.0 with click==8.1.0</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081193046" title="03-28 21:56">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>JelleZijlstra</b>: @Edwardx89 could you show more of the stack trace with line numbers? I suspect you're not...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081193376" title="03-28 21:56">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>scasagrande</b>: @Edwardx89 it is working across the board for me, I don't think you're running the version you...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081195107" title="03-28 21:59">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>Edwardx89</b>: @JelleZijlstra @scasagrande</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081197239" title="03-28 22:02">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>JelleZijlstra</b>: You're running an ancient version from back when the whole thing was in black.py.</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081198241" title="03-28 22:03">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>scasagrande</b>: @Edwardx89 you are running pip freeze on your pipeapp venv, but black is installed and running...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081200559" title="03-28 22:06">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>Edwardx89</b>: @scasagrande Ahhh you are right!!! Sorry! It does work :)</a></p>
                       
                     </li>
                   </ul>
@@ -1016,6 +1039,6 @@ Not sure...</a></p>
 
 <p class="footer">
   created at
-  2022-03-17 22:29
+  2022-03-28 19:11
   by <a href="https://pypi.org/project/dinghy/0.9.0">dinghy 0.9.0</a>.
 </p>
