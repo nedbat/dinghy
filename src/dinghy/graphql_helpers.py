@@ -139,8 +139,8 @@ class GraphqlHelper:
                     continue
             break
 
-        # $set_env.py: DIGEST_SAVE_RESPONSES - save every query response in a JSON file.
-        if int(os.environ.get("DIGEST_SAVE_RESPONSES", 0)):
+        # $set_env.py: DINGHY_SAVE_RESPONSES - save every query response in a JSON file.
+        if int(os.environ.get("DINGHY_SAVE_RESPONSES", 0)):
             json_name = next(self.json_names)
             await json_save(data, json_name)
             logger.info(f"Wrote query data: {json_name}")

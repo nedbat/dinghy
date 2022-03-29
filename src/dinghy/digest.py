@@ -226,8 +226,8 @@ class Digester:
 
         Keep only things updated since our date, and sort them.
         """
-        # $set_env.py: DIGEST_SAVE_ENTRIES - save each entry in its own JSON file.
-        if int(os.environ.get("DIGEST_SAVE_ENTRIES", 0)):
+        # $set_env.py: DINGHY_SAVE_ENTRIES - save each entry in its own JSON file.
+        if int(os.environ.get("DINGHY_SAVE_ENTRIES", 0)):
             for entry in entries:
                 try:
                     kind = entry["__typename"].lower()
@@ -439,8 +439,8 @@ async def make_digest(items, since="1 week", digest="digest.html", **options):
     digester.prepare()
     results = await asyncio.gather(*coros)
 
-    # $set_env.py: DIGEST_SAVE_RESULT - save digest data in a JSON file.
-    if int(os.environ.get("DIGEST_SAVE_RESULT", 0)):
+    # $set_env.py: DINGHY_SAVE_RESULT - save digest data in a JSON file.
+    if int(os.environ.get("DINGHY_SAVE_RESULT", 0)):
         json_name = digest.replace(".html", ".json")
         await json_save(results, json_name)
         logger.info(f"Wrote results data: {json_name}")
