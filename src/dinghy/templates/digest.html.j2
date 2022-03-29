@@ -276,7 +276,9 @@
 </ul>
 
 <p class="footer">
-  created at
-  {{ now|datetime("%Y-%m-%d %H:%M") }}
-  by <a href="https://pypi.org/project/dinghy/{{ __version__ }}">dinghy {{ __version__ }}</a>.
+  created at {{ now|datetime("%Y-%m-%d %H:%M") }} by
+  <a href="https://pypi.org/project/dinghy/{{ __version__ }}">
+    dinghy
+    <span class="dinghy_version">{{ __version__ }}</span>
+  </a>.
 </p>

@@ -14,7 +14,6 @@ clean: ## remove stuff we don't need
 	rm -fr build/ dist/ src/*.egg-info
 	rm -fr .*_cache/
 	rm -f out_*.json save_*.json
-	rm -f docs/black_digest.json
 
 requirements: ## install development environment requirements
 	pip install -r dev-requirements.txt
@@ -38,11 +37,28 @@ check_manifest:
 
 .PHONY: dist testpypi pypi tag sample
 
+release: clean check_release dist pypi tag ## do all the steps for a release
+
+check_release:
+	@if [[ $$(git tags | grep -q -w $$(grep __version__ src/dinghy/__init__.py | grep -E -o '[0-9.]+') && echo "x") == "x" ]]; then \
+		echo 'A git tag for this version exists! Did you forget to bump the version?'; \
+		exit 1; \
+	fi
+	@if (( $$(ls -1 scriv.d | wc -l) != 1 )); then \
+		echo 'There are scriv fragments! Did you forget to `scriv collect`?'; \
+		exit 1; \
+	fi
+	@if [[ $$(grep  __version__ src/dinghy/__init__.py | grep -E -o '[0-9.]+') != $$(grep dinghy_version docs/black_digest.html | grep -E -o '[0-9.]+') ]]; then \
+		echo 'The sample digest has the wrong version! Did you forget `make sample`?'; \
+		exit 1; \
+	fi
+	@echo "Release checks passed"
+
 dist: check_manifest ## build the distributions
 	python -m build --sdist --wheel
 	python -m twine check dist/*
 
-testpypi: ## upload the distrubutions to PyPI's testing server.
+testpypi: ## upload the distributions to PyPI's testing server.
 	python -m twine upload --verbose --repository testpypi dist/*
 
 pypi: ## upload the built distributions to PyPI.
@@ -52,5 +68,5 @@ tag: ## make a git tag with the version number
 	git tag -a -m "Version $$(python setup.py --version)" $$(python setup.py --version)
 
 sample: ## make the sample digest
-	python -m dinghy docs/black_dinghy.yaml
+	DINGHY_SAVE_ENTRIES=0 DINGHY_SAVE_RESPONSES=0 DINGHY_SAVE_RESULT=0 python -m dinghy docs/black_dinghy.yaml
 	sed -i "" -e '/>Activity/s/ since.*</</' docs/black_digest.html
