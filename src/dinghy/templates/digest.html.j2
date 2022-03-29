@@ -235,13 +235,13 @@
 
               {% if entry.children -%}
                 <ul class="comments">
-                  {% for comment in entry.children recursive -%}
-                    <li{% if comment.old %} class="old"{% endif %}>
-                      <p><a href="{{ comment.url }}" title="{{ comment.updatedAt|datetime() }}">
-                        {% if comment.review_state -%}
-                          {% if comment.review_state == "APPROVED" -%}
+                  {% for child in entry.children recursive -%}
+                    <li{% if child.old %} class="old"{% endif %}>
+                      <p><a href="{{ child.url }}" title="{{ child.updatedAt|datetime() }}">
+                        {% if child.review_state -%}
+                          {% if child.review_state == "APPROVED" -%}
                             <span class="octicon checkcircle" title="reviewed, approved"></span>
-                          {% elif comment.review_state == "CHANGES_REQUESTED" -%}
+                          {% elif child.review_state == "CHANGES_REQUESTED" -%}
                             <span class="octicon filediff" title="reviewed, changes requested"></span>
                           {% else %}
                             <span class="octicon eye" title="reviewed"></span>
@@ -249,11 +249,11 @@
                         {% else %}
                           <span class="octicon comment" title="comment"></span>
                         {% endif %}
-                        <b>{{ comment.author.login }}</b>{# -#}
-                      {%- if comment.bodyText %}: {{ comment.bodyText|trim|truncate(100) }}{% endif -%}
+                        <b>{{ child.author.login }}</b>{# -#}
+                      {%- if child.bodyText %}: {{ child.bodyText|trim|truncate(100) }}{% endif -%}
                       </a></p>
-                      {% if comment.children %}
-                        <ul class="thread_comment">{{ loop(comment.children) }}</ul>
+                      {% if child.children %}
+                        <ul class="thread_comment">{{ loop(child.children) }}</ul>
                       {% endif %}
                     </li>
                   {% endfor -%}
