@@ -1,0 +1,4 @@
+Fixed
+.....
+
+- Fixed a crash trying to get the repository for an issue in a project.

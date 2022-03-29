@@ -2,6 +2,9 @@
 fragment issueData on Issue {
   __typename
   id
+  repository {
+    ...repoData   # fragment: repo_frag.graphql
+  }
   number
   url
   title
