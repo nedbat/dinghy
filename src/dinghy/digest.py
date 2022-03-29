@@ -313,6 +313,7 @@ class Digester:
         for thread in pull["reviewThreads"]["nodes"]:
             com0 = thread["comments"]["nodes"][0]
             com0["children"] = thread["comments"]["nodes"][1:]
+            com0["isResolved"] = thread["isResolved"]
             rev_id = com0["pullRequestReview"]["id"]
             review_comments = reviews[rev_id].setdefault("children", [])
             review_comments.append(com0)

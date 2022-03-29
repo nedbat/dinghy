@@ -137,6 +137,9 @@
   .octicon.checkcircle {
     {{ octicon_bg("check-circle", color="green") }}
   }
+  .octicon.comment.resolved {
+    {{ octicon_bg("tasklist", color="green") }}
+  }
   .octicon.comment {
     {{ octicon_bg("comment") }}
   }
@@ -246,6 +249,8 @@
                           {% else %}
                             <span class="octicon eye" title="reviewed"></span>
                           {% endif %}
+                        {% elif child.isResolved %}
+                          <span class="octicon comment resolved" title="resolved comment"></span>
                         {% else %}
                           <span class="octicon comment" title="comment"></span>
                         {% endif %}

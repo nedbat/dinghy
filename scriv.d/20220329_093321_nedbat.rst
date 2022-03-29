@@ -1,0 +1,5 @@
+Added
+.....
+
+- Resolved comments are now indicated with a checkbox icon, and hover text of
+  "resolved comment".
