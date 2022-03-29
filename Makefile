@@ -39,7 +39,7 @@ check_manifest:
 
 release: clean check_release dist pypi tag ## do all the steps for a release
 
-check_release:
+check_release: check_manifest
 	@if [[ $$(git tags | grep -q -w $$(grep __version__ src/dinghy/__init__.py | grep -E -o '[0-9.]+') && echo "x") == "x" ]]; then \
 		echo 'A git tag for this version exists! Did you forget to bump the version?'; \
 		exit 1; \
@@ -54,7 +54,7 @@ check_release:
 	fi
 	@echo "Release checks passed"
 
-dist: check_manifest ## build the distributions
+dist: ## build the distributions
 	python -m build --sdist --wheel
 	python -m twine check dist/*
 

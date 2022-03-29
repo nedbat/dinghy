@@ -22,6 +22,33 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-0.11.1:
+
+0.11.1 — 2022-03-29
+-------------------
+
+Fixed
+.....
+
+- Corrected a packaging mistake (missing Changelog entry).
+
+
+.. _changelog-0.11.0:
+
+0.11.0 — 2022-03-29
+-------------------
+
+Added
+.....
+
+- Resolved comments are now indicated with a checkbox icon, and hover text of
+  "resolved comment".
+
+Fixed
+.....
+
+- Fixed a crash trying to get the repository for an issue in a project.
+
 .. _changelog-0.10.0:
 
 0.10.0 — 2022-03-28

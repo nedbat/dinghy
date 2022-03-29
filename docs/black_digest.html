@@ -216,7 +216,7 @@ Now PRs will run two diff-shades jobs, "preview-changes" which formats all proje
               </li>
           <li class="closed">
 
-              <p><a href="https://github.com/psf/black/issues/2957"><span class="octicons" title="closed issue, newly created, newly closed"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon closed issue"></span></span><b>Remove underscores in numeric literals</b> #2957</a>
+              <p><a href="https://github.com/psf/black/issues/2957"><span class="octicons" title="closed issue, newly closed"><span class="octicon dash"></span><span class="octicon check"></span><span class="octicon closed issue"></span></span><b>Remove underscores in numeric literals</b> #2957</a>
               [jpy-git]
 
               <span class="label" style="--label-r:255;--label-g:255;--label-b:255;--label-h:0;--label-s:0;--label-l:100;">R: rejected</span>
@@ -836,118 +836,50 @@ I think that change probably broke a lot...</a></p>
                     </li>
                   </ul>
               </li>
-          <li class="">
+          <li class="open">
 
-              <p><a href="https://github.com/psf/black/pull/2966"><span class="octicons" title="merged pull request, newly created, newly merged"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon merged pull"></span></span><b>Fix _unicodefun patch code for Click 8.1.0</b> #2966</a>
-              [JelleZijlstra]
+              <p><a href="https://github.com/psf/black/issues/2865"><span class="octicons" title="issue"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>Black should format docstring line length</b> #2865</a>
+              [danohn]
 
-              
-              </p><p>Fixes #2964</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081023184" title="03-28 18:58">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>github-actions</b>: diff-shades reports zero changes comparing this PR (2ebdcc3) to main (ac7402c).
+              <span class="label" style="--label-r:0;--label-g:82;--label-b:204;--label-h:215;--label-s:100;--label-l:40;">T: design</span>
+                <span class="label" style="--label-r:251;--label-g:170;--label-b:0;--label-h:40;--label-s:100;--label-l:49;">F: strings / docstrings</span>
+                <span class="label" style="--label-r:121;--label-g:71;--label-b:19;--label-h:30;--label-s:72;--label-l:27;">F: linetoolong</span>
+                <span class="label" style="--label-r:191;--label-g:212;--label-b:242;--label-h:215;--label-s:66;--label-l:84;">F: linebreak</span>
+                
+              </p><p>Describe the style change
+Black should format docstring line length.
+Examples in the current Black style
 
-What is this? |...</a></p>
-                      
-                    </li>
+def...</p><ul class="comments">
                   <li>
-                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081025641" title="03-28 19:01">
+                      <p><a href="https://github.com/psf/black/issues/2865#issuecomment-1081850532" title="03-29 13:09">
                         
                           <span class="octicon comment" title="comment"></span>
                         
-                        <b>JelleZijlstra</b>: Merging now because I'm pretty sure this isn't going to break PyPy on MacOS only.</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081069287" title="03-28 19:48">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>tjeck97</b>: breaks black==19.10b0
-ImportError: cannot import name '_unicodefun' from 'click'</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081071276" title="03-28 19:50">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: @tjeck97 black 19.10b0 is old. Please upgrade.</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081076379" title="03-28 19:57">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>tjeck97</b>: @tjeck97 black 19.10b0 is old. Please upgrade.
-
-well now i'm forced to 😅 though pinning...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081277725" title="03-29 00:25">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>mirayyuce</b>: With Version: 22.1.0 I still get the same error</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081279666" title="03-29 00:29">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: This PR was released in version 22.3.0.</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2966#discussion_r837005436" title="03-29 02:43">
-                        
-                            <span class="octicon eye" title="reviewed"></span>
-                          
-                        
-                        <b>cooperlees</b>: Why do we pin < 8.1.0 if this fixes the bug? What am I missing - Is this for diff-shades?</a></p>
-                      
-                        <ul class="thread_comment"><li>
-                      <p><a href="https://github.com/psf/black/pull/2966#discussion_r837006795" title="03-29 02:47">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: There's another bug, pallets/click#2227</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2966#discussion_r837007049" title="03-29 02:47">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>ichard26</b>: Click 8.1.0 breaks mypyc (and probably mypy in general) as it both deleted internal APIs we...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2966#discussion_r837007483" title="03-29 02:48">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>cooperlees</b>: Ahh ok - I just read this below and was super confused as to why we pinned:
-- Fix Black to work...</a></p>
+                        <b>ubalklen</b>: Not saying this should be solved by Black, but docformatter will only help so much. Their line...</a></p>
                       
                     </li>
                   </ul>
-                      
-                    </li>
+              </li>
+          <li class="open">
+
+              <p><a href="https://github.com/psf/black/issues/2493"><span class="octicons" title="issue"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>pre-commit hook fails when using `required-version`</b> #2493</a>
+              [spookylukey]
+
+              <span class="label" style="--label-r:215;--label-g:58;--label-b:74;--label-h:353;--label-s:66;--label-l:53;">T: bug</span>
+                <span class="label" style="--label-r:197;--label-g:222;--label-b:245;--label-h:208;--label-s:70;--label-l:86;">C: integrations</span>
+                <span class="label" style="--label-r:242;--label-g:179;--label-b:219;--label-h:321;--label-s:70;--label-l:82;">C: command line / config</span>
+                
+              </p><p>This is attempting to use the pre-commit hook as described under version control docs along with setting...</p><ul class="comments">
                   <li>
-                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081365235" title="03-29 03:33">
+                      <p><a href="https://github.com/psf/black/issues/2493#issuecomment-1081987650" title="03-29 15:05">
                         
                           <span class="octicon comment" title="comment"></span>
                         
-                        <b>vhosakot</b>: This PR was released in version 22.3.0.
-
-can confirm this issue is fixed in black 22.3.0.</a></p>
+                        <b>jack1142</b>: Here's a workaround:
+repos:
+  - repo: https://github.com/psf/black
+    # The...</a></p>
                       
                     </li>
                   </ul>
@@ -986,15 +918,6 @@ The issue is caused by the release of click...</a></p>
                         
                         <b>woodruffw</b>: +1: We have a failure in pip-audit here: trailofbits/pip-audit#249
 (click is strictly a...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1080974737" title="03-28 18:05">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>scasagrande</b>: For those that are running black via pre-commit, you can pin click to 8.0.4 via the following:
--...</a></p>
                       
                     </li>
                   <li>
@@ -1216,29 +1139,241 @@ I tried:
                         <b>AqeelAT</b>: And none of them worked. They all give the same ImportError. I think it could be a caching...</a></p>
                       
                     </li>
-                  </ul>
-              </li>
-          <li class="open">
-
-              <p><a href="https://github.com/psf/black/issues/2865"><span class="octicons" title="issue"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>Black should format docstring line length</b> #2865</a>
-              [danohn]
-
-              <span class="label" style="--label-r:0;--label-g:82;--label-b:204;--label-h:215;--label-s:100;--label-l:40;">T: design</span>
-                <span class="label" style="--label-r:251;--label-g:170;--label-b:0;--label-h:40;--label-s:100;--label-l:49;">F: strings / docstrings</span>
-                <span class="label" style="--label-r:121;--label-g:71;--label-b:19;--label-h:30;--label-s:72;--label-l:27;">F: linetoolong</span>
-                <span class="label" style="--label-r:191;--label-g:212;--label-b:242;--label-h:215;--label-s:66;--label-l:84;">F: linebreak</span>
-                
-              </p><p>Describe the style change
-Black should format docstring line length.
-Examples in the current Black style
-
-def...</p><ul class="comments">
                   <li>
-                      <p><a href="https://github.com/psf/black/issues/2865#issuecomment-1081850532" title="03-29 13:09">
+                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1082008103" title="03-29 15:20">
                         
                           <span class="octicon comment" title="comment"></span>
                         
-                        <b>ubalklen</b>: Not saying this should be solved by Black, but docformatter will only help so much. Their line...</a></p>
+                        <b>angel-langdon</b>: Upgrade black in .pre-commit-config.yaml
+Cleaner solution
+- repo: https://github.com/psf/black
+ ...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1080974737" title="03-29 15:27">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>scasagrande</b>: For those that are running black via pre-commit, you can pin click to 8.0.4 via the following:
+-...</a></p>
+                      
+                    </li>
+                  </ul>
+              </li>
+          <li class="">
+
+              <p><a href="https://github.com/psf/black/pull/2973"><span class="octicons" title="closed pull request, newly created, newly closed"><span class="octicon star"></span><span class="octicon x"></span><span class="octicon closed pull"></span></span><b>[FIX] update setup.py for click library upgrade</b> #2973</a>
+              [cormaza]
+
+              
+              </p><p>Close #2972</p><ul class="comments">
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2973#issuecomment-1082000451" title="03-29 15:15">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>jack1142</b>: This has already been fixed by Black 22.3.0 and there's no need to restrict click's version anymore.</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2973#issuecomment-1082038361" title="03-29 15:40">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>JelleZijlstra</b>: Indeed.</a></p>
+                      
+                    </li>
+                  </ul>
+              </li>
+          <li class="closed">
+
+              <p><a href="https://github.com/psf/black/issues/2972"><span class="octicons" title="closed issue, newly created, newly closed"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon closed issue"></span></span><b>Issue with click library upgrade</b> #2972</a>
+              [cormaza]
+
+              <span class="label" style="--label-r:215;--label-g:58;--label-b:74;--label-h:353;--label-s:66;--label-l:53;">T: bug</span>
+                <span class="label" style="--label-r:207;--label-g:211;--label-b:215;--label-h:210;--label-s:9;--label-l:82;">R: duplicate</span>
+                <span class="label" style="--label-r:29;--label-g:118;--label-b:219;--label-h:211;--label-s:76;--label-l:48;">C: installation / packaging</span>
+                
+              </p><p>Upgrade on library click https://pypi.org/project/click/8.1.0/ broken, I think we can solve restricting version of...</p><ul class="comments">
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2972#issuecomment-1081999821" title="03-29 15:14">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>jack1142</b>: This has already been fixed by Black 22.3.0.</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/2972#issuecomment-1082038819" title="03-29 15:41">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>JelleZijlstra</b>: Duplicate of #2964</a></p>
+                      
+                    </li>
+                  </ul>
+              </li>
+          <li class="">
+
+              <p><a href="https://github.com/psf/black/pull/2966"><span class="octicons" title="merged pull request, newly created, newly merged"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon merged pull"></span></span><b>Fix _unicodefun patch code for Click 8.1.0</b> #2966</a>
+              [JelleZijlstra]
+
+              
+              </p><p>Fixes #2964</p><ul class="comments">
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081023184" title="03-28 18:58">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>github-actions</b>: diff-shades reports zero changes comparing this PR (2ebdcc3) to main (ac7402c).
+
+What is this? |...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081025641" title="03-28 19:01">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>JelleZijlstra</b>: Merging now because I'm pretty sure this isn't going to break PyPy on MacOS only.</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081069287" title="03-28 19:48">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>tjeck97</b>: breaks black==19.10b0
+ImportError: cannot import name '_unicodefun' from 'click'</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081071276" title="03-28 19:50">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>JelleZijlstra</b>: @tjeck97 black 19.10b0 is old. Please upgrade.</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081076379" title="03-28 19:57">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>tjeck97</b>: @tjeck97 black 19.10b0 is old. Please upgrade.
+
+well now i'm forced to 😅 though pinning...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081277725" title="03-29 00:25">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>mirayyuce</b>: With Version: 22.1.0 I still get the same error</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081279666" title="03-29 00:29">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>JelleZijlstra</b>: This PR was released in version 22.3.0.</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2966#discussion_r837005436" title="03-29 02:43">
+                        
+                            <span class="octicon eye" title="reviewed"></span>
+                          
+                        
+                        <b>cooperlees</b>: Why do we pin < 8.1.0 if this fixes the bug? What am I missing - Is this for diff-shades?</a></p>
+                      
+                        <ul class="thread_comment"><li>
+                      <p><a href="https://github.com/psf/black/pull/2966#discussion_r837006795" title="03-29 02:47">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>JelleZijlstra</b>: There's another bug, pallets/click#2227</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2966#discussion_r837007049" title="03-29 02:47">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>ichard26</b>: Click 8.1.0 breaks mypyc (and probably mypy in general) as it both deleted internal APIs we...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2966#discussion_r837007483" title="03-29 02:48">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>cooperlees</b>: Ahh ok - I just read this below and was super confused as to why we pinned:
+- Fix Black to work...</a></p>
+                      
+                    </li>
+                  </ul>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081365235" title="03-29 03:33">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>vhosakot</b>: This PR was released in version 22.3.0.
+
+can confirm this issue is fixed in black 22.3.0.</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081966462" title="03-29 14:48">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>krmannix</b>: I had 21.10b0 pinned, and it began to break with the release of 22.3.0 with an error that looks...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1082021445" title="03-29 15:29">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>jack1142</b>: The old release of black is affected by a new release of click (black < 22.3.0 does not work...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1082036855" title="03-29 15:39">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>JelleZijlstra</b>: @krmannix you almost certainly did not have 21.10b0 pinned, and (as @jack1142 said), your code...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1082071852" title="03-29 16:07">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>aaronbrezel</b>: I am running black 22.3.0 and click 8.1.0  and am still seeing this issue</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1082074752" title="03-29 16:09">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>jack1142</b>: @aaronbrezel what is the issue you're seeing exactly? Because it cannot be the exact same as...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1082084009" title="03-29 16:17">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>aaronbrezel</b>: @aaronbrezel what is the issue you're seeing exactly? Because it cannot be the exact same as...</a></p>
                       
                     </li>
                   </ul>
@@ -1249,7 +1384,9 @@ def...</p><ul class="comments">
   </ul>
 
 <p class="footer">
-  created at
-  2022-03-29 10:06
-  by <a href="https://pypi.org/project/dinghy/0.11.0">dinghy 0.11.0</a>.
+  created at 2022-03-29 12:17 by
+  <a href="https://pypi.org/project/dinghy/0.11.1">
+    dinghy
+    <span class="dinghy_version">0.11.1</span>
+  </a>.
 </p>
