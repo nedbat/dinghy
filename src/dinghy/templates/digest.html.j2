@@ -279,6 +279,7 @@
   created at {{ now|datetime("%Y-%m-%d %H:%M") }} by
   <a href="https://pypi.org/project/dinghy/{{ __version__ }}">
     dinghy
+    {# keep the dinghy_version span on a line by itself for `make check_release` -#}
     <span class="dinghy_version">{{ __version__ }}</span>
   </a>.
 </p>
