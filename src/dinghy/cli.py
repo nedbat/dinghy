@@ -15,6 +15,7 @@ logger = click_log.basic_config("dinghy")
 
 @click.command()
 @click_log.simple_verbosity_option(logger)
+@click.version_option()
 @click.argument("_input", metavar="[INPUT]", default="dinghy.yaml")
 def cli(_input):
     """
