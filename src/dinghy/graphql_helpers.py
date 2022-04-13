@@ -188,6 +188,10 @@ class GraphqlHelper:
         return data, nodes
 
 
+# $set_env.py: DINGHY_FAKE_PAGE - smaller page size to force pagination
+FAKE_PAGE = int(os.environ.get("DINGHY_FAKE_PAGE", 0))
+
+
 def build_query(gql_filename):
     """Read a GraphQL file, and complete it with requested fragments."""
     filenames = [gql_filename]
@@ -207,4 +211,7 @@ def build_query(gql_filename):
                     seen_filenames.add(frag_name)
         filenames = next_filenames
 
-    return "\n".join(query)
+    full_query = "\n".join(query)
+    if FAKE_PAGE:
+        full_query = full_query.replace("first: 100", f"first: {FAKE_PAGE}")
+    return full_query
