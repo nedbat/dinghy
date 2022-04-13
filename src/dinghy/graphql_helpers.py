@@ -112,14 +112,26 @@ class GraphqlHelper:
         if variables:
             jbody["variables"] = variables
         async with aiohttp.ClientSession(headers=self.headers) as session:
-            async with session.post(self.endpoint, json=jbody) as response:
-                if response.status == 401:
-                    raise DinghyError(
-                        "Unauthorized. You need to create a GITHUB_TOKEN environment variable."
-                    )
-                response.raise_for_status()
-                self.save_rate_limit(_summarize_rate_limit(response))
-                return await response.json()
+            NUM_TRIES = 200
+            PAUSE = 5
+            total_wait = 0
+            for trynum in range(NUM_TRIES):
+                async with session.post(self.endpoint, json=jbody) as response:
+                    if response.status == 401:
+                        raise DinghyError(
+                            "Unauthorized. You need to create a GITHUB_TOKEN environment variable."
+                        )
+                    if response.status == 403 and trynum < NUM_TRIES - 1:
+                        # GitHub sometimes gives us this. Seems like an ad-hoc
+                        # unreported rate limit.  If we wait it out, it goes
+                        # away.
+                        logger.debug(f"Wait out a 403... {total_wait} so far.")
+                        await asyncio.sleep(PAUSE)
+                        total_wait += PAUSE
+                        continue
+                    response.raise_for_status()
+                    self.save_rate_limit(_summarize_rate_limit(response))
+                    return await response.json()
 
     async def execute(self, query, variables=None):
         """
