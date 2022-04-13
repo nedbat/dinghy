@@ -52,6 +52,9 @@
     text-decoration: none;
     color: #0969da;
   }
+  .footer a:hover {
+    text-decoration: underline;
+  }
   .reponame {
     font-weight: bold;
     font-size: 150%;
@@ -181,479 +184,199 @@
         <ul class="entries">
           <li class="">
 
-              <p><a href="https://github.com/psf/black/pull/2939"><span class="octicons" title="merged pull request, newly merged"><span class="octicon dash"></span><span class="octicon check"></span><span class="octicon merged pull"></span></span><b>Remove unnecessary parentheses from `except` clauses</b> #2939</a>
+              <p><a href="https://github.com/psf/black/pull/1879"><span class="octicons" title="pull request"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon pull"></span></span><b>Improve multiline string handling</b> #1879</a>
+              [aneeshusa]
+
+              <span class="label" style="--label-r:251;--label-g:170;--label-b:0;--label-h:40;--label-s:100;--label-l:49;">F: strings / docstrings</span>
+                
+              </p><p>Fixes #256.
+TODOs before this could be merged:
+
+ Get feedback/consensus on the test suite formatting matches what we...</p></li>
+          <li class="">
+
+              <p><a href="https://github.com/psf/black/pull/2991"><span class="octicons" title="merged pull request"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon merged pull"></span></span><b>Remove redundant parentheses around awaited coroutines/tasks</b> #2991</a>
               [jpy-git]
 
               
               </p><p>Description
-Closes #2937. As described in the issue we want to remove redundant parentheses from except...</p></li>
+Closes #275. Remove redundant parentheses around awaited coroutines/tasks.
+This is a tricky one as await...</p></li>
           <li class="">
 
-              <p><a href="https://github.com/psf/black/pull/469"><span class="octicons" title="merged pull request"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon merged pull"></span></span><b>change some numeric behavior</b> #469</a>
-              [JelleZijlstra]
-
-              
-              </p><p>Closes #467.</p></li>
-          <li class="">
-
-              <p><a href="https://github.com/psf/black/pull/2951"><span class="octicons" title="merged pull request, newly merged"><span class="octicon dash"></span><span class="octicon check"></span><span class="octicon merged pull"></span></span><b>Overhaul diff-shades integration to fail on stable changes and preview changes for all projects</b> #2951</a>
+              <p><a href="https://github.com/psf/black/pull/3002"><span class="octicons" title="merged pull request, newly created, newly merged"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon merged pull"></span></span><b>Explain our use of mypyc in the FAQ</b> #3002</a>
               [ichard26]
 
-              <span class="label" style="--label-r:217;--label-g:141;--label-b:91;--label-h:23;--label-s:62;--label-l:60;">skip news</span>
-                <span class="label" style="--label-r:80;--label-g:86;--label-b:120;--label-h:230;--label-s:20;--label-l:39;">C: maintenance</span>
+              <span class="label" style="--label-r:251;--label-g:205;--label-b:0;--label-h:49;--label-s:100;--label-l:49;">T: documentation</span>
+                <span class="label" style="--label-r:217;--label-g:141;--label-b:91;--label-h:23;--label-s:62;--label-l:60;">skip news</span>
                 
               </p><p>Description
-Now PRs will run two diff-shades jobs, "preview-changes" which formats all projects with preview=True,...</p><ul class="comments">
+While responding to GH-2994 I realized we don't have a FAQ entry about this, let's change that so...</p><ul class="comments">
                   <li>
-                      <p><a href="https://github.com/psf/black/pull/2951#pullrequestreview-922355404" title="03-26 20:49">
-                        <span class="octicon checkcircle" title="reviewed, approved"></span>
-                          
-                        
-                        <b>JelleZijlstra</b></a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="closed">
-
-              <p><a href="https://github.com/psf/black/issues/2957"><span class="octicons" title="closed issue, newly closed"><span class="octicon dash"></span><span class="octicon check"></span><span class="octicon closed issue"></span></span><b>Remove underscores in numeric literals</b> #2957</a>
-              [jpy-git]
-
-              <span class="label" style="--label-r:255;--label-g:255;--label-b:255;--label-h:0;--label-s:0;--label-l:100;">R: rejected</span>
-                <span class="label" style="--label-r:0;--label-g:82;--label-b:204;--label-h:215;--label-s:100;--label-l:40;">T: design</span>
-                
-              </p><p>Is your feature request related to a problem? Please describe.
-I've just learned that this
-a = 1_2_3_4_5.6_7_8_9
-is...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2957#issuecomment-1079710247" title="03-26 14:56">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: We previously did this (inserting underscores every third digit only), but undid it because it...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2957#issuecomment-1079775398" title="03-26 21:09">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>jpy-git</b>: I agree it would be a hassle to try and handle the every third digit logic.
-My suggestion was...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2957#issuecomment-1079776793" title="03-26 21:20">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: Well, I'd feel bad about making Black totally remove all usage of a language feature :)
-The...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2957#issuecomment-1079777969" title="03-26 21:28">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>jpy-git</b>: haha that's a fair point, in that case I understand why we leave it the users to handle these! Thanks 😄</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="open">
-
-              <p><a href="https://github.com/psf/black/issues/664"><span class="octicons" title="issue"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>Long with statements are not broken into several lines</b> #664</a>
-              [mhham]
-
-              <span class="label" style="--label-r:0;--label-g:82;--label-b:204;--label-h:215;--label-s:100;--label-l:40;">T: design</span>
-                <span class="label" style="--label-r:58;--label-g:252;--label-b:164;--label-h:152;--label-s:97;--label-l:60;">F: parentheses</span>
-                <span class="label" style="--label-r:194;--label-g:224;--label-b:198;--label-h:128;--label-s:32;--label-l:81;">S: accepted</span>
-                <span class="label" style="--label-r:29;--label-g:118;--label-b:219;--label-h:211;--label-s:76;--label-l:48;">C: target version</span>
-                
-              </p><p>Long with statements are not not broken into several lines:
-Something like this should be OK, according to PEP8
-with...</p></li>
-          <li class="">
-
-              <p><a href="https://github.com/psf/black/pull/2926"><span class="octicons" title="pull request"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon pull"></span></span><b>Remove unnecessary parentheses from `with` statements</b> #2926</a>
-              [jpy-git]
-
-              
-              </p><p>Description
-Closes #2921. Aims to remove redundant parentheses from with statements:
-
-I currently have one failing...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2926#issuecomment-1079773063" title="03-26 20:56">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>jpy-git</b>: One thing that I've noticed this PR doesn't currently do is add optional brackets if there...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2926#issuecomment-1079773682" title="03-26 20:59">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: We should add these parentheses, but probably in a separate PR. There is already a framework for...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2926#issuecomment-1079774489" title="03-26 21:04">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>jpy-git</b>: Fab thanks, just wanted to check/make you aware whilst reviewing this PR. Will follow up with a...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2926#issuecomment-1079779439" title="03-26 21:38">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>ichard26</b>: This has been discussed in #664 and #1948 FYI.</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2926#issuecomment-1070079132" title="03-26 21:41">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>github-actions</b>: diff-shades reports zero changes comparing this PR (639a2e4) to main (f239d22).
-
-What is this? |...</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="">
-
-              <p><a href="https://github.com/psf/black/pull/2852"><span class="octicons" title="pull request"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon pull"></span></span><b>Convert `index.rst` and `license.rst` to markdown</b> #2852</a>
-              [gunungpw]
-
-              <span class="label" style="--label-r:217;--label-g:141;--label-b:91;--label-h:23;--label-s:62;--label-l:60;">skip news</span>
-                
-              </p><p>Description
-resolve #2840
-
-Rename and convert index.rst and license.rst to index.md and lisence.md.
-fix ref link...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2852#pullrequestreview-922363395" title="03-26 22:17">
-                        <span class="octicon checkcircle" title="reviewed, approved"></span>
-                          
-                        
-                        <b>ichard26</b>: I took care of the cleanup. This is good to land now!</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2852#issuecomment-1079785784" title="03-26 22:21">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>gunungpw</b>: Thank you 😊
-Hope you have a nice day</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2852#issuecomment-1079786537" title="03-26 22:27">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>ichard26</b>: Hmm, I need to figure out what to do with the reference section of the contributing docs, but...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2852#pullrequestreview-922365152" title="03-26 22:52">
-                        <span class="octicon checkcircle" title="reviewed, approved"></span>
-                          
-                        
-                        <b>JelleZijlstra</b></a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="open">
-
-              <p><a href="https://github.com/psf/black/issues/1245"><span class="octicons" title="issue"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>Comments between fmt:on/off are reformatted</b> #1245</a>
-              [marcelm]
-
-              <span class="label" style="--label-r:215;--label-g:58;--label-b:74;--label-h:353;--label-s:66;--label-l:53;">T: bug</span>
-                <span class="label" style="--label-r:255;--label-g:0;--label-b:170;--label-h:320;--label-s:100;--label-l:50;">F: comments</span>
-                <span class="label" style="--label-r:78;--label-g:74;--label-b:168;--label-h:242;--label-s:38;--label-l:47;">F: fmtoff</span>
-                
-              </p><p>This code:
-# fmt: off
- #nospace
- #  twospaces
-# fmt: on
-is changed to:
-# fmt: off
-# nospace
-#  twospaces
-# fmt: on
-I...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/1245#issuecomment-1079842809" title="03-27 05:20">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>aljabadi</b>: Thanks for creating the best opinionated formatter I've used.
-I'm having this issue with...</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="">
-
-              <p><a href="https://github.com/psf/black/pull/633"><span class="octicons" title="closed pull request"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon closed pull"></span></span><b>Add a --single-quotes option to prefer single quotes</b> #633</a>
-              [davvid]
-
-              
-              </p><p>Now there are no excuses not to use black.
-Fixes #594</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/633#issuecomment-1080652565" title="03-28 13:28">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>rspadim</b>: Could the brunette --single-quotes be imported to black?</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="">
-
-              <p><a href="https://github.com/psf/black/pull/2965"><span class="octicons" title="draft closed pull request, newly created, newly closed"><span class="octicon star"></span><span class="octicon x"></span><span class="octicon draft closed pull"></span></span><b>Pin click between 8.0.0 and 8.0.4 as 8.1.0 drops Python 3.6</b> #2965</a>
-              [ichard26]
-
-              
-              </p><p>Description
-
-Checklist - did you ...
-
-
- Add a CHANGELOG entry if necessary?
- Add / update tests if necessary?
- Add...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2965#issuecomment-1080977159" title="03-28 18:08">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>ichard26</b>: Could someone please update the changelog for me? I don't have access to my main machine right...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2965#pullrequestreview-923548812" title="03-28 18:10">
-                        <span class="octicon checkcircle" title="reviewed, approved"></span>
-                          
-                        
-                        <b>JelleZijlstra</b></a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2965#issuecomment-1080988973" title="03-28 18:19">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>woodruffw</b>: Does it make sense to remove the patch entirely (or add ImportError to it), per #2964 (comment)?...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2965#issuecomment-1080993120" title="03-28 18:23">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: @woodruffw probably, looking into that now</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2965#issuecomment-1080995261" title="03-28 18:26">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>woodruffw</b>: (My unsolicited 0.02c: this is probably the ideal patch, since it preserves the fix for Python...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2965#issuecomment-1081017928" title="03-28 18:51">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>ichard26</b>: Closing as this was made under a false assessment of the situation.</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="">
-
-              <p><a href="https://github.com/psf/black/pull/2967"><span class="octicons" title="closed pull request, newly created, newly closed"><span class="octicon star"></span><span class="octicon x"></span><span class="octicon closed pull"></span></span><b>Remove usage of _unicodefun module from dependency: 'click'</b> #2967</a>
-              [bcrant]
-
-              
-              </p><p>Description
-The _unicodefun module has been removed from the click library.
-In addition, it is also not actively...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2967#issuecomment-1081006370" title="03-28 18:38">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: Thanks, closing in favor of #2966.</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2967#issuecomment-1081006871" title="03-28 18:39">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>ichard26</b>: We still need this so 3.6 still works even if LANG is misconfigured for unicode.</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2967#issuecomment-1081024775" title="03-28 19:00">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>bcrant</b>: Right on! Glad there was an easy fix. Thanks for being on top of it! Cheers</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="">
-
-              <p><a href="https://github.com/psf/black/pull/2968"><span class="octicons" title="merged pull request, newly created, newly merged"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon merged pull"></span></span><b>Prepare release 22.3.0</b> #2968</a>
-              [JelleZijlstra]
-
-              <span class="label" style="--label-r:217;--label-g:141;--label-b:91;--label-h:23;--label-s:62;--label-l:60;">skip news</span>
-                
-              </p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2968#discussion_r836757968" title="03-28 19:05">
+                      <p><a href="https://github.com/psf/black/pull/3002#discussion_r846703103" title="04-10 02:30">
                         
                             <span class="octicon eye" title="reviewed"></span>
                           
                         
-                        <b>JelleZijlstra</b>: This had ended up in "Parser" somehow</a></p>
+                        <b>JelleZijlstra</b>: Suggested change
+        
+          
+    
+
+        
+      
+    
+    
+      
+          
+         ...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/3002#discussion_r846703459" title="04-10 02:35">
+                        
+                            <span class="octicon eye" title="reviewed"></span>
+                          
+                        
+                        <b>JelleZijlstra</b>: Suggested change
+        
+          
+    
+
+        
+      
+    
+    
+      
+          
+         ...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/3002#discussion_r846703465" title="04-10 02:36">
+                        
+                            <span class="octicon eye" title="reviewed"></span>
+                          
+                        
+                        <b>JelleZijlstra</b>: Suggested change
+        
+          
+    
+
+        
+      
+    
+    
+      
+          
+         ...</a></p>
                       
                         <ul class="thread_comment"><li>
-                      <p><a href="https://github.com/psf/black/pull/2968#discussion_r836759087" title="03-28 19:06">
+                      <p><a href="https://github.com/psf/black/pull/3002#discussion_r846703546" title="04-10 02:37">
                         
                           <span class="octicon comment" title="comment"></span>
                         
-                        <b>ichard26</b>: I was trying to figure out why this line was changed, makes sense :)</a></p>
+                        <b>JelleZijlstra</b>: hm won't that use the sdist instead?</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/3002#discussion_r846704436" title="04-10 02:52">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>ichard26</b>: ah shoot you're correct, I think it's still worth keeping this but I will note that this uses...</a></p>
                       
                     </li>
                   </ul>
                       
                     </li>
                   <li>
-                      <p><a href="https://github.com/psf/black/pull/2968#pullrequestreview-923618193" title="03-28 19:06">
+                      <p><a href="https://github.com/psf/black/pull/3002#discussion_r846842095" title="04-10 21:03">
+                        
+                            <span class="octicon eye" title="reviewed"></span>
+                          
+                        
+                        <b>JelleZijlstra</b>: Suggested change
+        
+          
+    
+
+        
+      
+    
+    
+      
+          
+         ...</a></p>
+                      
+                        <ul class="thread_comment"><li>
+                      <p><a href="https://github.com/psf/black/pull/3002#discussion_r846865685" title="04-10 23:41">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>ichard26</b>: Resolved in 2805958</a></p>
+                      
+                    </li>
+                  </ul>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/3002#pullrequestreview-937358617" title="04-10 23:43">
                         <span class="octicon checkcircle" title="reviewed, approved"></span>
                           
                         
-                        <b>ichard26</b>: LGTM.</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="closed">
-
-              <p><a href="https://github.com/psf/black/issues/2969"><span class="octicons" title="closed issue, newly created, newly closed"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon closed issue"></span></span><b>Bug using a previous click version</b> #2969</a>
-              [nidhaloff]
-
-              <span class="label" style="--label-r:215;--label-g:58;--label-b:74;--label-h:353;--label-s:66;--label-l:53;">T: bug</span>
-                <span class="label" style="--label-r:207;--label-g:211;--label-b:215;--label-h:210;--label-s:9;--label-l:82;">R: duplicate</span>
-                <span class="label" style="--label-r:29;--label-g:118;--label-b:219;--label-h:211;--label-s:76;--label-l:48;">C: installation / packaging</span>
-                
-              </p><p>Describe the bug
-It looks like black is depending on click>=1.8.0, However, click changed the API in the new version...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2969#issuecomment-1081036970" title="03-28 19:12">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: Fixed in Black 22.3.0, published a full two minutes ago. See #2964.</a></p>
+                        <b>JelleZijlstra</b></a></p>
                       
                     </li>
                   <li>
-                      <p><a href="https://github.com/psf/black/issues/2969#issuecomment-1081037004" title="03-28 19:13">
+                      <p><a href="https://github.com/psf/black/pull/3002#issuecomment-1094412038" title="04-10 23:45">
                         
                           <span class="octicon comment" title="comment"></span>
                         
-                        <b>ichard26</b>: Already resolved, see #2964. Thanks anyway!</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="closed">
-
-              <p><a href="https://github.com/psf/black/issues/2963"><span class="octicons" title="closed issue, newly created, newly closed"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon closed issue"></span></span><b>black fails due to _unicodefun</b> #2963</a>
-              [NAThompson]
-
-              <span class="label" style="--label-r:215;--label-g:58;--label-b:74;--label-h:353;--label-s:66;--label-l:53;">T: bug</span>
-                <span class="label" style="--label-r:207;--label-g:211;--label-b:215;--label-h:210;--label-s:9;--label-l:82;">R: duplicate</span>
-                <span class="label" style="--label-r:29;--label-g:118;--label-b:219;--label-h:211;--label-s:76;--label-l:48;">C: installation / packaging</span>
-                
-              </p><p>Describe the bug
-On Centos 7:
-WARNING: You are using pip version 21.2.3; however, version 22.0.4 is available.
-$...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2963#issuecomment-1080971273" title="03-28 18:01">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>laundmo</b>: I found a solution: this is a issue with the newest click. if you install click==8.0.4 it should work</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2963#issuecomment-1080972874" title="03-28 18:03">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>Sillocan</b>: Yep. Click 8.1.0 was released with a breaking change.</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2963#issuecomment-1080975225" title="03-28 18:06">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: Going to close in favor of #2964 which is now pinned.</a></p>
+                        <b>ichard26</b>: Thanks for the review @JelleZijlstra !</a></p>
                       
                     </li>
                   </ul>
               </li>
           <li class="">
 
-              <p><a href="https://github.com/psf/black/pull/2970"><span class="octicons" title="pull request, newly created"><span class="octicon star"></span><span class="octicon dash"></span><span class="octicon pull"></span></span><b>Correctly handle fmt skip comments without internal spaces</b> #2970</a>
-              [siuryan]
+              <p><a href="https://github.com/psf/black/pull/2916"><span class="octicons" title="pull request"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon pull"></span></span><b>Format hex code in unicode escape sequences in string literals</b> #2916</a>
+              [Shivansh-007]
 
               
-              </p><p>Description
-Hi, first time contributor here! This PR fixes #2917 . The issue was that fmt skip comments were being...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2970#discussion_r836807281" title="03-28 20:11">
+              </p><p>Closes #2067
+Closes #2828
+Checklist - did you ...
+
+ Add a CHANGELOG entry if necessary?
+ Add / update tests if...</p><ul class="comments">
+                  <li class="old">
+                      <p><a href="https://github.com/psf/black/pull/2916#pullrequestreview-920963311" title="03-24 22:35">
                         
                             <span class="octicon eye" title="reviewed"></span>
                           
                         
-                        <b>siuryan</b>: Is setting leaf.prefix to empty string here okay? It appears leaf.prefix can only ever contain...</a></p>
+                        <b>ichard26</b>: I won't comment on the actual formatting style, but I got quite a few other suggestions. Not...</a></p>
                       
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2970#issuecomment-1081115661" title="03-28 20:35">
+                        <ul class="thread_comment"><li class="old">
+                      <p><a href="https://github.com/psf/black/pull/2916#discussion_r834785136" title="03-24 22:35">
                         
                           <span class="octicon comment" title="comment"></span>
                         
-                        <b>github-actions</b>: diff-shades reports zero changes comparing this PR (9e3d823) to main (ae2c075).
-
-What is this? |...</a></p>
+                        <b>ichard26</b>: This raw string check is too strict, you need to check for a r in a lowercased prefix, otherwise...</a></p>
+                      
+                        <ul class="thread_comment"><li>
+                      <p><a href="https://github.com/psf/black/pull/2916#discussion_r846872347" title="04-11 00:18">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>ichard26</b>: I'll note that this would be unnecessary if the other r-prefix related suggestion was implemented.</a></p>
+                      
+                    </li>
+                  </ul>
+                      
+                    </li>
+                  </ul>
                       
                     </li>
                   </ul>
@@ -667,713 +390,228 @@ What is this? |...</a></p>
               </p><p>Description
 One of the things discussed in issue #144 was quote placement. Reading through the discussion, there...</p><ul class="comments">
                   <li>
-                      <p><a href="https://github.com/psf/black/pull/2885#issuecomment-1043288305" title="03-28 21:22">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>github-actions</b>: diff-shades results comparing this PR (e073b63) to main (ae2c075). The full diff is available in...</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="open">
-
-              <p><a href="https://github.com/psf/black/issues/2971"><span class="octicons" title="issue, newly created"><span class="octicon star"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>Address breakage of our test suite *before* aiohttp 4.0.0 goes out of alpha</b> #2971</a>
-              [ichard26]
-
-              <span class="label" style="--label-r:0;--label-g:134;--label-b:114;--label-h:171;--label-s:100;--label-l:26;">help wanted</span>
-                <span class="label" style="--label-r:80;--label-g:86;--label-b:120;--label-h:230;--label-s:20;--label-l:39;">C: maintenance</span>
-                
-              </p><p>So thanks to the various dependency related fires we've had lately, I've created ichard26/black-deps-ci which runs...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2971#issuecomment-1081284658" title="03-29 00:39">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>ichard26</b>: It's worth noting even though a substantial amount of our dependencies have removed Python 3.6...</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="closed">
-
-              <p><a href="https://github.com/psf/black/issues/2634"><span class="octicons" title="closed issue"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon closed issue"></span></span><b>ImportError: cannot import name 'echo' from 'click' (unknown location)</b> #2634</a>
-              [salmanhiro]
-
-              <span class="label" style="--label-r:215;--label-g:58;--label-b:74;--label-h:353;--label-s:66;--label-l:53;">T: bug</span>
-                <span class="label" style="--label-r:3;--label-g:102;--label-b:214;--label-h:211;--label-s:97;--label-l:42;">C: dependencies</span>
-                <span class="label" style="--label-r:233;--label-g:150;--label-b:149;--label-h:0;--label-s:65;--label-l:74;">C: crash</span>
-                <span class="label" style="--label-r:127;--label-g:154;--label-b:189;--label-h:213;--label-s:31;--label-l:61;">S: awaiting response</span>
-                
-              </p><p>I'm using Python 3.8.9 with conda environment and resulted in this problem
-Traceback (most recent call last):
-  File...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2634#issuecomment-1081265057" title="03-29 00:02">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>arturomf94</b>: Getting something similar in a GitHub Actions workflow running 3.7.12:
-Traceback (most recent...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2634#issuecomment-1081269710" title="03-29 00:11">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: @arturomf94 you're using an old version of Black.</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2634#issuecomment-1081273719" title="03-29 00:17">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>pmolodo</b>: "old" meaning more than 5 hours ago:
-https://github.com/psf/black/releases/tag/22.3.0
-(For the...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2634#issuecomment-1081274637" title="03-29 00:18">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: "old" meaning more than 5 hours ago:
-
-No, much older than that.</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2634#issuecomment-1081275317" title="03-29 00:19">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>arturomf94</b>: Tbf, I think I am using and older one! I believe it's black==20.8b1.</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2634#issuecomment-1081283504" title="03-29 00:37">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>pmolodo</b>: Hmm - ok, how old, then?  I was just writing some workaround code which is checking the version...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2634#issuecomment-1081284081" title="03-29 00:38">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: Any version before 22.3.0 will fail. I was just pointing out that @arturomf94 was running a much...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2634#issuecomment-1081284846" title="03-29 00:40">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>dahluwalia-ag</b>: I'm also having this error using pre-commit. pre-commit is using verison "21.12b0" so I will try...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2634#issuecomment-1081286128" title="03-29 00:43">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>dahluwalia-ag</b>: Changing to version 22.3.0 has solved the problem... thanks!</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2634#issuecomment-1081286247" title="03-29 00:43">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>arturomf94</b>: Pinned on 22.3.0 - works now 👍. Thanks @JelleZijlstra.
-I think that change probably broke a lot...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2634#issuecomment-1081288938" title="03-29 00:49">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>flipbit03</b>: Just ran into the same issue on black via pre-commit. Moving to 22.3.0 fixed it. Thank goodness.</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2634#issuecomment-1081292806" title="03-29 00:57">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JKCai</b>: thanks for the almost live chat and solution. Save me from troubleshooting my environment.</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2634#issuecomment-1081295043" title="03-29 01:02">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>flipbit03</b>: This was exactly my impression @JKCai, I just found this issue and we live debugged it together...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2634#issuecomment-1081295240" title="03-29 01:03">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JuanEscorcia</b>: thanks a lot! :D</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2634#issuecomment-1081297944" title="03-29 01:09">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: I don't know how everyone ended up on this unrelated issue but glad it helped :) For the record,...</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="open">
-
-              <p><a href="https://github.com/psf/black/issues/2865"><span class="octicons" title="issue"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>Black should format docstring line length</b> #2865</a>
-              [danohn]
-
-              <span class="label" style="--label-r:0;--label-g:82;--label-b:204;--label-h:215;--label-s:100;--label-l:40;">T: design</span>
-                <span class="label" style="--label-r:251;--label-g:170;--label-b:0;--label-h:40;--label-s:100;--label-l:49;">F: strings / docstrings</span>
-                <span class="label" style="--label-r:121;--label-g:71;--label-b:19;--label-h:30;--label-s:72;--label-l:27;">F: linetoolong</span>
-                <span class="label" style="--label-r:191;--label-g:212;--label-b:242;--label-h:215;--label-s:66;--label-l:84;">F: linebreak</span>
-                
-              </p><p>Describe the style change
-Black should format docstring line length.
-Examples in the current Black style
-
-def...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2865#issuecomment-1081850532" title="03-29 13:09">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>ubalklen</b>: Not saying this should be solved by Black, but docformatter will only help so much. Their line...</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="open">
-
-              <p><a href="https://github.com/psf/black/issues/2493"><span class="octicons" title="issue"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>pre-commit hook fails when using `required-version`</b> #2493</a>
-              [spookylukey]
-
-              <span class="label" style="--label-r:215;--label-g:58;--label-b:74;--label-h:353;--label-s:66;--label-l:53;">T: bug</span>
-                <span class="label" style="--label-r:197;--label-g:222;--label-b:245;--label-h:208;--label-s:70;--label-l:86;">C: integrations</span>
-                <span class="label" style="--label-r:242;--label-g:179;--label-b:219;--label-h:321;--label-s:70;--label-l:82;">C: command line / config</span>
-                
-              </p><p>This is attempting to use the pre-commit hook as described under version control docs along with setting...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2493#issuecomment-1081987650" title="03-29 15:05">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>jack1142</b>: Here's a workaround:
-repos:
-  - repo: https://github.com/psf/black
-    # The...</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="closed">
-
-              <p><a href="https://github.com/psf/black/issues/2964"><span class="octicons" title="closed issue, newly created, newly closed"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon closed issue"></span></span><b>Incompatible with click 8.1.0 (ImportError: cannot import name '_unicodefun' from 'click')</b> #2964</a>
-              [stumpylog]
-
-              <span class="label" style="--label-r:215;--label-g:58;--label-b:74;--label-h:353;--label-s:66;--label-l:53;">T: bug</span>
-                <span class="label" style="--label-r:29;--label-g:118;--label-b:219;--label-h:211;--label-s:76;--label-l:48;">C: installation / packaging</span>
-                
-              </p><p>Please use Black 22.3.0 which was just released to fix this issue or pin Click to 8.0.0, 8.0.1, 8.0.2, 8.0.3, or...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1080970453" title="03-28 18:00">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>liranbg</b>: @stumpylog
-try with locking click to click==8.0.1</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1080971383" title="03-28 18:02">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>bradleyhurley</b>: I just came here to open a very similar issue.
-The issue is caused by the release of click...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1080971479" title="03-28 18:02">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>woodruffw</b>: +1: We have a failure in pip-audit here: trailofbits/pip-audit#249
-(click is strictly a...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1080976265" title="03-28 18:07">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: We should probably pin to <8.1.0 for now. I can help get a release out later today to do that.</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1080977192" title="03-28 18:08">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>davidism</b>: Why was black importing an internal module? I was not expecting this to be the change that...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1080978529" title="03-28 18:10">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>woodruffw</b>: Why was black importing an internal module? I was not expecting this to be the change that...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1080980837" title="03-28 18:12">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>mjpieters</b>: The import doesn't raise ModuleNotFoundError, only a plain ImportError, because from click...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1080984425" title="03-28 18:15">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>davidism</b>: Well good news at least, that whole patch isn't needed anymore, since Click itself is now at the...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1080990466" title="03-28 18:21">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>ProGamerGov</b>: This causing black to fail when run on Google Colab right now as well.</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081001637" title="03-28 18:33">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: We do still need the patch. On Python 3.6 + Click 8.0.4 + LANG=C, Click aborts with...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081012555" title="03-28 18:46">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>ichard26</b>: Oh wow, Click 8.1.0 drops support for Python 3.6. We will have to either drop 3.6 soon or pin...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1080974268" title="03-28 18:46">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>ichard26</b>: Oh wow, Click 8.1.0 drops support for Python 3.6. We will have to either drop 3.6 soon or pin...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081035937" title="03-28 19:12">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: We just released Black 22.3.0 with the fix. Sorry for the disruption everyone!
-(There are no...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081135703" title="03-28 20:56">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>ichard26</b>: Mypyc compiled wheels are now also available 🚀</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081157345" title="03-28 21:16">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>UnderratedNorf</b>: How can I fix my failing gitlab pipeline that uses pre-commit ? I'm not sure how to pin Click...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081159070" title="03-28 21:19">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>ichard26</b>: @UnderratedNorf either update black to 22.3.0 in the pre-commit-config.yaml file (remember...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081191079" title="03-28 21:55">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>Edwardx89</b>: Is it me or does 22.3.0 still did not fix it?
-Using black==22.3.0 with click==8.1.0</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081193046" title="03-28 21:56">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: @Edwardx89 could you show more of the stack trace with line numbers? I suspect you're not...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081193376" title="03-28 21:56">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>scasagrande</b>: @Edwardx89 it is working across the board for me, I don't think you're running the version you...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081195107" title="03-28 21:59">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>Edwardx89</b>: @JelleZijlstra @scasagrande</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081197239" title="03-28 22:02">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: You're running an ancient version from back when the whole thing was in black.py.</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081198241" title="03-28 22:03">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>scasagrande</b>: @Edwardx89 you are running pip freeze on your pipeapp venv, but black is installed and running...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081200559" title="03-28 22:06">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>Edwardx89</b>: @scasagrande Ahhh you are right!!! Sorry! It does work :)</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081365324" title="03-29 03:34">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>vhosakot</b>: can confirm this issue is fixed in black 22.3.0.</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081590000" title="03-29 08:36">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>siaccarino</b>: It is still not working:
-pip list
-black               22.3.0   
-click               8.1.0   ...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081597400" title="03-29 08:49">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>mjpieters</b>: It is still not working:
-pip list
-black               22.3.0   
-click               8.1.0   ...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081607647" title="03-29 08:54">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>AqeelAT</b>: Github action still fails.
-I tried:
-      - name: Black Format Check
-        uses:...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081610807" title="03-29 08:57">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>laymonage</b>: And none of them worked. They all give the same ImportError. I think it could be a caching...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1081648985" title="03-29 09:38">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>AqeelAT</b>: And none of them worked. They all give the same ImportError. I think it could be a caching...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1082008103" title="03-29 15:20">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>angel-langdon</b>: Upgrade black in .pre-commit-config.yaml
-Cleaner solution
-- repo: https://github.com/psf/black
- ...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2964#issuecomment-1080974737" title="03-29 15:27">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>scasagrande</b>: For those that are running black via pre-commit, you can pin click to 8.0.4 via the following:
--...</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="">
-
-              <p><a href="https://github.com/psf/black/pull/2973"><span class="octicons" title="closed pull request, newly created, newly closed"><span class="octicon star"></span><span class="octicon x"></span><span class="octicon closed pull"></span></span><b>[FIX] update setup.py for click library upgrade</b> #2973</a>
-              [cormaza]
-
-              
-              </p><p>Close #2972</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2973#issuecomment-1082000451" title="03-29 15:15">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>jack1142</b>: This has already been fixed by Black 22.3.0 and there's no need to restrict click's version anymore.</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2973#issuecomment-1082038361" title="03-29 15:40">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: Indeed.</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="closed">
-
-              <p><a href="https://github.com/psf/black/issues/2972"><span class="octicons" title="closed issue, newly created, newly closed"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon closed issue"></span></span><b>Issue with click library upgrade</b> #2972</a>
-              [cormaza]
-
-              <span class="label" style="--label-r:215;--label-g:58;--label-b:74;--label-h:353;--label-s:66;--label-l:53;">T: bug</span>
-                <span class="label" style="--label-r:207;--label-g:211;--label-b:215;--label-h:210;--label-s:9;--label-l:82;">R: duplicate</span>
-                <span class="label" style="--label-r:29;--label-g:118;--label-b:219;--label-h:211;--label-s:76;--label-l:48;">C: installation / packaging</span>
-                
-              </p><p>Upgrade on library click https://pypi.org/project/click/8.1.0/ broken, I think we can solve restricting version of...</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2972#issuecomment-1081999821" title="03-29 15:14">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>jack1142</b>: This has already been fixed by Black 22.3.0.</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/issues/2972#issuecomment-1082038819" title="03-29 15:41">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: Duplicate of #2964</a></p>
-                      
-                    </li>
-                  </ul>
-              </li>
-          <li class="">
-
-              <p><a href="https://github.com/psf/black/pull/2966"><span class="octicons" title="merged pull request, newly created, newly merged"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon merged pull"></span></span><b>Fix _unicodefun patch code for Click 8.1.0</b> #2966</a>
-              [JelleZijlstra]
-
-              
-              </p><p>Fixes #2964</p><ul class="comments">
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081023184" title="03-28 18:58">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>github-actions</b>: diff-shades reports zero changes comparing this PR (2ebdcc3) to main (ac7402c).
-
-What is this? |...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081025641" title="03-28 19:01">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: Merging now because I'm pretty sure this isn't going to break PyPy on MacOS only.</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081069287" title="03-28 19:48">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>tjeck97</b>: breaks black==19.10b0
-ImportError: cannot import name '_unicodefun' from 'click'</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081071276" title="03-28 19:50">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: @tjeck97 black 19.10b0 is old. Please upgrade.</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081076379" title="03-28 19:57">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>tjeck97</b>: @tjeck97 black 19.10b0 is old. Please upgrade.
-
-well now i'm forced to 😅 though pinning...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081277725" title="03-29 00:25">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>mirayyuce</b>: With Version: 22.1.0 I still get the same error</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081279666" title="03-29 00:29">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>JelleZijlstra</b>: This PR was released in version 22.3.0.</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2966#discussion_r837005436" title="03-29 02:43">
+                      <p><a href="https://github.com/psf/black/pull/2885#pullrequestreview-937364795" title="04-11 00:09">
                         
                             <span class="octicon eye" title="reviewed"></span>
                           
                         
-                        <b>cooperlees</b>: Why do we pin < 8.1.0 if this fixes the bug? What am I missing - Is this for diff-shades?</a></p>
+                        <b>JelleZijlstra</b>: The code looks solid but I'd still rather not put a blank line at the beginning of each...</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2885#issuecomment-1043288305" title="04-11 00:21">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>github-actions</b>: diff-shades results comparing this PR (06b2587) to main (497a725). The full diff is available in...</a></p>
+                      
+                    </li>
+                  </ul>
+              </li>
+          <li class="closed">
+
+              <p><a href="https://github.com/psf/black/issues/3005"><span class="octicons" title="closed issue, newly created, newly closed"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon closed issue"></span></span><b>Add support for structural pattern matching (match...case) new in 3.10</b> #3005</a>
+              [jimmyx0x]
+
+              <span class="label" style="--label-r:207;--label-g:211;--label-b:215;--label-h:210;--label-s:9;--label-l:82;">R: duplicate</span>
+                <span class="label" style="--label-r:162;--label-g:238;--label-b:239;--label-h:180;--label-s:70;--label-l:78;">T: enhancement</span>
+                <span class="label" style="--label-r:147;--label-g:148;--label-b:150;--label-h:219;--label-s:1;--label-l:58;">R: outdated</span>
+                
+              </p><p>Is your feature request related to a problem? Please describe.
+Black does not support the new structural pattern...</p><ul class="comments">
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/3005#issuecomment-1095163055" title="04-11 15:00">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>dignissimus</b>: Is this a duplicate of #2242?</a></p>
+                      
+                    </li>
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/3005#issuecomment-1095163426" title="04-11 15:01">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>JelleZijlstra</b>: We already support this; see the issue @dignissimus linked.</a></p>
+                      
+                    </li>
+                  </ul>
+              </li>
+          <li class="closed">
+
+              <p><a href="https://github.com/psf/black/issues/2976"><span class="octicons" title="closed issue"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon closed issue"></span></span><b>ImportError: cannot import name '_unicodefun' from 'click'</b> #2976</a>
+              [enaskopelja]
+
+              <span class="label" style="--label-r:215;--label-g:58;--label-b:74;--label-h:353;--label-s:66;--label-l:53;">T: bug</span>
+                <span class="label" style="--label-r:207;--label-g:211;--label-b:215;--label-h:210;--label-s:9;--label-l:82;">R: duplicate</span>
+                
+              </p><p>Describe the bug
+A recent version of click has been released which removes _unicodefun, breaking black (see also...</p></li>
+          <li class="">
+
+              <p><a href="https://github.com/psf/black/pull/3008"><span class="octicons" title="pull request, newly created"><span class="octicon star"></span><span class="octicon dash"></span><span class="octicon pull"></span></span><b>Make ipynb tests compatible with ipython 8.3.0+</b> #3008</a>
+              [MarcoGorelli]
+
+              <span class="label" style="--label-r:217;--label-g:141;--label-b:91;--label-h:23;--label-s:62;--label-l:60;">skip news</span>
+                
+              </p><p>Description
+
+Checklist - did you ...
+
+
+ Add a CHANGELOG entry if necessary? (this isn't user-facing, so I don't...</p><ul class="comments">
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/3008#discussion_r847625883" title="04-11 18:36">
+                        
+                            <span class="octicon eye" title="reviewed"></span>
+                          
+                        
+                        <b>JelleZijlstra</b>: This won't work well because line 146 will fail if the module isn't available.</a></p>
                       
                         <ul class="thread_comment"><li>
-                      <p><a href="https://github.com/psf/black/pull/2966#discussion_r837006795" title="03-29 02:47">
+                      <p><a href="https://github.com/psf/black/pull/3008#discussion_r847630686" title="04-11 18:42">
                         
                           <span class="octicon comment" title="comment"></span>
                         
-                        <b>JelleZijlstra</b>: There's another bug, pallets/click#2227</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2966#discussion_r837007049" title="03-29 02:47">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>ichard26</b>: Click 8.1.0 breaks mypyc (and probably mypy in general) as it both deleted internal APIs we...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2966#discussion_r837007483" title="03-29 02:48">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>cooperlees</b>: Ahh ok - I just read this below and was super confused as to why we pinned:
-- Fix Black to work...</a></p>
+                        <b>MarcoGorelli</b>: on line 25 there's
+pytest.importorskip("IPython", reason="IPython is an optional...</a></p>
                       
                     </li>
                   </ul>
                       
                     </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081365235" title="03-29 03:33">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>vhosakot</b>: This PR was released in version 22.3.0.
+                  </ul>
+              </li>
+          <li class="open">
 
-can confirm this issue is fixed in black 22.3.0.</a></p>
+              <p><a href="https://github.com/psf/black/issues/3009"><span class="octicons" title="issue, newly created"><span class="octicon star"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>Feature request: Respect `# fmt: skip` at the end of multi-line statements</b> #3009</a>
+              [goodside]
+
+              <span class="label" style="--label-r:162;--label-g:238;--label-b:239;--label-h:180;--label-s:70;--label-l:78;">T: enhancement</span>
+                
+              </p><p>Is your feature request related to a problem? Please describe.
+Consider the following un-blackened code:
+d =...</p></li>
+          <li class="">
+
+              <p><a href="https://github.com/psf/black/pull/3007"><span class="octicons" title="merged pull request, newly created, newly merged"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon merged pull"></span></span><b>Quote "black[jupyter]" in README.md</b> #3007</a>
+              [dignissimus]
+
+              <span class="label" style="--label-r:217;--label-g:141;--label-b:91;--label-h:23;--label-s:62;--label-l:60;">skip news</span>
+                
+              </p><p>Relates to #3006</p><ul class="comments">
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/3007#pullrequestreview-938277191" title="04-11 16:24">
+                        <span class="octicon checkcircle" title="reviewed, approved"></span>
+                          
+                        
+                        <b>JelleZijlstra</b></a></p>
                       
                     </li>
                   <li>
-                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1081966462" title="03-29 14:48">
+                      <p><a href="https://github.com/psf/black/pull/3007#issuecomment-1095686813" title="04-11 23:23">
                         
                           <span class="octicon comment" title="comment"></span>
                         
-                        <b>krmannix</b>: I had 21.10b0 pinned, and it began to break with the release of 22.3.0 with an error that looks...</a></p>
+                        <b>ichard26</b>: Congrats on your first contribution to psf/black 🎉 @dignissimus</a></p>
+                      
+                    </li>
+                  </ul>
+              </li>
+          <li class="">
+
+              <p><a href="https://github.com/psf/black/pull/3006"><span class="octicons" title="merged pull request, newly created, newly merged"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon merged pull"></span></span><b>Quote black[jupyter] and black[d] in installation docs</b> #3006</a>
+              [JelleZijlstra]
+
+              <span class="label" style="--label-r:217;--label-g:141;--label-b:91;--label-h:23;--label-s:62;--label-l:60;">skip news</span>
+                
+              </p><p>We just got someone on Discord who was confused because the command as written caused their shell to try to do...</p><ul class="comments">
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/3006#issuecomment-1095572136" title="04-11 21:19">
+                        
+                          <span class="octicon comment" title="comment"></span>
+                        
+                        <b>felix-hilden</b>: Let the first timer have it? misread...</a></p>
                       
                     </li>
                   <li>
-                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1082021445" title="03-29 15:29">
+                      <p><a href="https://github.com/psf/black/pull/3006#pullrequestreview-938703490" title="04-11 23:22">
+                        <span class="octicon checkcircle" title="reviewed, approved"></span>
+                          
+                        
+                        <b>ichard26</b>: Thank you!</a></p>
+                      
+                    </li>
+                  </ul>
+              </li>
+          <li class="open">
+
+              <p><a href="https://github.com/psf/black/issues/2052"><span class="octicons" title="issue"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon issue"></span></span><b>Trailing comma is not deleted in a one-line dict literal</b> #2052</a>
+              [Wim-De-Clercq]
+
+              <span class="label" style="--label-r:0;--label-g:82;--label-b:204;--label-h:215;--label-s:100;--label-l:40;">T: design</span>
+                <span class="label" style="--label-r:69;--label-g:66;--label-b:109;--label-h:244;--label-s:24;--label-l:34;">F: trailing comma</span>
+                
+              </p><p>Describe the style change
+When a specific dict with callables gets the key looked up and the callable called in one...</p></li>
+          <li class="closed">
+
+              <p><a href="https://github.com/psf/black/issues/3010"><span class="octicons" title="closed issue, newly created, newly closed"><span class="octicon star"></span><span class="octicon check"></span><span class="octicon closed issue"></span></span><b>Trailing comma is not deleted in a one-line dict literal</b> #3010</a>
+              [futujaos]
+
+              <span class="label" style="--label-r:215;--label-g:58;--label-b:74;--label-h:353;--label-s:66;--label-l:53;">T: bug</span>
+                <span class="label" style="--label-r:207;--label-g:211;--label-b:215;--label-h:210;--label-s:9;--label-l:82;">R: duplicate</span>
+                <span class="label" style="--label-r:69;--label-g:66;--label-b:109;--label-h:244;--label-s:24;--label-l:34;">F: trailing comma</span>
+                
+              </p><p>Playground, or code sample:
+Before
+user_info = {
+    'worker': _make_worker_info,
+    'requester':...</p><ul class="comments">
+                  <li>
+                      <p><a href="https://github.com/psf/black/issues/3010#issuecomment-1097001538" title="04-12 17:32">
                         
                           <span class="octicon comment" title="comment"></span>
                         
-                        <b>jack1142</b>: The old release of black is affected by a new release of click (black < 22.3.0 does not work...</a></p>
+                        <b>JelleZijlstra</b>: Duplicate of #2052</a></p>
                       
                     </li>
                   <li>
-                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1082036855" title="03-29 15:39">
+                      <p><a href="https://github.com/psf/black/issues/3010#issuecomment-1097001841" title="04-12 17:32">
                         
                           <span class="octicon comment" title="comment"></span>
                         
-                        <b>JelleZijlstra</b>: @krmannix you almost certainly did not have 21.10b0 pinned, and (as @jack1142 said), your code...</a></p>
+                        <b>JelleZijlstra</b>: Though your issue title is a lot better, I'll rename the other one</a></p>
+                      
+                    </li>
+                  </ul>
+              </li>
+          <li class="">
+
+              <p><a href="https://github.com/psf/black/pull/2996"><span class="octicons" title="pull request"><span class="octicon dash"></span><span class="octicon dash"></span><span class="octicon pull"></span></span><b>Standardise newlines after module-level docstrings</b> #2996</a>
+              [jpy-git]
+
+              
+              </p><p>Description
+Closes #1872.
+Does 2 things:
+a) First commit is a slight refactoring of EmptyLineTracker to remove the...</p><ul class="comments">
+                  <li>
+                      <p><a href="https://github.com/psf/black/pull/2996#pullrequestreview-938596177" title="04-11 21:12">
+                        
+                            <span class="octicon eye" title="reviewed"></span>
+                          
+                        
+                        <b>felix-hilden</b>: Man, huge thanks for taking on all these issues!
+I think I'd prefer the newlines to be added to...</a></p>
                       
                     </li>
                   <li>
-                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1082071852" title="03-29 16:07">
+                      <p><a href="https://github.com/psf/black/pull/2996#issuecomment-1097288409" title="04-12 22:23">
                         
                           <span class="octicon comment" title="comment"></span>
                         
-                        <b>aaronbrezel</b>: I am running black 22.3.0 and click 8.1.0  and am still seeing this issue</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1082074752" title="03-29 16:09">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>jack1142</b>: @aaronbrezel what is the issue you're seeing exactly? Because it cannot be the exact same as...</a></p>
-                      
-                    </li>
-                  <li>
-                      <p><a href="https://github.com/psf/black/pull/2966#issuecomment-1082084009" title="03-29 16:17">
-                        
-                          <span class="octicon comment" title="comment"></span>
-                        
-                        <b>aaronbrezel</b>: @aaronbrezel what is the issue you're seeing exactly? Because it cannot be the exact same as...</a></p>
+                        <b>jpy-git</b>: About the preview handling: certainly this is a feature we'd carry over without question, so no...</a></p>
                       
                     </li>
                   </ul>
@@ -1384,9 +622,8 @@ can confirm this issue is fixed in black 22.3.0.</a></p>
   </ul>
 
 <p class="footer">
-  created at 2022-03-29 12:17 by
-  <a href="https://pypi.org/project/dinghy/0.11.1">
+  created at 2022-04-12 21:15 by
+  <a href="https://pypi.org/project/dinghy/0.11.2">
     dinghy
-    <span class="dinghy_version">0.11.1</span>
-  </a>.
+    <span class="dinghy_version">0.11.2</span></a>.
 </p>
