@@ -22,6 +22,25 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-0.11.2:
+
+0.11.2 — 2022-04-12
+-------------------
+
+Added
+.....
+
+- Added a ``--version`` option.
+
+Fixed
+.....
+
+- Pull requests with many reviews would skip some reviews.  Now all pull
+  request data is fully retrieved.
+
+- On large digests, GitHub sometimes returns 403 as a rate limit.  Retry when
+  this happens to finish the queries.
+
 .. _changelog-0.11.1:
 
 0.11.1 — 2022-03-29

@@ -39,7 +39,7 @@ check_manifest:
 
 release: clean check_release dist pypi tag ## do all the steps for a release
 
-check_release: check_manifest check_version check_scriv check_sample
+check_release: check_manifest check_version check_scriv check_sample  ## check that we are ready for a release
 
 check_version:
 	@if [[ $$(git tags | grep -q -w $$(python setup.py --version) && echo "x") == "x" ]]; then \
