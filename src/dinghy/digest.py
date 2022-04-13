@@ -207,6 +207,19 @@ class Digester:
 
         raise DinghyError(f"Can't understand URL {url!r}")
 
+    async def get_more(
+        self, container, graphql, id
+    ):  # pylint: disable=redefined-builtin
+        """
+        If the `container` isn't full yet, get all the nodes.
+        """
+        if container["totalCount"] > len(container["nodes"]):
+            _, all_nodes = await self.gql.nodes(
+                query=build_query(graphql),
+                variables=dict(id=id),
+            )
+            container["nodes"] = all_nodes
+
     def _trim_unwanted(self, nodes):
         """
         Trim a list to keep only activity since `self.since`, and only by real
@@ -271,14 +284,8 @@ class Digester:
         Args:
             issue (dict): the issue to populate.
         """
-        if issue["comments"]["totalCount"] > len(issue["comments"]["nodes"]):
-            _, comments = await self.gql.nodes(
-                query=build_query("issue_comments.graphql"),
-                variables=dict(id=issue["id"]),
-            )
-        else:
-            comments = issue["comments"]["nodes"]
-        issue["children"] = self._trim_unwanted(comments)
+        await self.get_more(issue["comments"], "issue_comments.graphql", issue["id"])
+        issue["children"] = self._trim_unwanted(issue["comments"]["nodes"])
 
     async def _process_pull_request(self, pull):
         """
@@ -297,6 +304,27 @@ class Digester:
         #   reviewThreads:
         #       Each is a sequence of comments that follow one another.
         #
+
+        # Pull all the data from paginated components.
+        await asyncio.gather(
+            self.get_more(pull["comments"], "pr_comments.graphql", pull["id"]),
+            self.get_more(pull["reviews"], "pr_reviews.graphql", pull["id"]),
+            self.get_more(
+                pull["reviewThreads"], "pr_reviewthreads.graphql", pull["id"]
+            ),
+        )
+
+        coros = []
+        coros.extend(
+            self.get_more(r["comments"], "review_comments.graphql", r["id"])
+            for r in pull["reviews"]["nodes"]
+        )
+        coros.extend(
+            self.get_more(rt["comments"], "reviewthread_comments.graphql", rt["id"])
+            for rt in pull["reviewThreads"]["nodes"]
+        )
+        await asyncio.gather(*coros)
+
         children = {}
         reviews = {}
 

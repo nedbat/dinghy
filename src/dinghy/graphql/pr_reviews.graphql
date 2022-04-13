@@ -1,0 +1,18 @@
+query getPrReviews(
+  $id: ID!
+  $after: String
+) {
+  node(id:$id) {
+    ... on PullRequest {
+      reviews(first: 100, after: $after) {
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+        nodes {
+          ...reviewData     # fragment: review_frag.graphql
+        }
+      }
+    }
+  }
+}

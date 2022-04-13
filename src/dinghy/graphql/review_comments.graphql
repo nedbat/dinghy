@@ -1,0 +1,21 @@
+query getReviewComments(
+  $id: ID!
+  $after: String
+) {
+  node(id:$id) {
+    ... on PullRequestReview {
+      comments(first: 100, after: $after) {
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+        nodes {
+          pullRequestReview {
+            id
+          }
+          ...commentData    # fragment: comment_frag.graphql
+        }
+      }
+    }
+  }
+}

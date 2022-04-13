@@ -1,6 +1,7 @@
 # https://docs.github.com/en/graphql/reference/objects#pullrequest
 fragment pullRequestData on PullRequest {
   __typename
+  id
   repository {
     ...repoData   # fragment: repo_frag.graphql
   }
@@ -18,7 +19,7 @@ fragment pullRequestData on PullRequest {
   merged
   mergedAt
   isDraft
-  labels(first:10) {
+  labels(first: 30) {
     nodes {
       color
       name
@@ -40,16 +41,7 @@ fragment pullRequestData on PullRequest {
     # https://docs.github.com/en/graphql/reference/objects#pullrequestreviewthread
     totalCount
     nodes {
-      isResolved
-      comments(first: 100) {
-        totalCount
-        nodes {
-          pullRequestReview {
-            id
-          }
-          ...commentData    # fragment: comment_frag.graphql
-        }
-      }
+      ...reviewThreadData   # fragment: reviewthread_frag.graphql
     }
   }
 }

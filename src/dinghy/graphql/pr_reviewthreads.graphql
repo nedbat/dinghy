@@ -1,0 +1,18 @@
+query getPrReviewThreads(
+  $id: ID!
+  $after: String
+) {
+  node(id:$id) {
+    ... on PullRequest {
+      reviewThreads(first: 100, after: $after) {
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+        nodes {
+          ...reviewThreadData     # fragment: reviewthread_frag.graphql
+        }
+      }
+    }
+  }
+}

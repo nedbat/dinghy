@@ -1,0 +1,8 @@
+Fixed
+.....
+
+- Pull requests with many reviews would skip some reviews.  Now all pull
+  request data is fully retrieved.
+
+- On large digests, GitHub sometimes returns 403 as a rate limit.  Retry when
+  this happens to finish the queries.

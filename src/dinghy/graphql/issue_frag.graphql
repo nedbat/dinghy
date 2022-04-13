@@ -23,7 +23,7 @@ fragment issueData on Issue {
       ...commentData    # fragment: comment_frag.graphql
     }
   }
-  labels(first:20) {
+  labels(first: 30) {
     nodes {
       color
       name

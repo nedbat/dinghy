@@ -1,0 +1,18 @@
+query getPrComments(
+  $id: ID!
+  $after: String
+) {
+  node(id:$id) {
+    ... on PullRequest {
+      comments(first: 100, after: $after) {
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+        nodes {
+          ...commentData    # fragment: comment_frag.graphql
+        }
+      }
+    }
+  }
+}
