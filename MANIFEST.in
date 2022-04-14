@@ -3,8 +3,7 @@ include dev-requirements.txt
 include Makefile
 include pylintrc
 include *.rst
-include docs/black_dinghy.yaml
-include docs/black_digest.html
+include docs/black_digest.*
 
 recursive-include tests *
 recursive-include scriv.d *

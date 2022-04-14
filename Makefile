@@ -37,9 +37,12 @@ check_manifest:
 
 .PHONY: dist testpypi pypi tag sample
 
+SAMPLE = docs/black_digest
+
 release: clean check_release dist pypi tag ## do all the steps for a release
 
 check_release: check_manifest check_version check_scriv check_sample  ## check that we are ready for a release
+	@echo "Release checks passed"
 
 check_version:
 	@if [[ $$(git tags | grep -q -w $$(python setup.py --version) && echo "x") == "x" ]]; then \
@@ -49,16 +52,15 @@ check_version:
 
 check_scriv:
 	@if (( $$(ls -1 scriv.d | wc -l) != 1 )); then \
-		echo 'There are scriv fragments! Did you forget to `scriv collect`?'; \
+		echo 'There are scriv fragments! Did you forget `scriv collect`?'; \
 		exit 1; \
 	fi
 
 check_sample:
-	@if [[ $$(python setup.py --version) != $$(grep dinghy_version docs/black_digest.html | grep -E -o '[0-9][0-9.]+') ]]; then \
+	@if [[ $$(python setup.py --version) != $$(grep dinghy_version $(SAMPLE).html | grep -E -o '[0-9][0-9.]+') ]]; then \
 		echo 'The sample digest has the wrong version! Did you forget `make sample`?'; \
 		exit 1; \
 	fi
-	@echo "Release checks passed"
 
 dist: ## build the distributions
 	python -m build --sdist --wheel
@@ -74,5 +76,5 @@ tag: ## make a git tag with the version number
 	git tag -a -m "Version $$(python setup.py --version)" $$(python setup.py --version)
 
 sample: ## make the sample digest
-	DINGHY_SAVE_ENTRIES=0 DINGHY_SAVE_RESPONSES=0 DINGHY_SAVE_RESULT=0 python -m dinghy docs/black_dinghy.yaml
-	sed -i "" -e '/>Activity/s/ since.*</</' docs/black_digest.html
+	DINGHY_SAVE_ENTRIES=0 DINGHY_SAVE_RESPONSES=0 DINGHY_SAVE_RESULT=0 python -m dinghy $(SAMPLE).yaml
+	sed -i "" -e '/>Activity/s/ since.*</</' $(SAMPLE).html
