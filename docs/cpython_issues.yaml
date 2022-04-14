@@ -1,0 +1,6 @@
+# This is used to create the sample digest for the readme.
+digests:
+  - digest: docs/cpython_issues.html
+    since: 1 days
+    items:
+      - https://github.com/python/cpython/issues
