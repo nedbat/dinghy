@@ -1,7 +1,7 @@
 out_*.json
 save_*.json
-try_*.yaml
 
 *.egg-info/
 build/
 dist/
+lab/
