@@ -13,6 +13,26 @@ from .helpers import DinghyError
 logger = click_log.basic_config("dinghy")
 
 
+def main_run(coro):
+    """
+    Run a coroutine for a Dinghy command.
+    """
+    try:
+        return asyncio.run(coro)
+    except DinghyError as err:
+        logger.error(f"dinghy error: {err}")
+        sys.exit(1)
+    finally:
+        lrl = GraphqlHelper.last_rate_limit()
+        if lrl is not None:
+            resource = lrl.get("resource", "general")
+            logger.debug(
+                f"Remaining {resource} rate limit: "
+                + f"{lrl['remaining']} of {lrl['limit']}, "
+                + f"next reset at {lrl['reset_when']}"
+            )
+
+
 @click.command()
 @click_log.simple_verbosity_option(logger)
 @click.version_option()
@@ -30,17 +50,4 @@ def cli(_input):
     else:
         coro = make_digests_from_config(_input)
 
-    try:
-        asyncio.run(coro)
-    except DinghyError as err:
-        logger.error(f"dinghy error: {err}")
-        sys.exit(1)
-    finally:
-        lrl = GraphqlHelper.last_rate_limit()
-        if lrl is not None:
-            resource = lrl.get("resource", "general")
-            logger.debug(
-                f"Remaining {resource} rate limit: "
-                + f"{lrl['remaining']} of {lrl['limit']}, "
-                + f"next reset at {lrl['reset_when']}"
-            )
+    main_run(coro)

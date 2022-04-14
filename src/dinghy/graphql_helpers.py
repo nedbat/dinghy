@@ -160,7 +160,7 @@ class GraphqlHelper:
         _raise_if_error(data)
         return data
 
-    async def nodes(self, query, variables=None, donefn=None):
+    async def nodes(self, query, variables=None, donefn=None, clear_nodes=True):
         """
         Execute a GraphQL query, and follow the pagination to get all the nodes.
 
@@ -184,7 +184,8 @@ class GraphqlHelper:
                 break
             variables["after"] = fetched["pageInfo"]["endCursor"]
         # Remove the nodes from the top-level data we return, to keep things clean.
-        fetched["nodes"] = []
+        if clear_nodes:
+            fetched["nodes"] = []
         return data, nodes
 
 
