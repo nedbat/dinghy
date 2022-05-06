@@ -121,10 +121,10 @@ class GraphqlHelper:
                         raise DinghyError(
                             "Unauthorized. You need to create a GITHUB_TOKEN environment variable."
                         )
-                    if response.status == 403 and trynum < NUM_TRIES - 1:
-                        # GitHub sometimes gives us this. Seems like an ad-hoc
-                        # unreported rate limit.  If we wait it out, it goes
-                        # away.
+                    if response.status in {403, 502} and trynum < NUM_TRIES - 1:
+                        # GitHub sometimes gives us these. 403 seems like an ad-hoc
+                        # unreported rate limit.  502 seems like straight-up
+                        # flakiness.  If we wait them out, it goes away.
                         logger.debug(f"Wait out a 403... {total_wait} so far.")
                         await asyncio.sleep(PAUSE)
                         total_wait += PAUSE
