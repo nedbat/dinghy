@@ -19,7 +19,7 @@ requirements: ## install development environment requirements
 	pip install -r dev-requirements.txt
 
 
-.PHONY: test quality black lint check_manifest
+.PHONY: test quality black lint check_manifest sample
 
 test: ## run tests in the current virtualenv
 	pytest tests
@@ -35,11 +35,14 @@ lint:
 check_manifest:
 	python -m check_manifest
 
-.PHONY: dist testpypi pypi tag sample
-
 SAMPLE = docs/black_digest
 
-release: clean check_release dist pypi tag ## do all the steps for a release
+sample: ## make the sample digest
+	DINGHY_SAVE_ENTRIES=0 DINGHY_SAVE_RESPONSES=0 DINGHY_SAVE_RESULT=0 python -m dinghy $(SAMPLE).yaml
+	sed -i "" -e '/>Activity/s/ since.*</</' $(SAMPLE).html
+
+
+.PHONY: check_release check_version check_scriv check_sample
 
 check_release: check_manifest check_version check_scriv check_sample  ## check that we are ready for a release
 	@echo "Release checks passed"
@@ -62,6 +65,10 @@ check_sample:
 		exit 1; \
 	fi
 
+.PHONY: release dist testpypi pypi tag gh_release
+
+release: clean check_release dist pypi tag gh_release ## do all the steps for a release
+
 dist: ## build the distributions
 	python -m build --sdist --wheel
 	python -m twine check dist/*
@@ -74,7 +81,7 @@ pypi: ## upload the built distributions to PyPI.
 
 tag: ## make a git tag with the version number
 	git tag -a -m "Version $$(python setup.py --version)" $$(python setup.py --version)
+	git push --all
 
-sample: ## make the sample digest
-	DINGHY_SAVE_ENTRIES=0 DINGHY_SAVE_RESPONSES=0 DINGHY_SAVE_RESULT=0 python -m dinghy $(SAMPLE).yaml
-	sed -i "" -e '/>Activity/s/ since.*</</' $(SAMPLE).html
+gh_release: ## make a GitHub release
+	python -m scriv github-release
