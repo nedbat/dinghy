@@ -22,6 +22,17 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-0.11.3:
+
+0.11.3 — 2022-05-06
+-------------------
+
+Fixed
+.....
+
+- GitHub sometimes responds with "502 Bad Gateway".  Pause and retry if that
+  happens.
+
 .. _changelog-0.11.2:
 
 0.11.2 — 2022-04-12

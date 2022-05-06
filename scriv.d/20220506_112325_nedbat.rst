@@ -1,5 +1,0 @@
-Fixed
-.....
-
-- GitHub sometimes responds with "502 Bad Gateway".  Pause and retry if that
-  happens.
