@@ -1,6 +1,0 @@
-Added
-.....
-
-- HTML escaping is applied to the text pulled from GitHub (oops!)
-
-- Emojis are displayed as emojis rather than as text.

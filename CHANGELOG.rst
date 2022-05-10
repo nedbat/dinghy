@@ -22,6 +22,18 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-0.11.4:
+
+0.11.4 — 2022-05-10
+-------------------
+
+Added
+.....
+
+- HTML escaping is applied to the text pulled from GitHub (oops!)
+
+- Emojis are displayed as emojis rather than as text.
+
 .. _changelog-0.11.3:
 
 0.11.3 — 2022-05-06
