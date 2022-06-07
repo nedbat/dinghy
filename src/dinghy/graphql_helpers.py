@@ -186,6 +186,8 @@ class GraphqlHelper:
         # Remove the nodes from the top-level data we return, to keep things clean.
         if clear_nodes:
             fetched["nodes"] = []
+        else:
+            fetched["nodes"] = nodes
         return data, nodes
 
 

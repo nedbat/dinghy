@@ -18,13 +18,13 @@ logger = click_log.basic_config("dinghy")
 
 @click.command()
 @click_log.simple_verbosity_option(logger)
-@click.argument("query", type=click.File("r"))
+@click.argument("query_file", type=click.File("r"))
 @click.argument("var", metavar="[VAR=VAL]...", nargs=-1)
-def adhoc(query, var):
+def adhoc(query_file, var):
     """
     Run an ad-hoc GraphQL query.
     """
-    query = query.read()
+    query = query_file.read()
     variables = dict(v.split("=", 1) for v in var)
 
     token = os.environ.get("GITHUB_TOKEN", "")
