@@ -19,12 +19,12 @@ requirements: ## install development environment requirements
 	pip install -r dev-requirements.txt
 
 
-.PHONY: test quality black lint check_manifest sample
+.PHONY: test quality black lint _check_manifest sample
 
 test: ## run tests in the current virtualenv
 	pytest tests
 
-quality: black lint check_manifest ## run code-checking tools
+quality: black lint _check_manifest ## run code-checking tools
 
 black:
 	black -q src tests
@@ -32,7 +32,7 @@ black:
 lint:
 	pylint src tests
 
-check_manifest:
+_check_manifest:
 	python -m check_manifest
 
 SAMPLE = docs/black_digest
@@ -42,24 +42,24 @@ sample: ## make the sample digest
 	sed -i "" -e '/>Activity/s/ since.*</</' $(SAMPLE).html
 
 
-.PHONY: check_release check_version check_scriv check_sample
+.PHONY: check_release _check_version _check_scriv _check_sample
 
-check_release: check_manifest check_version check_scriv check_sample  ## check that we are ready for a release
+check_release: _check_manifest _check_version _check_scriv _check_sample  ## check that we are ready for a release
 	@echo "Release checks passed"
 
-check_version:
+_check_version:
 	@if [[ $$(git tags | grep -q -w $$(python setup.py --version) && echo "x") == "x" ]]; then \
 		echo 'A git tag for this version exists! Did you forget to bump the version?'; \
 		exit 1; \
 	fi
 
-check_scriv:
+_check_scriv:
 	@if (( $$(ls -1 scriv.d | wc -l) != 1 )); then \
 		echo 'There are scriv fragments! Did you forget `scriv collect`?'; \
 		exit 1; \
 	fi
 
-check_sample:
+_check_sample:
 	@if [[ $$(python setup.py --version) != $$(grep dinghy_version $(SAMPLE).html | grep -E -o '[0-9][0-9.]+') ]]; then \
 		echo 'The sample digest has the wrong version! Did you forget `make sample`?'; \
 		exit 1; \
