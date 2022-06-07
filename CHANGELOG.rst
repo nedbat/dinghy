@@ -22,6 +22,16 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-0.11.5:
+
+0.11.5 — 2022-06-07
+-------------------
+
+Fixed
+.....
+
+- Closed issues now distinguish between "completed" and "not planned".
+
 .. _changelog-0.11.4:
 
 0.11.4 — 2022-05-10
