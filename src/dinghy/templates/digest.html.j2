@@ -168,10 +168,13 @@
     {{ octicon_bg("git-merge", color="purple") }}
   }
   .octicon.issue {
-    {{ octicon_bg("issue-opened") }}
+    {{ octicon_bg("issue-opened", color="green") }}
   }
   .octicon.issue.closed {
-    {{ octicon_bg("issue-closed") }}
+    {{ octicon_bg("issue-closed", color="purple") }}
+  }
+  .octicon.issue.wontdo {
+    {{ octicon_bg("skip", color="gray") }}
   }
   </style>
 <body>
@@ -216,7 +219,7 @@
 
                   <span class="octicon
                     {%- if entry.isDraft %} draft{% endif -%}
-                    {%- if entry.merged %} merged{% elif entry.closed %} closed{% endif -%}
+                    {%- if entry.merged %} merged{% elif entry.stateReason == "NOT_PLANNED" %} wontdo{% elif entry.closed %} closed{% endif -%}
                     {%- if entry.__typename == "PullRequest" %} pull{% endif -%}
                     {%- if entry.__typename == "Issue" %} issue{% endif -%}
                   "></span>{# -#}
