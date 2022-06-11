@@ -114,6 +114,9 @@ clause sets defaults for the digest options in the rest of the file.  Each
   - If an item only needs to specify a GitHub URL, then it can simply be the
     URL string.
 
+- The optional ``title`` setting will be used to construct the title
+  and main header of the HTML page.
+
 Items can have additional options:
 
 - No activity is reported for bot users.  Some applications act as real users,

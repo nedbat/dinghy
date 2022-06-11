@@ -480,6 +480,7 @@ async def make_digest(items, since="1 week", digest="digest.html", **options):
         since=since_date,
         now=datetime.datetime.now(),
         __version__=__version__,
+        title=options.get("title", ""),
     )
     logger.info(f"Wrote digest: {digest}")
 
