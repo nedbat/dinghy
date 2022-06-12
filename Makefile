@@ -39,7 +39,7 @@ SAMPLE = docs/black_digest
 
 sample: ## make the sample digest
 	DINGHY_SAVE_ENTRIES=0 DINGHY_SAVE_RESPONSES=0 DINGHY_SAVE_RESULT=0 python -m dinghy $(SAMPLE).yaml
-	sed -i "" -e '/>Activity/s/ since.*</</' $(SAMPLE).html
+	sed -i "" -e '/Activity/s/ since ....-..-..</</' $(SAMPLE).html
 
 
 .PHONY: check_release _check_version _check_scriv _check_sample

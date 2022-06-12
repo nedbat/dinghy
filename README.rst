@@ -55,6 +55,7 @@ Here's an example:
 
     digests:
       - digest: lastweek.html
+        title: My projects last week
         since: 1 week
         items:
           - https://github.com/orgs/myorg/projects/17
@@ -62,6 +63,7 @@ Here's an example:
           - https://github.com/myorg/myrepo/pulls
 
       - digest: hotnews.html
+        title: Today's news
         since: 1 day
         items:
           - url: https://github.com/orgs/anotherorg/projects/8

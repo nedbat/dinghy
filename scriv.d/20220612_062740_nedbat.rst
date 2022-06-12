@@ -1,0 +1,5 @@
+Added
+.....
+
+- The `title` option can be used on individual digests to add text to the
+  title of the report. Thanks, Doug Hellmann.
