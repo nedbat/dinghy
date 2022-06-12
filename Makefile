@@ -49,7 +49,7 @@ check_release: _check_manifest _check_version _check_scriv _check_sample  ## che
 
 _check_version:
 	@if [[ $$(git tags | grep -q -w $$(python setup.py --version) && echo "x") == "x" ]]; then \
-		echo 'A git tag for this version exists! Did you forget to bump the version?'; \
+		echo 'A git tag for this version exists! Did you forget to bump the version in src/dinghy/__init__.py?'; \
 		exit 1; \
 	fi
 

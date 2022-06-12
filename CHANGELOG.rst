@@ -22,6 +22,17 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-0.12.0:
+
+0.12.0 — 2022-06-12
+-------------------
+
+Added
+.....
+
+- The `title` option can be used on individual digests to add text to the
+  title of the report. Thanks, Doug Hellmann.
+
 .. _changelog-0.11.5:
 
 0.11.5 — 2022-06-07
