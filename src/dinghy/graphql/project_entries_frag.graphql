@@ -1,5 +1,5 @@
 # A project in an org or repo.
-fragment projectNextData on ProjectNext {
+fragment projectV2Data on ProjectV2 {
   title
   url
   items(first: 10, after: $after) {
