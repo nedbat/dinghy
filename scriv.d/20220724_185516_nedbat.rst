@@ -1,0 +1,5 @@
+Added
+.....
+
+- The `api_root` setting lets GitHub Enterprise users control the GraphQL
+  endpoint to use.

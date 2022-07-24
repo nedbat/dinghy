@@ -119,6 +119,10 @@ clause sets defaults for the digest options in the rest of the file.  Each
 - The optional ``title`` setting will be used to construct the title
   and main header of the HTML page.
 
+- For GitHub Enterprise, you can specify ``api_root``, which is the URL to
+  build on for GraphQL API requests. It defaults to
+  "https://api.github.com/graphql".
+
 Items can have additional options:
 
 - No activity is reported for bot users.  Some applications act as real users,

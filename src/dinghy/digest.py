@@ -47,13 +47,15 @@ class Digester:
     def __init__(self, since, options):
         self.since = since.strftime("%Y-%m-%dT%H:%M:%S")
         self.ignore_users = options.get("ignore_users", [])
+        self.api_root = options.get("api_root")
         self.github = "github.com"
         self.gql = None
 
     def prepare(self):
         """Create the network helpers we need."""
         token = os.environ.get("GITHUB_TOKEN", "")
-        self.gql = GraphqlHelper(f"https://api.{self.github}/graphql", token)
+        api_root = self.api_root or f"https://api.{self.github}/graphql"
+        self.gql = GraphqlHelper(api_root, token)
 
     @github_route(r"/orgs/(?P<org>[^/]+)/projects/(?P<number>\d+)/?")
     async def get_org_project_entries(self, org, number, home_repo="", title=None):
