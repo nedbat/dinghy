@@ -1,0 +1,4 @@
+Removed
+.......
+
+- Removed the deprecated "pull_requests" setting.

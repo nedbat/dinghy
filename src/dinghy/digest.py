@@ -111,16 +111,6 @@ class Digester:
         }
         return container
 
-    async def get_org_pull_requests(self, org):
-        """
-        Get pull requests across an organization.  Uses GitHub search.
-        Deprecated, will be removed in favor of "search:".
-        """
-        query = f"org:{org} is:pr"
-        logger.info("pull_requests is deprecated, change to:")
-        logger.info(f"  - search: {query}")
-        return await self.get_search_results(query)
-
     @github_route(r"/(?P<owner>[^/]+)/(?P<name>[^/]+)/?")
     async def get_repo_entries(self, owner, name, title=None):
         """
@@ -424,13 +414,6 @@ def coro_from_item(digester, item):
             kwargs = dict(item)
             kwargs["query"] = kwargs.pop("search")
             fn = digester.get_search_results
-        elif "pull_requests" in item:
-            where = item["pull_requests"]
-            if where.startswith("org:"):
-                kwargs = dict(org=where.partition(":")[2])
-                fn = digester.get_org_pull_requests
-            else:
-                raise DinghyError(f"Don't understand pull_requests scope: {where!r}")
         else:
             raise DinghyError(f"Don't understand item: {item!r}")
 
