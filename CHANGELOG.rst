@@ -22,6 +22,30 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-0.13.0:
+
+0.13.0 — 2022-07-29
+-------------------
+
+Removed
+.......
+
+- Removed the deprecated "pull_requests" setting.
+
+Added
+.....
+
+- The `api_root` setting lets GitHub Enterprise users control the GraphQL
+  endpoint to use.
+
+Changed
+.......
+
+- Adapt to the `2022-06-23 GitHub issues update`__, using the ProjectsV2 API
+  instead of the ProjectsNext API.
+
+__ https://github.blog/changelog/2022-06-23-the-new-github-issues-june-23rd-update/
+
 .. _changelog-0.12.0:
 
 0.12.0 — 2022-06-12

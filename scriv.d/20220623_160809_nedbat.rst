@@ -1,9 +1,0 @@
-Changed
-.......
-
-- Adapt to the `2022-06-23 GitHub issues update`__, using the ProjectsV2 API
-  instead of the ProjectsNext API.
-
-__ https://github.blog/changelog/2022-06-23-the-new-github-issues-june-23rd-update/
-
-
