@@ -97,7 +97,7 @@ clause sets defaults for the digest options in the rest of the file.  Each
   - The ``url`` setting is a GitHub URL, in a number of forms:
 
     - An organization project URL will report on the issues and pull requests
-      in the project. Your GitHub token will need the "read:org" scope.
+      in the project. Your GitHub token will need the "read:project" scope.
 
     - A URL to a repo will report on the issues and pull requests in the repo.
 
