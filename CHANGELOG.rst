@@ -22,6 +22,19 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-0.13.1:
+
+0.13.1 — 2022-08-03
+-------------------
+
+Fixed
+.....
+
+- On Windows, an alarming but harmless error would appear when finishing.
+  This is now fixed, closing `issue 9`.  Thanks, Carlton Gibson.
+
+.. _issue 9: https://github.com/nedbat/dinghy/issues/9
+
 .. _changelog-0.13.0:
 
 0.13.0 — 2022-07-29
