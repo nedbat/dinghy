@@ -1,0 +1,7 @@
+Fixed
+.....
+
+- On Windows, an alarming but harmless error would appear when finishing.
+  This is now fixed, closing `issue 9`.  Thanks, Carlton Gibson.
+
+.. _issue 9: https://github.com/nedbat/dinghy/issues/9

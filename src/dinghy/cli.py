@@ -10,6 +10,12 @@ from .digest import make_digest, make_digests_from_config
 from .graphql_helpers import GraphqlHelper
 from .helpers import DinghyError
 
+# Fix for https://github.com/nedbat/dinghy/issues/9
+# Work around a known problem (https://github.com/python/cpython/issues/83413)
+# that is fixed in 3.10.6 (https://github.com/python/cpython/pull/92904).
+if sys.version_info < (3, 10, 6) and sys.platform.startswith('win'):
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
 logger = click_log.basic_config("dinghy")
 
 
