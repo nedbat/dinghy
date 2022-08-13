@@ -1,7 +1,0 @@
-Fixed
-.....
-
-- Add an HTML `<meta>` tag to ensure content is properly decoded as UTF-8.
-  Fixes `issue 12`_.  Thanks, Bill Mill.
-
-.. _issue 12: https://github.com/nedbat/dinghy/issues/12

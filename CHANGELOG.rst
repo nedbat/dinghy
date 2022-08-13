@@ -22,6 +22,19 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-0.13.2:
+
+0.13.2 — 2022-08-13
+-------------------
+
+Fixed
+.....
+
+- Add an HTML `<meta>` tag to ensure content is properly decoded as UTF-8.
+  Fixes `issue 12`_.  Thanks, Bill Mill.
+
+.. _issue 12: https://github.com/nedbat/dinghy/issues/12
+
 .. _changelog-0.13.1:
 
 0.13.1 — 2022-08-03
