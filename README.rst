@@ -10,6 +10,7 @@ Dinghy, a GitHub activity digest tool.
 Dinghy uses the GitHub GraphQL API to find recent activity on issues and pull
 requests, and writes a compact HTML digest `like this <sample_>`_.
 
+
 Getting Started
 ===============
 
@@ -41,8 +42,6 @@ Getting Started
 
    You can also write a YAML configuration file to digest multiple sources, or
    with different time periods.
-
-.. _sample: https://nedbat.github.io/dinghy/black_digest.html
 
 
 Configuration
@@ -137,6 +136,17 @@ Items can have additional options:
     created.  Issues in other repos will have the repo indicated in the
     digest.
 
+
+Daily Publishing
+================
+
+The `sample digest <sample_>`_ is published daily using a GitHub Action from
+its own repo: `nedbat/dinghy_sample <sample_repo_>`_.  You can use it as a
+starting point for your own publishing.
+
+
+.. _sample: https://nedbat.github.io/dinghy_sample/3day.html
+.. _sample_repo: https://github.com/nedbat/dinghy_sample
 
 
 .. |pypi-badge| image:: https://img.shields.io/pypi/v/dinghy.svg
