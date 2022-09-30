@@ -22,6 +22,17 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-0.13.3:
+
+0.13.3 — 2022-09-29
+-------------------
+
+Fixed
+.....
+
+- The hover tip for icons on pull requests and issues has text in the same
+  order as the icons, making them easier to understand.
+
 .. _changelog-0.13.2:
 
 0.13.2 — 2022-08-13

@@ -1,5 +1,0 @@
-Fixed
-.....
-
-- The hover tip for icons on pull requests and issue has text in the same order
-  as the icons, making them easier to understand.
