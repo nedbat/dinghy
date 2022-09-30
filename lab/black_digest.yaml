@@ -1,7 +1,0 @@
-# This is used to create the sample digest for the readme.
-digests:
-  - digest: docs/black_digest.html
-    title: Sample Dinghy report
-    since: 3 days
-    items:
-      - https://github.com/psf/black

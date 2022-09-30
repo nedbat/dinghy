@@ -3,8 +3,6 @@ include dev-requirements.txt
 include Makefile
 include pylintrc
 include *.rst
-include docs/black_digest.*
-include docs/cpython_issues.yaml
 
 recursive-include tests *
 recursive-include scriv.d *
