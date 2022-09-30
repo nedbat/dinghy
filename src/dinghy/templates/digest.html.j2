@@ -197,12 +197,12 @@
 
               <p><a href="{{ entry.url }}">{# -#}
                 <span class="octicons" title="
+                  {%- if entry.reasonCreated %}newly created; {% endif -%}
+                  {%- if entry.reasonMerged -%}newly merged; {% elif entry.reasonClosed %}newly closed; {% endif -%}
                   {%- if entry.isDraft %}draft {% endif -%}
                   {%- if entry.merged %}merged {% elif entry.closed %}closed {% endif -%}
                   {%- if entry.__typename == "PullRequest" %}pull request{% endif -%}
                   {%- if entry.__typename == "Issue" %}issue{% endif -%}
-                  {%- if entry.reasonCreated %}, newly created{% endif -%}
-                  {%- if entry.reasonMerged -%}, newly merged{% elif entry.reasonClosed %}, newly closed{% endif -%}
                 ">{# -#}
 
                   {%- if entry.reasonCreated -%}
