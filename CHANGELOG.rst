@@ -22,6 +22,18 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-0.13.4:
+
+0.13.4 — 2022-10-06
+-------------------
+
+Fixed
+.....
+
+- Comments on pull requests were only filtered by their age, not their authors,
+  so bot comments, and comments by "ignored users" were still included.  This
+  is now fixed.
+
 .. _changelog-0.13.3:
 
 0.13.3 — 2022-09-29

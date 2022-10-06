@@ -212,6 +212,17 @@ class Digester:
             )
             container["nodes"] = all_nodes
 
+    def _node_is_interesting(self, node):
+        """
+        Is a node interesting to show? It has to be new enough, by a real user,
+        and not by someone we want to ignore.
+        """
+        return (
+            node["updatedAt"] > self.since
+            and node["author"]["__typename"] == "User"
+            and node["author"]["login"] not in self.ignore_users
+        )
+
     def _trim_unwanted(self, nodes):
         """
         Trim a list to keep only activity since `self.since`, and only by real
@@ -219,9 +230,7 @@ class Digester:
 
         The returned list is also sorted by updatedAt date.
         """
-        nodes = (n for n in nodes if n["updatedAt"] > self.since)
-        nodes = (n for n in nodes if n["author"]["__typename"] == "User")
-        nodes = (n for n in nodes if n["author"]["login"] not in self.ignore_users)
+        nodes = (n for n in nodes if self._node_is_interesting(n))
         nodes = sorted(nodes, key=operator.itemgetter("updatedAt"))
         return nodes
 
@@ -365,23 +374,23 @@ class Digester:
         """
         Trim a nested list to indicate activity since `self.since`.  A thread
         will be kept if any of its children is newer than since.  Items older
-        than that will be get ["old"]=True, and shown grayed in the output.
+        than that will get ["boring"]=True, and shown grayed in the output.
         """
         keep = []
-        any_since_total = False
+        any_interesting_total = False
         for node in nodes:
-            if node["updatedAt"] > self.since:
-                any_since = True
+            if self._node_is_interesting(node):
+                any_interesting = True
             else:
-                any_since = False
-                node["old"] = True
-            kids, any_since_kids = self._trim_unwanted_tree(node.get("children", ()))
-            if any_since or any_since_kids:
+                any_interesting = False
+                node["boring"] = True
+            kids, any_interesting_kids = self._trim_unwanted_tree(node.get("children", ()))
+            if any_interesting or any_interesting_kids:
                 node["children"] = kids
                 keep.append(node)
-                any_since_total = True
+                any_interesting_total = True
         keep = sorted(keep, key=operator.itemgetter("updatedAt"))
-        return keep, any_since_total
+        return keep, any_interesting_total
 
     def _add_reasons(self, entry):
         """

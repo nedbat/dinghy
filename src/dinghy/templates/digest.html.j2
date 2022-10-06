@@ -109,7 +109,7 @@
   .homerepo {
     color: #888;
   }
-  .old > p {
+  .boring > p {
     color: #888;
   }
   .footer {
@@ -246,7 +246,7 @@
               {% if entry.children -%}
                 <ul class="comments">
                   {% for child in entry.children recursive -%}
-                    <li{% if child.old %} class="old"{% endif %}>
+                    <li{% if child.boring %} class="boring"{% endif %}>
                       <p><a href="{{ child.url }}" title="{{ child.updatedAt|datetime() }}">
                         {% if child.review_state -%}
                           {% if child.review_state == "APPROVED" -%}
