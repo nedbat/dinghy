@@ -384,7 +384,9 @@ class Digester:
             else:
                 any_interesting = False
                 node["boring"] = True
-            kids, any_interesting_kids = self._trim_unwanted_tree(node.get("children", ()))
+            kids, any_interesting_kids = self._trim_unwanted_tree(
+                node.get("children", ())
+            )
             if any_interesting or any_interesting_kids:
                 node["children"] = kids
                 keep.append(node)
