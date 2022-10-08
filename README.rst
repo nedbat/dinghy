@@ -20,10 +20,11 @@ Getting Started
 
     $ python -m pip install dinghy
 
-2. To run dinghy you will need a GitHub `personal access token`_ without any
-   scopes if you plan to only follow public repository, or with the "repo" scope
-   if you want to follow private repos. Create one and define the GITHUB_TOKEN
-   environment variable with the value:
+2. To run dinghy you will need a GitHub `personal access token`_. The scopes you
+   need to assign to it depend on what repos you'll be accessing:
+   - If you are only accessing public repos, then you don't need any scopes.
+   - If you will be accessing any private repos, then you need the "repo" scope.
+   Create one and define the GITHUB_TOKEN environment variable with the value:
 
    .. code-block:: bash
 
