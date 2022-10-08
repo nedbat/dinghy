@@ -36,7 +36,7 @@ Getting Started
 
    .. code-block:: bash
 
-    $ python -m dinghy https://github.com/Me/MyProject
+    $ dinghy https://github.com/Me/MyProject
     Wrote digest: digest.html
 
    You will have a digest of the repo's last week of activity in digest.html.
