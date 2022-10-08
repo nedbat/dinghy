@@ -212,6 +212,7 @@
                   {%- if entry.merged %}merged {% elif entry.closed %}closed {% endif -%}
                   {%- if entry.__typename == "PullRequest" %}pull request{% endif -%}
                   {%- if entry.__typename == "Issue" %}issue{% endif -%}
+                  {%- if entry.__typename == "Release" %}release{% endif -%}
                 ">{# -#}
 
                   {%- if entry.reasonCreated -%}
