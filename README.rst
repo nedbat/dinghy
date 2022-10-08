@@ -7,8 +7,8 @@ Dinghy, a GitHub activity digest tool.
 |pypi-badge| |pyversions-badge| |license-badge|
 |sponsor-badge| |twitter-nedbat|
 
-Dinghy uses the GitHub GraphQL API to find recent activity on issues and pull
-requests, and writes a compact HTML digest `like this <sample_>`_.
+Dinghy uses the GitHub GraphQL API to find recent activity on releases, issues
+and pull requests, and writes a compact HTML digest `like this <sample_>`_.
 
 
 Getting Started

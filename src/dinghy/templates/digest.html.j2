@@ -177,6 +177,15 @@
   .octicon.issue.wontdo {
     {{ octicon_bg("skip", color="gray") }}
   }
+  .octicon.tag {
+    {{ octicon_bg("tag", color="gray") }}
+  }
+  .octicon.commit {
+    {{ octicon_bg("git-commit", color="gray") }}
+  }
+  .octicon.release {
+    {{ octicon_bg("package", color="green") }}
+  }
   </style>
 <body>
 
@@ -223,10 +232,18 @@
                     {%- if entry.merged %} merged{% elif entry.stateReason == "NOT_PLANNED" %} wontdo{% elif entry.closed %} closed{% endif -%}
                     {%- if entry.__typename == "PullRequest" %} pull{% endif -%}
                     {%- if entry.__typename == "Issue" %} issue{% endif -%}
+                    {%- if entry.__typename == "Release" %} release{% endif -%}
                   "></span>{# -#}
                 </span>{# -#}
 
+                {%- if entry.__typename in ("PullRequest", "Issue") -%}
                 <b>{{entry.title|trim}}</b> #{{ entry.number }}{# -#}
+                {%- elif entry.__typename in ("Release",) -%}
+                <b>{{entry.name|trim}}</b>
+                <span class="octicon dash"></span>
+                <span class="octicon tag"></span>{{ entry.tagName }}
+                <span class="octicon commit"></span>{{ entry.tagCommit.abbreviatedOid }}
+                {%- endif -%}
               </a>
               [{{ entry.author.login }}]
 
@@ -242,6 +259,7 @@
               </p>
 
               {%- if entry.bodyText %}<p>{{ entry.bodyText|trim|truncate(120) }}</p>{% endif -%}
+              {%- if entry.description %}<p>{{ entry.description|trim|truncate(120) }}</p>{% endif -%}
 
               {% if entry.children -%}
                 <ul class="comments">

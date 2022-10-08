@@ -1,0 +1,21 @@
+query getRepoReleases(
+  $owner: String!
+  $name: String!
+  $after: String
+) {
+  repository(owner: $owner, name: $name) {
+    ...repoData         # fragment: repo_frag.graphql
+    releases(
+      first: 100
+      after: $after
+    ) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      nodes {
+        ...releaseData    # fragment: release_frag.graphql
+      }
+    }
+  }
+}
