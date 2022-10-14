@@ -97,6 +97,8 @@ class Digester:
             variables=dict(query=query),
         )
         entries = await self._process_entries(entries)
+        for entry in entries:
+            entry["other_repo"] = True
         url_q = urllib.parse.quote_plus(query)
         if "is:pr" in query:
             kind = "pull requests"
