@@ -236,6 +236,25 @@ class Digester:
         nodes = sorted(nodes, key=operator.itemgetter("updatedAt"))
         return nodes
 
+    def _fix_ghosts(self, obj):
+        """
+        GitHub has a @ghost account for deleted users. That shows up in our
+        data as None.  Fix those to have data we can use.
+        """
+        if isinstance(obj, list):
+            for elt in obj:
+                self._fix_ghosts(elt)
+        elif isinstance(obj, dict):
+            for key in obj:
+                if key == "author":
+                    if obj["author"] is None:
+                        obj["author"] = {
+                            "__typename": "User",
+                            "login": "ghost",
+                        }
+                else:
+                    self._fix_ghosts(obj[key])
+
     async def _process_entries(self, entries):
         """
         Process entries after they've been retrieved.
@@ -253,14 +272,7 @@ class Digester:
                 else:
                     await json_save(entry, f"save_{kind}_{num}.json")
 
-        # GitHub has a @ghost account for deleted users.  That shows up in our
-        # data as a None author. Fix those.
-        for entry in entries:
-            if entry["author"] is None:
-                entry["author"] = {
-                    "__typename": "User",
-                    "login": "ghost",
-                }
+        self._fix_ghosts(entries)
 
         entries = self._trim_unwanted(entries)
         entries = await asyncio.gather(*map(self._process_entry, entries))

@@ -1,0 +1,7 @@
+Fixed
+.....
+
+- Comments by deleted GitHub users would cause a crash.  This is now fixed
+  (`issue 23`_).
+
+.. _issue 23: https://github.com/nedbat/dinghy/issues/23
