@@ -1,5 +1,0 @@
-Added
-.....
-
-- You can now specify ``since: forever`` to include all activity regardless of
-  when it happened.

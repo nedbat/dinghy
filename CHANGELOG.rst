@@ -22,6 +22,33 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-0.14.0:
+
+0.14.0 — 2022-10-25
+-------------------
+
+Added
+.....
+
+- Now a CLI command is registered so you can use ``dinghy`` as a command
+  instead of ``python -m dinghy`` (though that still works).
+
+- You can now specify ``since: forever`` to include all activity regardless of
+  when it happened.
+
+Changed
+.......
+
+- Search results now always show the repo containing the item.
+
+Fixed
+.....
+
+- Comments by deleted GitHub users would cause a crash.  This is now fixed
+  (`issue 23`_).
+
+.. _issue 23: https://github.com/nedbat/dinghy/issues/23
+
 .. _changelog-0.13.4:
 
 0.13.4 — 2022-10-06

@@ -1,5 +1,0 @@
-Added
-.....
-
-- Now a CLI command is registered so you can use ``dinghy`` as a command
-  instead of ``python -m dinghy`` (though that still works).
