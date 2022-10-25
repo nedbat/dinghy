@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 {# The template for the digest.html output file. -#}
 
+{%- macro page_title() -%}
+  {{ title }}
+  {% if title and since %} — {% endif %}
+  {% if since %}Activity since {{ since|datetime("%Y-%m-%d") }}{% endif %}
+{%- endmacro -%}
+
 {%- macro octicon_url(name, size=16) -%}
   {#- Octicons: https://github.com/primer/octicons/tree/main/icons -#}
   {#- also: https://primer.style/octicons/ -#}
@@ -28,7 +34,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>{% if title %}{{ title }} — {% endif %}Activity since {{ since|datetime("%Y-%m-%d") }}</title>
+  <title>{{ page_title() }}</title>
   <link rel="icon" href="{{ octicon_url("comment-discussion", 24) }}" type="image/svg+xml">
   <style>
   body {
@@ -180,7 +186,7 @@
   </style>
 <body>
 
-<h1>{% if title %}{{ title }} - {% endif %}Activity since {{ since|datetime("%Y-%m-%d") }}</h1>
+<h1>{{ page_title() }}</h1>
 
 <ul class="repos">
   {% for container in results -%}

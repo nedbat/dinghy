@@ -90,7 +90,9 @@ clause sets defaults for the digest options in the rest of the file.  Each
 
 - The ``since`` setting indicates how far back to look for activity. It can use
   units of weeks, days, hours, minutes and seconds, and can also be
-  abbreviated, like ``1d6h``. If omitted, it defaults to one week.
+  abbreviated, like ``1d6h``. Using ``since: forever`` will include all
+  activity regardless of when it happened.  If ``since`` is omitted, it
+  defaults to one week.
 
 - The ``items`` setting is a list of things to report on, specified in a few
   different ways:

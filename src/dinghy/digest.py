@@ -462,7 +462,12 @@ async def make_digest(items, since="1 week", digest="digest.html", **options):
         digest (str): the HTML file name to write.
 
     """
-    since_date = datetime.datetime.now() - parse_timedelta(since)
+    if since == "forever":
+        show_date = False
+        since_date = datetime.datetime(year=1980, month=1, day=1)
+    else:
+        show_date = True
+        since_date = datetime.datetime.now() - parse_timedelta(since)
     digester = Digester(since=since_date, options=options)
 
     coros = []
@@ -487,7 +492,7 @@ async def make_digest(items, since="1 week", digest="digest.html", **options):
         "digest.html.j2",
         digest,
         results=results,
-        since=since_date,
+        since=since_date if show_date else None,
         now=datetime.datetime.now(),
         __version__=__version__,
         title=options.get("title", ""),
