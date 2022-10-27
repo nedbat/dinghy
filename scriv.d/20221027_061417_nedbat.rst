@@ -1,0 +1,8 @@
+Added
+.....
+
+- A new setting ``include_bots: true`` will include pull requests, issues, or
+  comments created by bot users.  The default remains False, to exclude them.
+  Closes `issue 25`_.
+
+.. _issue 25: https://github.com/nedbat/dinghy/issues/25

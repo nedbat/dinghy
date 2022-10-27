@@ -47,6 +47,9 @@ class Digester:
     def __init__(self, since, options):
         self.since = since.strftime("%Y-%m-%dT%H:%M:%S")
         self.ignore_users = options.get("ignore_users", [])
+        self.user_types = {"User"}
+        if options.get("include_bots", False):
+            self.user_types.add("Bot")
         self.api_root = options.get("api_root")
         self.github = "github.com"
         self.gql = None
@@ -250,7 +253,7 @@ class Digester:
         """
         return (
             node["updatedAt"] > self.since
-            and node["author"]["__typename"] == "User"
+            and node["author"]["__typename"] in self.user_types
             and node["author"]["login"] not in self.ignore_users
         )
 

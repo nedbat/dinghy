@@ -131,11 +131,14 @@ clause sets defaults for the digest options in the rest of the file.  Each
 
 Items can have additional options:
 
-- No activity is reported for bot users.  Some applications act as real users,
-  but should be ignored anyway.  You can list those user names that should be
-  ignored in the ``ignore_users`` setting.
+- By default, no activity is reported for bot users.  If you want to include
+  them, use ``include_bots: true``.
 
-- Items can have an explicit title set with the ``title:`` setting.
+- Some applications perform actions using real user accounts, but you'd like to
+  ignore them anyway.  You can list those user names that should be ignored in
+  the ``ignore_users`` setting.
+
+- Digests can have an explicit title set with the ``title`` setting.
 
 - Options for organization projects include:
 
