@@ -63,7 +63,7 @@ dist: ## build the distributions
 	python -m twine check dist/*
 
 testpypi: ## upload the distributions to PyPI's testing server.
-	python -m twine upload --verbose --repository testpypi dist/*
+	python -m twine upload --verbose --repository testpypi --password $$TWINE_TEST_PASSWORD dist/*
 
 pypi: ## upload the built distributions to PyPI.
 	python -m twine upload --verbose dist/*
