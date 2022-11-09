@@ -160,7 +160,7 @@ class Digester:
         }
         return container
 
-    @github_route(r"/(?P<owner>[^/]+)/(?P<name>[^/]+)/issues/?")
+    @github_route(r"/(?P<owner>[^/]+)/(?P<name>[^/]+)/releases/?")
     async def get_repo_releases(self, owner, name, title=None):
         """
         Get releases from a repo updated since a date
