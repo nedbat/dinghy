@@ -118,17 +118,22 @@ class Digester:
     @github_route(r"/(?P<owner>[^/]+)/(?P<name>[^/]+)/?")
     async def get_repo_entries(self, owner, name, title=None):
         """
-        Get issues and pull requests from a repo.
+        Get issues, releases, and pull requests from a repo.
         """
-        issue_container, pr_container = await asyncio.gather(
+        issue_container, pr_container, release_container = await asyncio.gather(
             self.get_repo_issues(owner, name, title=title),
             self.get_repo_pull_requests(owner, name),
+            self.get_repo_releases(owner, name),
         )
-        entries = issue_container["entries"] + pr_container["entries"]
+        entries = (
+            issue_container["entries"]
+            + pr_container["entries"]
+            + release_container["entries"]
+        )
         entries = self._trim_unwanted(entries)
         container = {
             **issue_container,
-            "kind": "issues and pull requests",
+            "kind": "issues, releases, and pull requests",
             "entries": entries,
         }
         return container
@@ -154,6 +159,30 @@ class Digester:
             "title": title or repo["nameWithOwner"],
             "kind": "issues",
             "entries": issues,
+        }
+        return container
+
+    @github_route(r"/(?P<owner>[^/]+)/(?P<name>[^/]+)/releases/?")
+    async def get_repo_releases(self, owner, name, title=None):
+        """
+        Get releases from a repo updated since a date
+
+        Args:
+            owner (str): the owner of the repo.
+            name (str): the name of the repo.
+        """
+        repo, releases = await self.gql.nodes(
+            query=build_query("repo_releases.graphql"),
+            variables=dict(owner=owner, name=name, since=self.since),
+        )
+        releases = await self._process_entries(releases)
+        repo = glom(repo, "data.repository")
+        container = {
+            "url": repo["url"],
+            "container_kind": "repo",
+            "title": title or repo["nameWithOwner"],
+            "kind": "releases",
+            "entries": releases,
         }
         return container
 

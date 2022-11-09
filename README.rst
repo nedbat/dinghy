@@ -7,8 +7,8 @@ Dinghy, a GitHub activity digest tool.
 |pypi-badge| |pyversions-badge| |license-badge|
 |sponsor-badge| |twitter-nedbat|
 
-Dinghy uses the GitHub GraphQL API to find recent activity on issues and pull
-requests, and writes a compact HTML digest `like this <sample_>`_.
+Dinghy uses the GitHub GraphQL API to find recent activity on releases, issues
+and pull requests, and writes a compact HTML digest `like this <sample_>`_.
 
 
 Getting Started
@@ -102,12 +102,15 @@ clause sets defaults for the digest options in the rest of the file.  Each
     - An organization project URL will report on the issues and pull requests
       in the project. Your GitHub token will need the "read:project" scope.
 
-    - A URL to a repo will report on the issues and pull requests in the repo.
+    - A URL to a repo will report on the issues, pull requests and releases in
+      the repo.
 
     - A URL to a repo's issues will report on the issues in the repo.
 
     - A URL to a repo's pull requests will report on the pull requests in the
       repo.
+
+    - A URL to a repo's releases will report on the releases in the repo.
 
     - Any of these URLs can point to a GitHub Enterprise installation instead
       of https://github.com.

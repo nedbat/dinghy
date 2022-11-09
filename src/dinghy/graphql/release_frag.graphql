@@ -1,0 +1,19 @@
+# https://docs.github.com/en/graphql/reference/objects#release
+fragment releaseData on Release {
+  __typename
+  repository {
+    ...repoData   # fragment: repo_frag.graphql
+  }
+  name
+  description
+  isDraft
+  isPrerelease
+  url
+  createdAt
+  updatedAt 
+  tagCommit { abbreviatedOid }
+  tagName
+  author {
+    ...authorData   # fragment: author_frag.graphql
+  }
+}
