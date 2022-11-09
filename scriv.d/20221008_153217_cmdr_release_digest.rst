@@ -10,7 +10,7 @@
 Added
 .....
 
-- Show releases in the digest.
+- Show releases in the digest. Thanks, Simon de Vlieger.
 
 .. Changed
 .. .......

@@ -118,7 +118,7 @@ class Digester:
     @github_route(r"/(?P<owner>[^/]+)/(?P<name>[^/]+)/?")
     async def get_repo_entries(self, owner, name, title=None):
         """
-        Get issues, releases, and pull requests from a repo.
+        Get issues, pull requests, and releases from a repo.
         """
         issue_container, pr_container, release_container = await asyncio.gather(
             self.get_repo_issues(owner, name, title=title),
@@ -133,7 +133,7 @@ class Digester:
         entries = self._trim_unwanted(entries)
         container = {
             **issue_container,
-            "kind": "issues, releases, and pull requests",
+            "kind": "issues, pull requests, and releases",
             "entries": entries,
         }
         return container
