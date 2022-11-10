@@ -22,6 +22,23 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-0.15.0:
+
+0.15.0 — 2022-11-09
+-------------------
+
+Added
+.....
+
+- Show releases in the digest. Thanks, Simon de Vlieger.
+
+- A new setting ``include_bots: true`` will include pull requests, issues, or
+  comments created by bot users.  The default remains False, to exclude them.
+  Closes `issue 25`_.
+
+.. _issue 25: https://github.com/nedbat/dinghy/issues/25
+
+
 .. _changelog-0.14.0:
 
 0.14.0 — 2022-10-25
