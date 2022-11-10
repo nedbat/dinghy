@@ -159,22 +159,19 @@ starting point for your own publishing.
 .. _sample_repo: https://github.com/nedbat/dinghy_sample
 
 
+
 .. |pypi-badge| image:: https://img.shields.io/pypi/v/dinghy.svg
     :target: https://pypi.python.org/pypi/dinghy/
     :alt: PyPI
-
 .. |pyversions-badge| image:: https://img.shields.io/pypi/pyversions/dinghy.svg
     :target: https://pypi.python.org/pypi/dinghy/
     :alt: Supported Python versions
-
 .. |license-badge| image:: https://img.shields.io/github/license/nedbat/dinghy.svg
     :target: https://github.com/nedbat/dinghy/blob/master/LICENSE.txt
     :alt: License
-
 .. |twitter-nedbat| image:: https://img.shields.io/twitter/follow/nedbat.svg?label=nedbat&style=flat&logo=twitter&logoColor=4FADFF
     :target: https://twitter.com/nedbat
     :alt: nedbat on Twitter
-
 .. |sponsor-badge| image:: https://img.shields.io/badge/%E2%9D%A4-Sponsor%20me-brightgreen?style=flat&logo=GitHub
     :target: https://github.com/sponsors/nedbat
     :alt: Sponsor me on GitHub
