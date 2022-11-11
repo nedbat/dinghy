@@ -32,6 +32,7 @@
   {% endif -%}
 {%- endmacro -%}
 
+<html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>{{ page_title() }}</title>
@@ -193,6 +194,7 @@
     {{ octicon_bg("package", color="green") }}
   }
   </style>
+</head>
 <body>
 
 <h1>{{ page_title() }}</h1>
@@ -314,3 +316,5 @@
     {# keep the dinghy_version span on a line by itself for `make check_release` -#}
     <span class="dinghy_version">{{ __version__ }}</span></a>.
 </p>
+</body>
+</html>
