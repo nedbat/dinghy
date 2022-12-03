@@ -22,6 +22,13 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-1.0.0:
+
+1.0.0 — 2022-12-03
+------------------
+
+- Nothing has changed, just decided Dinghy was stable enough to call 1.0.0.
+
 .. _changelog-0.15.0:
 
 0.15.0 — 2022-11-09
