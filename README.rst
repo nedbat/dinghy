@@ -5,7 +5,7 @@ Dinghy
 Dinghy, a GitHub activity digest tool.
 
 |pypi-badge| |pyversions-badge| |license-badge|
-|sponsor-badge| |twitter-nedbat|
+|sponsor-badge| |mastodon-nedbat| |twitter-nedbat|
 
 Dinghy uses the GitHub GraphQL API to find recent activity on releases, issues
 and pull requests, and writes a compact HTML digest `like this <sample_>`_.
@@ -169,6 +169,9 @@ starting point for your own publishing.
 .. |license-badge| image:: https://img.shields.io/github/license/nedbat/dinghy.svg
     :target: https://github.com/nedbat/dinghy/blob/master/LICENSE.txt
     :alt: License
+.. |mastodon-nedbat| image:: https://img.shields.io/badge/dynamic/json?style=flat&labelColor=450657&logo=mastodon&logoColor=ffffff&link=https%3A%2F%2Fhachyderm.io%2F%40nedbat&url=https%3A%2F%2Fhachyderm.io%2Fusers%2Fnedbat%2Ffollowers.json&query=totalItems&label=Mastodon
+    :target: https://hachyderm.io/@nedbat
+    :alt: nedbat on Mastodon
 .. |twitter-nedbat| image:: https://img.shields.io/twitter/follow/nedbat.svg?label=nedbat&style=flat&logo=twitter&logoColor=4FADFF
     :target: https://twitter.com/nedbat
     :alt: nedbat on Twitter
