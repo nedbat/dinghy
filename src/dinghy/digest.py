@@ -39,6 +39,18 @@ def github_route(url_pattern):
     return _dec
 
 
+def dd(name: str) -> str:
+    """Create an key for Dinghy-specfic data. (dd == Dinghy Data)
+
+    Dinghy adds extra data to GitHub responses. All of the keys for this data
+    are prefixed, created with this function.
+    """
+    return f"dinghy_{name}"
+
+
+DD_children = dd("children")
+
+
 class Digester:
     """
     Use GitHub GraphQL to get data about recent changes.
@@ -78,8 +90,8 @@ class Digester:
         entries = await self._process_entries(entries)
         for entry in entries:
             entry["other_repo"] = entry["repository"]["nameWithOwner"] != home_repo
-            if "children" not in entry:
-                entry["children"] = entry["comments"]["nodes"]
+            if DD_children not in entry:
+                entry[DD_children] = entry["comments"]["nodes"]
         project = glom(project, "data.organization.project")
         container = {
             "url": project["url"],
@@ -332,7 +344,7 @@ class Digester:
             issue (dict): the issue to populate.
         """
         await self.get_more(issue["comments"], "issue_comments.graphql", issue["id"])
-        issue["children"] = self._trim_unwanted(issue["comments"]["nodes"])
+        issue[DD_children] = self._trim_unwanted(issue["comments"]["nodes"])
 
     async def _process_pull_request(self, pull):
         """
@@ -377,7 +389,7 @@ class Digester:
 
         # Make a map of the reviews.
         for rev in pull["reviews"]["nodes"]:
-            rev["review_state"] = rev["state"]
+            rev[dd("review_state")] = rev["state"]
             reviews[rev["id"]] = rev
 
         # For each thread, attach the thread as a child of the review.  Each
@@ -387,24 +399,24 @@ class Digester:
         # comment 1.
         for thread in pull["reviewThreads"]["nodes"]:
             com0 = thread["comments"]["nodes"][0]
-            com0["children"] = thread["comments"]["nodes"][1:]
+            com0[DD_children] = thread["comments"]["nodes"][1:]
             com0["isResolved"] = thread["isResolved"]
             rev_id = com0["pullRequestReview"]["id"]
-            review_comments = reviews[rev_id].setdefault("children", [])
+            review_comments = reviews[rev_id].setdefault(DD_children, [])
             review_comments.append(com0)
 
         # For each review, show it if it has a body, or if it has children, or
         # if it's not just "COMMENTED".
         for rev in reviews.values():
-            if rev["bodyText"] or rev.get("children") or rev["state"] != "COMMENTED":
+            if rev["bodyText"] or rev.get(DD_children) or rev["state"] != "COMMENTED":
                 com = children.setdefault(rev["id"], dict(rev))
-                com["review_state"] = rev["state"]
+                com[dd("review_state")] = rev["state"]
 
-                if not rev["bodyText"] and len(rev.get("children", ())) == 1:
+                if not rev["bodyText"] and len(rev.get(DD_children, ())) == 1:
                     # A review with just one comment and no body: the comment should
                     # go where the review would have been.
-                    com = rev["children"][0]
-                    com["review_state"] = rev["review_state"]
+                    com = rev[DD_children][0]
+                    com[dd("review_state")] = rev[dd("review_state")]
                     children[rev["id"]] = com
 
         # Comments are simple: they all get shown.
@@ -414,7 +426,7 @@ class Digester:
         # Examine all the resulting threads (children). Keep a thread if it has
         # any comments newer than our since date.  Mark older comments as old.
         kids, _ = self._trim_unwanted_tree(children.values())
-        pull["children"] = kids
+        pull[DD_children] = kids
 
     def _trim_unwanted_tree(self, nodes):
         """
@@ -429,12 +441,12 @@ class Digester:
                 any_interesting = True
             else:
                 any_interesting = False
-                node["boring"] = True
+                node[dd("boring")] = True
             kids, any_interesting_kids = self._trim_unwanted_tree(
-                node.get("children", ())
+                node.get(DD_children, ())
             )
             if any_interesting or any_interesting_kids:
-                node["children"] = kids
+                node[DD_children] = kids
                 keep.append(node)
                 any_interesting_total = True
         keep = sorted(keep, key=operator.itemgetter("updatedAt"))
@@ -451,7 +463,7 @@ class Digester:
         # write "reasonCreated" based on "createdAt", etc.
         for slug in ["Created", "Closed", "Merged"]:
             at = slug.lower() + "At"
-            entry[f"reason{slug}"] = bool(entry.get(at) and entry[at] > self.since)
+            entry[dd(f"reason{slug}")] = bool(entry.get(at) and entry[at] > self.since)
 
 
 def coro_from_item(digester, item):

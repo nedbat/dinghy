@@ -214,8 +214,8 @@
 
               <p><a href="{{ entry.url }}">{# -#}
                 <span class="octicons" title="
-                  {%- if entry.reasonCreated %}newly created; {% endif -%}
-                  {%- if entry.reasonMerged -%}newly merged; {% elif entry.reasonClosed %}newly closed; {% endif -%}
+                  {%- if entry.dinghy_reasonCreated %}newly created; {% endif -%}
+                  {%- if entry.dinghy_reasonMerged -%}newly merged; {% elif entry.dinghy_reasonClosed %}newly closed; {% endif -%}
                   {%- if entry.isDraft %}draft {% endif -%}
                   {%- if entry.merged %}merged {% elif entry.closed %}closed {% endif -%}
                   {%- if entry.__typename == "PullRequest" %}pull request{% endif -%}
@@ -223,14 +223,14 @@
                   {%- if entry.__typename == "Release" %}release{% endif -%}
                 ">{# -#}
 
-                  {%- if entry.reasonCreated -%}
+                  {%- if entry.dinghy_reasonCreated -%}
                     <span class="octicon star"></span>
                   {%- else -%}
                     <span class="octicon dash"></span>
                   {%- endif -%}
-                  {% if entry.reasonMerged -%}
+                  {% if entry.dinghy_reasonMerged -%}
                     <span class="octicon check"></span>
-                  {%- elif entry.reasonClosed -%}
+                  {%- elif entry.dinghy_reasonClosed -%}
                     <span class="octicon {% if entry.__typename == "PullRequest" %}x{% else %}check{% endif %}"></span>
                   {%- else -%}
                     <span class="octicon dash"></span>
@@ -270,15 +270,15 @@
               {%- if entry.bodyText %}<p>{{ entry.bodyText|trim|truncate(120) }}</p>{% endif -%}
               {%- if entry.description %}<p>{{ entry.description|trim|truncate(120) }}</p>{% endif -%}
 
-              {% if entry.children -%}
+              {% if entry.dinghy_children -%}
                 <ul class="comments">
-                  {% for child in entry.children recursive -%}
+                  {% for child in entry.dinghy_children recursive -%}
                     <li{% if child.boring %} class="boring"{% endif %}>
                       <p><a href="{{ child.url }}" title="{{ child.updatedAt|datetime() }}">
-                        {% if child.review_state -%}
-                          {% if child.review_state == "APPROVED" -%}
+                        {% if child.dinghy_review_state -%}
+                          {% if child.dinghy_review_state == "APPROVED" -%}
                             <span class="octicon checkcircle" title="reviewed, approved"></span>
-                          {% elif child.review_state == "CHANGES_REQUESTED" -%}
+                          {% elif child.dinghy_review_state == "CHANGES_REQUESTED" -%}
                             <span class="octicon filediff" title="reviewed, changes requested"></span>
                           {% else %}
                             <span class="octicon eye" title="reviewed"></span>
@@ -291,8 +291,8 @@
                         <b>{{ child.author.login }}</b>{# -#}
                       {%- if child.bodyText %}: {{ child.bodyText|trim|truncate(100) }}{% endif -%}
                       </a></p>
-                      {% if child.children %}
-                        <ul class="thread_comment">{{ loop(child.children) }}</ul>
+                      {% if child.dinghy_children %}
+                        <ul class="thread_comment">{{ loop(child.dinghy_children) }}</ul>
                       {% endif %}
                     </li>
                   {% endfor -%}
