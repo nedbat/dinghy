@@ -125,6 +125,13 @@ clause sets defaults for the digest options in the rest of the file.  Each
 - The optional ``title`` setting will be used to construct the title
   and main header of the HTML page.
 
+- The ``template`` setting is the name of a Jinja2 template file to use to
+  produce the digest. It defaults to "digest.html.j2", which is packaged with
+  dinghy.  The data passed to the template is under-specified; if you want to
+  write a template of your own, model it on the built-in `digest.html.j2`_.
+
+.. _digest.html.j2: https://github.com/nedbat/dinghy/blob/main/src/dinghy/templates/digest.html.j2
+
 - For GitHub Enterprise, you can specify ``api_root``, which is the URL to
   build on for GraphQL API requests. It defaults to
   "https://api.github.com/graphql".

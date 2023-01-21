@@ -33,12 +33,17 @@ def label_color_css(bg_color):
 def render_jinja(template_filename, **variables):
     """Render a template file, with variables."""
     jenv = jinja2.Environment(
-        loader=jinja2.FileSystemLoader(Path(__file__).parent),
+        loader=jinja2.FileSystemLoader(
+            [
+                Path("."),
+                Path(__file__).parent / "templates",
+            ]
+        ),
         autoescape=True,
     )
     jenv.filters["datetime"] = datetime_format
     jenv.filters["label_color_css"] = label_color_css
-    template = jenv.get_template(f"templates/{template_filename}")
+    template = jenv.get_template(template_filename)
     html = template.render(**variables)
     return html
 

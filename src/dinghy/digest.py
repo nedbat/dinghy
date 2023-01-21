@@ -533,7 +533,7 @@ async def make_digest(items, since="1 week", digest="digest.html", **options):
         logger.info(f"Wrote results data: {json_name}")
 
     await render_jinja_to_file(
-        "digest.html.j2",
+        options.get("template", "digest.html.j2"),
         digest,
         results=results,
         since=since_date if show_date else None,
