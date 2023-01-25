@@ -1,5 +1,0 @@
-Added
-.....
-
-- A digest can specify ``template``, a Jinja2 template file to produce the
-  digest.  This opens the possibility for other output formats than HTML.

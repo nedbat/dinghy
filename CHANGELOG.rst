@@ -22,6 +22,17 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-1.1.0:
+
+1.1.0 — 2023-01-25
+------------------
+
+Added
+.....
+
+- A digest can specify ``template``, a Jinja2 template file to produce the
+  digest.  This opens the possibility for other output formats than HTML.
+
 .. _changelog-1.0.0:
 
 1.0.0 — 2022-12-03
