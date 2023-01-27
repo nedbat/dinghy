@@ -22,6 +22,23 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-1.2.0:
+
+1.2.0 — 2023-01-27
+------------------
+
+Added
+.....
+
+- Now you can additionally specify digests on the command line to write, which
+  will choose just those digests from the configuration file.
+
+Fixed
+.....
+
+- If the config file has no ``digests:`` clause, it could be because it's not a
+  dinghy config file at all, so print an error message about it.
+
 .. _changelog-1.1.0:
 
 1.1.0 — 2023-01-25
