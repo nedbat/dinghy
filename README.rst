@@ -43,7 +43,22 @@ Getting Started
    It will look `something like this <sample_>`_.
 
    You can also write a YAML configuration file to digest multiple sources, or
-   with different time periods.
+   with different time periods:
+
+   .. code-block:: bash
+
+    $ dinghy my-dinghy-config.yaml
+    Wrote digest: proj1.html
+    Wrote digest: proj2-daily.html
+    Wrote digest: proj2-weekly.html
+
+   Extra arguments specify which digests to write:
+
+   .. code-block:: bash
+
+    $ dinghy my-dinghy-config.yaml proj1.html
+    Wrote digest: proj1.html
+
 
 
 Configuration
