@@ -1,0 +1,5 @@
+Fixed
+.....
+
+- If the config file has no ``digests:`` clause, it could be because it's not a
+  dinghy config file at all, so print an error message about it.

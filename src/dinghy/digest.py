@@ -558,6 +558,9 @@ async def make_digests_from_config(conf_file, digests=None):
     except Exception as err:
         raise DinghyError(f"Couldn't read config file {conf_file!r}: {err}") from err
 
+    if "digests" not in config:
+        raise DinghyError(f"No 'digests:' clause in config file {conf_file!r}")
+
     defaults = config.get("defaults", {})
     coros = []
     for spec in config.get("digests", []):
