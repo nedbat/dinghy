@@ -1,0 +1,5 @@
+Added
+.....
+
+- Now you can additionally specify digests on the command line to write, which
+  will choose just those digests from the configuration file.

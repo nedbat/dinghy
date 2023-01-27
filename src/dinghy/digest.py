@@ -544,7 +544,7 @@ async def make_digest(items, since="1 week", digest="digest.html", **options):
     logger.info(f"Wrote digest: {digest}")
 
 
-async def make_digests_from_config(conf_file):
+async def make_digests_from_config(conf_file, digests=None):
     """
     Make all the digests specified by a configuration file.
 
@@ -562,6 +562,8 @@ async def make_digests_from_config(conf_file):
     coros = []
     for spec in config.get("digests", []):
         args = {**defaults, **spec}
+        if digests is not None and args["digest"] not in digests:
+            continue
         coros.append(make_digest(**args))
     await asyncio.gather(*coros)
 

@@ -43,17 +43,21 @@ def main_run(coro):
 @click_log.simple_verbosity_option(logger)
 @click.version_option()
 @click.argument("_input", metavar="[INPUT]", default="dinghy.yaml")
-def cli(_input):
+@click.argument("digests", metavar="[DIGEST ...]", nargs=-1)
+def cli(_input, digests):
     """
     Generate HTML digests of GitHub activity.
 
     INPUT is a dinghy YAML configuration file (default: dinghy.yaml), or a
     GitHub repo URL.
 
+    DIGEST(s) are the file names of digests from the configuration file to
+    create.  If none are specified, all of the digests are written.
+
     """
     if "://" in _input:
         coro = make_digest([_input])
     else:
-        coro = make_digests_from_config(_input)
+        coro = make_digests_from_config(_input, digests or None)
 
     main_run(coro)
