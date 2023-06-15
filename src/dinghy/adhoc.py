@@ -1,5 +1,10 @@
 """
 A module-main for running ad-hoc GitHub GraphQL queries.
+
+After installing dinghy, run it like this:
+
+    $ python -m dinghy.adhoc --help
+
 """
 
 import json
