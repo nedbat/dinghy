@@ -563,7 +563,7 @@ async def make_digests_from_config(conf_file, digests=None):
 
     defaults = config.get("defaults", {})
     coros = []
-    for spec in config.get("digests", []):
+    for spec in config["digests"]:
         args = {**defaults, **spec}
         if digests is not None and args["digest"] not in digests:
             continue

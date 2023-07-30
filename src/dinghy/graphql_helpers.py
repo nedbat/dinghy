@@ -53,7 +53,7 @@ def _raise_if_error(data):
     If `data` is an error response, raise a useful exception.
     """
     if "message" in data:
-        raise Exception(data["message"])
+        raise RuntimeError(data["message"])
     if "errors" in data:
         err = data["errors"][0]
         if user_fix_msg := USER_FIXABLE_ERR_TYPES.get(err.get("type")):
@@ -65,10 +65,10 @@ def _raise_if_error(data):
             loc = err["locations"][0]
             msg += f", line {loc['line']} column {loc['column']}"
         logger.debug(f"Error data: {data}")
-        raise Exception(msg)
+        raise RuntimeError(msg)
     if "data" in data and data["data"] is None:
         # Another kind of failure response?
-        raise Exception("GraphQL query returned null")
+        raise ValueError("GraphQL query returned null")
 
 
 def _query_synopsis(query, variables):
