@@ -68,3 +68,20 @@ build-backend = "setuptools.build_meta"
 fragment_directory = "scriv.d"
 rst_header_chars = "-."
 version = "literal: src/dinghy/__init__.py: __version__"
+
+[tool.pylint.REPORTS]
+# No need for a score.
+score = "no"
+# Regular expression which should only match function or class names that do
+# not require a docstring.
+no-docstring-rgx = "__.*__|test[A-Z_].*"
+
+[tool.pylint."MESSAGES CONTROL"]
+# Disable the message(s) with the given id(s).
+disable = [
+    "invalid-name",
+    "logging-fstring-interpolation",
+    "logging-not-lazy",
+    "no-else-return",
+    "use-dict-literal",
+]
