@@ -65,9 +65,17 @@ dist: ## build the distributions
 	python -m twine check dist/*
 
 testpypi: ## upload the distributions to PyPI's testing server.
+	@if [[ -z "$$TWINE_TEST_PASSWORD" ]]; then \
+		echo 'Missing TWINE_TEST_PASSWORD: opvars'; \
+		exit 1; \
+	fi
 	python -m twine upload --verbose --repository testpypi --password $$TWINE_TEST_PASSWORD dist/*
 
 pypi: ## upload the built distributions to PyPI.
+	@if [[ -z "$$TWINE_PASSWORD" ]]; then \
+		echo 'Missing TWINE_PASSWORD: opvars'; \
+		exit 1; \
+	fi
 	python -m twine upload --verbose dist/*
 
 tag: ## make a git tag with the version number
