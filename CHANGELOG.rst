@@ -22,6 +22,23 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-1.3.0:
+
+1.3.0 — 2023-07-31
+------------------
+
+Added
+.....
+
+- The ``since`` date can now be specified on the command line with ``--since``.
+  This will override any specification in the YAML file.
+
+- The ``since`` value can be specified as a specific ISO 8601 date or datetime,
+  closing `issue 26`_.
+
+.. _issue 26: https://github.com/nedbat/dinghy/issues/26
+
+
 .. _changelog-1.2.0:
 
 1.2.0 — 2023-01-27
