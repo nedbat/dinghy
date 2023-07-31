@@ -1,0 +1,70 @@
+# Dinghy pyproject.toml
+
+[project]
+name = "dinghy"
+description = "Dinghy daily digest tool"
+authors = [
+    {name = "Ned Batchelder", email = "ned@nedbatchelder.com"},
+]
+license.text = "Apache-2.0"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+
+requires-python = ">= 3.8"
+
+dependencies = [
+    "aiofiles>=0.8",
+    "aiohttp>3",
+    "backports-datetime-fromisoformat",
+    "click>8",
+    "click-log>0.3",
+    "emoji",
+    "glom",
+    "jinja2>3",
+    "pyyaml>=6",
+]
+
+dynamic = ["readme", "version"]
+
+[project.urls]
+"Mastodon" = "https://hachyderm.io/@nedbat"
+"Funding" = "https://github.com/sponsors/nedbat"
+"Issues" = "https://github.com/nedbat/dinghy/issues"
+"Source" = "https://github.com/nedbat/dinghy"
+"Home" = "https://github.com/nedbat/dinghy"
+
+[project.scripts]
+dinghy = "dinghy.__main__:cli"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+dinghy = [
+    "graphql/*.*",
+    "templates/*.*",
+]
+
+[tool.setuptools.dynamic]
+version.attr = "dinghy.__version__"
+readme.file = ["README.rst", "CHANGELOG.rst"]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+## Other tools
+
+[tool.scriv]
+fragment_directory = "scriv.d"
+rst_header_chars = "-."
+version = "literal: src/dinghy/__init__.py: __version__"
