@@ -38,12 +38,14 @@ _check_manifest:
 
 .PHONY: check_release _check_version _check_scriv
 
+VERSION := $(shell python -c "import dinghy as d; print(d.__version__)")
+
 check_release: _check_manifest _check_version _check_scriv  ## check that we are ready for a release
 	@echo "Release checks passed"
 
 _check_version:
-	@if [[ $$(git tags | grep -q -w $$(python setup.py --version) && echo "x") == "x" ]]; then \
-		echo 'A git tag for this version exists! Did you forget to bump the version in src/dinghy/__init__.py?'; \
+	@if [[ $$(git tags | grep -q -w $(VERSION) && echo "x") == "x" ]]; then \
+		echo 'A git tag for $(VERSION) exists! Did you forget to bump the version in src/dinghy/__init__.py?'; \
 		exit 1; \
 	fi
 
@@ -69,7 +71,7 @@ pypi: ## upload the built distributions to PyPI.
 	python -m twine upload --verbose dist/*
 
 tag: ## make a git tag with the version number
-	git tag -a -m "Version $$(python setup.py --version)" $$(python setup.py --version)
+	git tag -a -m "Version $(VERSION)" $(VERSION)
 	git push --all
 
 gh_release: ## make a GitHub release
