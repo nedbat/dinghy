@@ -42,9 +42,10 @@ def main_run(coro):
 @click.command()
 @click_log.simple_verbosity_option(logger)
 @click.version_option()
+@click.option("--since", metavar="DELTA-OR-DATE", help="Specify a since date.")
 @click.argument("_input", metavar="[INPUT]", default="dinghy.yaml")
 @click.argument("digests", metavar="[DIGEST ...]", nargs=-1)
-def cli(_input, digests):
+def cli(since, _input, digests):
     """
     Generate HTML digests of GitHub activity.
 
@@ -58,6 +59,6 @@ def cli(_input, digests):
     if "://" in _input:
         coro = make_digest([_input])
     else:
-        coro = make_digests_from_config(_input, digests or None)
+        coro = make_digests_from_config(_input, digests or None, since=since)
 
     main_run(coro)

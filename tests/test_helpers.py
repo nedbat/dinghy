@@ -4,9 +4,10 @@ Test dinghy.helpers
 
 import datetime
 
+import freezegun
 import pytest
 
-from dinghy.helpers import find_dict_with_key, parse_timedelta
+from dinghy.helpers import find_dict_with_key, parse_since, parse_timedelta
 
 
 @pytest.mark.parametrize(
@@ -37,8 +38,23 @@ def test_parse_timedelta(tds, kwargs):
     ],
 )
 def test_bad_parse_timedelta(tds):
-    with pytest.raises(ValueError, match=f"Couldn't parse time delta from {tds!r}"):
-        parse_timedelta(tds)
+    assert parse_timedelta(tds) is None
+
+
+@freezegun.freeze_time("2023-06-16")
+@pytest.mark.parametrize(
+    "since, dtargs",
+    [
+        ("20230730", (2023, 7, 30)),
+        ("2023-06-16T12:34:56", (2023, 6, 16, 12, 34, 56)),
+        ("forever", (1980, 1, 1)),
+        ("1day", (2023, 6, 15)),
+        ("2 weeks", (2023, 6, 2)),
+        ("1 week 1 day", (2023, 6, 8)),
+    ],
+)
+def test_parse_since(since, dtargs):
+    assert parse_since(since) == datetime.datetime(*dtargs)
 
 
 @pytest.mark.parametrize(

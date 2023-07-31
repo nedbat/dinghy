@@ -16,7 +16,7 @@ from glom import glom
 
 from . import __version__
 from .graphql_helpers import build_query, GraphqlHelper
-from .helpers import DinghyError, json_save, parse_timedelta
+from .helpers import DinghyError, json_save, parse_since
 from .jinja_helpers import render_jinja_to_file
 
 
@@ -506,12 +506,8 @@ async def make_digest(items, since="1 week", digest="digest.html", **options):
         digest (str): the HTML file name to write.
 
     """
-    if since == "forever":
-        show_date = False
-        since_date = datetime.datetime(year=1980, month=1, day=1)
-    else:
-        show_date = True
-        since_date = datetime.datetime.now() - parse_timedelta(since)
+    show_date = since != "forever"
+    since_date = parse_since(since)
     digester = Digester(since=since_date, options=options)
 
     coros = []
@@ -544,13 +540,14 @@ async def make_digest(items, since="1 week", digest="digest.html", **options):
     logger.info(f"Wrote digest: {digest}")
 
 
-async def make_digests_from_config(conf_file, digests=None):
+async def make_digests_from_config(conf_file, digests=None, since=None):
     """
     Make all the digests specified by a configuration file.
 
     Args:
         conf_file (str): a file path to read as a config file.
-
+        digests (list of str): the digest names to make.
+        since (str): the spec for since when.
     """
     try:
         with open(conf_file, encoding="utf-8") as cf:
@@ -567,6 +564,8 @@ async def make_digests_from_config(conf_file, digests=None):
         args = {**defaults, **spec}
         if digests is not None and args["digest"] not in digests:
             continue
+        if since is not None:
+            args["since"] = since
         coros.append(make_digest(**args))
     await asyncio.gather(*coros)
 

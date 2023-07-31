@@ -114,7 +114,8 @@ clause sets defaults for the digest options in the rest of the file.  Each
   units of weeks, days, hours, minutes and seconds, and can also be
   abbreviated, like ``1d6h``. Using ``since: forever`` will include all
   activity regardless of when it happened.  If ``since`` is omitted, it
-  defaults to one week.
+  defaults to one week.  You can specify ``--since=<SINCE>`` on the dinghy
+  command line to provide an explicit value.
 
 - The ``items`` setting is a list of things to report on, specified in a few
   different ways:
