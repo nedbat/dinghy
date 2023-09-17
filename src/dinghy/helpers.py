@@ -72,7 +72,7 @@ def parse_since(since):
             try:
                 since_date = datetime.datetime.fromisoformat(since)
             except ValueError:
-                raise DinghyError("Can't parse since: {since!r}") from None
+                raise DinghyError(f"Can't parse 'since' value: {since!r}") from None
     return since_date
 
 

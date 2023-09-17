@@ -42,7 +42,12 @@ def main_run(coro):
 @click.command()
 @click_log.simple_verbosity_option(logger)
 @click.version_option()
-@click.option("--since", metavar="DELTA-OR-DATE", help="Specify a since date.")
+@click.option(
+    "--since",
+    metavar="DELTA-OR-DATE",
+    help="Specify a since date [default: 1 week].",
+    default="1 week",
+)
 @click.argument("_input", metavar="[INPUT]", default="dinghy.yaml")
 @click.argument("digests", metavar="[DIGEST ...]", nargs=-1)
 def cli(since, _input, digests):
@@ -57,7 +62,7 @@ def cli(since, _input, digests):
 
     """
     if "://" in _input:
-        coro = make_digest([_input])
+        coro = make_digest([_input], since=since)
     else:
         coro = make_digests_from_config(_input, digests or None, since=since)
 
