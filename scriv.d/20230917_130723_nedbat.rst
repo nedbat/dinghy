@@ -1,7 +1,0 @@
-Fixed
-.....
-
-- When using a URL on the command line, the ``--since`` option was ignored.
-  This is now fixed, closing `issue 35`_.
-
-.. _issue 35: https://github.com/nedbat/dinghy/issues/35

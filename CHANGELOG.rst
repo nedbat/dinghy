@@ -22,6 +22,19 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-1.3.1:
+
+1.3.1 — 2023-09-17
+------------------
+
+Fixed
+.....
+
+- When using a URL on the command line, the ``--since`` option was ignored.
+  This is now fixed, closing `issue 35`_.
+
+.. _issue 35: https://github.com/nedbat/dinghy/issues/35
+
 .. _changelog-1.3.0:
 
 1.3.0 — 2023-07-31
