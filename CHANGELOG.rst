@@ -22,6 +22,20 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-1.3.2:
+
+1.3.2 — 2023-09-19
+------------------
+
+Fixed
+.....
+
+- fix: override default since param only if explicitly provided by cli #36
+  952bdfb introduced a regression ignoring the `since` parameter defined via
+  YAML config in favor of the default defined by the cli option
+
+.. _issue 36: https://github.com/nedbat/dinghy/issues/36
+
 .. _changelog-1.3.1:
 
 1.3.1 — 2023-09-17
