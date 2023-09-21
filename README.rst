@@ -189,6 +189,19 @@ starting point for your own publishing.
 .. _sample_repo: https://github.com/nedbat/dinghy_sample
 
 
+Contributors
+============
+
+Thanks to all who have helped:
+
+- Ned Batchelder
+- Bill Mill
+- Doug Hellmann
+- Henry Gessau
+- Lucas Taylor
+- Quentin Pradet
+- Simon de Vlieger
+
 
 .. |pypi-badge| image:: https://img.shields.io/pypi/v/dinghy.svg
     :target: https://pypi.python.org/pypi/dinghy/

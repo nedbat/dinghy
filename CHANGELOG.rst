@@ -24,17 +24,19 @@ See the fragment files in the `scriv.d directory`_.
 
 .. _changelog-1.3.2:
 
-1.3.2 — 2023-09-19
+1.3.2 — 2023-09-21
 ------------------
 
 Fixed
 .....
 
-- fix: override default since param only if explicitly provided by cli #36
-  952bdfb introduced a regression ignoring the `since` parameter defined via
-  YAML config in favor of the default defined by the cli option
+- The 1.3.1 fix for the ignore ``--since`` option accidentally ignored
+  ``since`` settings in configuration files.  This is now fixed, closing `issue
+  36`_.  Thanks, `Lucas Taylor <pull 37_>`_.
 
 .. _issue 36: https://github.com/nedbat/dinghy/issues/36
+.. _pull 37: https://github.com/nedbat/dinghy/issues/37
+
 
 .. _changelog-1.3.1:
 
@@ -48,6 +50,7 @@ Fixed
   This is now fixed, closing `issue 35`_.
 
 .. _issue 35: https://github.com/nedbat/dinghy/issues/35
+
 
 .. _changelog-1.3.0:
 

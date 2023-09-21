@@ -45,14 +45,11 @@ def main_run(coro):
 @click.option(
     "--since",
     metavar="DELTA-OR-DATE",
-    help="Specify a since date.",
-    default="1 week",
-    show_default=True,
+    help="Specify a since date. [default: 1 week]",
 )
 @click.argument("_input", metavar="[INPUT]", default="dinghy.yaml")
 @click.argument("digests", metavar="[DIGEST ...]", nargs=-1)
-@click.pass_context
-def cli(ctx, since, _input, digests):
+def cli(since, _input, digests):
     """
     Generate HTML digests of GitHub activity.
 
@@ -66,8 +63,6 @@ def cli(ctx, since, _input, digests):
     if "://" in _input:
         coro = make_digest([_input], since=since)
     else:
-        source = ctx.get_parameter_source("since")
-        since = None if source.name == "DEFAULT" else since
         coro = make_digests_from_config(_input, digests or None, since=since)
 
     main_run(coro)

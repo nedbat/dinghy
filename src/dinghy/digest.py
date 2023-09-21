@@ -496,16 +496,18 @@ def coro_from_item(digester, item):
     return coro
 
 
-async def make_digest(items, since="1 week", digest="digest.html", **options):
+async def make_digest(items, since=None, digest="digest.html", **options):
     """
     Make a single digest.
 
     Args:
-        since (str): a duration spec ("2 day", "3d6h", etc).
+        since (optional str): a duration spec ("2 day", "3d6h", etc). Default: 1 week.
         items (list[str|dict]): a list of YAML objects or GitHub URLs to collect entries from.
         digest (str): the HTML file name to write.
 
     """
+    if since is None:
+        since = "1 week"
     show_date = since != "forever"
     since_date = parse_since(since)
     digester = Digester(since=since_date, options=options)
