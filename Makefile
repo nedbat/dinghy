@@ -79,7 +79,7 @@ pypi: ## upload the built distributions to PyPI.
 	python -m twine upload --verbose dist/*
 
 tag: ## make a git tag with the version number
-	git tag -a -m "Version $(VERSION)" $(VERSION)
+	git tag -s -m "Version $(VERSION)" $(VERSION)
 	git push --all
 
 gh_release: ## make a GitHub release
