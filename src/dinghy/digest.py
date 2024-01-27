@@ -401,9 +401,10 @@ class Digester:
             com0 = thread["comments"]["nodes"][0]
             com0[DD_children] = thread["comments"]["nodes"][1:]
             com0["isResolved"] = thread["isResolved"]
-            rev_id = com0["pullRequestReview"]["id"]
-            review_comments = reviews[rev_id].setdefault(DD_children, [])
-            review_comments.append(com0)
+            if com0["pullRequestReview"]:
+                rev_id = com0["pullRequestReview"]["id"]
+                review_comments = reviews[rev_id].setdefault(DD_children, [])
+                review_comments.append(com0)
 
         # For each review, show it if it has a body, or if it has children, or
         # if it's not just "COMMENTED".
