@@ -22,6 +22,16 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-1.3.3:
+
+1.3.3 — 2024-11-09
+------------------
+
+Added
+.....
+
+- Declared support for Python 3.12 and 3.13.
+
 .. _changelog-1.3.2:
 
 1.3.2 — 2023-09-21
