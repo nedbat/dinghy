@@ -1,0 +1,14 @@
+# .ignore to control what gets searched.
+build
+dist
+htmlcov
+.tox*
+.coverage*
+_build
+_spell
+*.egg
+*.egg-info
+.mypy_cache
+.pytest_cache
+tmp
+out_*.json
