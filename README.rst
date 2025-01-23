@@ -184,9 +184,12 @@ The `sample digest <sample_>`_ is published daily using a GitHub Action from
 its own repo: `nedbat/dinghy_sample <sample_repo_>`_.  You can use it as a
 starting point for your own publishing.
 
+There's also a `separate project <email_project>`_ which sends a daily email of GitHub activity.
+
 
 .. _sample: https://nedbat.github.io/dinghy_sample/3day.html
 .. _sample_repo: https://github.com/nedbat/dinghy_sample
+.. _email_project: https://github.com/iloveitaly/github-digest
 
 
 Contributors
