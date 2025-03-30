@@ -7,7 +7,7 @@ import datetime
 import freezegun
 import pytest
 
-from dinghy.helpers import find_dict_with_key, parse_since, parse_timedelta
+from dinghy.helpers import find_dict_with_key, parse_since, parse_timedelta, slugify
 
 
 @pytest.mark.parametrize(
@@ -71,3 +71,7 @@ def test_parse_since(since, dtargs):
 )
 def test_find_dict_with_key(d, k, res):
     assert find_dict_with_key(d, k) == res
+
+
+def test_slugify():
+    assert slugify("Hello, World!") == "hello-world"

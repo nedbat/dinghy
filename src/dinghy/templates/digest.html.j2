@@ -195,17 +195,21 @@
   }
   </style>
 </head>
-<body>
+<body id="top">
 
 <h1>{{ page_title() }}</h1>
+{% for container in results -%}
+  <a href="#{{ container.title | slugify }}">{{ container.title | trim }}</a>{% if not loop.last -%}&nbsp;|&nbsp;{%- endif -%}
+{% endfor -%}
 
 <ul class="repos">
   {% for container in results -%}
     <li>
-      <p><span class="reponame"><a href="{{ container.url }}">
+      <p><span class="reponame" id="{{ container.title | slugify }}"><a href="{{ container.url }}">
         {{- container.title|trim -}}
       </a></span>
       {{ container.container_kind }} {{ container.kind }}
+      <a style="float: right" href="#top">[back to top]</a>
       </p>
       {% if container.entries %}
         <ul class="entries">

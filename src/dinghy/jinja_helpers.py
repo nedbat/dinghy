@@ -10,6 +10,8 @@ import aiofiles
 import emoji
 import jinja2
 
+from dinghy.helpers import slugify
+
 
 def datetime_format(value, fmt="%m-%d %H:%M"):
     """Format a datetime or ISO datetime string, for Jinja filtering."""
@@ -43,6 +45,7 @@ def render_jinja(template_filename, **variables):
     )
     jenv.filters["datetime"] = datetime_format
     jenv.filters["label_color_css"] = label_color_css
+    jenv.filters["slugify"] = slugify
     template = jenv.get_template(template_filename)
     html = template.render(**variables)
     return html
