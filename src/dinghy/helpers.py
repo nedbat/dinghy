@@ -5,6 +5,7 @@ Misc helpers.
 import datetime
 import json
 import re
+import unicodedata
 
 import aiofiles
 from backports.datetime_fromisoformat import MonkeyPatch
@@ -86,3 +87,25 @@ def find_dict_with_key(d, key):
             if sd is not None:
                 return sd
     return None
+
+
+def slugify(value, allow_unicode=False):
+    """
+    Convert to ASCII if 'allow_unicode' is False. Convert spaces or repeated
+    dashes to single dashes. Remove characters that aren't alphanumerics,
+    underscores, or hyphens. Convert to lowercase. Also strip leading and
+    trailing whitespace, dashes, and underscores.
+
+    from django.template.defaultfilters import slugify
+    """
+    value = str(value).strip()
+    if allow_unicode:
+        value = unicodedata.normalize("NFKC", value)
+    else:
+        value = (
+            unicodedata.normalize("NFKD", value)
+            .encode("ascii", "ignore")
+            .decode("ascii")
+        )
+    value = re.sub(r"[^\w\s-]", "", value.lower())
+    return re.sub(r"[-\s]+", "-", value).strip("-_")

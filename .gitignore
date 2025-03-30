@@ -2,6 +2,9 @@ out_*.json
 save_*.json
 
 *.egg-info/
+__pycache__
 build/
 dist/
 lab/
+
+.idea
