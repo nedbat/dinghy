@@ -198,6 +198,7 @@ Contributors
 Thanks to all who have helped:
 
 - Ned Batchelder
+- Andreas Motl
 - Bill Mill
 - Doug Hellmann
 - Henry Gessau
