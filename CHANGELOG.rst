@@ -22,6 +22,23 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-1.4.0:
+
+1.4.0 — 2025-04-01
+------------------
+
+Added
+.....
+
+- Added breadcrumbs with navigation at the top of the HTML page if there is
+  more than one section. Specifically with long sections, it makes navigating
+  so much easier.
+
+Changed
+.......
+
+- Install backports-datetime-fromisoformat only on Python <3.11
+
 .. _changelog-1.3.3:
 
 1.3.3 — 2024-11-09

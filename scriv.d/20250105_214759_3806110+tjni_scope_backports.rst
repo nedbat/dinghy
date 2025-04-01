@@ -1,4 +1,0 @@
-Changed
-.......
-
-- Install backports-datetime-fromisoformat only on Python < 3.11
