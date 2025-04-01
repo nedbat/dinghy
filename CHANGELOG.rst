@@ -37,7 +37,9 @@ Added
 Changed
 .......
 
-- Install backports-datetime-fromisoformat only on Python <3.11
+- Install backports-datetime-fromisoformat only on Python <3.11.
+
+- Dropped support for Python 3.8.
 
 .. _changelog-1.3.3:
 
