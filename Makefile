@@ -16,7 +16,7 @@ clean: ## remove stuff we don't need
 	rm -f out_*.json save_*.json
 
 requirements: ## install development environment requirements
-	pip install -r dev-requirements.txt
+	pip install -U -r dev-requirements.txt
 
 
 .PHONY: test quality black lint _check_manifest sample

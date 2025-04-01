@@ -6,11 +6,10 @@ description = "Dinghy daily digest tool"
 authors = [
     {name = "Ned Batchelder", email = "ned@nedbatchelder.com"},
 ]
-license.text = "Apache-2.0"
+license = "Apache-2.0"
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: Apache Software License",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
