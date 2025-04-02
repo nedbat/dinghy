@@ -4,8 +4,10 @@ Dinghy
 
 Dinghy, a GitHub activity digest tool.
 
-|pypi-badge| |pyversions-badge| |license-badge|
-|sponsor-badge| |mastodon-nedbat|
+| |pypi-badge| |pyversions-badge| |license-badge|
+| |sponsor-badge| |bluesky-nedbat| |mastodon-nedbat|
+
+--------------------
 
 Dinghy uses the GitHub GraphQL API to find recent activity on releases, issues
 and pull requests, and writes a compact HTML digest `like this <sample_>`_.
@@ -217,6 +219,9 @@ Thanks to all who have helped:
 .. |license-badge| image:: https://img.shields.io/github/license/nedbat/dinghy.svg
     :target: https://github.com/nedbat/dinghy/blob/master/LICENSE.txt
     :alt: License
+.. |bluesky-nedbat| image:: https://img.shields.io/badge/dynamic/json?style=flat&color=96a3b0&labelColor=3686f7&logo=icloud&logoColor=white&label=@nedbat&url=https%3A%2F%2Fpublic.api.bsky.app%2Fxrpc%2Fapp.bsky.actor.getProfile%3Factor=nedbat.com&query=followersCount
+    :target: https://bsky.app/profile/nedbat.com
+    :alt: nedbat on Bluesky
 .. |mastodon-nedbat| image:: https://img.shields.io/badge/dynamic/json?style=flat&labelColor=450657&logo=mastodon&logoColor=ffffff&label=@nedbat&query=followers_count&url=https%3A%2F%2Fhachyderm.io%2Fapi%2Fv1%2Faccounts%2Flookup%3Facct=nedbat
     :target: https://hachyderm.io/@nedbat
     :alt: nedbat on Mastodon
