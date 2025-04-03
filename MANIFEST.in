@@ -2,6 +2,7 @@ include .editorconfig
 include .ignore
 include dev-requirements.txt
 include Makefile
+include tox.ini
 include *.rst
 
 recursive-include tests *
