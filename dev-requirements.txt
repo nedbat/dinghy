@@ -7,4 +7,5 @@ pylint
 pytest
 readme_renderer
 scriv
+tox
 twine

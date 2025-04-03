@@ -1,4 +1,4 @@
-.PHONY: help clean requirements
+.PHONY: help clean sterile requirements
 
 .DEFAULT_GOAL := help
 
@@ -14,6 +14,9 @@ clean: ## remove stuff we don't need
 	rm -fr build/ dist/ src/*.egg-info
 	rm -fr .*_cache/
 	rm -f out_*.json save_*.json
+
+sterile: clean ## remove all transient stuff
+	rm -rf .tox
 
 requirements: ## install development environment requirements
 	pip install -U -r dev-requirements.txt
