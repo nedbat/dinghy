@@ -22,6 +22,21 @@ See the fragment files in the `scriv.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-1.4.1:
+
+1.4.1 — 2025-04-03
+------------------
+
+Fixed
+.....
+
+- Fixed the import of backports so people can use Python newer than 3.10.
+  Thanks, `Simon de Vlieger <pull 46_>`_.
+
+- Fixed a link in the README and added some badges.
+
+.. _pull 46: https://github.com/nedbat/dinghy/pull/46
+
 .. _changelog-1.4.0:
 
 1.4.0 — 2025-04-01
