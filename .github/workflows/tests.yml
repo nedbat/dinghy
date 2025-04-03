@@ -1,0 +1,61 @@
+# Run dinghy CI
+
+name: "Test Suite"
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+concurrency:
+  group: "${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
+
+env:
+  PIP_DISABLE_PIP_VERSION_CHECK: 1
+
+jobs:
+  tests:
+    name: "Test on ${{ matrix.os }}"
+    runs-on: "${{ matrix.os }}-latest"
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu
+          - macos
+          - windows
+
+    steps:
+      - name: "Check out the repo"
+        uses: "actions/checkout@v4"
+        with:
+          persist-credentials: false
+
+      - name: "Set up Python"
+        id: "setup-python"
+        uses: "actions/setup-python@v5"
+        with:
+          # The last listed Python version is the default.
+          python-version: |
+            3.9
+            3.10
+            3.11
+            3.12
+            3.13
+
+      - name: "Install dependencies"
+        run: |
+          python -m pip install -U setuptools tox
+
+      - name: "Run tox"
+        run: |
+          python -m tox
